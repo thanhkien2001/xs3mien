@@ -1,0 +1,424 @@
+<main>
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: base_url + "xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: base_url + "xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: base_url + "xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= $base_url ?>" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item active"><a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap - Dự đoán xổ số Wap 3 miền cực chuẩn">Soi cầu Wap - Dự đoán xổ số Wap 3 miền cực chuẩn</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h2 class="font-20 my-2"> <strong>Soi cầu Wap - Dự đoán xổ số Wap 3 miền cực chuẩn</strong> </h2>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"> Thứ <?= date('N') + 1 ?>, <?= $date ?> - 01:00 </div>
+                            <div class="allRate"> <input type="range" value="0" step="0.25" id="backing5" style="display: none;">
+                                <input type="text" value="page/59" hidden="" id="voteLink">
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5" data-rateit-resetable="false"
+                                    data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-mode="font"
+                                    data-rateit-icon="" style="font-family:fontawesome"> <button id="rateit-reset-2" type="button"
+                                        data-role="none" class="rateit-reset" aria-label="reset rating"
+                                        aria-controls="rateit-range-2" style="display: none;"><span></span></button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating"
+                                        aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"
+                                        aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset" style="width: 0px;">★★★★★</div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div> <span class="danhgia"> <span class="avg-rate">3.7</span> /<span>5</span> của <span
+                                        class="count-rate">1621</span> đánh giá</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3"><strong>Soi cầu WAP - Dự đoán xổ số Wap 3 miền luôn được các anh em
+                            đánh giá là công cụ chốt số 3 miền Bắc - Trung - Nam uy tín và chính xác nhất hiện nay. Bằng những
+                            phương pháp phân tích và soi cầu của cá chuyên gia hàng đầu, soi cầu Wap luôn đưa ra những cặp số chất
+                            lượng và có xác suất về siêu cao.</strong></h2>
+                    <div class="text-center"> <img width="600" height="314"
+                            src="https://soicau247s.org/public/media/thumb/Thumb-Cate/soi-cau-wap-600x314.jpg"
+                            alt="Soi cầu Wap - Dự đoán xổ số Wap 3 miền cực chuẩn"> </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Soi cầu Wap là gì?</a></li>
+                                <li><a rel="nofollow" href="#trick1">Những đặc điểm chính của Soi cầu Wap:</a></li>
+                                <li><a rel="nofollow" href="#trick2">Tại sao nên lựa chọn Soi cầu Wap của chúng tôi?</a></li>
+                                <li><a rel="nofollow" href="#trick3">Soi cầu Wap xổ số miền Bắc <?= $predictionDate ?></a></li>
+                                <li><a rel="nofollow" href="#trick4">Soi cầu Wap xổ số miền Nam <?= $predictionDate ?></a></li>
+                                <li><a rel="nofollow" href="#trick5">Soi cầu Wap xổ số miền Trung&nbsp;<?= $predictionDate ?></a></li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify;"><span><a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html"
+                                    title="Soi cầu WAP">Soi cầu WAP</a> từ lâu đã trở thành một trong những công cụ soi cầu chuẩn
+                                nhất được rất nhiều anh em tin tưởng và sử dụng. Dựa vào kết quả của các lần quay trước để đưa ra
+                                những thống kê các cặp số về nhiều, về ít trong vòng 30 lần quay. Từ đó đưa ra các cặp số đẹp ngay
+                                dưới đây.</span></p>
+                        <h3 id="trick0">Soi cầu Wap là gì?</h3>
+                        <p style="text-align: justify;">Soi cầu 3 miền Wap của chúng tôi sẽ giúp anh em tìm thấy thông tin dự đoán
+                            xổ số Wap 3 miền chính xác nhất. Kết quả xổ số Wap của chúng tôi sẽ được cập nhật nhanh nhất hàng ngày.
+                            Chúng tôi đưa ra các cặp số dự đoán 3 miền, chẳng hạn như:</p>
+                        <ul style="text-align: justify;">
+                            <li>Đối với miền Bắc: Dự đoán XSMB Wap đưa ra các cặp số dàn đặc biệt, lô xiên, lô về nhiều, lô gan, cầu
+                                số vip có độ chính xác siêu cao.</li>
+                            <li>Đối với miền Trung và miền Nam: Soi cầu 3 miền Wap đưa ra các cặp số dàn đặc biệt, giải 8, cầu số
+                                vip đẹp nhất và hoàn toàn miễn phí.</li>
+                        </ul>
+                        <p style="text-align: justify;">Nếu như bạn muốn dành được nhiều giải thưởng lớn với những cầu số đẹp nhất,
+                            uy tín nhất thì anh em nên thử sức công cụ soi cầu này.</p>
+                        <h3 id="trick1">Những đặc điểm chính của Soi cầu Wap:</h3>
+                        <p style="text-align: justify;">Dự đoán số qua wap: Người chơi có thể vào các trang web hoặc ứng dụng wap để
+                            xem các dự đoán lô đề, xổ số được chia sẻ trực tiếp trên đó. Các dự đoán này thường được cập nhật liên
+                            tục.</p>
+                        <p style="text-align: justify;">Phương pháp soi cầu: Các phương pháp soi cầu được áp dụng giống như trong
+                            các kênh soi cầu khác, bao gồm soi cầu lô rơi, soi cầu lô kép, soi cầu theo chu kỳ, soi cầu đầu đuôi,
+                            v.v.</p>
+                        <p style="text-align: justify;">Dễ dàng truy cập: Dịch vụ soi cầu wap rất phổ biến vì có thể truy cập trực
+                            tiếp trên điện thoại di động, giúp người chơi dễ dàng theo dõi các con số được dự đoán bất cứ lúc nào.
+                        </p>
+                        <h3 id="trick2" style="text-align: justify;">Tại sao nên lựa chọn Soi cầu Wap của chúng tôi?</h3>
+                        <p style="text-align: justify;">Soi cầu Wap của <a href="/">Soi cầu 247</a> là một trong những kênh phổ biến
+                            tạo được uy tín và sự tin tưởng nên được nhiều anh em lựa chọn sử dụng. Vì vậy, nhiều anh em đã tuyền
+                            tay nhau và đã có rất nhiều anh em lựa chọn đặt niềm tin vào con số của chúng tôi. Nếu bạn đang khó khăn
+                            trong việc lựa chọn cặp số thì đây quả là sự lựa chọn số 1.</p>
+                        <p style="text-align: justify;">Soi cầu dự đoán xổ số Wap không những hội tụ những đặc điểm nổi trội mà còn
+                            hoàn toàn miễn phí. Anh em có thể lựa dọn con số nhanh nhất mà không mất nhiều thời gian cũng như khoản
+                            chi phí nào. Anh em sẽ chỉ cần nhập thông tin cần tìm kiếm là có ngay được kết quả.</p>
+                        <p style="text-align: justify;">Anh em cũng cần lưu ý các thông tin dự đoán của dự đoán XS Wap không đảm bảo
+                            mang tới thắng lợi 100%. Tất cả chỉ mang tính khách quan và người tham gia không nên quá phụ thuộc. Hãy
+                            trang bị thêm các kinh nghiệm và tri thức lô đề căn bản trước khi khởi đầu chơi.</p>
+                        <h3 id="trick3" style="text-align: justify;"><span>Soi cầu Wap xổ số miền Bắc <?= $predictionDate ?></span></h3>
+                        <p style="text-align: justify;">Dự đoán XSMB WAP đưa ra những cặp số đặc biệt đầu đuôi, lô xiên, lô về
+                            nhiều, lô gan, lô VIP dựa vào thống kê tổng hợp kết quả trong thời gian qua. Cụ thể các cặp số đẹp hôm
+                            nay dự đoán Wap muốn mang đến cho anh em như sau:</p>
+                        <div class="overflow-auto text-nowrap">
+                            <table class="table table-bordered table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-blue text-white" colspan="2">Dự đoán xổ số Miền Bắc</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Đặc biệt đầu đuôi</b> </td>
+                                        <td> Đầu <span class="text-red"><?= $wapPredictions['mb']['dau'] ?></span> Đuôi <span class="text-red"><?= $wapPredictions['mb']['duoi'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mb']['so_dep']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Cặp số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode('', array_map(function ($p) {
+                                                                        return "({$p[0]} - {$p[1]})";
+                                                                    }, $wapPredictions['mb']['cap_so_dep'])) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto về nhiều</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mb']['ve_nhieu']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto lâu không về</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mb']['lau_ve']) ?></span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p></p>
+                        <h3 id="trick4" style="text-align: justify;"><span>Soi cầu Wap xổ số miền Nam <?= $predictionDate ?></span></h3>
+                        <p style="text-align: justify;">Dự đoán xổ số Wap miền Nam hôm nay đưa ra những con số đẹp cho các cầu quay
+                            thưởng tại các tỉnh: <a class="font-weight-bold"
+                                href="<?= $base_url ?>xo-so-bac-lieu-xsbl.html">Bạc Liêu</a>, <a class="font-weight-bold"
+                                href="<?= $base_url ?>xo-so-vung-tau-xsvt.html">Vũng Tàu</a>, <a class="font-weight-bold"
+                                href="<?= $base_url ?>xo-so-ben-tre-xsbtr.html">Bến Tre</a>. Tham khảo các cầu số đặc biệt,
+                            giải 8, cầu loto vip, lô xiên ngay sau đây nhé!</p>
+                        <p style="text-align: justify;"><span></span></p>
+                        <div class="overflow-auto text-nowrap">
+                            <table class="table table-bordered table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-blue text-white" colspan="2">Dự đoán xổ số Bến Tre Wap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Giải 8</b> </td>
+                                        <td> <span class="text-red"><?= $wapPredictions['mn']['ben_tre']['g8'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Đặc biệt đầu đuôi</b> </td>
+                                        <td> Đầu <span class="text-red"><?= $wapPredictions['mn']['ben_tre']['dau'] ?></span> Đuôi <span class="text-red"><?= $wapPredictions['mn']['ben_tre']['duoi'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['ben_tre']['so_dep']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Cặp số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode('', array_map(function ($p) {
+                                                                        return "({$p[0]} - {$p[1]})";
+                                                                    }, $wapPredictions['mn']['ben_tre']['cap_so_dep'])) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto về nhiều</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['ben_tre']['ve_nhieu']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto lâu không về</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['ben_tre']['lau_ve']) ?></span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="overflow-auto text-nowrap">
+                            <table class="table table-bordered table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-blue text-white" colspan="2">Dự đoán xổ số Vũng Tàu Wap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Giải 8</b> </td>
+                                        <td> <span class="text-red"><?= $wapPredictions['mn']['vung_tau']['g8'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Đặc biệt đầu đuôi</b> </td>
+                                        <td> Đầu <span class="text-red"><?= $wapPredictions['mn']['vung_tau']['dau'] ?></span> Đuôi <span class="text-red"><?= $wapPredictions['mn']['vung_tau']['duoi'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['vung_tau']['so_dep']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Cặp số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode('', array_map(function ($p) {
+                                                                        return "({$p[0]} - {$p[1]})";
+                                                                    }, $wapPredictions['mn']['vung_tau']['cap_so_dep'])) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto về nhiều</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['vung_tau']['ve_nhieu']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto lâu không về</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['vung_tau']['lau_ve']) ?></span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="overflow-auto text-nowrap">
+                            <table class="table table-bordered table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-blue text-white" colspan="2">Dự đoán xổ số Bạc Liêu Wap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Giải 8</b> </td>
+                                        <td> <span class="text-red"><?= $wapPredictions['mn']['bac_lieu']['g8'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Đặc biệt đầu đuôi</b> </td>
+                                        <td> Đầu <span class="text-red"><?= $wapPredictions['mn']['bac_lieu']['dau'] ?></span> Đuôi <span class="text-red"><?= $wapPredictions['mn']['bac_lieu']['duoi'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['bac_lieu']['so_dep']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Cặp số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode('', array_map(function ($p) {
+                                                                        return "({$p[0]} - {$p[1]})";
+                                                                    }, $wapPredictions['mn']['bac_lieu']['cap_so_dep'])) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto về nhiều</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['bac_lieu']['ve_nhieu']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto lâu không về</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mn']['bac_lieu']['lau_ve']) ?></span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p></p>
+                        <h3 id="trick5" style="text-align: justify;"><span>Soi cầu Wap xổ số miền
+                                Trung&nbsp;</span><span><?= $predictionDate ?></span></h3>
+                        <p style="text-align: justify;">Dự đoán xổ số wap miền Trung hôm nay chốt số cho các cầu quay thưởng tại các
+                            tỉnh: <a class="font-weight-bold" href="<?= $base_url ?>xo-so-quang-nam-xsqna.html">Quảng
+                                Nam</a>, <a class="font-weight-bold" href="<?= $base_url ?>xo-so-dak-lak-xsdlk.html">Đắk
+                                Lắk</a>. Cùng theo dõi những con số đẹp đặc biệt, giải 8, cầu loto vip, lô xiên mà chúng tôi đưa ra
+                            trong ngày hôm nay.</p>
+                        <p style="text-align: justify;"><span></span></p>
+                        <div class="overflow-auto text-nowrap">
+                            <table class="table table-bordered table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-blue text-white" colspan="2">Dự đoán xổ số Đắk Lắk Wap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Giải 8</b> </td>
+                                        <td> <span class="text-red"><?= $wapPredictions['mt']['dak_lak']['g8'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Đặc biệt đầu đuôi</b> </td>
+                                        <td> Đầu <span class="text-red"><?= $wapPredictions['mt']['dak_lak']['dau'] ?></span> Đuôi <span class="text-red"><?= $wapPredictions['mt']['dak_lak']['duoi'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mt']['dak_lak']['so_dep']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Cặp số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode('', array_map(function ($p) {
+                                                                        return "({$p[0]} - {$p[1]})";
+                                                                    }, $wapPredictions['mt']['dak_lak']['cap_so_dep'])) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto về nhiều</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mt']['dak_lak']['ve_nhieu']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto lâu không về</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mt']['dak_lak']['lau_ve']) ?></span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="overflow-auto text-nowrap">
+                            <table class="table table-bordered table-striped w-100">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-blue text-white" colspan="2">Dự đoán xổ số Quảng Nam Wap</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td> <b>Giải 8</b> </td>
+                                        <td> <span class="text-red"><?= $wapPredictions['mt']['quang_nam']['g8'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Đặc biệt đầu đuôi</b> </td>
+                                        <td> Đầu <span class="text-red"><?= $wapPredictions['mt']['quang_nam']['dau'] ?></span> Đuôi <span class="text-red"><?= $wapPredictions['mt']['quang_nam']['duoi'] ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mt']['quang_nam']['so_dep']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>Cặp số đẹp</b> </td>
+                                        <td> <span class="text-red"><?= implode('', array_map(function ($p) {
+                                                                        return "({$p[0]} - {$p[1]})";
+                                                                    }, $wapPredictions['mt']['quang_nam']['cap_so_dep'])) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto về nhiều</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mt']['quang_nam']['ve_nhieu']) ?></span> </td>
+                                    </tr>
+                                    <tr>
+                                        <td> <b>TK Loto lâu không về</b> </td>
+                                        <td> <span class="text-red"><?= implode(' - ', $wapPredictions['mt']['quang_nam']['lau_ve']) ?></span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;">»» <a
+                                    href="/thong-ke-xsmt-30-ngay-xo-so-mien-trung-30-ngay.html" title="XSMT 30 ngày">XSMT 30
+                                    ngày</a></span></p>
+                        <p style="text-align: justify;"><span>Chúc anh em may mắn!</span></p>
+                    </div>
+                </div>
+                <!-- Sidebar links (from original) -->
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    #trick1,
+    #trick2,
+    #trick3,
+    #trick4,
+    #trick5,
+    #trick6,
+    #trick7,
+    #trick8,
+    #trick9,
+    #trick10 {
+        margin-top: 10px;
+    }
+</style>

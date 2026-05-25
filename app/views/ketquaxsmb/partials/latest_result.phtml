@@ -1,0 +1,267 @@
+<?php
+/**
+ * Partial: Bảng kết quả XSMB các ngày gần đây
+ */
+use App\Library\LotteryHelper;
+
+$esc = $this->escaper;
+$latestResult = $latestResult ?? null;
+
+// Extract data from controller structure
+$result = $latestResult['normalized'] ?? [];
+$dau = $latestResult['dauDuoi']['dau'] ?? [];
+$duoi = $latestResult['dauDuoi']['duoi'] ?? [];
+
+// Get weekday text and slug
+$weekdayMap = [
+    1 => ['text' => 'thứ 2', 'slug' => 'thu-2'],
+    2 => ['text' => 'thứ 3', 'slug' => 'thu-3'],
+    3 => ['text' => 'thứ 4', 'slug' => 'thu-4'],
+    4 => ['text' => 'thứ 5', 'slug' => 'thu-5'],
+    5 => ['text' => 'thứ 6', 'slug' => 'thu-6'],
+    6 => ['text' => 'thứ 7', 'slug' => 'thu-7'],
+    7 => ['text' => 'chủ nhật', 'slug' => 'chu-nhat']
+];
+$latestWeekday = (int) $latestDate->format('N');
+$latestThuText = $weekdayMap[$latestWeekday]['text'] ?? '';
+$latestThuSlug = $weekdayMap[$latestWeekday]['slug'] ?? '';
+?>
+
+<article class="my-2" id="position-latest-<?= $esc->escapeHtmlAttr($latestYmd) ?>">
+    <div class="result result-single rounded">
+        <h3 class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+            <a class="text-white" href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="XSMB">
+                KQXSMB - Xổ Số Miền Bắc
+            </a>
+        </h3>
+
+        <div class="breadcrumb-table">
+            <h4 class="breadcrumb-table-title">
+                <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="XSMB">XSMB</a>
+                »
+                <a href="/xsmb-<?= $latestThuSlug ?>-ket-qua-xo-so-mien-bac.html" title="XSMB <?= $latestThuText ?>">
+                    XSMB <?= $latestThuText ?>
+                </a>
+                »
+                <a href="/xsmb-<?= str_replace('/', '-', $latestDateFormatted) ?>.html"
+                    title="XSMB <?= $latestDateFormatted ?>">
+                    XSMB <?= $latestDateFormatted ?>
+                </a>
+            </h4>
+        </div>
+
+        <div class="table-flex-border">
+            <table class="table-flex table-result" data-code="XSMB">
+                <tbody>
+                    <?php if ($result): ?>
+                        <!-- Hàng mã đài -->
+                        <tr>
+                            <td colspan="2">
+                                <div class="d-flex justify-content-between font-16 p-2">
+                                    <?php
+                                    $lvCodes = is_array($result['lv'] ?? null) ? $result['lv'] : [];
+                                    foreach ($lvCodes as $lv):
+                                        $lv = trim($lv);
+                                        if ($lv):
+                                            // Tách các mã theo dấu -
+                                            $codes = explode('-', $lv);
+                                            foreach ($codes as $code):
+                                                $code = trim($code);
+                                                if ($code):
+                                                    ?>
+                                                    <span class="text-number" nc="5"><?= $esc->escapeHtml($code) ?></span>
+                                                    <?php
+                                                endif;
+                                            endforeach;
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Giải ĐB -->
+                        <tr>
+                            <td>ĐB</td>
+                            <td>
+                                <span class="text-number"
+                                    nc="5"><?= $esc->escapeHtml($result['special_prize'] ?? '') ?></span>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 1 -->
+                        <tr>
+                            <td>G1</td>
+                            <td>
+                                <span class="text-number"
+                                    nc="5"><?= $esc->escapeHtml($result['first_prize'] ?? '') ?></span>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 2 -->
+                        <tr>
+                            <td>G2</td>
+                            <td>
+                                <?php
+                                $secondPrizes = is_array($result['second_prize'] ?? null)
+                                    ? $result['second_prize']
+                                    : [];
+                                foreach ($secondPrizes as $prize):
+                                    $prize = trim($prize);
+                                    if ($prize):
+                                        ?>
+                                        <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 3 -->
+                        <tr>
+                            <td>G3</td>
+                            <td>
+                                <?php
+                                $thirdPrizes = is_array($result['third_prize'] ?? null)
+                                    ? $result['third_prize']
+                                    : [];
+                                foreach ($thirdPrizes as $prize):
+                                    $prize = trim($prize);
+                                    if ($prize):
+                                        ?>
+                                        <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 4 -->
+                        <tr>
+                            <td>G4</td>
+                            <td>
+                                <?php
+                                $fourthPrizes = is_array($result['fourth_prize'] ?? null)
+                                    ? $result['fourth_prize']
+                                    : [];
+                                foreach ($fourthPrizes as $prize):
+                                    $prize = trim($prize);
+                                    if ($prize):
+                                        ?>
+                                        <span class="text-number" nc="4"><?= $esc->escapeHtml($prize) ?></span>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 5 -->
+                        <tr>
+                            <td>G5</td>
+                            <td>
+                                <?php
+                                $fifthPrizes = is_array($result['fifth_prize'] ?? null)
+                                    ? $result['fifth_prize']
+                                    : [];
+                                foreach ($fifthPrizes as $prize):
+                                    $prize = trim($prize);
+                                    if ($prize):
+                                        ?>
+                                        <span class="text-number" nc="4"><?= $esc->escapeHtml($prize) ?></span>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 6 -->
+                        <tr>
+                            <td>G6</td>
+                            <td>
+                                <?php
+                                $sixthPrizes = is_array($result['sixth_prize'] ?? null)
+                                    ? $result['sixth_prize']
+                                    : [];
+                                foreach ($sixthPrizes as $prize):
+                                    $prize = trim($prize);
+                                    if ($prize):
+                                        ?>
+                                        <span class="text-number" nc="3"><?= $esc->escapeHtml($prize) ?></span>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+
+                        <!-- Giải 7 -->
+                        <tr>
+                            <td>G7</td>
+                            <td>
+                                <?php
+                                $seventhPrizes = is_array($result['seventh_prize'] ?? null)
+                                    ? $result['seventh_prize']
+                                    : [];
+                                foreach ($seventhPrizes as $prize):
+                                    $prize = trim($prize);
+                                    if ($prize):
+                                        ?>
+                                        <span class="text-number" nc="2"><?= $esc->escapeHtml($prize) ?></span>
+                                        <?php
+                                    endif;
+                                endforeach;
+                                ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bảng lô tô -->
+    <div class="loto loto-single">
+        <table class="table table-bordered table-striped table-xslt-single-col">
+            <thead>
+                <tr>
+                    <th>Đầu</th>
+                    <th>Lô tô</th>
+                    <th>Đuôi</th>
+                    <th>Lô tô</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php for ($i = 0; $i <= 9; $i++): ?>
+                    <tr>
+                        <td><?= $i ?></td>
+                        <td>
+                            <?php
+                            if (!empty($dau[$i])) {
+                                sort($dau[$i]);
+                                foreach ($dau[$i] as $num) {
+                                    echo '<span>' . $esc->escapeHtml($num) . '</span>';
+                                }
+                            }
+                            ?>
+                        </td>
+                        <td><?= $i ?></td>
+                        <td>
+                            <?php
+                            if (!empty($duoi[$i])) {
+                                sort($duoi[$i]);
+                                foreach ($duoi[$i] as $num) {
+                                    echo '<span>' . $esc->escapeHtml($num) . '</span>';
+                                }
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                <?php endfor; ?>
+            </tbody>
+        </table>
+    </div>
+</article>

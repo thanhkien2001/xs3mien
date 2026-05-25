@@ -1,0 +1,26 @@
+<?php
+/**
+ * View for AJAX load more - Returns only article elements
+ */
+
+if (isset($latestResults) && !empty($latestResults)):
+    foreach ($latestResults as $index => $latestResult):
+        $latestDate = new \DateTime($latestResult['draw_date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+        $latestDay = (int)$latestDate->format('j');
+        $latestMonth = (int)$latestDate->format('n');
+        $latestYear = (int)$latestDate->format('Y');
+        $latestDateFormatted = sprintf('%02d/%02d/%d', $latestDay, $latestMonth, $latestYear);
+        $latestYmd = $latestResult['draw_date'] ? str_replace('-', '', $latestResult['draw_date']) : 'unknown';
+        
+        // Include partial cho kết quả
+        $this->partial('ketquaxsmb/partials/latest_result', [
+            'latestResult' => $latestResult,
+            'latestDate' => $latestDate,
+            'latestDateFormatted' => $latestDateFormatted,
+            'latestYmd' => $latestYmd,
+            'index' => $index
+        ]);
+    endforeach;
+endif;
+?>
+

@@ -1,0 +1,352 @@
+<main>
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: base_url + "xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: base_url + "xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: base_url + "xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= $base_url ?>" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item active"><a href="<?= $base_url ?>du-doan-xsmn-wap.html" title="Dự đoán XSMN Wap">Dự đoán XSMN Wap</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h2 class="font-20 my-2"> <strong>Dự đoán XSMN Wap - Soi cầu xổ số miền Nam chính xác nhất</strong> </h2>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"> Thứ <?= $currentDayOfWeek ?? 2 ?>, <?= $currentDate ?? date('d/m/Y') ?> - 01:00 </div>
+                            <div class="allRate"> <input type="range" value="0" step="0.25" id="backing5" style="display: none;">
+                                <input type="text" value="page/119" hidden="" id="voteLink">
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5" data-rateit-resetable="false"
+                                    data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-mode="font"
+                                    data-rateit-icon="" style="font-family:fontawesome"> <button id="rateit-reset-2" type="button"
+                                        data-role="none" class="rateit-reset" aria-label="reset rating"
+                                        aria-controls="rateit-range-2" style="display: none;"><span></span></button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating"
+                                        aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"
+                                        aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset" style="width: 0px;">★★★★★</div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div> <span class="danhgia"> <span class="avg-rate">4.3</span> /<span>5</span> của <span
+                                        class="count-rate">339</span> đánh giá</span>
+                                <script
+                                    type="application/ld+json">
+                                    {
+                                        "@context": "https://schema.org/",
+                                        "@type": "AggregateRating",
+                                        "ratingValue": "4.3",
+                                        "bestRating": "5",
+                                        "ratingCount": "339",
+                                        "itemReviewed": {
+                                            "@type": "CreativeWorkSeries",
+                                            "name": "Dự đoán XSMN Wap - Soi cầu xổ số miền Nam chính xác nhất"
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3"><strong>Dự đoán XSMN Wap là nơi dành cho các anh em tham gia quay
+                            thưởng tại sân chơi XSMN. Đây là công cụ soi cầu hoàn toàn miễn phí nhưng lại giúp nhiều anh em thắng
+                            lớn và mang về nhiều giải thưởng có giá trị. Cùng theo dõi ngay trong bài viết dưới đây.</strong></h2>
+                    <div class="text-center"> <img width="600" height="314"
+                            src="<?= $base_url ?>public/media/thumb/Thumb-Cate/soi-cau-xsmn-wap-600x314.jpg"
+                            alt="Dự đoán XSMN Wap - Soi cầu xổ số miền Nam chính xác nhất"> </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Kết quả XSMN kỳ quay trước</a></li>
+                                <li><a rel="nofollow" href="#trick1">Dự đoán Xổ số miền Nam Wap</a></li>
+                                <li><a rel="nofollow" href="#trick2">Dự đoán XSBL Wap hôm nay </a></li>
+                                <li><a rel="nofollow" href="#trick3">Dự đoán XSVT Wap hôm nay </a></li>
+                                <li><a rel="nofollow" href="#trick4">Dự đoán XSBTR Wap hôm nay </a></li>
+                                <li><a rel="nofollow" href="#trick5">Lịch quay thưởng XSMN trong tuần</a></li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify;"><a href="<?= $base_url ?>du-doan-xsmn-wap.html" title="Dự đoán XSMN Wap">Dự đoán XSMN
+                                Wap</a> với hình thức soi cầu chốt số MN được các chuyên gia của chúng tôi nghiên cứu kĩ và đưa ra
+                            các con số chính xác cho anh em. Kết quả soi cầu dự đoán của chúng tôi hoàn toàn miễn phí và được cập
+                            nhật hàng ngày để anh em tham khảo và cùng nhau làm giàu.</p>
+                        <h3 id="trick0" style="text-align: justify;">Kết quả XSMN kỳ quay trước</h3>
+                        <p style="text-align: justify;">Ở kỳ quay trước, chúc mừng những anh em đã tin tưởng con số của chúng tôi và
+                            đêm về cho mình nhiều giải thưởng lớn. Cùng chúng tôi theo dõi những cặp số đẹp nhất của ngày hôm nay
+                            nhé!</p>
+                        <p style="text-align: justify;"></p>
+                        <article class="my-2">
+                            <div class="result result-multi rounded">
+                                <div class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0"> Xổ số Miền
+                                    Nam ngày 20/01/2026 </div>
+                                <div class="breadcrumb-table">
+                                    <h4 class="breadcrumb-table-title"> <a href="<?= $base_url ?>xsmn-thu-3.html"
+                                            title="XSMN thứ 3">XSMN thứ 3</a> / <a
+                                            href="<?= $base_url ?>xsmn-20-01-2026.html" title="XSMN 20/01/2026">XSMN
+                                            20/01/2026</a> </h4>
+                                </div>
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result" data-code="XSMN">
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td> <a href="<?= $base_url ?>xo-so-ben-tre-xsbtr.html"
+                                                        title="XSBTR thứ 3 - Kết quả XSBTR ngày 20-01-2026">Bến Tre</a> </td>
+                                                <td> <a href="<?= $base_url ?>xo-so-vung-tau-xsvt.html"
+                                                        title="XSVT thứ 3 - Kết quả XSVT ngày 20-01-2026">Vũng Tàu</a> </td>
+                                                <td> <a href="<?= $base_url ?>xo-so-bac-lieu-xsbl.html"
+                                                        title="XSBL thứ 3 - Kết quả XSBL ngày 20-01-2026">Bạc Liêu</a> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G8</td>
+                                                <td> <span class="text-number" nc="2">01</span> </td>
+                                                <td> <span class="text-number" nc="2">11</span> </td>
+                                                <td> <span class="text-number" nc="2">21</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G7</td>
+                                                <td> <span class="text-number" nc="3">308</span> </td>
+                                                <td> <span class="text-number" nc="3">421</span> </td>
+                                                <td> <span class="text-number" nc="3">433</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G6</td>
+                                                <td> <span class="text-number" nc="4">3185</span> <span class="text-number"
+                                                        nc="4">4987</span> <span class="text-number" nc="4">0971</span> </td>
+                                                <td> <span class="text-number" nc="4">9266</span> <span class="text-number"
+                                                        nc="4">6311</span> <span class="text-number" nc="4">8860</span> </td>
+                                                <td> <span class="text-number" nc="4">2475</span> <span class="text-number"
+                                                        nc="4">5208</span> <span class="text-number" nc="4">0627</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G5</td>
+                                                <td> <span class="text-number" nc="4">7647</span> </td>
+                                                <td> <span class="text-number" nc="4">5027</span> </td>
+                                                <td> <span class="text-number" nc="4">5224</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G4</td>
+                                                <td> <span class="text-number" nc="5">97818</span> <span class="text-number"
+                                                        nc="5">70012</span> <span class="text-number" nc="5">86537</span> <span
+                                                        class="text-number" nc="5">97964</span> <span class="text-number"
+                                                        nc="5">19460</span> <span class="text-number" nc="5">63208</span> <span
+                                                        class="text-number" nc="5">86545</span> </td>
+                                                <td> <span class="text-number" nc="5">95120</span> <span class="text-number"
+                                                        nc="5">28950</span> <span class="text-number" nc="5">21496</span> <span
+                                                        class="text-number" nc="5">04134</span> <span class="text-number"
+                                                        nc="5">27149</span> <span class="text-number" nc="5">45134</span> <span
+                                                        class="text-number" nc="5">07046</span> </td>
+                                                <td> <span class="text-number" nc="5">72741</span> <span class="text-number"
+                                                        nc="5">91052</span> <span class="text-number" nc="5">23957</span> <span
+                                                        class="text-number" nc="5">79489</span> <span class="text-number"
+                                                        nc="5">84471</span> <span class="text-number" nc="5">57188</span> <span
+                                                        class="text-number" nc="5">18532</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G3</td>
+                                                <td> <span class="text-number" nc="5">65890</span> <span class="text-number"
+                                                        nc="5">98272</span> </td>
+                                                <td> <span class="text-number" nc="5">02258</span> <span class="text-number"
+                                                        nc="5">38499</span> </td>
+                                                <td> <span class="text-number" nc="5">45418</span> <span class="text-number"
+                                                        nc="5">90546</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G2</td>
+                                                <td> <span class="text-number" nc="5">35638</span> </td>
+                                                <td> <span class="text-number" nc="5">27620</span> </td>
+                                                <td> <span class="text-number" nc="5">91483</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G1</td>
+                                                <td> <span class="text-number" nc="5">70044</span> </td>
+                                                <td> <span class="text-number" nc="5">58157</span> </td>
+                                                <td> <span class="text-number" nc="5">70893</span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ĐB</td>
+                                                <td> <span class="text-number" nc="6">300409</span> </td>
+                                                <td> <span class="text-number" nc="6">305017</span> </td>
+                                                <td> <span class="text-number" nc="6">787820</span> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </article>
+                        <p></p>
+                        <p style="text-align: center;"><span style="color: #ff0000;"><span>»</span> <a
+                                    href="<?= $base_url ?>xo-so-mien-nam-xsmn.html" title="Kết quả XSMN">Kết quả XSMN</a> «</span></p>
+                        <h3 id="trick1" style="text-align: justify;">Dự đoán Xổ số miền Nam Wap</h3>
+                        <p style="text-align: justify;"></p>
+                        <h3 id="trick2">Dự đoán XSBL Wap hôm nay </h3>
+                        <table class="table-default w-100 text-center mb-3">
+                            <tbody>
+                                <tr>
+                                    <td>Giải 8</td>
+                                    <td class="text-red font-weight-bold">28</td>
+                                </tr>
+                                <tr>
+                                    <td>Đặc biệt</td>
+                                    <td class="font-weight-bold">Đầu <span class="text-red">9</span>, Đuôi <span
+                                            class="text-red">9</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô xiên</td>
+                                    <td class="text-red font-weight-bold">04 - 77 - 62</td>
+                                </tr>
+                                <tr>
+                                    <td>Cầu lotto 2 số VIP</td>
+                                    <td class="text-red font-weight-bold">18 - 86 - 59</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="trick3">Dự đoán XSVT Wap hôm nay </h3>
+                        <table class="table-default w-100 text-center mb-3">
+                            <tbody>
+                                <tr>
+                                    <td>Giải 8</td>
+                                    <td class="text-red font-weight-bold">82</td>
+                                </tr>
+                                <tr>
+                                    <td>Đặc biệt</td>
+                                    <td class="font-weight-bold">Đầu <span class="text-red">8</span>, Đuôi <span
+                                            class="text-red">4</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô xiên</td>
+                                    <td class="text-red font-weight-bold">51 - 01 - 72</td>
+                                </tr>
+                                <tr>
+                                    <td>Cầu lotto 2 số VIP</td>
+                                    <td class="text-red font-weight-bold">54 - 60 - 59</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h3 id="trick4">Dự đoán XSBTR Wap hôm nay </h3>
+                        <table class="table-default w-100 text-center mb-3">
+                            <tbody>
+                                <tr>
+                                    <td>Giải 8</td>
+                                    <td class="text-red font-weight-bold">92</td>
+                                </tr>
+                                <tr>
+                                    <td>Đặc biệt</td>
+                                    <td class="font-weight-bold">Đầu <span class="text-red">4</span>, Đuôi <span
+                                            class="text-red">2</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô xiên</td>
+                                    <td class="text-red font-weight-bold">55 - 79 - 22</td>
+                                </tr>
+                                <tr>
+                                    <td>Cầu lotto 2 số VIP</td>
+                                    <td class="text-red font-weight-bold">74 - 37 - 79</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <p style="text-align: center;"><span style="color: #ff0000;">» <a href="<?= $base_url ?>du-doan-xsmn-c61.html"
+                                    title="Dự đoán XSMN">Dự đoán XSMN</a> <span>«</span></span></p>
+                        <h3 id="trick5" style="text-align: justify;">Lịch quay thưởng XSMN trong tuần</h3>
+                        <ul style="text-align: justify;">
+                            <li>XSMN thứ 2: XSMN được quay thưởng tại các đài TpHCM, Cà Mau, Đồng Tháp.</li>
+                            <li>XSMN thứ 3: Giúp bạn có thông tin kết quả xổ số của đài Bến Tre, Vũng Tàu, Bạc Liêu.</li>
+                            <li>XSMN thứ 4: Thống kê đầy đủ các kết quả của đài Đồng Nai, Cần Thơ, Sóc Trăng.</li>
+                            <li>XSMN thứ 5: Cung cấp chính xác các số đẹp của đài Tây Ninh, An Giang, Bình Thuận.</li>
+                            <li>XSMN thứ 6: Giúp bạn có thông tin kết quả xổ số của đài Vĩnh Long, Bình Dương, Trà Vinh.</li>
+                            <li>XSMN thứ 7: Mang đến cho anh em những con số may mắn của đài TpHCM, Long An, Bình Phước, Hậu Giang.
+                            </li>
+                            <li>XSMN Chủ Nhật: Cập nhật những số liên quan trực tiếp tới đài Tiền Giang, Kiên Giang, Đà Lạt.</li>
+                        </ul>
+                        <p style="text-align: justify;">Những con số dự đoán XSMN Wap được chúng tôi phân tích và chọn lọc ra con số
+                            đẹp nhất. Việc còn lại của anh em là lựa chọn cho mình một con số ưng ý nhất và tham gia ngay vào lần
+                            quay thưởng trong ngày hôm nay. Tuy nhiên, các con số của chúng tôi không chính xác hoàn toàn 100%. Anh
+                            em nên cân nhắc kĩ trước khi chơi nhé.<span> </span></p>
+                        <p style="text-align: justify;">Chúc anh em may mắn!!</p>
+                    </div>
+                </div>
+                <!-- Sidebar links (from original) -->
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    #trick1,
+    #trick2,
+    #trick3,
+    #trick4,
+    #trick5,
+    #trick6,
+    #trick7,
+    #trick8,
+    #trick9,
+    #trick10 {
+        margin-top: 10px;
+    }
+</style>

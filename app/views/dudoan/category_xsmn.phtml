@@ -1,0 +1,270 @@
+<?php
+$esc = $this->escaper;
+use App\Library\LotteryHelper;
+
+$firstPrediction = $predictions->count() > 0 ? $predictions[0] : null;
+$remainingPredictions = [];
+foreach ($predictions as $index => $pred) {
+    if ($index > 0 && $index <= 3) {
+        $remainingPredictions[] = $pred;
+    }
+}
+$ajaxPredictions = [];
+foreach ($predictions as $index => $pred) {
+    if ($index > 3) {
+        $ajaxPredictions[] = $pred;
+    }
+}
+
+$previousDraw = $previousDraw ?? null;
+$drawDateFormatted = $previousDraw ? date('d/m/Y', strtotime($previousDraw['draw_date'])) : '';
+?>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="<i class='icon-home'></i>"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item active"><a href="/du-doan-xsmn-c61.html" title="Dự đoán XSMN">Dự đoán XSMN</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-xl-610 border-radius-4">
+                <div class="row">
+                    <div class="col-12 pt-3">
+                        <h2 class="title-news-cate text-center">DỰ ĐOÁN XSMN - DỰ ĐOÁN MN CHÍNH XÁC NHẤT HÔM NAY</h2>
+                        <p>Dự đoán KQXSMN - Dự đoán xổ số miền Nam đưa ra những con số đẹp nhất có tỉ lệ về cao trong ngày. Mời anh em cùng theo dõi ngay sau đây:</p>
+                        <div class="d-flex bg-blue1 child-border-right">
+                            <a href="/du-doan-xsmb-c59.html" class="col text-center p-2 text-white">Dự đoán XSMB</a>
+                            <a href="/du-doan-xsmt-c60.html" class="col text-center p-2 text-white">Dự đoán XSMT</a>
+                            <a href="/du-doan-xsmn-c61.html" class="col text-center p-2 text-white bg-red1">Dự đoán XSMN</a>
+                        </div>
+                        <h2 class="font-weight-bold mt-3">Dự đoán XSMN</h2>
+                    </div>
+                    <?php if ($firstPrediction): ?>
+                    <div class="col-12 col-lg-6 pr-2">
+                        <a href="/<?= $esc->escapeHtml($firstPrediction->slug) ?>.html" title="<?= $esc->escapeHtml($firstPrediction->title) ?>">
+                            <img width="410" height="215" loading="lazy" src="<?= $esc->escapeHtml($firstPrediction->image_url ?? '/img/soicaududoan/xsmn/dudoanxsmn.png') ?>" alt="<?= $esc->escapeHtml($firstPrediction->title) ?>">
+                        </a>
+                    </div>
+                    <div class="col-12 col-lg-6 pl-2">
+                        <h3 class="mt-2 mt-lg-0">
+                            <a class="font-18 font-weight-bold lh-24px text-blue1" href="/<?= $esc->escapeHtml($firstPrediction->slug) ?>.html" title="<?= $esc->escapeHtml($firstPrediction->title) ?>">
+                                <?= $esc->escapeHtml($firstPrediction->title) ?>
+                            </a>
+                        </h3>
+                        <p class="text-black2 font-14 d-none line-lg-4 mb-0 lh-18px text-justify">
+                            <?= $esc->escapeHtml(mb_substr(strip_tags($firstPrediction->content), 0, 200)) ?>...
+                        </p>
+                    </div>
+                    <div class="col-12 d-lg-none">
+                        <p class="text-black2 font-14 mb-0">
+                            <?= $esc->escapeHtml(mb_substr(strip_tags($firstPrediction->content), 0, 200)) ?>...
+                        </p>
+                    </div>
+                    <?php endif; ?>
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <?php foreach ($remainingPredictions as $pred): ?>
+                    <div class="col-4 <?= $pred === $remainingPredictions[0] ? 'pr-2' : ($pred === $remainingPredictions[count($remainingPredictions)-1] ? 'pl-2' : 'px-2') ?>">
+                        <a href="/<?= $esc->escapeHtml($pred->slug) ?>.html" title="<?= $esc->escapeHtml($pred->title) ?>">
+                            <img width="410" height="215" loading="lazy" src="<?= $esc->escapeHtml($pred->image_url ?? '/img/soicaududoan/xsmn/dudoanxsmn.png') ?>" alt="<?= $esc->escapeHtml($pred->title) ?>">
+                        </a>
+                        <h3>
+                            <a class="text-black1 lh-18px font-14 font-weight-bold mt-3 d-block text-justify" href="/<?= $esc->escapeHtml($pred->slug) ?>.html" title="<?= $esc->escapeHtml($pred->title) ?>">
+                                <?= $esc->escapeHtml($pred->title) ?>
+                            </a>
+                        </h3>
+                    </div>
+                    <?php endforeach; ?>
+                    <div class="col-12">
+                        <hr class="mb-0">
+                    </div>
+                    <?php if ($previousDraw && !empty($previousDraw['provinces'])): ?>
+                    <div class="col-12">
+                        <hr class="mb-0">
+                        <h3 class="font-weight-bold my-2">Kết quả XSMN kỳ quay trước</h3>
+                        <article class="my-2">
+                            <div class="result result-multi rounded">
+                                <div class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+                                    Xổ số Miền Nam ngày <?= $esc->escapeHtml($drawDateFormatted) ?>
+                                </div>
+                                <div class="breadcrumb-table">
+                                    <h4 class="breadcrumb-table-title">
+                                        <a href="/xsmn-thu-<?= date('N', strtotime($previousDraw['draw_date'])) ?>.html" title="XSMN">XSMN</a>
+                                        /
+                                        <a href="/xsmn-<?= date('d-m-Y', strtotime($previousDraw['draw_date'])) ?>.html" title="XSMN <?= $esc->escapeHtml($drawDateFormatted) ?>">XSMN <?= $esc->escapeHtml($drawDateFormatted) ?></a>
+                                    </h4>
+                                </div>
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result" data-code="XSMN">
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <?php foreach ($previousDraw['provinces'] as $prov): ?>
+                                                <td>
+                                                    <a href="/xo-so-<?= strtolower(str_replace(' ', '-', $prov['province_name'])) ?>-<?= strtolower($prov['province_code']) ?>.html" title="<?= $esc->escapeHtml($prov['province_name']) ?>">
+                                                        <?= $esc->escapeHtml($prov['province_name']) ?>
+                                                    </a>
+                                                </td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                            <?php
+                                            $prizeLabels = ['G8', 'G7', 'G6', 'G5', 'G4', 'G3', 'G2', 'G1', 'ĐB'];
+                                            $prizeKeys = ['eighth_prize', 'seventh_prize', 'sixth_prize', 'fifth_prize', 'fourth_prize', 'third_prize', 'second_prize', 'first_prize', 'special_prize'];
+                                            $prizeLengths = [2, 3, 4, 4, 5, 5, 5, 5, 6];
+                                            foreach ($prizeLabels as $idx => $label):
+                                            ?>
+                                            <tr>
+                                                <td><?= $esc->escapeHtml($label) ?></td>
+                                                <?php foreach ($previousDraw['provinces'] as $prov): ?>
+                                                <td>
+                                                    <?php
+                                                    $prizeKey = $prizeKeys[$idx];
+                                                    $prizes = $prov['prizes'][$prizeKey] ?? [];
+                                                    foreach ($prizes as $num):
+                                                    ?>
+                                                    <span class="text-number" nc="<?= $prizeLengths[$idx] ?>"><?= $esc->escapeHtml($num) ?></span>
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="loto loto-multi rounded">
+                                <table class="table table-bordered table-striped table-xslt-multi-col" data-code="XSMN">
+                                    <thead>
+                                        <tr>
+                                            <th>Đầu</th>
+                                            <?php foreach ($previousDraw['provinces'] as $prov): ?>
+                                            <th><?= $esc->escapeHtml($prov['province_name']) ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php for ($head = 0; $head <= 9; $head++): ?>
+                                        <tr>
+                                            <td><?= $head ?></td>
+                                            <?php foreach ($previousDraw['provinces'] as $prov): ?>
+                                            <td>
+                                                <?php
+                                                $dau = $prov['dauDuoi']['dau'][$head] ?? [];
+                                                sort($dau);
+                                                foreach ($dau as $num):
+                                                ?>
+                                                <span><?= $esc->escapeHtml($num) ?></span>
+                                                <?php endforeach; ?>
+                                            </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <?php endfor; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </article>
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <div id="ajax_content">
+                    <?php foreach ($ajaxPredictions as $pred): ?>
+                    <div class="row">
+                        <div class="col-12 mt-3 mb-2">
+                            <a class="text-blue1 font-16 font-weight-bold" href="/<?= $esc->escapeHtml($pred->slug) ?>.html" title="<?= $esc->escapeHtml($pred->title) ?>">
+                                <?= $esc->escapeHtml($pred->title) ?>
+                            </a>
+                        </div>
+                        <div class="col-4 pr-2">
+                            <a href="/<?= $esc->escapeHtml($pred->slug) ?>.html" title="<?= $esc->escapeHtml($pred->title) ?>">
+                                <img loading="lazy" width="410" height="215" src="<?= $esc->escapeHtml($pred->image_url ?? '/img/soicaududoan/xsmn/dudoanxsmn.png') ?>" alt="<?= $esc->escapeHtml($pred->title) ?>">
+                            </a>
+                        </div>
+                        <div class="col-8 pl-2">
+                            <p class="text-black1 font-14 lh-18px line-3 text-justify">
+                                <?= $esc->escapeHtml(mb_substr(strip_tags($pred->content), 0, 200)) ?>...
+                            </p>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+                <button class="btnLoadMore" data-url="/du-doan-xsmn-c61/page/" data-page="2" data-total="<?= $predictions->count() ?>" data-limit="19">Xem thêm bài viết</button>
+                <div class="new-content text-justify mt-4">
+                    <p style="text-align: justify;"><a href="/du-doan-xsmn-c61.html" title="Dự đoán XSMN">Dự đoán XSMN</a> - Dự đoán xổ số miền Nam hôm nay cực chuẩn. Chuyên mục dự đoán XSMN, soi cầu XSMN sẽ gửi đến anh em những con số đẹp nhất và dự đoán KQXSMN mở thưởng trong ngày cực chính xác và hoàn toàn miễn phí.</p>
+                    <p style="text-align: justify;">Những dự đoán và nhận định xổ số miền Nam của chúng tôi cung cấp đều dựa vào số liệu thống kê trên máy tính hiện đại, phân tích kết quả XSMN đã về nhiều ngày qua. Kết hợp với các phương pháp soi cầu hiệu quả của các chuyên gia lô đề có nhiều năm kinh nghiệm chắc chắn sẽ không làm anh em thất vọng.</p>
+                </div>
+            </div>
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btnLoadMore = document.querySelector('.btnLoadMore');
+    if (btnLoadMore) {
+        btnLoadMore.addEventListener('click', function() {
+            const currentPage = parseInt(this.getAttribute('data-page') || '2');
+            const baseUrl = this.getAttribute('data-url');
+            const total = parseInt(this.getAttribute('data-total') || '0');
+            const limit = parseInt(this.getAttribute('data-limit') || '19');
+            
+            if (!baseUrl) {
+                console.error('Missing data-url attribute');
+                return;
+            }
+            
+            this.disabled = true;
+            const originalText = this.textContent;
+            this.textContent = 'Đang tải...';
+            
+            fetch(baseUrl + currentPage, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(html => {
+                if (html && html.trim().length > 0) {
+                    const ajaxContent = document.getElementById('ajax_content');
+                    if (ajaxContent) {
+                        ajaxContent.insertAdjacentHTML('beforeend', html);
+                    }
+                    const newPage = currentPage + 1;
+                    this.setAttribute('data-page', newPage);
+                    if (newPage * limit >= total) {
+                        this.style.display = 'none';
+                    } else {
+                        this.disabled = false;
+                        this.textContent = originalText;
+                    }
+                } else {
+                    this.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                this.disabled = false;
+                this.textContent = originalText;
+            });
+        });
+    }
+});
+</script>
+

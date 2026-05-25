@@ -1,0 +1,352 @@
+<main>
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: base_url + "xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: base_url + "xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: base_url + "xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= $base_url ?>" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item active"><a href="<?= $base_url ?>du-doan-xsmb-hom-nay.html" title="Dự đoán xổ số miền Bắc chính xác hôm nay">Dự đoán xổ số miền Bắc chính xác hôm nay</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h2 class="font-20 my-2"> <strong>Dự đoán xổ số miền Bắc chính xác hôm nay</strong> </h2>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"> Thứ <?= date('N') + 1 ?>, <?= $date ?> - 01:00 </div>
+                            <div class="allRate"> <input type="range" value="0" step="0.25" id="backing5" style="display: none;">
+                                <input type="text" value="page/116" hidden="" id="voteLink">
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5" data-rateit-resetable="false"
+                                    data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-mode="font"
+                                    data-rateit-icon="" style="font-family:fontawesome"> <button id="rateit-reset-2" type="button"
+                                        data-role="none" class="rateit-reset" aria-label="reset rating"
+                                        aria-controls="rateit-range-2" style="display: none;"><span></span></button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating"
+                                        aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"
+                                        aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset" style="width: 0px; display: block;">★★★★★</div>
+                                        <div class="rateit-hover" style="width: 0px; display: none;">★★★★★</div>
+                                    </div>
+                                </div> <span class="danhgia"> <span class="avg-rate">3.7</span> /<span>5</span> của <span
+                                        class="count-rate">718</span> đánh giá</span>
+                                <script
+                                    type="application/ld+json">
+                                    {
+                                        "@context": "https://schema.org/",
+                                        "@type": "AggregateRating",
+                                        "ratingValue": "3.7",
+                                        "bestRating": "5",
+                                        "ratingCount": "718",
+                                        "itemReviewed": {
+                                            "@type": "CreativeWorkSeries",
+                                            "name": "Du đoán xổ số miền Bắc chính xác hôm nay"
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3"><strong>Soi cầu lô chính xác nhất miền Bắc được đưa ra nhằm giúp
+                            anh em giải quyết những khó khăn trong việc tìm ra những con số đẹp nhất trong ngày cho mình. Chúng tôi
+                            đưa ra những con số được chọn lọc kỹ càng và có độ chính xác lên tới 90%. Cùng tham khảo ngay những con
+                            số hôm nay của chúng tôi nhé.</strong></h2>
+                    <div class="text-center"> <img width="600" height="314"
+                            src="<?= $base_url ?>public/media/thumb/Thumb-Cate/soi-cau-lo-chinh-xac-nhat-600x314.jpg"
+                            alt="Du đoán xổ số miền Bắc chính xác hôm nay"> </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Soi cầu lô chính xác nhất miền Bắc hôm nay&nbsp;<?= $date ?></a>
+                                </li>
+                                <li><a rel="nofollow" href="#trick1">Thống kê XSMB hôm nay</a></li>
+                                <li><a rel="nofollow" href="#trick2">Thống kê lô gan XSMB</a></li>
+                                <li><a rel="nofollow" href="#trick3">Thống kê lô xiên XSMB</a></li>
+                                <li><a rel="nofollow" href="#trick4">Thống kê lô kép XSMB</a></li>
+                                <li><a rel="nofollow" href="#trick5">Tại sao nên tham khảo soi cầu chính xác nhất miền Bắc?</a></li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify;"><a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html">Du đoán xổ số miền Bắc
+                                chính xác hôm nay</a> giúp anh em thực hiện được mục tiêu thắng lớn trong mỗi kỳ quay thưởng. Đây
+                            không còn là một trò chơi may rủi nữa mà đã đánh đâu là phải trúng đấy với những con số được đưa ra từ
+                            các cao thủ lô đề chưa chủng tôi. Anh em chỉ việc tham khảo và đưa ra con số ưng ý để tham gia quay
+                            thưởng.</p>
+                        <h3 id="trick0" style="text-align: justify;">Soi cầu lô chính xác nhất miền Bắc hôm nay&nbsp;<?= $date ?></h3>
+                        <p style="text-align: justify;"></p>
+                        <table class="table-default w-100 text-center">
+                            <tbody>
+                                <tr>
+                                    <td>Bạch thủ lô</td>
+                                    <td class="text-red font-weight-bold"><?= $cauLo['bach_thu'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô kép</td>
+                                    <td class="text-red font-weight-bold"><?= $cauLo['lo_kep'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Song thủ lô</td>
+                                    <td class="text-red font-weight-bold"><?= $cauLo['song_thu'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô xiên</td>
+                                    <td class="text-red font-weight-bold"><?= $cauLo['lo_xien'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>3 càng vip</td>
+                                    <td class="text-red font-weight-bold"><?= $cauLo['3_cang'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Dàn đề</td>
+                                    <td class="text-red font-weight-bold"><?= $cauLo['dan_de'] ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <p style="text-align: center;"><span style="color: #ff0000;">» <a href="<?= $base_url ?>du-doan-xsmb-c59.html"
+                                    title="Dự đoán XSMB">Dự đoán XSMB</a> «</span></p>
+                        <h3 id="trick1" style="text-align: justify;">Thống kê XSMB hôm nay</h3>
+                        <h4 id="trick2">Thống kê lô gan XSMB</h4>
+                        <p style="text-align: justify;"></p>
+                        <table class="text-center table-default w-100">
+                            <thead>
+                                <tr class="bg-orange">
+                                    <th>Lô gan</th>
+                                    <th>Lần chưa về</th>
+                                    <th>Về gần nhất</th>
+                                    <th>Gan cực đại</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($loGan as $item): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold"><?= $item['val'] ?></td>
+                                        <td><?= $item['days'] ?> <span class="font-weight-normal">lần</span></td>
+                                        <td> <a rel="nofollow" href="<?= $base_url ?>xsmb-<?= str_replace('/', '-', $item['last_date']) ?>.html" class="text-black"
+                                                target="_blank"><?= $item['last_date'] ?></a> </td>
+                                        <td><?= $item['max_gan'] ?> <span class="font-weight-normal">lần</span></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <p style="text-align: center;"><span style="color: #ff0000;">» <a href="<?= $base_url ?>rong-bach-kim.html"
+                                    title="Rồng Bạch Kim">Rồng Bạch Kim</a> «</span></p>
+                        <h4 id="trick3" style="text-align: justify;">Thống kê lô xiên XSMB</h4>
+                        <p style="text-align: justify;">Anh em tham khảo bảng thống kê lô xiên 2 và lô xiên 3 biên độ 30 ngày mà
+                            chúng tôi đã tổng hợp lại để có thêm cơ sở lựa chọn con số cho mình nhé!</p>
+                        <p style="text-align: center;"></p>
+                        <div class="logan-result">
+                            <div class="table-loxien">
+                                <div class="overflow-auto">
+                                    <table class="table-total table-logan-lcvn lo-xien">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center px-2">Lô xiên 2</th>
+                                                <th class="text-center px-2">Số lần xuất hiện</th>
+                                                <th class="pl-3">Các ngày xuất hiện</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($loXien2 as $item): ?>
+                                                <tr class="lh2">
+                                                    <td class="text-center"><span class="font-weight-bold text-nowrap px-2"><?= $item['pair'] ?></span></td>
+                                                    <td class="text-center px-2 font-weight-bold"> <?= $item['count'] ?> <span
+                                                            class="font-weight-normal">ngày</span> </td>
+                                                    <td class="pl-3 text-left">
+                                                        <?php
+                                                        $dates = array_map(function ($d) use ($base_url) {
+                                                            return '<a rel="nofollow" href="' . $base_url . 'xsmb-' . str_replace('/', '-', $d) . '.html" title="XSMB ngày ' . $d . '">' . $d . '</a>';
+                                                        }, $item['dates']);
+                                                        echo implode(', ', $dates);
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <p></p>
+                        <p style="text-align: center;">Bảng thống kê lô xiên 2 XSMB</p>
+                        <p style="text-align: center;"></p>
+                        <div class="logan-result">
+                            <div class="table-loxien">
+                                <div class="overflow-auto">
+                                    <table class="table-total table-logan-lcvn lo-xien">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center px-2">Lô xiên 3</th>
+                                                <th class="text-center px-2">Số lần xuất hiện</th>
+                                                <th class="pl-3">Các ngày xuất hiện</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($loXien3 as $item): ?>
+                                                <tr class="lh2">
+                                                    <td class="text-center"><span class="font-weight-bold text-nowrap px-2"><?= $item['pair'] ?></span></td>
+                                                    <td class="text-center px-2 font-weight-bold"> <?= $item['count'] ?> <span
+                                                            class="font-weight-normal">ngày</span> </td>
+                                                    <td class="pl-3 text-left">
+                                                        <?php
+                                                        $dates = array_map(function ($d) use ($base_url) {
+                                                            return '<a rel="nofollow" href="' . $base_url . 'xsmb-' . str_replace('/', '-', $d) . '.html" title="XSMB ngày ' . $d . '">' . $d . '</a>';
+                                                        }, $item['dates']);
+                                                        echo implode(', ', $dates);
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <p></p>
+                        <p style="text-align: center;">Bảng thống kê lô xiên 3 XSMB</p>
+                        <p style="text-align: center;"><span style="color: #ff0000;">» <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html"
+                                    title="Soi cầu mô đề chuẩn">Soi cầu mô đề chuẩn</a></span><span color="#ff0000"
+                                style="color: #ff0000;"> «</span></p>
+                        <h4 id="trick4" style="text-align: justify;">Thống kê lô kép XSMB</h4>
+                        <p style="text-align: center;"></p>
+                        <div class="logan-result">
+                            <div class="table-logan">
+                                <div class="overflow-auto">
+                                    <table class="table-total table-logan-lcvn lo-xien">
+                                        <thead>
+                                            <tr class="text-nowrap text-center text-uppercase lh2">
+                                                <th>Bộ số</th>
+                                                <th>Số ngày về</th>
+                                                <th class="text-left pl-3">Ngày đã về</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($loKep as $item): ?>
+                                                <tr class="lh2">
+                                                    <td class="text-center font-weight-bold text-nowrap px-2"> <?= $item['pair'] ?> </td>
+                                                    <td class="px-2 text-center"> <span class="text-red"><?= $item['count'] ?></span> <span
+                                                            class="font-weight-normal">ngày</span> </td>
+                                                    <td class="pl-3 text-left">
+                                                        <?php
+                                                        $dates = array_map(function ($d) use ($base_url) {
+                                                            return '<a rel="nofollow" href="' . $base_url . 'xsmb-' . str_replace('/', '-', $d) . '.html" title="XSMB ngày ' . $d . '">' . $d . '</a>';
+                                                        }, $item['dates']);
+                                                        echo implode(', ', $dates);
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <p></p>
+                        <p style="text-align: center;">Bảng thống kê lô kép XSMB</p>
+                        <p style="text-align: justify;">Từ bảng thống kê trên anh em có thể dễ dàng theo dõi những lô xiên có số
+                            lượt về cao nhất và thấp nhất, Từ đó dễ dàng lựa chọn con số để tham gia quay thưởng hôm nay.</p>
+                        <p style="text-align: center;"><span style="color: #ff0000;">» <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html"
+                                    title="Soi cầu Vip">Soi cầu VIP</a> «</span></p>
+                        <h3 id="trick5" style="text-align: justify;">Tại sao nên tham khảo soi cầu chính xác nhất miền Bắc?</h3>
+                        <ul>
+                            <li style="text-align: justify;">Chúng tôi luôn cập nhật bảng <a href="<?= $base_url ?>xo-so-mien-bac-xsmb.html"
+                                    title="kết quả XSMB">kết quả XSMB</a> hàng ngày từ đó thống kê lại cho anh em kết quả các số về
+                                nhiều về ít, lô gan,... Từ những con số này chúng tôi sử dụng những công cụ soi cầu xổ số thông minh
+                                và kinh nghiệm của các chuyên gia hàng đầu về xổ số để đưa ra các con số đẹp nhất.</li>
+                            <li style="text-align: justify;">Có rất nhiều anh em tin tưởng chúng tôi và giành được những giải thưởng
+                                có giá trị. Nếu bạn có mong muốn đổi đời thì không nên bỏ qua những con số mà chúng tôi đã đưa ra.
+                            </li>
+                            <li style="text-align: justify;">Thay vì lựa chọn con số theo cảm tính và chờ đợi kết quả may rủi thì
+                                giờ đây anh em có thể tự tin về các con số của mình khi tham khảo cài soi cầu cảu chúng tôi.</li>
+                        </ul>
+                        <p>Hy vọng những con số của chúng tôi đưa ra sẽ không phụ lòng tin tưởng của anh em dành cho soi cầu lô
+                            chính xác nhất miền Bắc. Anh em nên tham khảo thêm ở các trang soi cầu khác để có thể lựa chọn cho mình
+                            con số ưng ý nhất. Chúc anh em thắng lớn với những con số của mình.</p>
+                    </div>
+                </div>
+                <!-- Sidebar links (from original) -->
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    #trick1,
+    #trick2,
+    #trick3,
+    #trick4,
+    #trick5,
+    #trick6,
+    #trick7,
+    #trick8,
+    #trick9,
+    #trick10 {
+        margin-top: 10px;
+    }
+</style>

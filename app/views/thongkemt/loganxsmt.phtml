@@ -1,0 +1,305 @@
+<?php
+$showDate = function ($d) {
+    return !empty($d) ? $d : '—';
+};
+?>
+
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class=" " title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a></li>
+                    <li><a class=" " title="Thống kê xổ số Miền Nam" href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+                    <li><a class="util-text-red" title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                    <li><a title="Thống kê Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power 6/55</a></li>
+                    <li><a title="Thống kê Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <?php if (!empty($selectedProvinceCode) && $selectedProvinceRaw !== 'REGION:XSMT'): ?>
+                            <li class="nav-breadcrumb-item"><a href="/thong-ke-lo-gan-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html"><span>Lô gan Miền Trung</span></a></li>
+                            <li class="nav-breadcrumb-item"><span>Lô gan <?= htmlspecialchars($selectedProvinceCode) ?></span></li>
+                        <?php else: ?>
+                            <li class="nav-breadcrumb-item"><span>Lô gan Miền Trung</span></li>
+                        <?php endif; ?>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1">
+                        <?= htmlspecialchars($seo_title ?? "Lô Gan {$selectedProvinceName} – Thống Kê XSMT Lâu Chưa Về Nhất") ?>
+                    </h1>
+
+                    <form class="util-mb-3 util-rounded util-small js-thong-ke-redirect-form" action="" method="POST">
+                        <div class="layout-row util-g-3">
+                            <div class="layout-col-sm-6">
+                                <label class="util-mb-1">Tỉnh/Thành</label>
+                                <select class="form-select util-border-dark-subtle util-fs-8 js-chon-mien-tinh" name="province_id" onchange="this.form.submit()">
+                                    <option value="<?= htmlspecialchars($selectRegionToken) ?>" <?= ($selectedProvinceRaw === $selectRegionToken ? 'selected' : '') ?>>
+                                        Miền Trung (tổng hợp)
+                                    </option>
+                                    <optgroup label="Miền Trung">
+                                        <?php foreach ($provinceOptions as $p): ?>
+                                            <option value="<?= (int)$p['id'] ?>" <?= ((string)$p['id'] === (string)$selectedProvinceRaw ? 'selected' : '') ?>>
+                                                <?= htmlspecialchars($p['name']) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="layout-col-sm-3" style="margin-top: 0px;">
+                                <label class="util-mb-1">Số lần quay</label>
+                                <select class="form-select util-border-dark-subtle util-fs-8" name="total_day" onchange="this.form.submit()">
+                                    <?php foreach ([5, 10, 30, 60, 100] as $opt): ?>
+                                        <option value="<?= $opt ?>" <?= ($opt == (int)$totalDay ? 'selected' : '') ?>><?= $opt ?> lần quay</option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+
+                        </div>
+                        <input type="hidden" name="loai_tk" value="tk_logan" />
+                    </form>
+
+                    <?php if ($isRegionMode): ?>
+                        <ul class="list__subpage">
+                            <li><a title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                            <li><a title="Thống kê đặc biệt xổ số Miền Trung" href="/thong-ke-dac-biet-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Giải đặc biệt Miền Trung</a></li>
+                            <li><a title="Thống kê đầu đuôi xổ số Miền Trung" href="/thong-ke-dau-duoi-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Đầu đuôi Miền Trung</a></li>
+                            <li><a title="Thống kê tần suất xổ số Miền Trung" href="/thong-ke-tan-suat-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Tần suất Miền Trung</a></li>
+                        </ul>
+                    <?php endif; ?>
+                    <?php if (!empty($statisticsMenu)): ?>
+                        <?= $statisticsMenu ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p>Để có cái nhìn tổng quan trước khi tra cứu <strong>thống kê lô gan <?= htmlspecialchars($selectedProvinceName) ?></strong>, bạn nên tham khảo kết quả
+                    <strong><a title="XSMT" href="/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html">XSMT</a></strong>
+                    được soicau247.com cập nhật liên tục sau mỗi phiên quay.
+                </p>
+                <p>Bảng phân tích dưới đây theo dõi các cặp <strong>2 số cuối (00–99)</strong> xuất hiện trên <em>toàn bộ các giải</em> của <?= htmlspecialchars($selectedProvinceName) ?> trong từng kỳ quay,
+                    giúp xác định những con lô đang <strong>khan</strong> (lâu chưa xuất hiện), các <strong>cặp lộn hiếm AB–BA</strong>, và <strong>đầu/đuôi khan GĐB</strong>.
+                </p>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange">Bảng thống kê 10 con lô gan <?= htmlspecialchars($selectedProvinceName) ?> lâu chưa về nhất</h2>
+            <div class="comp-table-responsive util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-small util-text-center util-mb-0 table-sticky">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th class="sticky-col">Lô gan</th>
+                            <th>Lần chưa về</th>
+                            <th>Về gần nhất</th>
+                            <th>Gan cực đại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($loGanTop)): ?>
+                            <?php foreach ($loGanTop as $row): ?>
+                                <tr>
+                                    <td class="sticky-col"><span class="util-text-red util-fs-6 util-font-bold"><?= htmlspecialchars($row['num']) ?></span></td>
+                                    <td><?= (int)$row['streak'] ?> lần</td>
+                                    <td><?= $showDate($row['last_seen']) ?></td>
+                                    <td><?= (int)$row['max_streak'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4" class="util-text-center util-text-muted">Không có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange">Bảng thống kê 10 cặp lô khan <?= htmlspecialchars($selectedProvinceName) ?> (AB – BA)</h2>
+            <div class="comp-table-responsive util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Cặp số</th>
+                            <th>Lần chưa về</th>
+                            <th>Ra gần nhất</th>
+                            <th>Gan cực đại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($khanPairsTop)): ?>
+                            <?php foreach ($khanPairsTop as $row): ?>
+                                <tr>
+                                    <td><span class="util-text-red util-fs-6 util-font-bold util-text-nowrap"><?= htmlspecialchars($row['pair']) ?></span></td>
+                                    <td><?= (int)$row['streak'] ?> lần</td>
+                                    <td><?= $showDate($row['last_seen']) ?></td>
+                                    <td><?= (int)$row['max_streak'] ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4" class="util-text-center util-text-muted">Không có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange">Số ngày gan <span>đầu số</span> giải đặc biệt <?= htmlspecialchars($selectedProvinceName) ?></h2>
+            <div class="comp-table-responsive util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Con số</th>
+                            <th>Số ngày gan</th>
+                            <th>Con số</th>
+                            <th>Số ngày gan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $rows = $headGanDigits ?? [];
+                        usort($rows, fn($a, $b) => strcmp($a['digit'], $b['digit']));
+                        for ($i = 0; $i < count($rows); $i += 2):
+                            $a = $rows[$i] ?? null;
+                            $b = $rows[$i + 1] ?? null;
+                        ?>
+                            <tr>
+                                <td>Đầu <span class="util-text-red util-font-bold"><?= $a ? htmlspecialchars($a['digit']) : '' ?></span></td>
+                                <td><?= $a ? ((int)$a['streak'] . ' ngày' . ($a['last_seen'] ? ' (' . $showDate($a['last_seen']) . ')' : '')) : '' ?></td>
+                                <td>Đầu <span class="util-text-red util-font-bold"><?= $b ? htmlspecialchars($b['digit']) : '' ?></span></td>
+                                <td><?= $b ? ((int)$b['streak'] . ' ngày' . ($b['last_seen'] ? ' (' . $showDate($b['last_seen']) . ')' : '')) : '' ?></td>
+                            </tr>
+                        <?php endfor; ?>
+                        <?php if (empty($rows)): ?>
+                            <tr>
+                                <td colspan="4" class="util-text-center util-text-muted">Không có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange">Số ngày gan <span>đuôi số</span> giải đặc biệt <?= htmlspecialchars($selectedProvinceName) ?></h2>
+            <div class="comp-table-responsive util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Con số</th>
+                            <th>Số ngày gan</th>
+                            <th>Con số</th>
+                            <th>Số ngày gan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $rows = $tailGanDigits ?? [];
+                        usort($rows, fn($a, $b) => strcmp($a['digit'], $b['digit']));
+                        for ($i = 0; $i < count($rows); $i += 2):
+                            $a = $rows[$i] ?? null;
+                            $b = $rows[$i + 1] ?? null;
+                        ?>
+                            <tr>
+                                <td>Đuôi <span class="util-text-red util-font-bold"><?= $a ? htmlspecialchars($a['digit']) : '' ?></span></td>
+                                <td><?= $a ? ((int)$a['streak'] . ' ngày' . ($a['last_seen'] ? ' (' . $showDate($a['last_seen']) . ')' : '')) : '' ?></td>
+                                <td>Đuôi <span class="util-text-red util-font-bold"><?= $b ? htmlspecialchars($b['digit']) : '' ?></span></td>
+                                <td><?= $b ? ((int)$b['streak'] . ' ngày' . ($b['last_seen'] ? ' (' . $showDate($b['last_seen']) . ')' : '')) : '' ?></td>
+                            </tr>
+                        <?php endfor; ?>
+                        <?php if (empty($rows)): ?>
+                            <tr>
+                                <td colspan="4" class="util-text-center util-text-muted">Không có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange">Gan cực đại <?= htmlspecialchars($selectedProvinceName) ?> các số 00–99 (từ trước đến nay)</h2>
+            <div class="table-sticky-container util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-small util-text-center util-mb-0 table-sticky">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th class="sticky-col">Con số</th>
+                            <th>Số lần chưa ra (max)</th>
+                            <th>Ngày ra gần nhất</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($allTimeMaxGanList)): ?>
+                            <?php foreach ($allTimeMaxGanList as $row): ?>
+                                <tr>
+                                    <td class="sticky-col"><span class="util-text-red util-fs-6 util-font-bold"><?= htmlspecialchars($row['num']) ?></span></td>
+                                    <td><?= (int)$row['max_streak'] ?> lần</td>
+                                    <td><?= $showDate($row['last_seen']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="3" class="util-text-center util-text-muted">Không có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p><strong><a title="Lô gan Miền Trung" href="/thong-ke-lo-gan-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Lô gan Miền Trung</a></strong> là công cụ do soicau247.com phát triển, giúp theo dõi khoảng thời gian chưa về của các cặp 2 số cuối qua tất cả giải, cung cấp thông tin <strong>lô gan MT</strong> hữu ích cho người chơi.</p>
+
+                <p><strong>Bảng phân tích lô gan miền Trung lâu chưa về</strong> được thiết kế theo nhu cầu của anh em. Bạn có thể tra cứu top 10 cặp gan dài nhất, xem chi tiết số ngày chưa về, lần về gần đây và kỷ lục gan tối đa để đánh giá. Ngoài ra còn có mục cặp lô lộn khan hiếm, đầu - đuôi khan giải đặc biệt. Đặc biệt, người chơi có thể xem toàn bộ tình trạng của 100 cặp số từ 00 đến 99 trong <a title="XSMT" href="/du-doan-xsmt">XSMT</a> để có cái nhìn toàn diện.</p>
+
+                <p>Tận dụng dữ liệu về những cặp lô miền Trung lâu chưa về để tham khảo, xây dựng bộ số <a title="soi cầu MT" href="/du-doan-xsmt">soi cầu MT</a> hôm nay chính xác hơn, nâng cao cơ hội trúng giải có giá trị.</p>
+
+                <p><strong>Tham khảo thêm Lô gan khu vực khác:</strong></p>
+                <ul>
+                    <li><strong><a title="Lô gan Miền Bắc" href="/lo-gan-xsmb.html">Lô gan Miền
+                                Bắc</a></strong></li>
+                    <li><strong><a title="Lô gan Miền Nam" href="/thong-ke-lo-gan-xsmn-thong-ke-xo-so-mien-nam-tk-xsmn.html">Lô gan Miền
+                                Nam</a></strong></li>
+                </ul>
+                <p>Chúc các bạn may mắn!</p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+    </div>
+</main>
+<script src="/js/thongke/thongke-navigation.js"></script>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0 !important;
+        }
+    }
+</style>
+
+<script>
+    (function() {
+        var form = document.querySelector('.js-thong-ke-redirect-form');
+        if (!form) return;
+
+        // Đảm bảo form submit đến đúng URL hiện tại
+        if (!form.action || form.action === '') {
+            form.action = window.location.pathname;
+        }
+
+        form.addEventListener('change', function(e) {
+            if (e.target && (e.target.name === 'province_id' || e.target.name === 'total_day')) {
+                form.submit();
+            }
+        });
+    })();
+</script>

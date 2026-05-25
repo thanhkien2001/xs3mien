@@ -1,0 +1,609 @@
+<?php
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$esc = $this->escaper;
+$region = $region ?? 'XSMB';
+$regionName = $regionName ?? 'Miền Bắc';
+?>
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="<i class='icon-home'></i>"><i
+                                    class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                                title="XSMB">XSMB</a></li>
+                        <li class="breadcrumb-item active"><a href="<?= $baseUrl ?? '/' ?>" title="Sổ kết quả XSMB">Sổ
+                                kết quả XSMB</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-xl-610">
+                <div class="row text-center">
+                    <div class="col bg-red2"><a class="btn text-white"
+                            href="/thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html" title="Sổ kết quả MB">Sổ kết quả
+                            MB</a></div>
+                    <div class="col border-left border-right bg-red2"><a class="btn text-white"
+                            href="/thong-ke-xsmt-30-ngay-xo-so-mien-trung-30-ngay.html" title="Sổ kết quả MT">Sổ kết quả
+                            MT</a></div>
+                    <div class="col bg-red2"><a class="btn text-white"
+                            href="/thong-ke-xsmn-30-ngay-xo-so-mien-nam-30-ngay.html" title="Sổ kết quả MN">Sổ kết quả
+                            MN</a></div>
+                </div>
+                <div id="lichSoKetQua" class="lich-custom mb-4" data-code="<?= $esc->escapeHtmlAttr($region) ?>">
+                    <div class="datepicker datepicker-inline">
+                        <div class="datepicker-days" style="display: block;">
+                            <table class="table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="datepicker-title" style="display: none;"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="prev"><i class="icon-chevron-left"></i></th>
+                                        <th colspan="5" class="datepicker-switch"><?= date('F Y') ?></th>
+                                        <th class="next disabled"><i class="icon-chevron-right"></i></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="dow">T2</th>
+                                        <th class="dow">T3</th>
+                                        <th class="dow">T4</th>
+                                        <th class="dow">T5</th>
+                                        <th class="dow">T6</th>
+                                        <th class="dow">T7</th>
+                                        <th class="dow">CN</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $today = new DateTime();
+                                    $year = (int) $today->format('Y');
+                                    $month = (int) $today->format('n');
+                                    $firstDay = new DateTime("$year-$month-01");
+                                    $firstDayOfWeek = (int) $firstDay->format('w');
+                                    $firstDayOfWeek = $firstDayOfWeek === 0 ? 7 : $firstDayOfWeek; // Convert Sunday to 7 (Monday = 1)
+                                    $daysInMonth = (int) $today->format('t');
+
+                                    // Get previous month's last days
+                                    $prevMonth = clone $firstDay;
+                                    $prevMonth->modify('-1 day');
+                                    $prevMonthDays = (int) $prevMonth->format('d');
+
+                                    // Calculate start day (Monday = 1)
+                                    $startDay = 1 - ($firstDayOfWeek - 1);
+
+                                    $currentDay = $startDay;
+                                    for ($week = 0; $week < 6; $week++):
+                                    ?>
+                                        <tr>
+                                            <?php for ($day = 0; $day < 7; $day++): ?>
+                                                <?php
+                                                $cellDate = null;
+                                                $cellYear = $year;
+                                                $cellMonth = $month;
+
+                                                if ($currentDay <= 0) {
+                                                    // Previous month
+                                                    $displayDay = $prevMonthDays + $currentDay;
+                                                    $class = 'old day';
+                                                    $cellDate = clone $prevMonth;
+                                                    $cellDate->setDate((int) $prevMonth->format('Y'), (int) $prevMonth->format('n'), $displayDay);
+                                                    $cellYear = (int) $cellDate->format('Y');
+                                                    $cellMonth = (int) $cellDate->format('n');
+                                                    $timestamp = $cellDate->getTimestamp() * 1000;
+                                                } elseif ($currentDay > $daysInMonth) {
+                                                    // Next month
+                                                    $displayDay = $currentDay - $daysInMonth;
+                                                    $class = 'new disabled day';
+                                                    $nextMonth = clone $firstDay;
+                                                    $nextMonth->modify('+1 month');
+                                                    $cellDate = clone $nextMonth;
+                                                    $cellDate->setDate((int) $nextMonth->format('Y'), (int) $nextMonth->format('n'), $displayDay);
+                                                    $cellYear = (int) $cellDate->format('Y');
+                                                    $cellMonth = (int) $cellDate->format('n');
+                                                    $timestamp = $cellDate->getTimestamp() * 1000;
+                                                } else {
+                                                    // Current month
+                                                    $displayDay = $currentDay;
+                                                    $cellDate = new DateTime("$year-$month-" . str_pad($displayDay, 2, '0', STR_PAD_LEFT));
+                                                    $timestamp = $cellDate->getTimestamp() * 1000;
+
+                                                    // Check if date is in the future
+                                                    $today = new DateTime();
+                                                    $today->setTime(0, 0, 0);
+                                                    $cellDate->setTime(0, 0, 0);
+
+                                                    if ($cellDate > $today) {
+                                                        $class = 'day disabled';
+                                                    } else {
+                                                        $class = 'day';
+                                                    }
+                                                }
+
+                                                // Generate URL for current and past dates only
+                                                $url = '';
+                                                if ($cellDate && $cellDate <= $today) {
+                                                    $url = sprintf('/xsmb-%d-%d-%d.html', $displayDay, $cellMonth, $cellYear);
+                                                }
+
+                                                $currentDay++;
+                                                ?>
+                                                <td class="<?= $class ?>" data-date="<?= $timestamp ?>">
+                                                    <?php if ($url): ?>
+                                                        <a href="<?= $esc->escapeHtmlAttr($url) ?>"
+                                                            title="Kết quả XSMB ngày <?= sprintf('%02d/%02d/%d', $displayDay, $cellMonth, $cellYear) ?>">
+                                                            <?= $displayDay ?>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <?= $displayDay ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            <?php endfor; ?>
+                                        </tr>
+                                    <?php endfor; ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="7" class="today" style="display: none;">Hôm nay</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" class="clear" style="display: none;">Clear</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="datepicker-months" style="display: none;">
+                            <table class="table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="datepicker-title" style="display: none;"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="prev"><i class="icon-chevron-left"></i></th>
+                                        <th colspan="5" class="datepicker-switch"><?= date('Y') ?></th>
+                                        <th class="next disabled"><i class="icon-chevron-right"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7">
+                                            <?php for ($m = 1; $m <= 12; $m++): ?>
+                                                <span
+                                                    class="month <?= $m == (int) date('n') ? 'focused' : 'disabled' ?>">Th.<?= $m ?></span>
+                                            <?php endfor; ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="7" class="today" style="display: none;">Hôm nay</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" class="clear" style="display: none;">Clear</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="datepicker-years" style="display: none;">
+                            <table class="table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="datepicker-title" style="display: none;"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="prev"><i class="icon-chevron-left"></i></th>
+                                        <th colspan="5" class="datepicker-switch">2020-2029</th>
+                                        <th class="next disabled"><i class="icon-chevron-right"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7">
+                                            <?php
+                                            $currentYear = (int) date('Y');
+                                            for ($y = 2019; $y <= 2030; $y++):
+                                                $class = 'year';
+                                                if ($y < 2020)
+                                                    $class .= ' old';
+                                                if ($y == $currentYear)
+                                                    $class .= ' focused';
+                                                if ($y > 2026)
+                                                    $class .= ' disabled';
+                                                if ($y == 2030)
+                                                    $class .= ' new disabled';
+                                            ?>
+                                                <span class="<?= $class ?>"><?= $y ?></span>
+                                            <?php endfor; ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="7" class="today" style="display: none;">Hôm nay</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" class="clear" style="display: none;">Clear</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="datepicker-decades" style="display: none;">
+                            <table class="table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="datepicker-title" style="display: none;"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="prev"><i class="icon-chevron-left"></i></th>
+                                        <th colspan="5" class="datepicker-switch">2000-2090</th>
+                                        <th class="next disabled"><i class="icon-chevron-right"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7">
+                                            <span class="decade old disabled">1990</span>
+                                            <span class="decade disabled">2000</span>
+                                            <span class="decade">2010</span>
+                                            <span class="decade focused">2020</span>
+                                            <span class="decade disabled">2030</span>
+                                            <span class="decade disabled">2040</span>
+                                            <span class="decade disabled">2050</span>
+                                            <span class="decade disabled">2060</span>
+                                            <span class="decade disabled">2070</span>
+                                            <span class="decade disabled">2080</span>
+                                            <span class="decade disabled">2090</span>
+                                            <span class="decade new disabled">2100</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="7" class="today" style="display: none;">Hôm nay</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" class="clear" style="display: none;">Clear</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="datepicker-centuries" style="display: none;">
+                            <table class="table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th colspan="7" class="datepicker-title" style="display: none;"></th>
+                                    </tr>
+                                    <tr>
+                                        <th class="prev"><i class="icon-chevron-left"></i></th>
+                                        <th colspan="5" class="datepicker-switch">2000-2900</th>
+                                        <th class="next disabled"><i class="icon-chevron-right"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7">
+                                            <span class="century old disabled">1900</span>
+                                            <span class="century disabled focused">2000</span>
+                                            <span class="century disabled">2100</span>
+                                            <span class="century disabled">2200</span>
+                                            <span class="century disabled">2300</span>
+                                            <span class="century disabled">2400</span>
+                                            <span class="century disabled">2500</span>
+                                            <span class="century disabled">2600</span>
+                                            <span class="century disabled">2700</span>
+                                            <span class="century disabled">2800</span>
+                                            <span class="century disabled">2900</span>
+                                            <span class="century new disabled">3000</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="7" class="today" style="display: none;">Hôm nay</th>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="7" class="clear" style="display: none;">Clear</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php $limitDays = $limitDays ?? 30; ?>
+                <div class="submenu2">
+                    <ul class="nav rounded lh-25 submenu2-bg colum-5 text-nowrap pl-0 pl-md-3">
+                        <li class="px-1 px-md-4 <?= $limitDays == 10 ? 'active' : '' ?>"><a
+                                href="/thong-ke-xsmb-10-ngay-xo-so-mien-bac-10-ngay.html"
+                                title="Sổ kết quả XSMB 10 ngày">10 ngày</a></li>
+                        <li class="px-1 px-md-4 <?= $limitDays == 30 ? 'active' : '' ?>"><a
+                                href="/thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html"
+                                title="Sổ kết quả XSMB 30 ngày">30 ngày</a></li>
+                        <li class="px-1 px-md-4 <?= $limitDays == 60 ? 'active' : '' ?>"><a
+                                href="/thong-ke-xsmb-60-ngay-xo-so-mien-bac-60-ngay.html"
+                                title="Sổ kết quả XSMB 60 ngày">60 ngày</a></li>
+                        <li class="px-1 px-md-4 <?= $limitDays == 90 ? 'active' : '' ?>"><a
+                                href="/thong-ke-xsmb-90-ngay-xo-so-mien-bac-90-ngay.html"
+                                title="Sổ kết quả XSMB 90 ngày">90 ngày</a></li>
+                        <li class="px-1 px-md-4 <?= $limitDays == 100 ? 'active' : '' ?>"><a
+                                href="/thong-ke-xsmb-100-ngay-xo-so-mien-bac-100-ngay.html"
+                                title="Sổ kết quả XSMB 100 ngày">100 ngày</a></li>
+                    </ul>
+                </div>
+                <div class="text-center my-3 font-weight-bold">Bảng thống kê <a
+                        href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                        title="kết quả xổ số Miền Bắc">kết quả xổ số Miền Bắc</a> <?= $limitDays ?> ngày</div>
+                <div id="ajax_content" class="category-so-ket-qua d-flex flex-column">
+                    <?php if (!empty($results)): ?>
+                        <?php foreach ($results as $result): ?>
+                            <article class="my-2">
+                                <div class="result result-single rounded">
+                                    <h2 class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+                                        Xổ số <?= $esc->escapeHtml($regionName) ?> ngày
+                                        <?= $esc->escapeHtml($result['dateFormatted']) ?>
+                                    </h2>
+                                    <div class="breadcrumb-table">
+                                        <h4 class="breadcrumb-table-title">
+                                            <a href="/xsmb-<?= strtolower(str_replace(' ', '-', $result['weekday'])) ?>.html"
+                                                title="XSMB <?= $esc->escapeHtmlAttr($result['weekday']) ?>">
+                                                XSMB <?= $esc->escapeHtml($result['weekday']) ?>
+                                            </a>
+                                            /
+                                            <a href="/xsmb-<?= str_replace('/', '-', $result['dateFormatted']) ?>.html"
+                                                title="XSMB <?= $esc->escapeHtmlAttr($result['dateFormatted']) ?>">
+                                                XSMB <?= $esc->escapeHtml($result['dateFormatted']) ?>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div class="table-flex-border">
+                                        <table class="table-flex table-result" data-code="<?= $esc->escapeHtmlAttr($region) ?>">
+                                            <tbody>
+                                                <?php
+                                                $province = $result['provinces'][0] ?? null;
+                                                if ($province):
+                                                    $prizes = [
+                                                        'special_prize' => ['ĐB', 5],
+                                                        'first_prize' => ['G1', 5],
+                                                        'second_prize' => ['G2', 5],
+                                                        'third_prize' => ['G3', 5],
+                                                        'fourth_prize' => ['G4', 4],
+                                                        'fifth_prize' => ['G5', 4],
+                                                        'sixth_prize' => ['G6', 3],
+                                                        'seventh_prize' => ['G7', 2]
+                                                    ];
+
+                                                    foreach ($prizes as $key => [$label, $nc]):
+                                                        $prizeData = $province[$key] ?? [];
+                                                        if (is_string($prizeData)) {
+                                                            $prizeData = $prizeData ? [$prizeData] : [];
+                                                        }
+                                                ?>
+                                                        <tr>
+                                                            <td><?= $label ?></td>
+                                                            <td>
+                                                                <?php if (!empty($prizeData)): ?>
+                                                                    <?php foreach ($prizeData as $number): ?>
+                                                                        <span class="text-number" nc="<?= $nc ?>">
+                                                                            <?= $esc->escapeHtml($number) ?>
+                                                                        </span>
+                                                                    <?php endforeach; ?>
+                                                                <?php endif; ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <?php if (!empty($province['loto_dau'])): ?>
+                                    <div class="loto loto-single">
+                                        <table class="table table-bordered table-striped table-xslt-single-col">
+                                            <thead>
+                                                <tr>
+                                                    <th>Đầu</th>
+                                                    <th>Lô tô</th>
+                                                    <th>Đuôi</th>
+                                                    <th>Lô tô</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php for ($i = 0; $i <= 9; $i++): ?>
+                                                    <tr>
+                                                        <td><?= $i ?></td>
+                                                        <td>
+                                                            <?php if (!empty($province['loto_dau']['dau'][$i])): ?>
+                                                                <?php foreach ($province['loto_dau']['dau'][$i] as $num): ?>
+                                                                    <span><?= $esc->escapeHtml($num) ?></span>
+                                                                <?php endforeach; ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                        <td><?= $i ?></td>
+                                                        <td>
+                                                            <?php if (!empty($province['loto_dau']['duoi'][$i])): ?>
+                                                                <?php foreach ($province['loto_dau']['duoi'][$i] as $num): ?>
+                                                                    <span><?= $esc->escapeHtml($num) ?></span>
+                                                                <?php endforeach; ?>
+                                                            <?php endif; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endfor; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <?php endif; ?>
+                            </article>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center my-3">Chưa có dữ liệu kết quả.</p>
+                    <?php endif; ?>
+                </div>
+                <?php if ($hasMore ?? false): ?>
+                    <button class="btnLoadMore mt-2" data-url="<?= $baseUrl ?? '/' ?>page/"
+                        data-page="<?= ($currentPage ?? 1) + 1 ?>" data-total="<?= $totalResults ?? 0 ?>"
+                        data-limit="10">Xem thêm kết quả</button>
+                <?php endif; ?>
+
+                <!-- Thống kê giải đặc biệt -->
+                <?php if (!empty($statistics['db_top_frequent'])): ?>
+                    <h3 class="mt-3 title-bg-blue border-radius-top mb-0">Thống kê giải đặc biệt về nhiều nhất <?= $limitDays ?>
+                        ngày qua
+                    </h3>
+                    <div class="overflow-auto">
+                        <table class="table table-default table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>Bộ số</th>
+                                    <th>Số lượt về</th>
+                                    <th>Bộ số</th>
+                                    <th>Số lượt về</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < count($statistics['db_top_frequent']); $i += 2): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold">
+                                            <?= $esc->escapeHtml($statistics['db_top_frequent'][$i]['number'] ?? '') ?></td>
+                                        <td><?= ($statistics['db_top_frequent'][$i]['count'] ?? 0) ?> (lần)</td>
+                                        <td class="text-red font-weight-bold">
+                                            <?= $esc->escapeHtml($statistics['db_top_frequent'][$i + 1]['number'] ?? '') ?></td>
+                                        <td><?= ($statistics['db_top_frequent'][$i + 1]['count'] ?? 0) ?> (lần)</td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Thống kê đầu đuôi tổng giải đặc biệt -->
+                <?php if (!empty($statistics['db_head_stats'])): ?>
+                    <h3 class="mt-3 title-bg-blue border-radius-top mb-0">Thống kê đầu, đuôi và tổng giải đặc biệt
+                        <?= $limitDays ?> ngày
+                        qua</h3>
+                    <div class="overflow-auto">
+                        <table class="table table-default table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>Đầu</th>
+                                    <th>Đuôi</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i <= 9; $i++): ?>
+                                    <tr>
+                                        <td>Đầu <?= $i ?>: <span
+                                                class="text-red font-weight-bold"><?= $statistics['db_head_stats'][$i]['count'] ?? 0 ?></span>
+                                            lần</td>
+                                        <td>Đuôi <?= $i ?>: <span
+                                                class="text-red font-weight-bold"><?= $statistics['db_tail_stats'][$i]['count'] ?? 0 ?></span>
+                                            lần</td>
+                                        <td>Tổng <?= $i ?>: <span
+                                                class="text-red font-weight-bold"><?= $statistics['db_sum_stats'][$i]['count'] ?? 0 ?></span>
+                                            lần</td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Thống kê lô tô -->
+                <?php if (!empty($statistics['loto_top_frequent'])): ?>
+                    <h3 class="mt-3 title-bg-blue border-radius-top mb-0">Thống kê lô tô về nhiều nhất <?= $limitDays ?> ngày
+                        qua</h3>
+                    <div class="overflow-auto">
+                        <table class="table table-default table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>Bộ số</th>
+                                    <th>Số lượt về</th>
+                                    <th>Bộ số</th>
+                                    <th>Số lượt về</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i < count($statistics['loto_top_frequent']); $i += 2): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold">
+                                            <?= $esc->escapeHtml($statistics['loto_top_frequent'][$i]['number'] ?? '') ?></td>
+                                        <td><?= ($statistics['loto_top_frequent'][$i]['count'] ?? 0) ?> (lần)</td>
+                                        <td class="text-red font-weight-bold">
+                                            <?= $esc->escapeHtml($statistics['loto_top_frequent'][$i + 1]['number'] ?? '') ?>
+                                        </td>
+                                        <td><?= ($statistics['loto_top_frequent'][$i + 1]['count'] ?? 0) ?> (lần)</td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+
+                <!-- Thống kê đầu đuôi tổng lô tô -->
+                <?php if (!empty($statistics['loto_head_stats'])): ?>
+                    <h3 class="mt-3 title-bg-blue border-radius-top mb-0">Thống kê đầu, đuôi và tổng lô tô <?= $limitDays ?>
+                        ngày qua</h3>
+                    <div class="overflow-auto">
+                        <table class="table table-default table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>Đầu</th>
+                                    <th>Đuôi</th>
+                                    <th>Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i <= 9; $i++): ?>
+                                    <tr>
+                                        <td>Đầu <?= $i ?>: <span
+                                                class="text-red font-weight-bold"><?= $statistics['loto_head_stats'][$i]['count'] ?? 0 ?></span>
+                                            lần</td>
+                                        <td>Đuôi <?= $i ?>: <span
+                                                class="text-red font-weight-bold"><?= $statistics['loto_tail_stats'][$i]['count'] ?? 0 ?></span>
+                                            lần</td>
+                                        <td>Tổng <?= $i ?>: <span
+                                                class="text-red font-weight-bold"><?= $statistics['loto_sum_stats'][$i]['count'] ?? 0 ?></span>
+                                            lần</td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
+                <div class="new-content my-3">
+                    <h3 style="text-align: justify;">Thống kê xổ số miền Bắc <?= $limitDays ?> ngày</h3>
+                    <p style="text-align: justify;"><a href="/thong-ke-xsmb-<?= $limitDays ?>-ngay-xo-so-mien-bac-<?= $limitDays ?>-ngay.html"
+                            title="Thống kê XSMB <?= $limitDays ?> ngày">Thống kê XSMB <?= $limitDays ?> ngày</a> tổng hợp và
+                        đưa ra kết quả xổ số
+                        miền Bắc trong vòng <?= $limitDays ?> ngày gần nhất giúp anh em dễ dàng theo dõi và tìm ra số đẹp cho mình.
+                    </p>
+                    <p style="text-align: justify;">Sổ kết quả miền Bắc <?= $limitDays ?> ngày là thông tin được nhiều anh em quan tâm.
+                        Nhờ vào đây anh em có thể dễ dàng kiểm tra lại kết quả của nhiều ngày trước, từ đó chốt số một
+                        cách dễ dàng hơn</p>
+                    <ul style="text-align: justify;">
+                        <li>Chúng tôi cung cấp cho anh em bảng kết quả chi tiết, bảng thống kê đặc biệt và lô tô về
+                            nhiều nhất.</li>
+                        <li>Ngoài ra chúng tôi còn tổng hợp đuôi lô tô và đầu đuôi đặc biệt để anh em dễ dàng so sánh
+                            được những đầu ( đuôi) nào về nhiều nhất trong thời gian qua.</li>
+                    </ul>
+                    <p><strong><span style="color: #ff0000;">»</span> </strong><a
+                            href="/xsmb-thu-2-ket-qua-xo-so-mien-bac.html">XSMB thứ 2</a> siêu đẹp<br><strong><span
+                                style="color: #ff0000;">»</span> </strong><a
+                            href="/xsmb-thu-3-ket-qua-xo-so-mien-bac.html">XSMB thứ 3</a> chính xác</p>
+                    <p style="text-align: justify;">Chúc anh em may mắn!</p>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+
+
+        </div>
+    </div>
+</main>

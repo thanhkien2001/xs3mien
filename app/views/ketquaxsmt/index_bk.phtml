@@ -1,0 +1,475 @@
+<?php
+$esc = $this->escaper;
+$ymd = $pageDate->format('Ymd');
+$dmy = $pageDate->format('d/m/Y');
+$dm = $pageDate->format('d/m');
+
+function getProvinceUrl($provinceName)
+{
+    $urlMap = [
+        'Bình Định' => '/ket-qua-xo-so-binh-dinh-xsbdinh',
+        'Đà Nẵng' => '/ket-qua-xo-so-da-nang-xsdna',
+        'Đắk Lắk' => '/ket-qua-xo-so-dak-lak-xsdlk',
+        'Đắk Nông' => '/ket-qua-xo-so-dak-nong-xsdnong',
+        'Gia Lai' => '/ket-qua-xo-so-gia-lai-xsgl',
+        'Huế' => '/ket-qua-xo-so-hue-xshue',
+        'Khánh Hòa' => '/ket-qua-xo-so-khanh-hoa-xskhoa',
+        'Kon Tum' => '/ket-qua-xo-so-kon-tum-xskontum',
+        'Ninh Thuận' => '/ket-qua-xo-so-ninh-thuan-xsnt',
+        'Phú Yên' => '/ket-qua-xo-so-phu-yen-xspy',
+        'Quảng Bình' => '/ket-qua-xo-so-quang-binh-xsqb',
+        'Quảng Nam' => '/ket-qua-xo-so-quang-nam-xsqn',
+        'Quảng Ngãi' => '/ket-qua-xo-so-quang-ngai-xsqng',
+        'Quảng Trị' => '/ket-qua-xo-so-quang-tri-xsqtri',
+    ];
+
+    return $urlMap[$provinceName] ?? '/ket-qua-xo-so-' . strtolower(str_replace(' ', '-', $provinceName));
+}
+
+function printCells($items)
+{
+    $filteredItems = array_filter($items, function ($value) {
+        return $value !== null && $value !== '';
+    });
+
+    if (empty($filteredItems)) {
+        echo '<span class="util-loading-spinner util-spinner-sm util-text-warning util-fs-6" role="status"></span>';
+        return;
+    }
+    foreach ($filteredItems as $n) {
+        echo '<div>' . htmlspecialchars((string)$n, ENT_QUOTES, 'UTF-8') . '</div>';
+    }
+}
+?>
+<div class="util-bg-white util-shadow-sm">
+    <div class="layout-wrapper">
+        <div class="layout-row" style="margin-right: 0 !important;">
+            <div class="layout-col-12">
+                <ul class="nav-sub util-flex util-justify-center util-w-100 util-m-0 util-p-0 util-list-unstyled">
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-2' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Thứ 2" href="/xsmt-thu-2-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Thứ 2</span><span class="util-md-none">T2</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-3' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Thứ 3" href="/xsmt-thu-3-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Thứ 3</span><span class="util-md-none">T3</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-4' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Thứ 4" href="/xsmt-thu-4-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Thứ 4</span><span class="util-md-none">T4</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-5' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Thứ 5" href="/xsmt-thu-5-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Thứ 5</span><span class="util-md-none">T5</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-6' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Thứ 6" href="/xsmt-thu-6-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Thứ 6</span><span class="util-md-none">T6</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-7' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Thứ 7" href="/xsmt-thu-7-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Thứ 7</span><span class="util-md-none">T7</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'chu-nhat' ? 'is-active-day' : '' ?> util-block util-text-center" title="KQ XSMT Chủ Nhật" href="/xsmt-chu-nhat-ket-qua-xo-so-mien-trung.html"><span class="util-hidden util-md-inline">Chủ Nhật</span><span class="util-md-none">CN</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-01 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <?php if (isset($isBasePage) && $isBasePage): ?>
+                        <li class="nav-breadcrumb-item"><span>Xổ số Miền Trung</span></li>
+                        <?php else: ?>
+                        <li class="nav-breadcrumb-item"><a href="<?= $esc->escapeHtmlAttr($todayHref) ?>"><span>Xổ số Miền Trung</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>XSMT <?= $dmy ?></span></li>
+                        <?php endif; ?>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <?php if (isset($isBasePage) && $isBasePage): ?>
+                    <h1 class="page-title-h1">KQXSMT - Xổ Số Miền Trung - XSMT - Kết Quả SXMT Hôm Nay</h1>
+                    <?php else: ?>
+                    <h1 class="page-title-h1">Xổ Số Miền Trung Ngày <?= $esc->escapeHtml($dmy) ?> - XSMT <?= $esc->escapeHtml($dm) ?> - Kết Quả</h1> <?php endif; ?>
+                    <?php if (isset($latestResults) && !empty($latestResults)): ?>
+                    <nav class="toc-result">
+                        <ul class="layout-row util-gx-31">
+                            <li><a class="js-go-to" href="#position-<?= $esc->escapeHtmlAttr($ymd) ?>"><?= $esc->escapeHtml($dmy) ?></a></li>
+                            <?php foreach ($latestResults as $index => $latestResult): ?>
+                            <?php
+                                    $latestYmd = str_replace('-', '', $latestResult['draw_date']);
+                                    $latestDmy = date('d/m/Y', strtotime($latestResult['draw_date']));
+                                    $isLast = ($index === count($latestResults) - 1);
+                                    ?>
+                            <li><a class="js-go-to<?= $isLast ? ' is-last' : '' ?>" href="#position-latest-<?= $esc->escapeHtmlAttr($latestYmd) ?>"><?= $esc->escapeHtml($latestDmy) ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </nav>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div id="position-<?= $esc->escapeHtmlAttr($ymd) ?>" class="lottery-result js-lottery-table-result js-lottery-table-mien-trung" data-ketqua="" data-mien="Xổ Số Miền Trung">
+
+                <header class="lottery-result-header util-sticky-top">
+                    <div class="util-flex util-flex-column util-md-flex-row util-justify-between util-align-items-start util-md-align-items-center util-gap-2">
+                        <div class="breadcrumb-nav">
+                            <h2 class="lottery-result-tree">
+                                <a href="<?= $esc->escapeHtmlAttr($todayHref) ?>" title="Kết quả xổ số Miền Trung">XSMT</a>
+                                <span class="sep">»</span>
+                                <a href="<?= $esc->escapeHtmlAttr($thuLink) ?>" title="Kết quả xổ số Miền Trung <?= $esc->escapeHtml($thuText) ?> hàng tuần">XSMT <?= $esc->escapeHtml($thuText) ?></a>
+                                <span class="sep">»</span>
+                                <span class="breadcrumb-current">XSMT <?= $esc->escapeHtml($dmy) ?></span>
+                            </h2>
+                        </div>
+                        <?php
+                        $todayMax   = $todayMax ?? (new DateTime('tomorrow', new DateTimeZone('Asia/Ho_Chi_Minh')))->format('Y-m-d');
+                        $currentVal = $currentVal ?? $pageDate->format('Y-m-d');
+                        ?>
+                        <form class="lottery-date-form util-flex util-align-items-center util-gap-2" onsubmit="return false;">
+                            <div class="util-position-relative">
+                                <input id="date-xsmt" class="form-input form-input-sm" type="date" value="<?= $esc->escapeHtmlAttr($currentVal) ?>" max="<?= $esc->escapeHtmlAttr($todayMax) ?>" data-region="xsmt" aria-label="Chọn ngày XSMT" />
+                                <i class="fas fa-calendar-alt util-position-absolute util-top-50 util-end-0 util-translate-middle-y util-me-2 util-text-muted" style="pointer-events: none; z-index: 1;"></i>
+                            </div>
+                        </form>
+                    </div>
+                </header>
+
+                <table class="comp-table util-align-items-center lottery-table xsmt js-lottery-kq-table">
+                    <thead class="table-header util-sticky-top util-align-items-center">
+                        <tr>
+                            <th class="util-small util-text-start util-bg-primary-subtle" style="--i:0">Giải</th>
+                            <?php $i = 1;
+                            foreach ($this->view->provincesForView as $province): ?>
+                            <th class="util-bg-primary-subtle" style="--i:<?= $i ?>">
+                                <a href="<?= getProvinceUrl($province['name']) ?>" title="Kết quả xổ số <?= $esc->escapeHtmlAttr($province['name']) ?>" aria-label="Xem kết quả xổ số <?= $esc->escapeHtmlAttr($province['name']) ?>">
+                                    <?= $esc->escapeHtml($province['name']) ?>
+                                </a>
+                            </th>
+                            <?php $i++;
+                            endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $get = function ($pvId, $idx) {
+                            $pr = $this->view->resultsForView[$pvId]['prizes'] ?? null;
+                            return $pr ? ($pr[$idx] ?? []) : [];
+                        };
+                        $dau = function ($pvId, $head) {
+                            $d = $this->view->resultsForView[$pvId]['dau'] ?? array_fill(0, 10, []);
+                            return $d[$head] ?? [];
+                        };
+                        ?>
+                        <tr style="--row-index:9">
+                            <td class="util-small util-text-nowrap util-text-start">Giải ĐB</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number medium" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="1" data-num=""><?php printCells($get($province['id'], 1)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:8">
+                            <td class="util-small util-text-start">Giải 1</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="2" data-num=""><?php printCells($get($province['id'], 2)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:7">
+                            <td class="util-small util-text-start">Giải 2</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="3" data-num=""><?php printCells($get($province['id'], 3)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:6">
+                            <td class="util-small util-text-start">Giải 3</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="4" data-num=""><?php printCells($get($province['id'], 4)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:5">
+                            <td class="util-small util-text-start">Giải 4</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="5" data-num=""><?php printCells($get($province['id'], 5)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:4">
+                            <td class="util-small util-text-start">Giải 5</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="6" data-num=""><?php printCells($get($province['id'], 6)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:3">
+                            <td class="util-small util-text-start">Giải 6</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="7" data-num=""><?php printCells($get($province['id'], 7)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:2">
+                            <td class="util-small util-text-start">Giải 7</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="8" data-num=""><?php printCells($get($province['id'], 8)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:1">
+                            <td class="util-small util-text-start">Giải 8</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                            <td><span class="lottery-number big" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="9" data-num=""><?php printCells($get($province['id'], 9)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="comp-table util-align-items-center util-text-center util-m-0">
+                    <tr>
+                        <td colspan="<?= count($this->view->provincesForView) + 1 ?>" class="util-bg-primary-subtle util-p-2 util-text-start">Lô tô Miền Trung - <?= $esc->escapeHtml($this->view->currentDayName) ?> Ngày <?= $esc->escapeHtml($dmy) ?></td>
+                    </tr>
+                    <tr class="util-align-items-center">
+                        <td>Đầu</td>
+                        <?php foreach ($this->view->provincesForView as $province): ?>
+                        <td><a href="<?= getProvinceUrl($province['name']) ?>"><?= $esc->escapeHtml($province['code']) ?></a></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php for ($head = 0; $head <= 9; $head++): ?>
+                    <tr>
+                        <td class="util-text-red util-font-bold"><?= $head ?></td>
+                        <?php foreach ($this->view->provincesForView as $province): ?>
+                        <?php $vals = $dau($province['id'], $head); ?>
+                        <td class="js-lottery-number-dau-duoi" data-find="dau" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-num="<?= $head ?>">
+                            <?php
+                                    if (!empty($vals)) {
+                                        $formattedVals = array_map(fn($v) => '<span class="lottery-number">' . htmlspecialchars($v, ENT_QUOTES, 'UTF-8') . '</span>', $vals);
+                                        echo implode(', ', $formattedVals);
+                                    }
+                                    ?>
+                        </td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php endfor; ?>
+                </table>
+            </div>
+
+            <div class="comp-box">
+                <h3 class="comp-box-title">Kết quả Miền Trung các ngày khác</h3>
+                <ul class="comp-list-links layout-row util-gx-0">
+                    <?php foreach ($otherLinks as $i => $lnk): ?>
+                    <li class="layout-col-6 layout-col-md-3">
+                        <a title="<?= $esc->escapeHtml($lnk['title']) ?>" href="<?= $esc->escapeHtmlAttr($lnk['href']) ?>.html">
+                            <?= $esc->escapeHtml($lnk['title']) ?>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <br>
+            <div class="comp-box">
+                <div class="comp-box-title">Tiện ích Miền Trung</div>
+                <ul class="comp-list-links layout-row util-gx-0">
+                    <li class="layout-col-6 layout-col-md-3"><a title="Soi cầu dự đoán xổ số Miền Trung" href="/du-doan-xsmt-c60.html">Dự đoán XSMT</a></li>
+                    <li class="layout-col-6 layout-col-md-3"><a title="Quay thử xổ số Miền Trung" href="/quay-thu-xsmb-xsmt-xsmn-quay-thu-xo-so-hom-nay.html">Quay thử XSMT</a></li>
+                    <li class="layout-col-6 layout-col-md-3"><a title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                    <li class="layout-col-6 layout-col-md-3"><a title="Thống kê lô gan xổ số Miền Trung" href="/thong-ke-lo-gan-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Lô gan Miền Trung</a></li>
+                </ul>
+            </div>
+            <br>
+            <div class="comp-box util-mx-md-0">
+                <div class="comp-box-title">
+                    <a class="util-text-black-2 util-text-decoration-none" href="/du-doan-xsmt-c60.html">Dự đoán xổ số hôm nay</a>
+                </div>
+
+                <?php if (!empty($predictions)): ?>
+                <ul class="comp-list-articles grid util-flex util-align-items-start util-flex-wrap">
+                    <?php foreach ($predictions as $idx => $p): ?>
+                    <li class="util-p-2 util-block <?= $idx === 0 ? 'is-first' : '' ?>">
+                        <figure class="comp-thumb-grid util-mb-2">
+                            <a class="util-p-0" href="<?= $this->escaper->escapeHtmlAttr($p['url']) ?>" title="<?= $this->escaper->escapeHtmlAttr($p['title']) ?>">
+                                <img class="comp-thumb-medium util-float-start util-me-3 util-lazy-load" alt="<?= $this->escaper->escapeHtmlAttr($p['title']) ?>" src="<?= $this->escaper->escapeHtmlAttr($p['image_url']) ?>" data-src="<?= $this->escaper->escapeHtmlAttr($p['image_url']) ?>" />
+                            </a>
+                        </figure>
+                        <aside>
+                            <a class="util-block util-fs-7 util-text-uppercase util-mb-1 util-text-black" href="<?= $this->escaper->escapeHtmlAttr($p['category_href']) ?>" title="<?= $this->escaper->escapeHtmlAttr($p['category_label']) ?>">
+                                <?= $this->escaper->escapeHtml($p['category_label']) ?>
+                            </a>
+                            <a class="util-block util-text-decoration-none" href="<?= $this->escaper->escapeHtmlAttr($p['url']) ?>" title="<?= $this->escaper->escapeHtmlAttr($p['title']) ?>">
+                                <span><?= $this->escaper->escapeHtml($p['title']) ?></span>
+                            </a>
+                        </aside>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php else: ?>
+                <div class="util-p-3 util-text-muted">Chưa có bài dự đoán phù hợp.</div>
+                <?php endif; ?>
+            </div>
+            <!-- Kết quả gần đây -->
+            <?php if (isset($latestResults) && !empty($latestResults)): ?>
+            <?php foreach ($latestResults as $index => $latestResult): ?>
+            <?php
+                    // Calculate weekday info for this latest result
+                    $latestDate = new \DateTime($latestResult['draw_date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+                    [$latestThuText, $latestThuSlug] = \App\Library\KqxsHelper::weekdayInfo($latestDate);
+                    $latestThuLink = "/xsmt-{$latestThuSlug}-ket-qua-xo-so-mien-trung.html";
+                    $latestDay = (int)$latestDate->format('j');
+                    $latestMonth = (int)$latestDate->format('n');
+                    $latestYear = (int)$latestDate->format('Y');
+                    ?>
+            <div id="position-latest-<?= $latestResult['draw_date'] ? str_replace('-', '', $latestResult['draw_date']) : 'unknown' ?>" class="lottery-result js-lottery-table-result js-lottery-table-xsmt util-mt-3" data-ketqua="" data-mien="Xổ Số Miền Trung">
+
+                <header class="lottery-result-header util-sticky-top">
+                    <div class="util-flex util-flex-column util-md-flex-row util-justify-between util-align-items-start util-md-align-items-center util-gap-2">
+                        <div class="breadcrumb-nav">
+                            <h2 class="lottery-result-tree">
+                                <a href="<?= $todayHref ?>" title="Kết quả xổ số Miền Trung">XSMT</a>
+                                <span class="sep">»</span>
+                                <a href="<?= $esc->escapeHtmlAttr($latestThuLink) ?>" title="Kết quả xổ số Miền Trung <?= $esc->escapeHtml($latestThuText) ?> hàng tuần">XSMT <?= $esc->escapeHtml($latestThuText) ?></a>
+                                <span class="sep">»</span>
+                                <a href="<?= sprintf('xsmt-%d-%d-ket-qua-xo-so-mien-trung-ngay-%d-%d-%d.html', $latestDay, $latestMonth, $latestDay, $latestMonth, $latestYear) ?>" title="Kết quả xổ số Miền Trung ngày <?= $latestDay ?>/<?= $latestMonth ?>/<?= $latestYear ?>">XSMT <?= $latestDay ?>/<?= $latestMonth ?>/<?= $latestYear ?></a>
+                            </h2>
+                        </div>
+                    </div>
+                </header>
+
+                <table class="comp-table util-align-items-center lottery-table xsmt js-lottery-kq-table">
+                    <thead class="table-header util-sticky-top util-align-items-center">
+                        <tr>
+                            <th class="util-small util-text-start util-bg-primary-subtle" style="--i:0">Giải</th>
+                            <?php $i = 1;
+                                    foreach ($latestResult['provincesForView'] as $province): ?>
+                            <th class="util-bg-primary-subtle" style="--i:<?= $i ?>">
+                                <a href="/ket-qua-xo-so-<?= strtolower(str_replace(' ', '-', $province['name'])) ?>" title="Kết quả xổ số <?= $esc->escapeHtmlAttr($province['name']) ?>" aria-label="Xem kết quả xổ số <?= $esc->escapeHtmlAttr($province['name']) ?>">
+                                    <?= $esc->escapeHtml($province['name']) ?>
+                                </a>
+                            </th>
+                            <?php $i++;
+                                    endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                                $getLatest = function ($pvId, $idx) use ($latestResult) {
+                                    $pr = $latestResult['resultsForView'][$pvId]['prizes'] ?? null;
+                                    return $pr ? ($pr[$idx] ?? []) : [];
+                                };
+                                ?>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 8</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number big" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="9" data-num=""><?php printCells($getLatest($province['id'], 9)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 7</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="8" data-num=""><?php printCells($getLatest($province['id'], 8)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 6</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="7" data-num=""><?php printCells($getLatest($province['id'], 7)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 5</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="6" data-num=""><?php printCells($getLatest($province['id'], 6)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 4</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="5" data-num=""><?php printCells($getLatest($province['id'], 5)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 3</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="4" data-num=""><?php printCells($getLatest($province['id'], 4)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 2</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="3" data-num=""><?php printCells($getLatest($province['id'], 3)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-start">Giải 1</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="2" data-num=""><?php printCells($getLatest($province['id'], 2)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td class="util-small util-text-nowrap util-text-start">Giải ĐB</td>
+                            <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                            <td><span class="lottery-number medium" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-id-giai="1" data-num=""><?php printCells($getLatest($province['id'], 1)); ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="comp-table util-align-items-center util-text-center util-m-0">
+                    <tr>
+                        <td colspan="<?= count($latestResult['provincesForView']) + 1 ?>" class="util-bg-primary-subtle util-p-2 util-text-start">Lô tô gần đây nhất - <?= $latestResult['draw_date'] ? date('d/m/Y', strtotime($latestResult['draw_date'])) : 'N/A' ?></td>
+                    </tr>
+                    <tr class="util-align-items-center">
+                        <td>Đầu</td>
+                        <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                        <td><a href="/ket-qua-xo-so-<?= strtolower(str_replace(' ', '-', $province['name'])) ?>"><?= $esc->escapeHtml($province['code']) ?></a></td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php for ($head = 0; $head <= 9; $head++): ?>
+                    <tr>
+                        <td class="util-text-red util-font-bold"><?= $head ?></td>
+                        <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                        <?php
+                                        $result = $latestResult['resultsForView'][$province['id']] ?? null;
+                                        $vals = $result ? ($result['dau'][$head] ?? []) : [];
+                                        ?>
+                        <td class="js-lottery-number-dau-duoi" data-find="dau" data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>" data-num="<?= $head ?>">
+                            <?php
+                                            if (!empty($vals)) {
+                                                $formattedVals = array_map(fn($v) => '<span class="lottery-number">' . htmlspecialchars($v, ENT_QUOTES, 'UTF-8') . '</span>', $vals);
+                                                echo implode(', ', $formattedVals);
+                                            }
+                                            ?>
+                        </td>
+                        <?php endforeach; ?>
+                    </tr>
+                    <?php endfor; ?>
+                </table>
+            </div>
+            <?php endforeach; ?>
+            <?php endif; ?>
+
+            <div class="comp-article-content util-p-3 util-bg-white util-shadow-sm util-mt-5 util-rounded js-bottom-content">
+                <p>Để thuận tiện tham gia dự thưởng Miền Trung, mời các bạn tham khảo lịch quay sau đây:</p>
+                <h3><strong>Lịch mở thưởng <a title="xổ số Miền Trung" href="/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html">xổ số Miền Trung</a></strong></h3>
+
+                <p>Thứ 2: <a title="Thừa Thiên Huế" href="/ket-qua-xo-so-thua-thien-hue-xstth.html">Huế</a>, <a title="Phú Yên" href="/ket-qua-xo-so-phu-yen-xspy.html">Phú Yên</a></p>
+                <p>Thứ 3: <a title="Đắk Lắk" href="/ket-qua-xo-so-dak-lak-xsdaklak.html">Đắk Lắk</a>, <a title="Quảng Nam" href="/ket-qua-xo-so-quang-nam-xsqn.html">Quảng Nam</a></p>
+                <p>Thứ 4: <a title="Đà Nẵng" href="/ket-qua-xo-so-da-nang-xsdanang.html">Đà Nẵng</a>, <a title="Khánh Hòa" href="/ket-qua-xo-so-khanh-hoa-xskh.html">Khánh Hòa</a></p>
+                <p>Thứ 5: <a title="Bình Định" href="/ket-qua-xo-so-binh-dinh-xsbd.html">Bình Định</a>, <a title="Quảng Trị" href="/ket-qua-xo-so-quang-tri-xsqt.html">Quảng Trị</a>, <a title="Quảng Bình" href="/ket-qua-xo-so-quang-binh-xsqb.html">Quảng Bình</a></p>
+                <p>Thứ 6: <a title="Gia Lai" href="/ket-qua-xo-so-gia-lai-xsgl.html">Gia Lai</a>, <a title="Ninh Thuận" href="/ket-qua-xo-so-ninh-thuan-xsnth.html">Ninh Thuận</a></p>
+                <p>Thứ 7: <a title="Đà Nẵng" href="/ket-qua-xo-so-da-nang-xsdanang.html">Đà Nẵng</a>, <a title="Quảng Ngãi" href="/ket-qua-xo-so-quang-ngai-xsqng.html">Quảng Ngãi</a>, <a title="Đắk Nông" href="/ket-qua-xo-so-dak-nong-xsdn.html">Đắk Nông</a></p>
+                <p>Chủ Nhật: <a title="Khánh Hòa" href="/ket-qua-xo-so-khanh-hoa-xskh.html">Khánh Hòa</a>, <a title="Kon Tum" href="/ket-qua-xo-so-kon-tum-xskontum.html">Kon Tum</a>, <a title="Thừa Thiên Huế" href="/ket-qua-xo-so-thua-thien-hue-xstth.html">Huế</a></p>
+
+                <p><strong>Chúc bạn may mắn trúng thưởng!</strong></p>
+            </div>
+
+
+
+        </div>
+
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<link rel="preload" href="/js/kqxs/kqxsmt.js" as="script">
+<script src="/js/kqxs/kqxsmt.js" async></script>
+<style>
+    @media (max-width: 768px) {
+        .util-bg-white.util-shadow-sm {
+            margin-top: 54px;
+        }
+
+        .nav-sub li a {
+            width: 100% !important;
+            text-align: center !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 8px 4px !important;
+        }
+
+        .layout-wrapper-fluid.util-mt-3 {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+    }
+</style>

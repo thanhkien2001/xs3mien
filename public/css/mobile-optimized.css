@@ -1,0 +1,160 @@
+/* Mobile Performance Optimization CSS */
+
+/* Critical CSS - Load immediately */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mobile-first responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Lazy loading for images */
+img[data-src] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[data-src].util-loaded {
+    opacity: 1;
+}
+
+/* Optimize tables for mobile */
+.comp-table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.comp-table {
+    min-width: 600px; /* Prevent table from being too narrow */
+}
+
+/* Mobile navigation optimization */
+.nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+/* Reduce animations on mobile for better performance */
+@media (max-width: 768px) {
+    * {
+        animation-duration: 0.3s !important;
+        transition-duration: 0.3s !important;
+    }
+    
+    /* Disable hover effects on touch devices */
+    .btn-base:hover,
+    .nav-link:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* Critical above-the-fold styles */
+.layout-wrapper {
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+.layout-row {
+    margin: 0 -15px;
+}
+
+.layout-col-12 {
+    padding: 0 15px;
+}
+
+/* Optimize font loading */
+@font-face {
+    font-family: 'System Font';
+    src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont');
+    font-display: swap;
+}
+
+/* Reduce paint complexity */
+.comp-card,
+.util-shadow-sm {
+    will-change: auto;
+    contain: layout style paint;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 480px) {
+    .layout-wrapper {
+        padding: 0 10px;
+    }
+    
+    .layout-row {
+        margin: 0 -10px;
+    }
+    
+    .layout-col-12 {
+        padding: 0 10px;
+    }
+    
+    /* Smaller text for mobile */
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.1rem; }
+    
+    /* Optimize buttons for touch */
+    .btn-base {
+        min-height: 44px; /* iOS touch target size */
+        padding: 12px 16px;
+    }
+}
+
+/* Performance optimizations */
+.util-lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.util-lazy-load.util-loaded {
+    opacity: 1;
+}
+
+/* Reduce layout thrashing */
+.fixed-height {
+    height: 200px;
+    overflow: hidden;
+}
+
+/* Optimize for mobile scrolling */
+html {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+/* Critical mobile styles */
+@media (max-width: 768px) {
+    .d-none-mobile,
+    .util-d-none-mobile {
+        display: none !important;
+    }
+    
+    .d-block-mobile,
+    .util-d-block-mobile {
+        display: block !important;
+    }
+    
+    .text-center-mobile,
+    .util-text-center-mobile {
+        text-align: center !important;
+    }
+}

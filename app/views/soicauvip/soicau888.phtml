@@ -1,0 +1,395 @@
+<main>
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: base_url + "xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: base_url + "xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: base_url + "xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= $base_url ?>" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item active"><a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247 - Soi cầu Rồng Bạch Kim siêu vip</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h1 class="font-20 my-2"> <strong>Soi cầu 888 - Soi cầu XSMB 888 2nháy miễn phí hôm nay</strong> </h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date">
+                                <?php
+                                $tomorrow = new DateTime('tomorrow');
+                                $weekdayMap = [
+                                    'Monday' => 'Thứ 2',
+                                    'Tuesday' => 'Thứ 3',
+                                    'Wednesday' => 'Thứ 4',
+                                    'Thursday' => 'Thứ 5',
+                                    'Friday' => 'Thứ 6',
+                                    'Saturday' => 'Thứ 7',
+                                    'Sunday' => 'Chủ nhật'
+                                ];
+                                $weekdayEn = $tomorrow->format('l');
+                                $weekdayVi = isset($weekdayMap[$weekdayEn]) ? $weekdayMap[$weekdayEn] : $weekdayEn;
+                                ?>
+                                <?= $weekdayVi ?>, <?= $tomorrow->format('d/m/Y - H:i') ?>
+                            </div>
+                            <!-- Rating section omitted/simplified for clean PHP -->
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3"><strong>Soi cầu 888 - Soi cầu miễn phí 888 miền Bắc uy tín nhất hiện nay. Phương pháp soi cầu bất bại hoàn toàn miễn phí được cập nhật nhanh chóng mỗi ngày. Soi cầu 888 2nháy miễn phí siêu chuẩn.</strong></h2>
+                    <div class="text-center"> <img width="600" height="314" src="https://soicau247s.org/public/media/thumb/Thumb-Cate/soi-cau-888-600x314.jpg" alt="Soi cầu 888"> </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Soi cầu miễn phí 888 ngày <?= $date ?></a></li>
+                                <li><a rel="nofollow" href="#trick1">Kết quả XSMB ngày hôm qua</a></li>
+                                <li><a rel="nofollow" href="#trick2">Soi cầu lô kép 888 khung 2 ngày</a></li>
+                                <li><a rel="nofollow" href="#trick3">Thống kê XSMB hôm nay</a></li>
+                                <li><a rel="nofollow" href="#trick4">Thống kê chạm trong tháng</a></li>
+                                <li><a rel="nofollow" href="#trick5">Thống kê đặc biệt XSMB</a></li>
+                                <li><a rel="nofollow" href="#trick6">Đặc biệt xác suất về cao nhất</a></li>
+                                <li><a rel="nofollow" href="#trick7">Soi cầu vip 888 là gì?</a></li>
+                                <li><a rel="nofollow" href="#trick8">Hướng dẫn soi cầu vip 888 bách phát bách trúng</a></li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify;"><a href="/soi-cau-mien-phi-888.html" title="Soi cầu 888">Soi cầu 888</a> là kênh soi cầu uy tín đã giúp rất nhiều anh em tìm ra những con số may mắn cho mình. Để không tốn quá nhiều gian, anh em nhanh chóng cập nhật ngay cặp số đẹp mà cầu 888 mang lại ngay sau đây. Cùng chúng tôi theo dõi nhé!</p>
+
+                        <h3 id="trick0" style="text-align: justify;">Soi cầu miễn phí 888 ngày <?= $date ?></h3>
+                        <p style="text-align: justify;"></p>
+                        <table class="table-default w-100 text-center">
+                            <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">Giải đặc biệt</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Đầu <span class="text-red font-weight-bold"><?= $predictions888['dac_biet']['dau'] ?></span> -
+                                        Đuôi <span class="text-red font-weight-bold"><?= $predictions888['dac_biet']['duoi'] ?></span> -
+                                        Tổng <span class="text-red font-weight-bold"><?= $predictions888['dac_biet']['tong'] ?></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Cầu bạch thủ</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red font-weight-bold"><?= $predictions888['bach_thu'] ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">3 số đẹp nhất</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red font-weight-bold"><?= implode(' - ', $predictions888['ba_so_dep']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Cầu lô xiên</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red font-weight-bold">
+                                        <?php foreach ($predictions888['lo_xien'] as $pair): ?>
+                                            (<?= implode(' - ', $pair) ?>)
+                                        <?php endforeach; ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Cầu 888 2 nháy LỘC- PHÁT - TÀI</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-red font-weight-bold"><?= implode(' - ', $predictions888['hai_nhay']) ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <p style="text-align: justify;">Hy vọng rằng anh em có thể lựa chọn cho mình một con số đẹp trong số những cặp số mà soi cầu vip 888 đã cập nhật ở phía trên và dành được giải thưởng lớn. Các con số của chúng tôi có tỷ lệ về cao tuy nhiên chỉ mang tính chất tương đối. Anh em hay cân nhắc phương án phù hợp nhất trước khi sử dụng để tham gia quay thưởng nhé!</p>
+
+                        <h3 id="trick1" style="text-align: justify;">Kết quả XSMB ngày hôm qua</h3>
+                        <p>Cùng cầu 88 xem lại những cặp số đẹp đã về trong ngày hôm qua ngay sau đây nhé!</p>
+
+                        <?php if (isset($resultYesterday['raw'])): $res = $resultYesterday['raw']; ?>
+                            <article class="my-2">
+                                <div class="result result-single rounded">
+                                    <div class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16"> Xổ số Miền Bắc ngày <?= $resultYesterday['date'] ?> </div>
+                                    <div class="breadcrumb-table">
+                                        <h4 class="breadcrumb-table-title">
+                                            <a href="#" title="XSMB thứ <?= date('N', strtotime($res->draw_date)) + 1 ?>">XSMB thứ <?= date('N', strtotime($res->draw_date)) + 1 ?></a> /
+                                            <a href="#" title="XSMB <?= $resultYesterday['date'] ?>">XSMB <?= $resultYesterday['date'] ?></a>
+                                        </h4>
+                                    </div>
+                                    <div class="table-flex-border">
+                                        <table class="table-flex table-result" data-code="XSMB">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="d-flex justify-content-between font-16 p-2">
+                                                            <?php
+                                                            $lvs = [];
+                                                            if (!empty($res->lv)) {
+                                                                $lvs = preg_split('/[,\-\s]+/', str_replace(['[', ']', '"'], '', $res->lv));
+                                                            }
+                                                            foreach ($lvs as $l): if (trim($l) === '') continue;
+                                                            ?>
+                                                                <span class="text-number" nc="5"><?= trim($l) ?></span>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ĐB</td>
+                                                    <td> <span class="text-number" nc="5"><?= $res->special_prize ?></span> </td>
+                                                </tr>
+                                                <?php
+                                                $prizes = [
+                                                    'G1' => $res->first_prize,
+                                                    'G2' => $res->second_prize,
+                                                    'G3' => $res->third_prize,
+                                                    'G4' => $res->fourth_prize,
+                                                    'G5' => $res->fifth_prize,
+                                                    'G6' => $res->sixth_prize,
+                                                    'G7' => $res->seventh_prize
+                                                ];
+                                                foreach ($prizes as $name => $val):
+                                                    $nums = [];
+                                                    if (is_string($val)) {
+                                                        $clean = str_replace(['[', ']', '"'], '', $val);
+                                                        $nums = preg_split('/[,\-\s]+/', $clean);
+                                                    }
+                                                    $nums = array_filter($nums, function ($v) {
+                                                        return trim($v) !== '';
+                                                    });
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $name ?></td>
+                                                        <td>
+                                                            <?php foreach ($nums as $n): $n = trim($n);
+                                                                $len = strlen($n); ?>
+                                                                <span class="text-number" nc="<?= $len ?>"><?= $n ?></span>
+                                                            <?php endforeach; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endif; ?>
+
+                        <p></p>
+                        <h3 id="trick2" style="text-align: justify;">Soi cầu lô kép 888 khung 2 ngày</h3>
+                        <p style="text-align: justify;">Soi cầu 888 cung cấp cho anh em cặp lô kép nuôi khung 2 ngày với tỉ lệ trúng thưởng lên đến 99%. Những anh em muốn chơi chắc thắng hoặc có nguồn vốn ít thì nên nuôi lô theo cách này. Cùng theo dõi các cầu số đẹp nhất hôm nay mà soi cầu XSMB 888 đưa ra nhé!</p>
+                        <p style="text-align: justify;"></p>
+                        <table class="table-default w-100 text-center">
+                            <thead>
+                                <tr>
+                                    <th>Lô kép</th>
+                                    <th>Ngày</th>
+                                    <th>Kết quả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($loKepKhung2Ngay as $row): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold"><?= $row['pair'] ?></td>
+                                        <td><?= $row['date_range'] ?></td>
+                                        <td><?= $row['result'] ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <p></p>
+
+                        <h3 id="trick3" style="text-align: justify;">Thống kê XSMB hôm nay</h3>
+                        <p style="text-align: justify;">Chúng tôi luôn cập nhật nhanh chóng nhất kết quả XSMB cho anh em. Từ đó, thống kê cho anh em những cầu chạm và cầu đặc biệt đã về với mong muốn giúp anh em chọn được những con số ưng ý nhất. Mời anh em tham khảo kết quả thống kê của cầu 888 của chúng tôi ngay sau đây.</p>
+
+                        <h4 id="trick4" style="text-align: justify;">Thống kê chạm trong tháng</h4>
+                        <p style="text-align: justify;"></p>
+                        <table class="table-default text-center w-100">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="bg-blue text-white"> THỐNG KÊ CHẠM </th>
+                                </tr>
+                                <tr>
+                                    <th>Số</th>
+                                    <th class="text-darker">Đã về Đầu</th>
+                                    <th class="text-darker">Đã về Đuôi</th>
+                                    <th class="text-darker">Đã về Tổng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($thongKeCham as $num => $stats): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold"> <?= $num ?> </td>
+                                        <td> <?= $stats['dau'] ?> lần </td>
+                                        <td> <?= $stats['duoi'] ?> lần </td>
+                                        <td> <?= $stats['tong'] ?> lần </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <p style="text-align: center;"><span style="color: #ff0000;">» <a href="/soi-cau-mien-phi-888.html" title="Soi cầu 888">Soi cầu 888</a> «</span></p>
+
+                        <h4 id="trick5" style="text-align: justify;">Thống kê đặc biệt XSMB</h4>
+                        <p style="text-align: justify;">Dưới đây, soi cầu 888 2 nháy đã thống kê lại kết quả XSMB từ trước đến nay và tổng hợp lại kết quả giải đặc biệt về ngày tiếp theo đó. Cụ thể như sau:</p>
+                        <p style="text-align: justify;"></p>
+
+                        <?php if (isset($thongKeBacNho)): ?>
+                            <div class="logan-result">
+                                <div class="table-dacbiet overflow-auto">
+                                    <table class="text-center table-total">
+                                        <tbody>
+                                            <tr class="table-dacbiet-tr2">
+                                                <td class="bg-orange" colspan="4">
+                                                    <h3 class="text-center">Xem các kết quả đặc biệt đã về vào <span class="text-red">ngày tiếp theo</span> .Sau khi ra <span class="text-red"><?= $thongKeBacNho['target'] ?></span> vào ngày trước đó </h3>
+                                                    <div class="date">ngày <?= $thongKeBacNho['last_date'] ?> <span class="font-16 font-weight-bold text-red"><?= $thongKeBacNho['last_full'] ?></span></div>
+                                                </td>
+                                            </tr>
+                                            <tr class="font-weight-bold">
+                                                <td class="bg-white" colspan="2">Ngày xuất hiện Loto ĐB</td>
+                                                <td class="bg-white" colspan="2">Loto ĐB ngày tiếp theo</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="p-0 align-top">
+                                                    <table class="text-center w-100">
+                                                        <tbody>
+                                                            <tr class="font-weight-bold">
+                                                                <td>Ngày</td>
+                                                                <td>Giải đặc biệt</td>
+                                                            </tr>
+                                                            <?php foreach ($thongKeBacNho['history'] as $hist): ?>
+                                                                <tr>
+                                                                    <td class="text-center"> <a rel="nofollow" href="#" class="text-black"><?= $hist['date'] ?></a> </td>
+                                                                    <td class="font-weight-bold"> <?= $hist['prefix'] ?><span class="text-red"><?= $hist['end'] ?></span> </td>
+                                                                </tr>
+                                                            <?php endforeach; ?>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <!-- Note: original HTML has strange structure with nested table in first col, and then seemingly random rows?? 
+                                                     Actually, looking at the original HTML, the "Loto DB ngày tiếp theo" logical column is MISSING in the visual structure?
+                                                     Wait, the original HTML has:
+                                                     <tr>
+                                                        <td colspan="2" class="p-0 align-top">
+                                                            <table>...rows of previous dates...</table>
+                                                        </td>
+                                                     </tr>
+                                                     And NO second column content? It seems the table structure in the source HTML is a bit weird or truncated.
+                                                     
+                                                     Ah, usually "Bac Nho" tables show:
+                                                     Left: Date X occurred. Right: Result of Date X+1.
+                                                     The source HTML has a single nested table under colspan=2?
+                                                     Let's look at lines 393-500+ of the source.
+                                                     It seems all rows are inside that nested table.
+                                                     The nested table has rows like: <td>Date</td> <td>Result</td>.
+                                                     Wait, "Giải đặc biệt" column in nested table shows the PAST result? Or the NEXT result?
+                                                     Title says: "Xem các kết quả đặc biệt đã về vào ngày tiếp theo. Sau khi ra 93".
+                                                     Rows show: "15/12/2025 - 74093". 
+                                                     "08/09/2025 - 04493".
+                                                     These are the dates when 93 appeared!
+                                                     Where are the "Next Day" results?
+                                                     The visual table header says "Ngày xuất hiện" | "Loto DB ngày tiếp theo".
+                                                     But the content only fills the FIRST part (Colspan 2)?
+                                                     
+                                                     Actually, typically these tables have two side-by-side lists or a mapped list.
+                                                     Let's stick to the structure of the HTML provided. It lists the DATES when the target number appeared.
+                                                     Maybe the user wants to see what came NEXT?
+                                                     The text says: "Xem các kết quả đặc biệt đã về vào ngày tiếp theo...".
+                                                     But the list shows the dates when the TARGET (93) appeared.
+                                                     It's possible the logic intends to show what happened AFTER.
+                                                     
+                                                     For now, I will mimic the HTML structure: Just list the occurrences.
+                                                     I'll fix the logic in the controller to fetch these occurrences.
+                                                -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+
+        <!-- SIDEBAR LEFT -->
+    </div>
+    </div>
+</main>
+
+<style>
+    #trick1,
+    #trick2,
+    #trick3,
+    #trick4,
+    #trick5,
+    #trick6,
+    #trick7,
+    #trick8,
+    #trick9,
+    #trick10 {
+        margin-top: 10px;
+    }
+</style>

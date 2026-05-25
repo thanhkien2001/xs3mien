@@ -1,0 +1,95 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class=" " title="Quay thử xổ số Miền Bắc" href="/quay-thu-xsmb.html">Quay thử XSMB</a></li>
+                    <li><a class=" " title="Quay thử xổ số Miền Nam" href="/quay-thu-xsmn.html">Quay thử XSMN</a></li>
+                    <li><a class=" " title="Quay thử xổ số Miền Trung" href="/quay-thu-xsmt.html">Quay thử XSMT</a></li>
+                    <li><a class="util-text-red" title="Quay thử Power 6/55" href="/quay-thu-xo-so-power-6-55-hom-nay.html">Quay thử Power 6/55</a></li>
+                    <li><a class=" " title="Quay thử Mega 6/45" href="/quay-thu-xo-so-mega-6-45-hom-nay.html">Quay thử Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Quay thử Power 6/55</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class>
+                        Quay Thử Power 6/55 Hôm Nay – Lấy Hên Cùng Xổ Số Vietlott Power
+                    </h1>
+                    <div class="util-mx-1">
+                        <ul class="layout-row util-gx-0 list-type-square util-p-0">
+                            <li class="layout-col-6">
+                                <a class="util-inline-block util-pt-1 util-pb-1" title="Xổ Số Power 6/55 – Vietlott" href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y')) ?>">Kết Quả Power</a>
+                            </li>
+                            <?php $nextDate1 = DateHelper::getNextLotteryDate655(); ?>
+                            <li class="layout-col-6">
+                                <a class="util-inline-block util-pt-1 util-pb-1" title="Dự đoán Power 6/55" href="<?= $this->url->get('/du-doan-soi-cau-xo-so-power-6-55-vietlott-ngay-' . $nextDate1) . '-co-nen-xuong-tay' ?>">Dự đoán Power</a>
+                            </li>
+                            <li class="layout-col-6">
+                                <a class="util-inline-block util-pt-1 util-pb-1 util-text-red" title="Quay thử Power 6/55" href="/quay-thu-xo-so-power-6-55-hom-nay.html">Quay thử Power</a>
+                            </li>
+                            <li class="layout-col-6">
+                                <a class="util-inline-block util-pt-1 util-pb-1" title="Thống kê xổ số Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-p-2 util-rounded">
+                <p>
+                    <strong>Quay thử Power 6/55</strong> sử dụng thuật toán ngẫu nhiên thông minh giúp tạo ra bộ số may mắn Vietlott hôm nay.
+                    Trước khi mua vé dự thưởng
+                    <a title="xổ số Power 6/55" href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y')) ?>"><strong>xổ số Power 6/55</strong></a>,
+                    hãy thử vận may với tính năng “Quay thử” tại soicau247.com để chọn nhanh bộ số tiềm năng và tăng cơ hội chạm Jackpot.
+                </p>
+
+                <div>
+                    <div class="d-grid">
+                        <button class="btn-green btn-block btn-lg js-btn-quay-thu-power">Bắt đầu quay thử</button>
+                    </div>
+                    <h2 class="util-fs-5 util-text-center">Kết quả quay thử xổ số Power 6/55</h2>
+                    <div class="lottery-balls js-power-655-quaythu">
+                        <?php for ($i = 1; $i <= 6; $i++): ?>
+                            <span class="ball big power util-mx-1 loading js-loading-number js-num" data-index="<?php echo $i; ?>" data-id-giai="9">...</span>
+                        <?php endfor; ?>
+                        <span class="ball big green special util-mx-1 loading js-loading-number js-num" data-index="7" data-id-giai="9">...</span>
+                    </div>
+                </div>
+                <p class="util-mt-4 util-small">
+                    Lưu ý: Kết quả quay thử chỉ mang tính tham khảo, không có giá trị lãnh thưởng.
+                    Chúc bạn gặp nhiều may mắn và sớm sở hữu bộ số Vietlott Power 6/55 như ý!
+                </p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<script src="/js/quaythu/quaythu655.js"></script>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+       
+    }
+</style>

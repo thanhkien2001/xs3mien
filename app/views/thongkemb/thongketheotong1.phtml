@@ -1,0 +1,511 @@
+<main class="main-home">
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: base_url + "xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: base_url + "xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: base_url + "xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+        <div class="box-tuong-thuat bg-white">
+            <div class="d-flex flex-wrap align-items-center justify-content-center mb-3">
+                <p class="py-3 mb-0 text-center font-weight-bold mr-3">
+                    <!--<img loading="lazy" style="margin-bottom: 4px" class="mr-2" alt="tuong thuat truc tiep" src="https://cdn.xoso.com.vn/Content/images/long-quay.gif">-->Đang
+                    tường thuật Xổ số <span id="notiLiveTitle"></span>
+                </p>
+                <a id="notiLiveLink" href="#" class="bg-red1 text-white px-3 py-2">Xem ngay</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="&lt;i class='icon-home'&gt;&lt;/i&gt;"><i
+                                    class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                                title="XSMB">XSMB</a> </li>
+                        <li class="breadcrumb-item active"><a href="/thong-ke-theo-tong-xsmb.html"
+                                title="Thống kê theo tổng">Thống kê theo tổng</a> </li>
+                        <script type="application/ld+json">
+                            {
+                                "@context": "http:\/\/schema.org",
+                                "@type": "BreadcrumbList",
+                                "itemListElement": [{
+                                    "@type": "ListItem",
+                                    "position": 1,
+                                    "item": {
+                                        "@id": "https:\/\/soicau247s.org\/",
+                                        "name": "<i class='icon-home'><\/i>"
+                                    }
+                                }, {
+                                    "@type": "ListItem",
+                                    "position": 2,
+                                    "item": {
+                                        "@id": "https:\/\/soicau247s.org\/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html",
+                                        "name": "XSMB"
+                                    }
+                                }, {
+                                    "@type": "ListItem",
+                                    "position": 3,
+                                    "item": {
+                                        "@id": "https:\/\/soicau247s.org\/thong-ke-theo-tong-xsmb.html",
+                                        "name": "Th\u1ed1ng k\u00ea theo t\u1ed5ng"
+                                    }
+                                }]
+                            }
+                        </script>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <aside>
+                    <table class="table-b">
+                        <tbody>
+                            <tr>
+                                <td><a href="/lo-gan-xsmb.html" title="Lô gan XSMB">Lô gan XSMB</a></td>
+                                <td><a href="/lo-xien-xsmb.html" title="Lô xiên XSMB">Lô xiên XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/lo-kep-xsmb.html" title="Lô kép XSMB">Lô kép XSMB</a></td>
+                                <td><a href="/dau-duoi-xsmb.html" title="Đầu đuôi lô tô XSMB">Đầu đuôi lô tô XSMB</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="/dac-biet-xsmb.html" title="Đặc biệt XSMB">Đặc biệt XSMB</a></td>
+                                <td><a href="/dac-biet-tuan-xsmb.html" title="Đặc biệt tuần XSMB">Đặc biệt tuần XSMB</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="/tan-suat-lo-to-xsmb.html" title="Tần suất lô tô XSMB">Tần suất lô tô
+                                        XSMB</a></td>
+                                <td><a text-red="" href="/thong-ke-theo-tong-xsmb.html" title="Theo tổng XSMB">Theo tổng
+                                        XSMB</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+                <div class="viewStatistic">
+                    <article>
+                        <div class="static-search">
+                            <h2 class="aside-title-red justify-content-center"> Thống kê theo tổng Miền Bắc </h2>
+                            <div class="form-search">
+                                <form>
+                                    <div class="row align-items-end">
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Tỉnh/Thành phố</div>
+                                            <div class="col-6 col-lg-7 select-arow mt-2"> <select
+                                                    class="form-control form-control-sm select-logan"
+                                                    name="chon_tinh_logan" id="selectProvince">
+                                                    <option selected="selected" data-code="xsmb" data-id="1"
+                                                        value="/thong-ke-theo-tong-xsmb.html"> Miền Bắc </option>
+                                                    <option data-code="xskh" value="/thong-ke-theo-tong-xskh.html">Khánh
+                                                        Hòa</option>
+                                                    <option data-code="xsdna" value="/thong-ke-theo-tong-xsdna.html">Đà
+                                                        Nẵng</option>
+                                                    <option data-code="xsqng" value="/thong-ke-theo-tong-xsqng.html">
+                                                        Quảng Ngãi</option>
+                                                    <option data-code="xstth" value="/thong-ke-theo-tong-xstth.html">
+                                                        Thừa Thiên Huế</option>
+                                                    <option data-code="xspy" value="/thong-ke-theo-tong-xspy.html">Phú
+                                                        Yên</option>
+                                                    <option data-code="xsbdi" value="/thong-ke-theo-tong-xsbdi.html">
+                                                        Bình Định</option>
+                                                    <option data-code="xskt" value="/thong-ke-theo-tong-xskt.html">Kon
+                                                        Tum</option>
+                                                    <option data-code="xsdlk" value="/thong-ke-theo-tong-xsdlk.html">Đắk
+                                                        Lắk</option>
+                                                    <option data-code="xsqna" value="/thong-ke-theo-tong-xsqna.html">
+                                                        Quảng Nam</option>
+                                                    <option data-code="xsdno" value="/thong-ke-theo-tong-xsdno.html">Đắk
+                                                        Nông</option>
+                                                    <option data-code="xsgl" value="/thong-ke-theo-tong-xsgl.html">Gia
+                                                        Lai</option>
+                                                    <option data-code="xsnt" value="/thong-ke-theo-tong-xsnt.html">Ninh
+                                                        Thuận</option>
+                                                    <option data-code="xsqb" value="/thong-ke-theo-tong-xsqb.html">Quảng
+                                                        Bình</option>
+                                                    <option data-code="xsqt" value="/thong-ke-theo-tong-xsqt.html">Quảng
+                                                        Trị</option>
+                                                    <option data-code="xshcm" value="/thong-ke-theo-tong-xshcm.html">Hồ
+                                                        Chí Minh</option>
+                                                    <option data-code="xsdn" value="/thong-ke-theo-tong-xsdn.html">Đồng
+                                                        Nai</option>
+                                                    <option data-code="xsag" value="/thong-ke-theo-tong-xsag.html">An
+                                                        Giang</option>
+                                                    <option data-code="xstg" value="/thong-ke-theo-tong-xstg.html">Tiền
+                                                        Giang</option>
+                                                    <option data-code="xskg" value="/thong-ke-theo-tong-xskg.html">Kiên
+                                                        Giang</option>
+                                                    <option data-code="xstn" value="/thong-ke-theo-tong-xstn.html">Tây
+                                                        Ninh</option>
+                                                    <option data-code="xsbd" value="/thong-ke-theo-tong-xsbd.html">Bình
+                                                        Dương</option>
+                                                    <option data-code="xsst" value="/thong-ke-theo-tong-xsst.html">Sóc
+                                                        Trăng</option>
+                                                    <option data-code="xsvl" value="/thong-ke-theo-tong-xsvl.html">Vĩnh
+                                                        Long</option>
+                                                    <option data-code="xstv" value="/thong-ke-theo-tong-xstv.html">Trà
+                                                        Vinh</option>
+                                                    <option data-code="xsct" value="/thong-ke-theo-tong-xsct.html">Cần
+                                                        Thơ</option>
+                                                    <option data-code="xsbtr" value="/thong-ke-theo-tong-xsbtr.html">Bến
+                                                        Tre</option>
+                                                    <option data-code="xsvt" value="/thong-ke-theo-tong-xsvt.html">Vũng
+                                                        Tàu</option>
+                                                    <option data-code="xsbl" value="/thong-ke-theo-tong-xsbl.html">Bạc
+                                                        Liêu</option>
+                                                    <option data-code="xsbth" value="/thong-ke-theo-tong-xsbth.html">
+                                                        Bình Thuận</option>
+                                                    <option data-code="xsdt" value="/thong-ke-theo-tong-xsdt.html">Đồng
+                                                        Tháp</option>
+                                                    <option data-code="xsla" value="/thong-ke-theo-tong-xsla.html">Long
+                                                        An</option>
+                                                    <option data-code="xscm" value="/thong-ke-theo-tong-xscm.html">Cà
+                                                        Mau</option>
+                                                    <option data-code="xsbp" value="/thong-ke-theo-tong-xsbp.html">Bình
+                                                        Phước</option>
+                                                    <option data-code="xshg" value="/thong-ke-theo-tong-xshg.html">Hậu
+                                                        Giang</option>
+                                                    <option data-code="xsdl" value="/thong-ke-theo-tong-xsdl.html">Đà
+                                                        Lạt</option>
+                                                </select></div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Từ ngày</div>
+                                            <div class="col-6 col-lg-7 input-datetick mt-2"> <input id="dateBegin"
+                                                    class="form-control form-control-sm mr-2" name="date_begin"
+                                                    type="text" value="03/12/2025"> </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Đến ngày</div>
+                                            <div class="col-6 col-lg-7 input-datetick mt-2"> <input id="dateEnd"
+                                                    class="form-control form-control-sm mr-2" name="date_end"
+                                                    type="text" value="02/01/2026"> </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Chọn tổng muốn xem</div>
+                                            <div class="col-6 col-lg-7 select-arow mt-2"> <select
+                                                    class="form-control form-control-sm select-logan" name="chon_tong"
+                                                    id="range-day">
+                                                    <option value="0" selected="">Tổng 0</option>
+                                                    <option value="1">Tổng 1</option>
+                                                    <option value="2">Tổng 2</option>
+                                                    <option value="3">Tổng 3</option>
+                                                    <option value="4">Tổng 4</option>
+                                                    <option value="5">Tổng 5</option>
+                                                    <option value="6">Tổng 6</option>
+                                                    <option value="7">Tổng 7</option>
+                                                    <option value="8">Tổng 8</option>
+                                                    <option value="9">Tổng 9</option>
+                                                </select></div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Chỉ xét giải đặc biệt</div>
+                                            <div class="col-6 col-lg-7 check-radio form-inline mt-2"> <label
+                                                    class="form-check col justify-content-start" for="is_special">
+                                                    <input type="checkbox" id="is_special" name="is_special" hidden=""
+                                                        value="1"> <span class="checkbox"><i
+                                                            class="icon-check"></i></span> </label> </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline"> <button
+                                                data-url="load_theo_tong" id="btn-Statistic-search"
+                                                class="btn btn-danger btn-sm w-100 mt-2 btnLogan" type="submit">XEM
+                                                THỐNG KÊ </button> </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                    <div id="view_data">
+                        <article class="mt-2">
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> BẢNG THỐNG KÊ TỔNG XỔ SỐ Miền Bắc: TỔNG 0
+                                </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="table-total table-logan-lcvn w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Bộ số</th>
+                                                    <th>Tổng số lần xuất hiện</th>
+                                                    <th>Lần xuất hiện cuối</th>
+                                                    <th>Số ngày chưa về</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">00</td>
+                                                    <td>7 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-26-12-2025.html">26/12/2025</a>
+                                                    </td>
+                                                    <td>7 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">19</td>
+                                                    <td>9 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-30-12-2025.html">30/12/2025</a>
+                                                    </td>
+                                                    <td>3 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">28</td>
+                                                    <td>11 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-01-01-2026.html">01/01/2026</a>
+                                                    </td>
+                                                    <td>1 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">37</td>
+                                                    <td>10 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-29-12-2025.html">29/12/2025</a>
+                                                    </td>
+                                                    <td>4 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">46</td>
+                                                    <td>11 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-24-12-2025.html">24/12/2025</a>
+                                                    </td>
+                                                    <td>9 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">55</td>
+                                                    <td>2 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-23-12-2025.html">23/12/2025</a>
+                                                    </td>
+                                                    <td>10 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">64</td>
+                                                    <td>7 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-29-12-2025.html">29/12/2025</a>
+                                                    </td>
+                                                    <td>4 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">73</td>
+                                                    <td>7 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-28-12-2025.html">28/12/2025</a>
+                                                    </td>
+                                                    <td>5 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">82</td>
+                                                    <td>9 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-30-12-2025.html">30/12/2025</a>
+                                                    </td>
+                                                    <td>3 ngày</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-red font-weight-bold">91</td>
+                                                    <td>7 lần</td>
+                                                    <td><a rel="nofollow" href="/xsmb-01-01-2026.html">01/01/2026</a>
+                                                    </td>
+                                                    <td>1 ngày</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="mt-2">
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> Loto lần quay gần đây nhất ngày 01/01/2026
+                                    của Miền Bắc </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="table-total table-logan-lcvn w-100">
+                                            <thead>
+                                                <tr class="bg-fafafa font-weight-bold lh2">
+                                                    <th class="pl-3 font-weight-bold">Tổng</th>
+                                                    <th class="pl-3 font-weight-bold">Lô tô</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 0</td>
+                                                    <td class="text-left pl-3">28, 91</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 1</td>
+                                                    <td class="text-left pl-3">01, 38</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 2</td>
+                                                    <td class="text-left pl-3">Không về tổng 2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 3</td>
+                                                    <td class="text-left pl-3">76, 76, 67</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 4</td>
+                                                    <td class="text-left pl-3">68, 31, 31</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 5</td>
+                                                    <td class="text-left pl-3">96, 69</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 6</td>
+                                                    <td class="text-left pl-3">42, 88</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 7</td>
+                                                    <td class="text-left pl-3">25, 52, 34, 25, 25</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 8</td>
+                                                    <td class="text-left pl-3">08, 35, 17, 53, 17, 53</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-nowrap px-2">Tổng 9</td>
+                                                    <td class="text-left pl-3">72, 63</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <aside class="border-radius-4 mt-2">
+                        <h3 class="title-bg-blue border-radius-top mb-0"> Dự đoán xổ số</h3>
+                        <div class="border border-radius-bottom px-3 pb-3">
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2"> <a class="text-blue1 font-16 font-weight-bold"
+                                        href="/du-doan-xsmb-2-1-2026-hom-nay-thu-6-d12199.html"
+                                        title="Dự đoán XSMB ngày 2/1/2026 - Thống kê XSMB thứ 6 - XSMB">Dự đoán XSMB
+                                        ngày 2/1/2026 - Thống kê XSMB thứ 6 - XSMB</a> </div>
+                                <div class="col-4 pr-2"> <a href="/du-doan-xsmb-2-1-2026-hom-nay-thu-6-d12199.html"
+                                        title="Dự đoán XSMB ngày 2/1/2026 - Thống kê XSMB thứ 6 - XSMB"> <img
+                                            loading="lazy" width="410" height="215"
+                                            src="/media/thumb/Thumb-Cate/du-doan-MB-410x215.jpg"
+                                            alt="Dự đoán XSMB ngày 2/1/2026 - Thống kê XSMB thứ 6 - XSMB"> </a> </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">Dự đoán XSMB 2/1/2026 -
+                                        Dự đoán kết quả xổ số miền Bắc hôm nay. Soi cầu XSMB ngày 2/1/2026 phân thích
+                                        kết quả XSMB chốt số lô giải tám, đặc biệt đầu đuôi, bao lô 2 số siêu chính xác.
+                                    </p>
+                                    <p class="mb-0 font-13 text-gray1">21 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2"> <a class="text-blue1 font-16 font-weight-bold"
+                                        href="/soi-cau-xsmb-win2888-asia-2-1-2026-d12200.html"
+                                        title="Soi cầu XSMB Win2888 2/1/2026 chính xác nhất hôm nay">Soi cầu XSMB
+                                        Win2888 2/1/2026 chính xác nhất hôm nay</a> </div>
+                                <div class="col-4 pr-2"> <a href="/soi-cau-xsmb-win2888-asia-2-1-2026-d12200.html"
+                                        title="Soi cầu XSMB Win2888 2/1/2026 chính xác nhất hôm nay"> <img
+                                            loading="lazy" width="410" height="215"
+                                            src="/media/thumb/Thumb-Cate/soicau-win-2888-410x215.jpg"
+                                            alt="Soi cầu XSMB Win2888 2/1/2026 chính xác nhất hôm nay"> </a> </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">Soi cầu XSMB Win2888 Asia
+                                        2/1/2026 - Dự đoán XSMB Win2888 từ các chuyên gia phân tích hàng đầu về xổ số
+                                        với mong muốn đưa anh em vào bờ an toàn hôm nay. Những con số đẹp nhất đã được
+                                        tìm thấy giúp anh em có thêm cơ hội dành được những giải thưởng lớn nhất.</p>
+                                    <p class="mb-0 font-13 text-gray1">21 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2"> <a class="text-blue1 font-16 font-weight-bold"
+                                        href="/du-doan-so-de-hom-nay-2-1-2026-d12201.html"
+                                        title="Dự đoán số đề 2/1/2026 - Chốt số đề XSMB hôm nay">Dự đoán số đề 2/1/2026
+                                        - Chốt số đề XSMB hôm nay</a> </div>
+                                <div class="col-4 pr-2"> <a href="/du-doan-so-de-hom-nay-2-1-2026-d12201.html"
+                                        title="Dự đoán số đề 2/1/2026 - Chốt số đề XSMB hôm nay"> <img loading="lazy"
+                                            width="410" height="215"
+                                            src="/media/thumb/Thumb-Cate/du-doan-so-de-410x215.jpg"
+                                            alt="Dự đoán số đề 2/1/2026 - Chốt số đề XSMB hôm nay"> </a> </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">Dự đoán số đề luôn là
+                                        phương pháp soi cầu đặc biệt được nhiều anh em tin tưởng và chờ đón mỗi ngày. Dự
+                                        đoán số đề 2/1/2026 đem đến cho anh em những cặp đặc biệt đã chọn lọc đẹp nhất.
+                                        Cùng theo dõi ngay nhé!</p>
+                                    <p class="mb-0 font-13 text-gray1">21 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2"> <a class="text-blue1 font-16 font-weight-bold"
+                                        href="/du-doan-xsmb-1-1-2026-hom-nay-thu-5-d12193.html"
+                                        title="Dự đoán XSMB ngày 1/1/2026 - Thống kê XSMB thứ 5 - XSMB">Dự đoán XSMB
+                                        ngày 1/1/2026 - Thống kê XSMB thứ 5 - XSMB</a> </div>
+                                <div class="col-4 pr-2"> <a href="/du-doan-xsmb-1-1-2026-hom-nay-thu-5-d12193.html"
+                                        title="Dự đoán XSMB ngày 1/1/2026 - Thống kê XSMB thứ 5 - XSMB"> <img
+                                            loading="lazy" width="410" height="215"
+                                            src="/media/thumb/Thumb-Cate/du-doan-MB-410x215.jpg"
+                                            alt="Dự đoán XSMB ngày 1/1/2026 - Thống kê XSMB thứ 5 - XSMB"> </a> </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">Dự đoán XSMB 1/1/2026 -
+                                        Dự đoán kết quả xổ số miền Bắc hôm nay. Soi cầu XSMB ngày 1/1/2026 phân thích
+                                        kết quả XSMB chốt số lô giải tám, đặc biệt đầu đuôi, bao lô 2 số siêu chính xác.
+                                    </p>
+                                    <p class="mb-0 font-13 text-gray1">1 ngày trước</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2"> <a class="text-blue1 font-16 font-weight-bold"
+                                        href="/soi-cau-xsmb-win2888-asia-1-1-2026-d12194.html"
+                                        title="Soi cầu XSMB Win2888 1/1/2026 chính xác nhất hôm nay">Soi cầu XSMB
+                                        Win2888 1/1/2026 chính xác nhất hôm nay</a> </div>
+                                <div class="col-4 pr-2"> <a href="/soi-cau-xsmb-win2888-asia-1-1-2026-d12194.html"
+                                        title="Soi cầu XSMB Win2888 1/1/2026 chính xác nhất hôm nay"> <img
+                                            loading="lazy" width="410" height="215"
+                                            src="/media/thumb/Thumb-Cate/soicau-win-2888-410x215.jpg"
+                                            alt="Soi cầu XSMB Win2888 1/1/2026 chính xác nhất hôm nay"> </a> </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">Soi cầu XSMB Win2888 Asia
+                                        1/1/2026 - Dự đoán XSMB Win2888 từ các chuyên gia phân tích hàng đầu về xổ số
+                                        với mong muốn đưa anh em vào bờ an toàn hôm nay. Những con số đẹp nhất đã được
+                                        tìm thấy giúp anh em có thêm cơ hội dành được những giải thưởng lớn nhất.</p>
+                                    <p class="mb-0 font-13 text-gray1">1 ngày trước</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2"> <a class="text-blue1 font-16 font-weight-bold"
+                                        href="/du-doan-so-de-hom-nay-1-1-2026-d12195.html"
+                                        title="Dự đoán số đề 1/1/2026 - Chốt số đề XSMB hôm nay">Dự đoán số đề 1/1/2026
+                                        - Chốt số đề XSMB hôm nay</a> </div>
+                                <div class="col-4 pr-2"> <a href="/du-doan-so-de-hom-nay-1-1-2026-d12195.html"
+                                        title="Dự đoán số đề 1/1/2026 - Chốt số đề XSMB hôm nay"> <img loading="lazy"
+                                            width="410" height="215"
+                                            src="/media/thumb/Thumb-Cate/du-doan-so-de-410x215.jpg"
+                                            alt="Dự đoán số đề 1/1/2026 - Chốt số đề XSMB hôm nay"> </a> </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">Dự đoán số đề luôn là
+                                        phương pháp soi cầu đặc biệt được nhiều anh em tin tưởng và chờ đón mỗi ngày. Dự
+                                        đoán số đề 1/1/2026 đem đến cho anh em những cặp đặc biệt đã chọn lọc đẹp nhất.
+                                        Cùng theo dõi ngay nhé!</p>
+                                    <p class="mb-0 font-13 text-gray1">1 ngày trước</p>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

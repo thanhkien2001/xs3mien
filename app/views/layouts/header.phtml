@@ -1,0 +1,585 @@
+<div>
+        <div class="border-bottom d-none d-lg-block">
+                <div class="container py-2">
+                        <div class="row justify-content-between align-items-center">
+                                <h1 class="hlm-title font-13"><?php echo $heading_title ?? 'Soi Cầu 247: Chuyên Trang Soi Cầu Xổ Số 3 Miền Đáng Tin Cậy'; ?></h1>
+                                <span class="font-13">Hôm nay:
+                                        <?php echo ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'][date('w')]; ?>,
+                                        ngày <?php echo date('d/m/Y'); ?></span>
+                        </div>
+                </div>
+        </div>
+        <div class="container">
+                <div class="row flex-nowrap justify-content-between align-items-center"> <button
+                                class="btn show-menu-mobi h-100 d-lg-none" data-toggle="modal" data-target="#modalMenu">
+                                <i class="icon-bars font-20"></i> </button> <a
+                                class="text-center text-lg-left py-2 py-lg-4" href="/" title="Soi cầu 247">
+                                <img width="238" height="59" src="/media/website/logo.png" alt="Soi cầu 247"
+                                        class="img-fluid img-logo"> </a>
+                        <div class="d-flex align-items-center"> </div>
+                </div>
+        </div>
+</div>
+<header class="header-menu bg-blue1">
+        <div class="position-relative">
+                <div class="container">
+                        <div class="row flex-nowrap position-relative"> <a class="p-3 d-none d-lg-block active-menu"
+                                        href="/" title="Soi cầu 247">Trang chủ</a>
+                                <div class="overflow-auto d-flex d-lg-none">
+                                        <ul class="nav flex-nowrap menu-mobi">
+                                                <li class="nav-item"><a class="nav-link"
+                                                                href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                                                                title="XSMB">XSMB</a></li>
+                                                <li class="nav-item"><a class="nav-link"
+                                                                href="/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html"
+                                                                title="XSMT">XSMT</a></li>
+                                                <li class="nav-item"><a class="nav-link"
+                                                                href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html"
+                                                                title="XSMN">XSMN</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="/soi-cau-xo-so.html"
+                                                                title="SOI CẦU">SOI CẦU</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="/du-doan-xsmb-c59.html"
+                                                                title="DỰ ĐOÁN">DỰ ĐOÁN</a></li>
+                                                <li class="nav-item"><a class="nav-link" href="/lo-gan-xsmb.html"
+                                                                title="THỐNG KÊ">THỐNG KÊ</a></li>
+                                                <li class="nav-item"><a class="nav-link"
+                                                                href="/giai-ma-giac-mo-lo-de-y-nghia-nhung-giac-mo-va-chot-so-c111.html"
+                                                                title="SỔ MƠ">SỔ MƠ</a></li>
+                                        </ul>
+                                </div>
+                               <ul class="nav menu d-lg-flex main-menu-pc">
+                                        <!-- <li class="nav-item"><a class='nav-link'
+                                                        href='/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html'
+                                                        title='Kết quả xổ số'>Kết quả xổ số</a><label> <input
+                                                                type='checkbox' hidden>
+                                                        <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html'
+                                                                        title='Xổ số miền Bắc'>Xổ số miền Bắc</a><label>
+                                                                        <input type='checkbox' hidden>
+                                                                        <span>⋗</span> </label>
+                                                                <ul class="nav sub-menu flex-column">
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-thu-2-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB thứ 2'>XSMB thứ
+                                                                                        2</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-thu-3-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB thứ 3'>XSMB thứ
+                                                                                        3</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-thu-4-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB thứ 4'>XSMB thứ
+                                                                                        4</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-thu-5-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB thứ 5'>XSMB thứ
+                                                                                        5</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-thu-6-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB thứ 6'>XSMB thứ
+                                                                                        6</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-thu-7-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB thứ 7'>XSMB thứ
+                                                                                        7</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html'
+                                                                                        title='XSMB chủ nhật'>XSMB chủ
+                                                                                        nhật</a></li>
+                                                                </ul>
+                                                        </li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html'
+                                                                        title='Xổ số Miền Trung'>Xổ số Miền
+                                                                        Trung</a><label> <input type='checkbox' hidden>
+                                                                        <span>⋗</span> </label>
+                                                                <ul class="nav sub-menu flex-column">
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-thu-2-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT thứ 2'>XSMT thứ
+                                                                                        2</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-thu-3-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT thứ 3'>XSMT thứ
+                                                                                        3</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-thu-4-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT thứ 4'>XSMT thứ
+                                                                                        4</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-thu-5-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT thứ 5'>XSMT thứ
+                                                                                        5</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-thu-6-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT thứ 6'>XSMT thứ
+                                                                                        6</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-thu-7-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT thứ 7'>XSMT thứ
+                                                                                        7</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmt-chu-nhat-ket-qua-xo-so-mien-trung.html'
+                                                                                        title='XSMT chủ nhật'>XSMT chủ
+                                                                                        nhật</a></li>
+                                                                </ul>
+                                                        </li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html'
+                                                                        title='Xổ số miền Nam'>Xổ số miền Nam</a><label>
+                                                                        <input type='checkbox' hidden>
+                                                                        <span>⋗</span> </label>
+                                                                <ul class="nav sub-menu flex-column">
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-thu-2-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN thứ 2'>XSMN thứ
+                                                                                        2</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-thu-3-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN thứ 3'>XSMN thứ
+                                                                                        3</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-thu-4-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN thứ 4'>XSMN thứ
+                                                                                        4</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-thu-5-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN thứ 5'>XSMN thứ
+                                                                                        5</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-thu-6-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN thứ 6'>XSMN thứ
+                                                                                        6</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-thu-7-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN thứ 7'>XSMN thứ
+                                                                                        7</a></li>
+                                                                        <li class="nav-item"><a class='nav-link'
+                                                                                        href='/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html'
+                                                                                        title='XSMN chủ nhật'>XSMN chủ
+                                                                                        nhật</a></li>
+                                                                </ul>
+                                                        </li>
+                                                </ul>
+                                        </li> -->
+                                        <li class="nav-item"><a class='nav-link' href='soi-cau-xo-so.html'
+                                                        title='Soi cầu xổ số'>Soi cầu
+                                                        xổ số</a><label> <input type='checkbox' hidden> <span>⋗</span>
+                                                </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-bach-thu.html'
+                                                                        title='Soi cầu bạch thủ'>Soi cầu bạch thủ</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-nhieu-nhay.html'
+                                                                        title='Soi cầu nhiều nháy'>Soi cầu nhiều
+                                                                        nháy</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-lat-lien-tuc.html'
+                                                                        title='Soi cầu lật liên tục'>Soi cầu lật liên
+                                                                        tục</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-mien-trung.html'
+                                                                        title='Soi cầu miền Trung'>Soi cầu miền
+                                                                        Trung</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-mien-nam.html'
+                                                                        title='Soi cầu miền Nam'>Soi cầu miền Nam</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <!-- <li class="nav-item"><a class='nav-link' href='lo-gan-xsmb.html'
+                                                        title='Thống kê xổ số'>Thống kê
+                                                        xổ số</a><label> <input type='checkbox' hidden> <span>⋗</span>
+                                                </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class='nav-link' href='lo-gan-xsmb.html'
+                                                                        title='Thống kê lô gan'>Thống kê lô gan</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='dac-biet-xsmb.html'
+                                                                        title='Thống kê đặc biệt'>Thống kê đặc biệt</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='dac-biet-tuan-xsmb.html'
+                                                                        title='Thống kê đặc biệt tuần'>Thống kê đặc biệt
+                                                                        tuần</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='dac-biet-thang-xsmb.html'
+                                                                        title='Thống kê đặc biệt tháng'>Thống kê đặc
+                                                                        biệt tháng</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='dau-duoi-xsmb.html'
+                                                                        title='Thống kê đầu đuôi'>Thống kê đầu đuôi</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='tan-suat-lo-to-xsmb.html'
+                                                                        title='Thống kê tần suất lô tô'>Thống kê tần
+                                                                        suất lô tô</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='lo-xien-xsmb.html'
+                                                                        title='Thống kê lô xiên'>Thống kê lô xiên</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class='nav-link' href='lo-kep-xsmb.html'
+                                                                        title='Thống kê lô kép'>Thống kê lô kép</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='thong-ke-theo-tong-xsmb.html'
+                                                                        title='Thống kê theo tổng'>Thống kê theo
+                                                                        tổng</a></li>
+                                                </ul>
+                                        </li> -->
+                                        <li class="nav-item"><a class='nav-link' href='du-doan-xsmb-c59.html'
+                                                        title='Dự đoán xổ số'>Dự
+                                                        đoán xổ số</a><label> <input type='checkbox' hidden>
+                                                        <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='du-doan-xsmb-c59.html'
+                                                                        title='Dự đoán XSMB'>Dự đoán XSMB</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='du-doan-xsmt-c60.html'
+                                                                        title='Dự đoán XSMT'>Dự đoán XSMT</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='du-doan-xsmn-c61.html'
+                                                                        title='Dự đoán XSMN'>Dự đoán XSMN</a></li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item"><a class='nav-link' href='soi-cau-xsmb-vip-hom-nay.html'
+                                                        title='Soi cầu VIP'>Soi cầu VIP</a><label> <input
+                                                                type='checkbox' hidden> <span>⋗</span>
+                                                </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='rong-bach-kim.html'
+                                                                        title='Rồng Bạch Kim'>Rồng Bạch Kim</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-24h-du-doan-xo-so-24h-mien-bac.html'
+                                                                        title='Soi cầu 24h'>Soi cầu
+                                                                        24h</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-mien-phi-888.html'
+                                                                        title='Soi cầu 888'>Soi cầu 888</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-366-mb.html'
+                                                                        title='Soi cầu 366'>Soi cầu 366</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='soi-cau-3-cang-mien-bac.html'
+                                                                        title='Soi cầu 3 càng'>Soi cầu 3 càng</a></li>
+                                                </ul>
+                                        </li>
+                                        <!-- <li class="nav-item"><a class='nav-link'
+                                                        href='thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html'
+                                                        title='Sổ kết quả'>Sổ kết
+                                                        quả</a><label> <input type='checkbox' hidden> <span>⋗</span>
+                                                </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html'
+                                                                        title='Sổ kết quả XSMB'>Sổ kết quả XSMB</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='thong-ke-xsmt-30-ngay-xo-so-mien-trung-30-ngay.html'
+                                                                        title='Sổ kết quả XSMT'>Sổ kết quả XSMT</a></li>
+                                                        <li class="nav-item"><a class='nav-link'
+                                                                        href='thong-ke-xsmn-30-ngay-xo-so-mien-nam-30-ngay.html'
+                                                                        title='Sổ kết quả XSMN'>Sổ kết quả XSMN</a></li>
+                                                </ul>
+                                        </li> -->
+                                        <!-- <li class="nav-item"><a class='nav-link'
+                                                        href='giai-ma-giac-mo-lo-de-y-nghia-nhung-giac-mo-va-chot-so-c111.html'
+                                                        title='Giải mã giấc mơ'>Giải mã giấc mơ</a>
+                                        </li> -->
+                                        <li class="nav-item"><a class='nav-link'
+                                                        href='bi-kip-ve-phuong-phap-soi-cau-lo-de-chuan-c110.html'
+                                                        title='Bi kíp chơi lô đề'>Bi
+                                                        kíp chơi xổ số</a></li>
+                                </ul>
+                                <div itemscope itemtype="http://schema.org/WebSite" class="ml-auto d-none d-lg-flex">
+                                        <link itemprop="url" href="index.html" />
+                                        <form itemprop="potentialAction" itemscope
+                                                itemtype="http://schema.org/SearchAction"
+                                                class="form-inline position-relative flex-lg-nowrap mh-100 form-search"
+                                                action="/tim-kiem">
+                                                <meta itemprop="target" content="/tim-kiem?s={s}" />
+                                                <meta itemprop="query-input" content="required name=s" /> <button
+                                                        type="button" class="btn btn-search-menu" data-toggle="modal"
+                                                        data-target="#modalCSE"> <img loading="lazy"
+                                                                src="images/icon-search.svg" alt="Search">
+                                                </button>
+                                                <div class="position-absolute box-search-menu d-none"> <input
+                                                                itemprop="query" type="text" name="s"
+                                                                class="form-control input-search-menu"
+                                                                placeholder="Tìm kiếm"> </div>
+                                        </form>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</header>
+
+<!-- Modal Mobile Menu -->
+<div class="modal fade" tabindex="-1" id="modalMenu" aria-hidden="true">
+        <div class="modal-dialog col-9 m-0 p-0 h-100">
+                <div class="modal-content h-100 border-0 rounded-0">
+                        <div class="modal-header border-0 p-2 bg-blue1 text-white">
+                                <button type="button" class="close text-white opacity-1" data-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body p-0 overflow-auto">
+                                <ul class="nav flex-column menu main-menu-mobile">
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="/xo-so-mien-bac-xsmb.html"
+                                                        title="Kết quả xổ số">Kết quả xổ số</a>
+                                                <label> <input type="checkbox" hidden=""> <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="/xo-so-mien-bac-xsmb.html"
+                                                                        title="Xổ số miền Bắc">Xổ số miền Bắc</a>
+                                                                <label> <input type="checkbox" hidden=""> <span>⋗</span>
+                                                                </label>
+                                                                <ul class="nav sub-menu flex-column">
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-thu-2-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB thứ 2">XSMB thứ
+                                                                                        2</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-thu-3-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB thứ 3">XSMB thứ
+                                                                                        3</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-thu-4-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB thứ 4">XSMB thứ
+                                                                                        4</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-thu-5-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB thứ 5">XSMB thứ
+                                                                                        5</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-thu-6-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB thứ 6">XSMB thứ
+                                                                                        6</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-thu-7-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB thứ 7">XSMB thứ
+                                                                                        7</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html"
+                                                                                        title="XSMB chủ nhật">XSMB chủ
+                                                                                        nhật</a></li>
+                                                                </ul>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="/xo-so-mien-trung-xsmt.html"
+                                                                        title="Xổ số Miền Trung">Xổ số Miền Trung</a>
+                                                                <label> <input type="checkbox" hidden=""> <span>⋗</span>
+                                                                </label>
+                                                                <ul class="nav sub-menu flex-column">
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-thu-2-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT thứ 2">XSMT thứ
+                                                                                        2</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-thu-3-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT thứ 3">XSMT thứ
+                                                                                        3</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-thu-4-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT thứ 4">XSMT thứ
+                                                                                        4</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-thu-5-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT thứ 5">XSMT thứ
+                                                                                        5</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-thu-6-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT thứ 6">XSMT thứ
+                                                                                        6</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-thu-7-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT thứ 7">XSMT thứ
+                                                                                        7</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmt-chu-nhat-ket-qua-xo-so-mien-trung.html"
+                                                                                        title="XSMT chủ nhật">XSMT chủ
+                                                                                        nhật</a></li>
+                                                                </ul>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                                <a class="nav-link" href="/xo-so-mien-nam-xsmn.html"
+                                                                        title="Xổ số miền Nam">Xổ số miền Nam</a>
+                                                                <label> <input type="checkbox" hidden=""> <span>⋗</span>
+                                                                </label>
+                                                                <ul class="nav sub-menu flex-column">
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-thu-2-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN thứ 2">XSMN thứ
+                                                                                        2</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-thu-3-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN thứ 3">XSMN thứ
+                                                                                        3</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-thu-4-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN thứ 4">XSMN thứ
+                                                                                        4</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-thu-5-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN thứ 5">XSMN thứ
+                                                                                        5</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-thu-6-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN thứ 6">XSMN thứ
+                                                                                        6</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-thu-7-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN thứ 7">XSMN thứ
+                                                                                        7</a></li>
+                                                                        <li class="nav-item"><a class="nav-link"
+                                                                                        href="/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html"
+                                                                                        title="XSMN chủ nhật">XSMN chủ
+                                                                                        nhật</a></li>
+                                                                </ul>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="/soi-cau-xo-so.html" title="Soi cầu xổ số">Soi
+                                                        cầu xổ số</a>
+                                                <label> <input type="checkbox" hidden=""> <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-bach-thu.html"
+                                                                        title="Soi cầu bạch thủ">Soi cầu bạch thủ</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-nhieu-nhay.html"
+                                                                        title="Soi cầu nhiều nháy">Soi cầu nhiều
+                                                                        nháy</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-lat-lien-tuc.html"
+                                                                        title="Soi cầu lật liên tục">Soi cầu lật liên
+                                                                        tục</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-mien-trung.html"
+                                                                        title="Soi cầu miền Trung">Soi cầu miền
+                                                                        Trung</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-mien-nam.html"
+                                                                        title="Soi cầu miền Nam">Soi cầu miền Nam</a>
+                                                        </li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="/lo-gan-xsmb.html"
+                                                        title="Thống kê xổ số">Thống kê xổ số</a>
+                                                <label> <input type="checkbox" hidden=""> <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/lo-gan-xsmb.html"
+                                                                        title="Thống kê lô gan">Thống kê lô gan</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/dac-biet-xsmb.html"
+                                                                        title="Thống kê đặc biệt">Thống kê đặc biệt</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/dac-biet-tuan-xsmb.html"
+                                                                        title="Thống kê đặc biệt tuần">Thống kê đặc biệt
+                                                                        tuần</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/dac-biet-thang-xsmb.html"
+                                                                        title="Thống kê đặc biệt tháng">Thống kê đặc
+                                                                        biệt tháng</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/dau-duoi-xsmb.html"
+                                                                        title="Thống kê đầu đuôi">Thống kê đầu đuôi</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/tan-suat-lo-to-xsmb.html"
+                                                                        title="Thống kê tần suất lô tô">Thống kê tần
+                                                                        suất lô tô</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/lo-xien-xsmb.html"
+                                                                        title="Thống kê lô xiên">Thống kê lô xiên</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/lo-kep-xsmb.html"
+                                                                        title="Thống kê lô kép">Thống kê lô kép</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/thong-ke-theo-tong-xsmb.html"
+                                                                        title="Thống kê theo tổng">Thống kê theo
+                                                                        tổng</a></li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="/du-doan-xsmb-c59.html"
+                                                        title="Dự đoán xổ số">Dự đoán xổ số</a>
+                                                <label> <input type="checkbox" hidden=""> <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/du-doan-xsmb-c59.html"
+                                                                        title="Dự đoán XSMB">Dự đoán XSMB</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/du-doan-xsmt-c60.html"
+                                                                        title="Dự đoán XSMT">Dự đoán XSMT</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/du-doan-xsmn-c61.html"
+                                                                        title="Dự đoán XSMN">Dự đoán XSMN</a></li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="/soi-cau-xsmb-vip-hom-nay.html"
+                                                        title="Soi cầu VIP">Soi cầu VIP</a>
+                                                <label> <input type="checkbox" hidden=""> <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/rong-bach-kim.html"
+                                                                        title="Rồng Bạch Kim">Rồng Bạch Kim</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-24h-du-doan-xo-so-24h-mien-bac.html"
+                                                                        title="Soi cầu 24h">Soi cầu 24h</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-mien-phi-888.html"
+                                                                        title="Soi cầu 888">Soi cầu 888</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-366-mb.html"
+                                                                        title="Soi cầu 366">Soi cầu 366</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-3-cang-mien-bac.html"
+                                                                        title="Soi cầu 3 càng">Soi cầu 3 càng</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/soi-cau-xsmb-win2888-asia.html"
+                                                                        title="Soi cầu XSMB Win2888">Soi cầu XSMB
+                                                                        Win2888</a></li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link"
+                                                        href="/thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html"
+                                                        title="Sổ kết quả">Sổ kết quả</a>
+                                                <label> <input type="checkbox" hidden=""> <span>⋗</span> </label>
+                                                <ul class="nav sub-menu flex-column">
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html"
+                                                                        title="Sổ kết quả XSMB">Sổ kết quả XSMB</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/thong-ke-xsmt-30-ngay-xo-so-mien-trung-30-ngay.html"
+                                                                        title="Sổ kết quả XSMT">Sổ kết quả XSMT</a></li>
+                                                        <li class="nav-item"><a class="nav-link"
+                                                                        href="/thong-ke-xsmn-30-ngay-xo-so-mien-nam-30-ngay.html"
+                                                                        title="Sổ kết quả XSMN">Sổ kết quả XSMN</a></li>
+                                                </ul>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                        href="/giai-ma-giac-mo-lo-de-y-nghia-nhung-giac-mo-va-chot-so-c111.html"
+                                                        title="Giải mã giấc mơ">Giải mã giấc mơ</a></li>
+                                        <li class="nav-item"><a class="nav-link"
+                                                        href="/bi-kip-ve-phuong-phap-soi-cau-lo-de-chuan-c110.html"
+                                                        title="Bi kíp chơi lô đề">Bi kíp chơi lô đề</a></li>
+                                </ul>
+                        </div>
+                </div>
+        </div>
+</div>

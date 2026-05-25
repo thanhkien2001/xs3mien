@@ -1,0 +1,301 @@
+<?php
+// Partial để hiển thị kết quả XSMB
+use App\Library\LotteryHelper;
+
+$esc = $this->escaper;
+$isLive = $data['isLive'] ?? false;
+$row = $data['rows'][0] ?? null;
+
+// If live mode and no row, create fake row structure
+if ($isLive && !$row) {
+    // Get XSMB province (Hà Nội)
+    $dateObj = new \DateTime('now', new \DateTimeZone('Asia/Ho_Chi_Minh'));
+    $dow = (int)$dateObj->format('N');
+    $province = \App\Models\Provinces::findFirst([
+        'bind' => ['dow' => (string)$dow],
+        'conditions' => "region = 'XSMB' AND FIND_IN_SET(:dow:, draw_days)",
+        'order' => 'id ASC'
+    ]);
+    
+    if ($province) {
+        $row = [
+            'province_id' => (int)$province->id,
+            'province_name' => (string)$province->name,
+            'province_code' => (string)$province->code,
+            'keyid' => (string)$province->keyid,
+        ];
+    }
+}
+
+if (!$row) return;
+
+// Use today's date when in live mode, otherwise use DB date
+if ($isLive) {
+    $dateObj = new \DateTime('now', new \DateTimeZone('Asia/Ho_Chi_Minh'));
+} else {
+    $dateObj = new \DateTime($data['date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+}
+
+$weekday = $dateObj->format('w'); // 0 = CN, 1 = T2, ...
+$weekdayText = ['Chủ Nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'][$weekday];
+
+// Remove Vietnamese accents for URL slug
+$weekdaySlugMap = ['chu-nhat', 'thu-2', 'thu-3', 'thu-4', 'thu-5', 'thu-6', 'thu-7'];
+$weekdaySlug = $weekdaySlugMap[$weekday];
+
+// Format date for display and URL
+$displayDate = $dateObj->format('d/m/Y');
+$dateSlugForUrl = $dateObj->format('d-m-Y');
+?>
+
+<div class="result result-single rounded">
+    <h3 class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+        Xổ số Miền Bắc ngày <?= $displayDate ?>
+    </h3>
+    <div class="breadcrumb-table">
+        <h4 class="breadcrumb-table-title">
+            <a href='/xsmb-<?= $weekdaySlug ?>-ket-qua-xo-so-mien-bac.html' title='XSMB <?= $weekdayText ?>'>XSMB <?= $weekdayText ?></a> /
+            <a href='/xsmb-<?= $dateSlugForUrl ?>.html' title='XSMB <?= $displayDate ?>'>XSMB <?= $displayDate ?></a>
+        </h4>
+    </div>
+    
+    <div class="table-flex-border">
+        <table class="table-flex table-result js-kq-table" data-code="XSMB">
+            <tbody>
+                <!-- Hàng mã đài -->
+                <tr>
+                    <td colspan="2" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="lv">
+                        <div class="d-flex justify-content-between font-16 p-2">
+                            <?php if ($isLive || empty($row['lv'])): ?>
+                                <?php for ($i = 0; $i < 8; $i++): ?>
+                                <span class="text-number" nc="5">
+                                    <i class="icon icon-loading123"></i>
+                                </span>
+                                <?php endfor; ?>
+                            <?php else:
+                                $lvEntries = LotteryHelper::cleanPrizeData($row['lv']);
+                                foreach ($lvEntries as $lvEntry):
+                                    $lvEntry = trim($lvEntry);
+                                    if ($lvEntry):
+                                        $codes = explode('-', $lvEntry);
+                                        foreach ($codes as $code):
+                                            $code = trim($code);
+                                            if ($code):
+                                ?>
+                                    <span class="text-number" nc="5"><?= $esc->escapeHtml($code) ?></span>
+                                <?php 
+                                            endif;
+                                        endforeach;
+                                    endif;
+                                endforeach;
+                            endif; ?>
+                        </div>
+                    </td>
+                </tr>
+
+                <!-- Giải ĐB -->
+                <tr>
+                    <td>ĐB</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="0">
+                        <?php if ($isLive || empty($row['special_prize'])): ?>
+                            <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="0">
+                                <i class="icon icon-loading123"></i>
+                            </span>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['special_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="0">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G1</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="1">
+                        <?php if ($isLive || empty($row['first_prize'])): ?>
+                            <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="1">
+                                <i class="icon icon-loading123"></i>
+                            </span>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['first_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="1">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G2</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="2">
+                        <?php if ($isLive || empty($row['second_prize'])): ?>
+                            <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="2">
+                                <i class="icon icon-loading123"></i>
+                            </span>
+                            <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="2">
+                                <i class="icon icon-loading123"></i>
+                            </span>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['second_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="2">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G3</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="3">
+                        <?php if ($isLive || empty($row['third_prize'])): ?>
+                            <?php for($i=0; $i<6; $i++): ?>
+                                <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="3">
+                                    <i class="icon icon-loading123"></i>
+                                </span>
+                            <?php endfor; ?>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['third_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="5" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="3">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G4</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="4">
+                        <?php if ($isLive || empty($row['fourth_prize'])): ?>
+                            <?php for($i=0; $i<4; $i++): ?>
+                                <span class="text-number" nc="4" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="4">
+                                    <i class="icon icon-loading123"></i>
+                                </span>
+                            <?php endfor; ?>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['fourth_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="4" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="4">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G5</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="5">
+                        <?php if ($isLive || empty($row['fifth_prize'])): ?>
+                            <?php for($i=0; $i<6; $i++): ?>
+                                <span class="text-number" nc="4" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="5">
+                                    <i class="icon icon-loading123"></i>
+                                </span>
+                            <?php endfor; ?>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['fifth_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="4" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="5">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G6</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="6">
+                        <?php if ($isLive || empty($row['sixth_prize'])): ?>
+                            <?php for($i=0; $i<3; $i++): ?>
+                                <span class="text-number" nc="3" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="6">
+                                    <i class="icon icon-loading123"></i>
+                                </span>
+                            <?php endfor; ?>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['sixth_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="3" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="6">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>G7</td>
+                    <td data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="7">
+                        <?php if ($isLive || empty($row['seventh_prize'])): ?>
+                            <?php for($i=0; $i<4; $i++): ?>
+                                <span class="text-number" nc="2" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="7">
+                                    <i class="icon icon-loading123"></i>
+                                </span>
+                            <?php endfor; ?>
+                        <?php else:
+                            $numbers = LotteryHelper::cleanPrizeData($row['seventh_prize']);
+                            foreach ($numbers as $n): ?>
+                                <span class="text-number" nc="2" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-id-giai="7">
+                                    <span class="number"><?= $esc->escapeHtml(trim($n)) ?></span>
+                                </span>
+                            <?php endforeach;
+                        endif; ?>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Lô tô XSMB -->
+<div class="loto loto-single">
+    <table class="table table-bordered table-striped table-xslt-single-col">
+        <thead>
+            <tr>
+                <th>Đầu</th>
+                <th>Lô tô</th>
+                <th>Đuôi</th>
+                <th>Lô tô</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $dauDuoi = $data['dauDuoi'][$row['province_id']] ?? ['dau' => [], 'duoi' => []];
+            for ($head = 0; $head <= 9; $head++): 
+                $dauNumbers = $dauDuoi['dau'][$head] ?? [];
+                $duoiNumbers = $dauDuoi['duoi'][$head] ?? [];
+                sort($dauNumbers);
+                sort($duoiNumbers);
+            ?>
+            <tr>
+                <td><?= $head ?></td>
+                <td class="js-number-dau-duoi" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-num="<?= $esc->escapeHtmlAttr($head) ?>">
+                    <?php if ($isLive): ?>
+                        <span class="text-muted">-</span>
+                    <?php elseif (!empty($dauNumbers)): ?>
+                        <?php foreach ($dauNumbers as $n): ?>
+                            <span><?= $esc->escapeHtml($n) ?></span>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <span class="text-muted">-</span>
+                    <?php endif; ?>
+                </td>
+                <td><?= $head ?></td>
+                <td class="js-number-duoi-duoi" data-page-id="<?= $esc->escapeHtmlAttr($row['keyid'] ?? '') ?>" data-num="<?= $esc->escapeHtmlAttr($head) ?>">
+                    <?php if ($isLive): ?>
+                        <span class="text-muted">-</span>
+                    <?php elseif (!empty($duoiNumbers)): ?>
+                        <?php foreach ($duoiNumbers as $n): ?>
+                            <span><?= $esc->escapeHtml($n) ?></span>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <span class="text-muted">-</span>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+</div>
+

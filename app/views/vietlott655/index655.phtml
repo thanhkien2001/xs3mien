@@ -1,0 +1,235 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix" data-preload-date="<?= $preloadDate ?? '' ?>">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3" id="breadcrumb-container">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item" id="game-breadcrumb" <?= isset($isSpecificDate) && $isSpecificDate ? '' : 'style="display: none;"' ?>><a title="Xổ số Power 6/55 - Vietlott" href="/ket-qua-xoso-power-6-55-vietlott.html"><span>Xổ số Power 6/55 - Vietlott</span></a></li>
+                        <li class="nav-breadcrumb-item" id="date-breadcrumb"><span><?= isset($isSpecificDate) && $isSpecificDate && isset($selectedDate) ? 'Kết Quả Xổ Số Power 6/55 Ngày ' . date('d/m/Y', strtotime($selectedDate)) . ' (' . date('l', strtotime($selectedDate)) . ' ' . date('d-m', strtotime($selectedDate)) . ')' : 'Xổ số Power 6/55' ?></span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm" id="page-header">
+                    <h1 class="page-title-h1" id="page-title"><?= isset($isSpecificDate) && $isSpecificDate && isset($selectedDate) ? 'Kết Quả Xổ Số Điện Toán Power 6/55 Ngày ' . date('d/m/Y', strtotime($selectedDate)) . ' (' . date('l', strtotime($selectedDate)) . ' ' . date('d-m', strtotime($selectedDate)) . ')' : 'Kết Quả Xổ Số Điện Toán Power 6/55 Vietlott Hôm Nay' ?></h1>
+                </div>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm util-mt-3 util-mb-3 util-p-3">
+                <p><strong><a title="Xo so Power" href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y')) ?>">Xo so
+                            Power</a>,</strong> Trực tiếp kết quả <strong>Xổ số Power 6/55 Vietlott</strong> hôm
+                    nay, <strong>XSPower 655</strong> vào các ngày thứ 3, thứ 5 và thứ 7 hàng tuần, <strong>KQXS
+                        Power 6/55</strong> mới nhất.</p>
+            </div>
+            <ul class="nav nav-tabs util-rounded-top util-bg-power" id="myTab" role="tablist">
+                <li class="nav-item util-text-center util-text-uppercase util-bg-orange" role="presentation"><a
+                        href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y') . '.html') ?>"
+                        class="nav-link util-text-decoration-none util-text-black">Power 655</a></li>
+                <li class="nav-item util-text-center util-text-uppercase " role="presentation"><a
+                        href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y') . '.html') ?>"
+                        class="nav-link util-text-decoration-none util-text-white">Mega 645</a></li>
+                <li class="nav-item util-text-center util-text-uppercase " role="presentation"><a
+                        href="<?= $this->url->get('/ket-qua-xoso-max-3d-pro-vietlott-' . date('d-m-Y') . '.html') ?>"
+                        class="nav-link util-text-decoration-none util-text-white">Max 3D Pro</a></li>
+                <li class="nav-item util-text-center util-text-uppercase " role="presentation"><a
+                        href="<?= $this->url->get('/ket-qua-xoso-max-3d-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Max 3D</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase " role="presentation"><a
+                        href="<?= $this->url->get('/ket-qua-xoso-keno-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Keno</a></li>
+            </ul>
+            <div class="lottery-result util-p-0 js-result-power-wrap">
+                <div class="lottery-result-header util-bg-red">
+                    <h2 class="lottery-result-tree util-text-center util-text-uppercase">
+                        <a href="/ket-qua-xo-so-power-6-55-vietlott.html" class="util-text-decoration-none util-fs-5" title="Kết quả xổ số Vietlott Power 6/55">Kết Quả Xổ Số Power 6/55 Vietlott</a>
+                    </h2>
+                </div>
+                <div class="util-p-3 util-text-center util-bg-dark-vietlott js-vietlott-item-content">
+                    <p>Chúc các bạn dò kết quả <strong>xổ số kiểu mỹ Vietlott Power 6/55</strong> mới nhất giành giải đặc biệt Jackpot siêu khủng.</p>
+
+                    <div class="js-result-content">
+                        <?php if ($latestResult) { ?>
+                            <h3 class="util-text-center util-font-bold util-fs-6 util-mb-3">Kỳ quay thưởng <span class="util-text-warning"><?= $latestResult['draw_number'] ?> <?= date('l, d/m/Y', strtotime($latestResult['draw_date'])) ?></span></h3>
+                            <div class="lottery-balls util-justify-center power-655 js-result-number" data-power="<?= $latestResult['id'] ?>">
+                                <?php
+                                $numbers = explode(',', $latestResult['numbers']);
+                                $mainNumbers = array_slice($numbers, 0, 6);
+                                $bonusNumber = end($numbers);
+                                foreach ($mainNumbers as $number) {
+                                ?>
+                                    <span class="lottery-ball power big util-mx-1"><?= sprintf('%02d', $number) ?></span>
+                                <?php } ?>
+                                <span class="lottery-ball green big util-mx-1"><?= sprintf('%02d', $bonusNumber) ?></span>
+                            </div>
+                            <div class="util-mt-3 util-mb-3">
+                                Jackpot 1: <span class="util-font-bold util-fs-1 util-text-red util-block util-lh-1 js_power_jackpot1"><?= number_format($latestResult['jackpot_amount'], 0, ',', '.') ?>₫</span>
+                                <?php if ($jackpotIncrease > 0) { ?>
+                                    <span class="util-block util-small js-tang-them" style="color: #0fbb36;">
+                                        Tăng + <?= number_format($jackpotIncrease, 0, ',', '.') ?>₫ so với kỳ trước
+                                    </span>
+                                <?php } ?>
+                            </div>
+                            <div>
+                                Jackpot 2: <span class="util-font-bold util-fs-5 util-text-red util-block util-lh-1 js_power_jackpot2"><?= number_format($latestResult['jackpot_2'], 0, ',', '.') ?>₫</span>
+                            </div>
+                            <div class="comp-table-responsive util-mt-3 util-mb-3">
+                                <table class="comp-table util-table-bordered util-text-start util-align-items-center util-small vietlott__winners__table util-bg-dark-vietlott">
+                                    <thead>
+                                        <tr>
+                                            <th>Giải</th>
+                                            <th>Trùng khớp</th>
+                                            <th class="util-text-end">SL trúng</th>
+                                            <th class="util-text-end">Giá trị</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jackpot 1</td>
+                                            <td><span class="util-small util-text-orange">●●●●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['jackpot_1_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['jackpot_amount'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jackpot 2</td>
+                                            <td><span class="util-small util-text-orange">●●●●●</span><span class="util-small util-text-success">●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['jackpot_2_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['jackpot_2'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giải nhất</td>
+                                            <td><span class="util-small util-text-orange">●●●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['giai_nhat_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['giai_nhat_gia_tri'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giải nhì</td>
+                                            <td><span class="util-small util-text-orange">●●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['giai_nhi_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['giai_nhi_gia_tri'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giải ba</td>
+                                            <td><span class="util-small util-text-orange">●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['giai_ba_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['giai_ba_gia_tri'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="util-fs-10 util-m-0 util-text-start">Lưu ý: Các con số dự thưởng phải trùng với số kết quả nhưng không cần theo đúng thứ tự.</p>
+                            <p class="util-fs-10 util-m-0 util-text-start">Thời hạn lĩnh thưởng của vé trúng thưởng: là 60 (sáu mươi) ngày, kể từ ngày xác định Kết quả quay số mở thưởng. Quá thời hạn trên, các vé trúng thưởng không còn giá trị lĩnh thưởng.</p>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comp-box">
+                <h2 class="comp-box-title">Các kỳ Power 655 gần đây</h2>
+                <ul class="comp-list-links layout-row util-gx-0 util-mb-0 util-me-4">
+                    <?php foreach ($recentResults as $result) { ?>
+                        <li class="layout-col-4">
+                            <a href="/ket-qua-xoso-power-6-55-vietlott-<?= date('d-m-Y', strtotime($result['draw_date'])) ?>.html"
+                                title="Kết quả xổ số Vietlott Power 6/55 ngày <?= date('d/m/Y', strtotime($result['draw_date'])) ?>"
+                                class="js-power-date-link"
+                                data-date="<?= date('Y-m-d', strtotime($result['draw_date'])) ?>">
+                                Power <?= date('d/m/Y', strtotime($result['draw_date'])) ?>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <p class="util-p-1 util-text-center util-pb-3 align-item-center">
+                    <a class="js-date-picker-vietlott util-text-body util-text-decoration-none util-fs-6"
+                        data-type="power"
+                        day-of-week="[0,1,3,5]"
+                        day-of-week-used="[2,4,6]"
+                        href="javascript:void(0)">
+                        <i class="icon-calendar util-me-1 util-align-items-center util-mb-1"></i> Xem ngày khác
+                    </a>
+                </p>
+            </div>
+
+            <div class="comp-box">
+                <h2 class="comp-box-title">Kết quả Power 6/55 những kỳ quay trước</h2>
+                <div class="comp-table-responsive">
+                    <table class="comp-table util-small util-align-items-center util-mb-0 util-text-center">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Kết quả</th>
+                                <th class="util-text-end">Jackpot 1</th>
+                                <th class="util-text-end">Jackpot 2</th>
+                            </tr>
+                        </thead>
+                        <tbody class="js-results-tbody">
+                            <?php foreach ($recentResults as $result) { ?>
+                                <tr>
+                                    <td>
+                                        <a title="Kết quả xổ số Vietlott Power 6/55 ngày <?= date('d/m/Y', strtotime($result['draw_date'])) ?>"
+                                            href="/ket-qua-xo-so-power-6-55-vietlott-<?= date('d-m-Y', strtotime($result['draw_date'])) ?>.html"
+                                            class="js-power-date-link"
+                                            data-date="<?= date('Y-m-d', strtotime($result['draw_date'])) ?>">
+                                            <?= date('d/m/Y', strtotime($result['draw_date'])) ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="lottery-balls">
+                                            <?php
+                                            $numbers = explode(',', $result['numbers']);
+                                            $mainNumbers = array_slice($numbers, 0, 6);
+                                            $bonusNumber = end($numbers);
+                                            foreach ($mainNumbers as $number) {
+                                            ?>
+                                                <span class="lottery-ball power util-me-1"><?= sprintf('%02d', $number) ?></span>
+                                            <?php } ?>
+                                            <span class="lottery-ball green"><?= sprintf('%02d', $bonusNumber) ?></span>
+                                        </div>
+                                    </td>
+                                    <td class="util-text-end"><span class="util-text-nowrap"><?= number_format($result['jackpot_amount'], 0, ',', '.') ?></span></td>
+                                    <td class="util-text-end"><span class="util-text-nowrap"><?= number_format($result['jackpot_2'], 0, ',', '.') ?></span></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="util-grid util-mt-3">
+                    <button class="btn-base btn-green btn-lg util-rounded util-shadow-sm js-btn-load-more-power"
+                        data-page="<?= $currentPage + 1 ?>"
+                        data-limit="10">
+                        Xem thêm kết quả <i class="bi bi-three-dots util-ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="comp-article-content util-shadow-sm util-bg-white util-p-3 util-mt-5 util-rounded">
+                <p style="text-align: left;"><a href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y')) ?>"><strong>Power
+                            6/55</strong></a> sử dụng bộ số từ 01 đến 55 trong một lồng quay. Xổ số tự chọn
+                    <strong>XS Power 655</strong> đặc biệt có tới 2 giải Jackpot (Đặc Biệt) mỗi kỳ quay. Jackpot 1 
+                    <strong>khởi điểm từ 30 tỷ</strong> đồng, được xác định qua 6 lần quay số chính thức. Điểm đặc sắc 
+                    của Power Vietlott 6/55 là người chơi chỉ cần trúng 5 số trong kết quả Jackpot 1 vẫn có cơ hội 
+                    giành Jackpot 2.
+                </p>
+                <p><img class="wp-image-16065 size-medium" title="Vietlott Power 6/55"
+                        src="/img/655/logo_power_6_55-1.png"
+                        alt="Vietlott Power 6/55" width="300" height="216" /></p>
+                <p style="text-align: left;">Jackpot 2 được xác định bằng một lần quay bổ sung để chọn ra 
+                    <strong>số đặc biệt</strong>. Vé nào có 5 số khớp với Jackpot 1 và thêm 1 số khớp với 
+                    số đặc biệt sẽ trúng Jackpot 2 với giá trị tối thiểu 3 tỷ đồng.</p>
+                <p style="text-align: left;">Khi không có vé trúng cả Jackpot 1 và Jackpot 2, sau khi trừ tiền 
+                    thưởng các giải nhất, nhì, ba, Vietlott sẽ lấy 55% doanh thu để tích lũy cho các giải độc đắc, 
+                    cụ thể 90% (tương đương 49.5% doanh thu) cộng vào Jackpot 1 và 10% (tương đương 5.5% doanh thu) 
+                    cộng vào Jackpot 2.</p>
+                <p style="text-align: left;">Với <strong>XS Power</strong>, khi Jackpot 1 vượt 300 tỷ đồng mà 
+                    chưa có người trúng, nếu kỳ đó có người trúng Jackpot 2 thì phần giá trị vượt quá 300 tỷ từ 
+                    Jackpot 1 sẽ được chuyển sang tăng giá trị Jackpot 2.
+                </p>
+                <p style="text-align: left;">Nếu có nhiều người cùng trúng Jackpot của
+                    <strong>XSPower,</strong> tổng giải thưởng sẽ được <strong>phân chia theo tỷ lệ số tiền 
+                        đặt cược</strong> của từng người chơi. 
+                </p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="/js/655index/655index.js"></script>

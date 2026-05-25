@@ -1,0 +1,76 @@
+<?php
+/**
+ * Partial: Prediction Articles Box
+ * Variables: $predictions (array), $region (string), $regionName (string)
+ */
+$esc = $this->escaper;
+
+if (empty($predictions)) {
+    return;
+}
+
+// Map region to image
+$imageMap = [
+    'XSMN' => '/media/thumb/Thumb-Cate/du-doan-MN-410x215.jpg',
+    'XSMB' => '/media/thumb/Thumb-Cate/du-doan-MB-410x215.jpg',
+    'XSMT' => '/media/thumb/Thumb-Cate/du-doan-MT-410x215.jpg',
+];
+$defaultImage = $imageMap[$region] ?? '/media/thumb/Thumb-Cate/du-doan-MB-410x215.jpg';
+
+// Format days ago text (use closure to avoid redeclare error)
+$getDaysAgoText = function($days) {
+    if ($days == 0) {
+        return 'Hôm nay';
+    } elseif ($days == 1) {
+        return '1 ngày trước';
+    } else {
+        return "{$days} ngày trước";
+    }
+};
+?>
+
+<aside class="border-radius-4 mt-2">
+    <h3 class="title-bg-blue border-radius-top mb-0">
+        Dự đoán xổ số <?= $esc->escapeHtml($regionName) ?>
+    </h3>
+    <div class="border border-radius-bottom px-3 pb-3">
+        <?php foreach ($predictions as $article): ?>
+        <div class="row">
+            <div class="col-12 mt-3 mb-2">
+                <a class="text-blue1 font-16 font-weight-bold" 
+                   href="/<?= $esc->escapeHtmlAttr($article['slug']) ?>.html" 
+                   title="<?= $esc->escapeHtmlAttr($article['title']) ?>">
+                    <?= $esc->escapeHtml($article['title']) ?>
+                </a>
+            </div>
+            
+            <!-- Tất cả các bài: Có ảnh + excerpt + ngày -->
+            <div class="col-4 pr-2">
+                <a href="/<?= $esc->escapeHtmlAttr($article['slug']) ?>.html" 
+                   title="<?= $esc->escapeHtmlAttr($article['title']) ?>">
+                    <img loading="lazy" width="410" height="215" 
+                         src="<?= $esc->escapeHtmlAttr($defaultImage) ?>" 
+                         alt="<?= $esc->escapeHtmlAttr($article['title']) ?>">
+                </a>
+            </div>
+            <div class="col-8 pl-2">
+                <?php 
+                $content = $article['content'] ?? '';
+                $excerpt = strip_tags($content);
+                $excerpt = mb_substr($excerpt, 0, 150);
+                if (empty($excerpt)) {
+                    $excerpt = 'Dự đoán xổ số ' . $regionName . ' chính xác từ các cao thủ chốt số';
+                }
+                ?>
+                <p class="text-black1 font-14 lh-18px line-3 text-justify">
+                    <?= $esc->escapeHtml($excerpt) ?><?= strlen($excerpt) >= 150 ? '...' : '' ?>
+                </p>
+                <p class="mb-0 font-13 text-gray1">
+                    <?= $getDaysAgoText($article['days_ago']) ?>
+                </p>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</aside>
+

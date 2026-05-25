@@ -1,0 +1,209 @@
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Xổ số Keno</span></li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="js-keno-result-box">
+                <div class="util-bg-dark-vietlott js-keno_result-numbers util-p-4 util-rounded">
+                    <h1 class="util-fs-2">Xổ Số Keno - Kết Quả Trực Tuyến 24/7 ngày Hôm Nay</h1>
+                    <div id="keno-loading" class="util-text-center util-py-4">
+                        <div class="util-loading-spinner util-text-light" role="status">
+                            <span class="visually-hidden">Đang tải...</span>
+                        </div>
+                        <p class="util-mt-2 util-mb-0">Đang tải dữ liệu Keno...</p>
+                    </div>
+                    <div id="keno-current-draw" class="js-wrap-content-keno-latest" style="display: none;">
+                        <div class="util-flex util-flex-nowrap util-mb-2 util-pb-2 js-keno-item js-keno-latest done">
+                            <div class="util-small util-me-3">
+                                <div class="util-text-nowrap">Kỳ quay: <span class="util-text-red" id="current-draw-number">-</span></div>
+                                <span class="util-block util-font-medium util-text-nowrap js-data-full-time" id="current-draw-time">
+                                    -
+                                </span>
+                            </div>
+                            <div class="util-flex util-flex-wrap" id="current-draw-numbers">
+                            </div>
+                            <div class="util-ms-3 util-small">
+                                <div class="util-text-nowrap util-flex util-mb-2">
+                                    <div id="current-even-count">
+                                        Chẵn: <span>-</span>
+                                    </div>
+                                    <div class="util-px-2">/</div>
+                                    <div id="current-odd-count">
+                                        Lẻ: <span>-</span>
+                                    </div>
+                                </div>
+                                <div class="util-text-nowrap util-flex">
+                                    <div id="current-large-count">
+                                        Lớn: <span>-</span>
+                                    </div>
+                                    <div class="util-px-2">/</div>
+                                    <div id="current-small-count">
+                                        Nhỏ: <span>-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="keno-error" class="util-text-center util-py-4" style="display: none;">
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle util-me-2"></i>
+                            Không thể tải dữ liệu Keno. Vui lòng thử lại sau.
+                        </div>
+                    </div>
+                    <p class="util-small util-mb-0">Các con số cần khớp với kết quả công bố nhưng thứ tự xuất hiện không bắt buộc. Mở thưởng diễn ra sau mỗi 8 phút</p>
+                    <div class="util-small">
+                        Phiên quay kế tiếp: <span class="util-font-bold util-text-red js-time-result" id="next-draw-time">-</span>
+                        <span id="countdown-timer" class="util-ms-2"></span> (Thông thường kết quả sẽ hiển thị sau khoảng 1 phút kể từ lúc quay)
+                    </div>
+                </div>
+                <div class="util-mb-5 util-mt-3">
+                    <div class="comp-box">
+                        <ul class="nav nav-tabs util-rounded-top util-bg-keno" id="myTab" role="tablist">
+                            <li class="nav-item util-text-center util-text-uppercase"><a href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Power 655</a></li>
+                            <li class="nav-item util-text-center util-text-uppercase"><a href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Mega 645</a></li>
+                            <li class="nav-item util-text-center util-text-uppercase"><a href="<?= $this->url->get('/ket-qua-xoso-max-3d-pro-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Max 3D Pro</a></li>
+                            <li class="nav-item util-text-center util-text-uppercase"><a href="<?= $this->url->get('/ket-qua-xoso-max-3d-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Max 3D</a></li>
+                            <li class="nav-item util-text-center util-text-uppercase util-bg-orange"><a href="<?= $this->url->get('/ket-qua-xoso-keno-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-black">Keno</a></li>
+                        </ul>
+                        <h2 class="comp-box-title">Kết quả xổ số Keno gần đây</h2>
+                        <div class="js-keno_result-numbers">
+                            <div class="util-p-3 util-rounded-bottom js-wrap-content-kenos">
+                                <?php foreach ($recentResults as $result) { ?>
+                                <div class="util-flex util-flex-nowrap util-border-bottom util-mb-2 util-pb-2 js-keno-item done" data-id="<?= $result->id ?>" data-kyquay="<?= $result->draw_number ?>" data-time="<?= date('H:i', strtotime($result->draw_date)) ?>">
+                                    <div class="util-small util-me-3">
+                                        <div class="util-text-nowrap">Kỳ quay: <span class="util-text-red"><?= $result->draw_number ?></span></div>
+                                        <span class="util-block util-font-medium util-text-nowrap">
+                                            <?= date('H:i d/m/Y', strtotime($result->draw_date)) ?>
+                                        </span>
+                                    </div>
+                                    <div class="util-flex util-flex-wrap">
+                                        <?php
+                                            $numbers = explode(',', $result->numbers);
+                                            foreach ($numbers as $number) {
+                                            ?>
+                                        <div class="util-w-10 util-p-1"><span class="lottery-ball keno"><?= sprintf('%02d', $number) ?></span></div>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="util-ms-3 util-small">
+                                        <div class="util-text-nowrap util-flex util-mb-2">
+                                            <div class="<?= $result->even_count > $result->odd_count ? 'util-text-decoration-underline util-font-medium' : '' ?>">
+                                                Chẵn: <span><?= $result->even_count ?></span>
+                                            </div>
+                                            <div class="util-px-2">/</div>
+                                            <div class="<?= $result->odd_count > $result->even_count ? 'util-text-decoration-underline util-font-medium' : '' ?>">
+                                                Lẻ: <span><?= $result->odd_count ?></span>
+                                            </div>
+                                        </div>
+                                        <div class="util-text-nowrap util-flex">
+                                            <div class="<?= $result->large_count > $result->small_count ? 'util-text-decoration-underline util-font-medium' : '' ?>">
+                                                Lớn: <span><?= $result->large_count ?></span>
+                                            </div>
+                                            <div class="util-px-2">/</div>
+                                            <div class="<?= $result->small_count > $result->large_count ? 'util-text-decoration-underline util-font-medium' : '' ?>">
+                                                Nhỏ: <span><?= $result->small_count ?></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="util-grid util-mt-3">
+                        <button class="btn-base btn-green btn-lg util-rounded util-shadow-sm js-btn-load-more-keno" data-page="<?= $currentPage + 1 ?>" data-limit="10">
+                            Xem thêm kết quả <i class="bi bi-three-dots util-ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="comp-box">
+                    <h2 class="comp-box-title">Thống kê xổ số Keno 100 kỳ quay</h2>
+                    <div class="comp-table-responsive js-thong-ke-box">
+                        <table class="comp-table util-small util-text-center">
+                            <tbody>
+                                <?php
+                                $rows = array_chunk($statistics, 14);
+                                foreach ($rows as $row) {
+                                ?>
+                                <tr>
+                                    <?php foreach ($row as $stat) { ?>
+                                    <td class="util-p-2 util-px-0">
+                                        <div class="lottery-ball keno"><?= sprintf('%2d', $stat['number']) ?></div>
+                                        <span class="util-fs-12 util-text-nowrap"><?= $stat['frequency'] ?> lần</span>
+                                    </td>
+                                    <?php } ?>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="comp-box">
+                    <h2 class="comp-box-title">Hướng dẫn tham gia xổ số Keno</h2>
+                    <div class="comp-article-content util-p-3">
+                        <p><a title="Xổ số Keno" href="<?= $this->url->get('/ket-qua-xoso-keno-vietlott-' . date('d-m-Y') . '.html') ?>"><strong>Xổ số Keno</strong></a> là hình thức xổ số tự lựa chọn số trực tuyến được ưa chuộng trên phạm vi quốc tế với chu kỳ quay số cực kỳ nhanh chỉ trong 8 phút cho mỗi phiên. Trong mỗi phiên quay <strong>XS Keno</strong> sẽ công bố 20 con số bất kỳ từ khoảng 01 tới 80. Chỉ cần 10 phút để mua phiếu và tra cứu kết quả <strong>Vietlott Keno</strong> tại điểm xổ số, người tham gia có thể nhận về giải Jackpot giá trị tới 2 tỷ đồng khi đoán đúng hoàn toàn 10/20 số trong kết quả.</p>
+
+                        <p><strong>XSKENO</strong> được Vietlott triển khai tại thị trường Việt Nam, công bố giải từ 6h00 sáng tới 21h52 tối hàng ngày với 120 phiên quay số. Giá trị phiếu thấp nhất là 10.000 đồng, người chơi có quyền tham gia đa dạng lần trong cùng phiên và được đặt trước tối đa 30 phiên kế tiếp. <strong>Xổ số Keno</strong> hỗ trợ hai cách thức chơi: Chính thức (lựa chọn từ 1 tới 10 số) và Phụ trợ (dự báo Lớn - Nhỏ hoặc Chẵn - Lẻ).</p>
+
+                        <p><strong>Cách thức lựa chọn số Keno theo phương pháp chính thức:</strong></p>
+                        <ul>
+                            <li>Lựa chọn số phiên quay muốn tham dự (tùy chọn): 2, 3, 4, 5, 10, 15, 20, hoặc 30 phiên. Mỗi phiên tương ứng một phiếu tham gia.</li>
+                            <li>Lựa chọn Cấp độ số từ 1 tới 10 theo ý muốn.</li>
+                            <li>Lựa chọn các con số ưa thích trong phạm vi 01 - 80, tổng số phải trùng với Cấp độ đã chọn.</li>
+                            <li>Mức đặt cược ban đầu là 10.000 đồng, có thể nâng lên với các mức (đơn vị: <strong>nghìn VNĐ</strong>): 20, 50, 100, 200, 500.</li>
+                        </ul>
+
+                        <p><strong>Bảng phân bổ giải thưởng phương pháp chơi xổ số Keno chính thức:</strong></p>
+                        <figure class="image align-center"><img class="aligncenter wp-image-126524 size-large" src="/img/keno/cocaugiaithuong.png" alt="Cơ cấu giải thưởng cách chơi Keno cơ bản" />
+                            <figcaption>Cơ cấu giải thưởng cách chơi Keno cơ bản</figcaption>
+                        </figure>
+
+                        <p><em><strong>*</strong> Mỗi phiếu đặt số trong một phiên quay chỉ được nhận một giải thưởng duy nhất.</em></p>
+
+                        <p>Đối với cấp độ 8, 9 và 10, Keno không giới hạn số lần đặt cược nhưng có giới hạn tổng giá trị thưởng tối đa 10 tỷ đồng cho từng cấp độ trong mỗi phiên, chi tiết:</p>
+                        <ul>
+                            <li><strong>Cấp độ 8:</strong> Trong trường hợp có tối đa 50 người trúng đủ 8 số, mỗi người được nhận 200 triệu đồng. Nếu vượt quá 50 người, giá trị 10 tỷ sẽ được phân chia đồng đều.</li>
+                            <li><strong>Cấp độ 9</strong>: Trong trường hợp có tối đa 12 người trúng đủ 9 số, mỗi người được nhận 800 triệu đồng. Nếu vượt quá 12 người, giá trị 10 tỷ sẽ được phân chia đồng đều.</li>
+                            <li><strong>Cấp độ 10</strong>: Trong trường hợp có tối đa 5 người trúng đủ 10 số, mỗi người được nhận 2 tỷ đồng. Nếu vượt quá 5 người, giá trị 10 tỷ sẽ được phân chia đồng đều.</li>
+                        </ul>
+
+                        <p><strong>Cách thức chơi XS Keno phụ trợ:</strong></p>
+                        <ul>
+                            <li>Lựa chọn số phiên quay muốn tham dự (tùy chọn): 2, 3, 4, 5, 10, 15, 20, hoặc 30 phiên. Mỗi phiên tương ứng một phiếu tham gia.</li>
+                            <li>Lựa chọn một trong các hình thức đặt cược dưới đây:<br />
+                                + <strong>Lớn</strong>: từ 11 số trở lên nằm trong nhóm 41 - 80<br />
+                                + <strong>Hòa Lớn Nhỏ</strong>: 10 số nằm trong nhóm 01 - 40 và 10 số nằm trong nhóm 41 - 80<br />
+                                + <strong>Nhỏ</strong>: từ 11 số trở lên nằm trong nhóm 01 - 40<br />
+                                + <strong>Chẵn</strong>: từ 13 số chẵn trở lên<br />
+                                + <strong>Chẵn 11 - 12</strong>: có chính xác 11 hoặc 12 số chẵn<br />
+                                + <strong>Hòa Chẵn Lẻ</strong>: 10 số chẵn và 10 số lẻ<br />
+                                + <strong>Lẻ 11 - 12</strong>: có chính xác 11 hoặc 12 số lẻ<br />
+                                + <strong>Lẻ</strong>: từ 13 số lẻ trở lên
+                            </li>
+                            <li>Mức đặt cược ban đầu là 10.000 đồng, có thể nâng lên với các mức (đơn vị: <strong>nghìn VNĐ</strong>): 20, 50, 100, 200, 500.</li>
+                        </ul>
+
+                        <p><em><strong>Lưu ý:</strong> Khi lựa chọn phương pháp phụ trợ, người chơi không cần lựa chọn Cấp độ số và Bảng số.</em></p>
+
+                        <p>Bảng phân bổ giải thưởng phương pháp chơi <strong>xổ số Keno</strong> phụ trợ:</p>
+                        <figure class="image align-center"><img class="size-large wp-image-126525 aligncenter" src="/img/keno/cocaucachchoi.png" alt="Cơ cấu giải thưởng cách chơi Keno bổ sung" />
+                            <figcaption>Cơ cấu giải thưởng cách chọi Keno bổ sung</figcaption>
+                        </figure>
+
+                        <p><em><strong>*</strong> Mỗi phiếu đặt phương pháp phụ trợ trong một phiên quay chỉ được nhận một giải thưởng duy nhất.</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<link rel="stylesheet" href="/css/keno/keno.css">
+<script src="/js/keno-live.js"></script>
+<script src="/js/kenoindex/keno-controller.js"></script>

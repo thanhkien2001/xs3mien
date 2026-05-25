@@ -1,0 +1,204 @@
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                                title="XSMB">XSMB</a> </li>
+                        <li class="breadcrumb-item active"><a href="/thong-ke-theo-tong-xsmb.html"
+                                title="Thống kê theo tổng">Thống kê theo tổng</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610 border-radius-4">
+                <aside>
+                    <table class="table-b">
+                        <tbody>
+                            <tr>
+                                <td><a href="/lo-gan-xsmb.html" title="Lô gan XSMB">Lô gan XSMB</a></td>
+                                <td><a href="/lo-xien-xsmb.html" title="Lô xiên XSMB">Lô xiên XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/lo-kep-xsmb.html" title="Lô kép XSMB">Lô kép XSMB</a></td>
+                                <td><a href="/dau-duoi-xsmb.html" title="Đầu đuôi lô tô XSMB">Đầu đuôi lô tô XSMB</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="/dac-biet-xsmb.html" title="Đặc biệt XSMB">Đặc biệt XSMB</a></td>
+                                <td><a href="/dac-biet-tuan-xsmb.html" title="Đặc biệt tuần XSMB">Đặc biệt tuần XSMB</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="/tan-suat-lo-to-xsmb.html" title="Tần suất lô tô XSMB">Tần suất lô tô
+                                        XSMB</a></td>
+                                <td><a class="text-red" href="/thong-ke-theo-tong-xsmb.html" title="Theo tổng XSMB">Theo
+                                        tổng XSMB</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+                <div class="viewStatistic">
+                    <article>
+                        <div class="static-search">
+                            <h2 class="aside-title-red justify-content-center"> Thống kê theo tổng Miền Bắc </h2>
+                            <div class="form-search">
+                                <form action="/thong-ke-theo-tong-xsmb.html" method="get">
+                                    <div class="row align-items-end">
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Tỉnh/Thành phố</div>
+                                            <div class="col-6 col-lg-7 select-arow mt-2">
+                                                <select class="form-control form-control-sm select-logan"
+                                                    name="province_slug" id="selectProvince">
+                                                    <option selected="selected" value="/thong-ke-theo-tong-xsmb.html">
+                                                        Miền Bắc </option>
+                                                    <option value="/thong-ke-theo-tong-xskh.html">Khánh Hòa</option>
+                                                    <!-- More options can be added here -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Từ ngày</div>
+                                            <div class="col-6 col-lg-7 input-datetick mt-2">
+                                                <input id="dateBegin" class="form-control form-control-sm mr-2"
+                                                    name="date_begin" type="text" value="<?= $dateBegin ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Đến ngày</div>
+                                            <div class="col-6 col-lg-7 input-datetick mt-2">
+                                                <input id="dateEnd" class="form-control form-control-sm mr-2"
+                                                    name="date_end" type="text" value="<?= $dateEnd ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Chọn tổng muốn xem</div>
+                                            <div class="col-6 col-lg-7 select-arow mt-2">
+                                                <select class="form-control form-control-sm select-logan"
+                                                    name="chon_tong" id="range-day">
+                                                    <?php for ($i = 0; $i <= 9; $i++): ?>
+                                                        <option value="<?= $i ?>" <?= $chonTong == $i ? 'selected' : '' ?>>Tổng
+                                                            <?= $i ?></option>
+                                                    <?php endfor; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline px-0">
+                                            <div class="col-6 col-lg-5">Chỉ xét giải đặc biệt</div>
+                                            <div class="col-6 col-lg-7 check-radio form-inline mt-2">
+                                                <label class="form-check col justify-content-start" for="is_special">
+                                                    <input type="checkbox" id="is_special" name="is_special" value="1"
+                                                        <?= $isSpecial ? 'checked' : '' ?>>
+                                                    <span class="checkbox"><i class="icon-check"></i></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex align-items-baseline"> <button type="submit"
+                                                class="btn btn-danger btn-sm w-100 mt-2 btnLogan">XEM THỐNG KÊ </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                    <div id="view_data">
+                        <article class="mt-2">
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> BẢNG THỐNG KÊ TỔNG XỔ SỐ Miền Bắc: TỔNG
+                                    <?= $chonTong ?> </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="table-total table-logan-lcvn w-100">
+                                            <thead>
+                                                <tr>
+                                                    <th>Bộ số</th>
+                                                    <th>Tổng số lần xuất hiện</th>
+                                                    <th>Lần xuất hiện cuối</th>
+                                                    <th>Số ngày chưa về</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($stats)): ?>
+                                                    <?php foreach ($stats as $item): ?>
+                                                        <tr>
+                                                            <td class="text-red font-weight-bold"><?= $item['num'] ?></td>
+                                                            <td><?= $item['count'] ?> lần</td>
+                                                            <td>
+                                                                <?php if ($item['last_date']): ?>
+                                                                    <a rel="nofollow"
+                                                                        href="<?= $item['url'] ?>"><?= date('d/m/Y', strtotime($item['last_date'])) ?></a>
+                                                                <?php else: ?>
+                                                                    -
+                                                                <?php endif; ?>
+                                                            </td>
+                                                            <td><?= $item['days_since'] ?>
+                                                                <?= is_numeric($item['days_since']) ? 'ngày' : '' ?></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <tr>
+                                                        <td colspan="4">Không có dữ liệu</td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="mt-2">
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> Loto lần quay gần đây nhất ngày
+                                    <?= $recentDate ?> của Miền Bắc </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="table-total table-logan-lcvn w-100">
+                                            <thead>
+                                                <tr class="bg-fafafa font-weight-bold lh2">
+                                                    <th class="pl-3 font-weight-bold">Tổng</th>
+                                                    <th class="pl-3 font-weight-bold">Lô tô</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php for ($k = 0; $k <= 9; $k++): ?>
+                                                    <tr>
+                                                        <td class="text-nowrap px-2">Tổng <?= $k ?></td>
+                                                        <td class="text-left pl-3">
+                                                            <?php
+                                                            if (!empty($recentLotoBySum[$k])) {
+                                                                echo implode(', ', $recentLotoBySum[$k]);
+                                                            } else {
+                                                                echo "No occurrence"; // Or Vietnamese "Không về tổng $k"
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endfor; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <?php $this->partial('partials/prediction_articles_list'); ?>
+            </div>
+
+            <!-- COL LEFT (Sidebar trái) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+
+
+        </div>
+    </div>
+</main>

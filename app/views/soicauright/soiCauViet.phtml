@@ -1,0 +1,395 @@
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active"><a href="<?= $page_schema_data['url'] ?>"
+                                title="<?= $page_schema_data['title'] ?>">
+                                <?= $page_schema_data['title'] ?>
+                            </a>
+                        </li>
+                        <script type="application/ld+json"><?= json_encode($page_schema_data['breadcrumbs']) ?></script>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h1 class="font-20 my-2">
+                        <strong>
+                            <?= $seo_title ?>
+                        </strong>
+                    </h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date">
+                                <?= $current_date_full ?>
+                            </div>
+                            <div class="allRate">
+                                <input type="range" value="0" step="0.25" id="backing5" style="display: none" />
+                                <input type="text" value="page/54" hidden="" id="voteLink" />
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5"
+                                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0"
+                                    data-rateit-max="5" data-rateit-mode="font" data-rateit-icon=""
+                                    style="font-family: fontawesome">
+                                    <button id="rateit-reset-2" type="button" data-role="none" class="rateit-reset"
+                                        aria-label="reset rating" aria-controls="rateit-range-2" style="display: none">
+                                        <span></span>
+                                    </button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider"
+                                        aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0"
+                                        aria-valuemax="5" aria-valuenow="0" aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset"
+                                            style="width: <?= ($rating_value / 5) * 100 ?>%">
+                                            ★★★★★
+                                        </div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div>
+                                <span class="danhgia">
+                                    <span class="avg-rate">
+                                        <?= $rating_value ?>
+                                    </span>
+                                    /<span>5</span> của
+                                    <span class="count-rate">
+                                        <?= $rating_count ?>
+                                    </span> đánh
+                                    giá</span>
+                                <script type="application/ld+json">
+                                {
+                                    "@context": "https://schema.org/",
+                                    "@type": "AggregateRating",
+                                    "ratingValue": "<?= $rating_value ?>",
+                                    "bestRating": "5",
+                                    "ratingCount": "<?= $rating_count ?>",
+                                    "itemReviewed": {
+                                        "@type": "CreativeWorkSeries",
+                                        "name": "<?= $seo_title ?>"
+                                    }
+                                }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3">
+                        <strong>Soi cầu Việt - Công cụ soi cầu miễn phí nhanh
+                            và chính xác nhất. Kết quả soi cầu lô Việt được cập nhật hàng ngày giúp anh em có thể dễ
+                            dàng lựa chọn con số may mắn cho mình trong ngày hôm nay.</strong>
+                    </h2>
+                    <div class="text-center">
+                        <img width="600" height="314"
+                            src="https://soicau247s.org/public/media/thumb/Thumb-Cate/soi-cau-viet-600x314.jpg"
+                            alt="<?= $seo_title ?>" />
+                    </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4">
+                                <i class="fa fa-bars mr-2"></i>Mục lục
+                            </legend>
+                            <ol class="text-news-link">
+                                <li>
+                                    <a rel="nofollow" href="#trick0">Kết quả xổ số miền Bắc kỳ quay trước</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick1">Soi cầu Việt XSMB
+                                        <?= $current_date ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick2">Kết quả xổ số miền Nam kỳ quay trước</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick3">Soi cầu Việt XSMN
+                                        <?= $current_date ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick4">Kết quả xổ số miền Trung kỳ quay trước</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick5">Soi cầu Việt XSMT
+                                        <?= $current_date ?>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick6">Kinh nghiệm soi cầu Việt chắc thắng</a>
+                                </li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify">
+                            <a href="<?= $this->url->get('/soi-cau-viet-soi-cau-lo-viet.html') ?>"
+                                title="Soi cầu Việt">Soi cầu Việt</a>
+                            hôm nay chính xác nhất đước các chuyên gia soi cầu xổ số 3 miền Bắc, Trung, Nam hàng đầu
+                            hiện nay gợi ý các cặp số đẹp, xác suất về cực cao cho anh em trong ngày.
+                        </p>
+
+                        <!-- XSMB Previous Result -->
+                        <h3 id="trick0" style="text-align: justify">
+                            Kết quả xổ số miền Bắc kỳ quay trước
+                        </h3>
+                        <p style="text-align: justify">
+                            Cùng chúng tôi xem lại bảng kết quả XSMB ngày hôm qua để có được những cặp số&nbsp;
+                            <a href="/soi-cau-xsmb.html" title="soi cầu MB">soi cầu MB</a> đẹp nhất ngày hôm nay nhé!
+                        </p>
+                        <p></p>
+                        <article class="my-2">
+                            <?php if (!empty($xsmb_result_data)): ?>
+                                <?php $this->partial('partials/home/result_xsmb', $xsmb_result_data); ?>
+                            <?php endif; ?>
+                        </article>
+                        <p></p>
+
+                        <!-- XSMB Predictions -->
+                        <h3 id="trick1" style="text-align: justify">
+                            Soi cầu Việt XSMB
+                            <?= $current_date ?>
+                        </h3>
+                        <p></p>
+                        <table class="table-default w-100 text-center">
+                            <tbody>
+                                <tr>
+                                    <td>Chạm đề</td>
+                                    <td>Chạm <span class="text-red">
+                                            <?= substr($xsmb_predictions['cham_db'][0] ?? '?', -1) ?>
+                                        </span>,
+                                        Chạm <span class="text-red">
+                                            <?= substr($xsmb_predictions['cham_db'][1] ?? '?', -1) ?>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Độc thủ Lô</td>
+                                    <td class="text-red">
+                                        <?= $xsmb_predictions['bach_thu'] ?? '?' ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Lô xiên 2</td>
+                                    <td class="text-red">
+                                        <?= implode(' - ', array_slice($xsmb_predictions['lo_xien_2'] ?? [], 0, 2)) ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Lô 2 số Vip</td>
+                                    <td class="text-red">
+                                        <?= implode(' - ', array_slice($xsmb_predictions['lo_dep'] ?? [], 0, 3)) ?>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+
+                        <!-- XSMN Previous Result -->
+                        <h3 id="trick2">
+                            Kết quả xổ số miền Nam kỳ quay trước
+                        </h3>
+                        <p style="text-align: justify">
+                            Ở kỳ quay trước đã có rất nhiều anh em may mắn dành được nhiều giải thưởng lớn từ việc tham
+                            khảo bài viết của chúng tôi. Cùng nhìn lại bảng
+                            <a href="/xo-so-mien-nam-xsmn.html" title="kết quả XSMN">kết quả XSMN</a> ngay sau đây:
+                        </p>
+                        <p style="text-align: center"></p>
+                        <article class="my-2">
+                            <?php if (!empty($xsmn_result_data)): ?>
+                                <?php $this->partial('partials/home/result_multi', $xsmn_result_data); ?>
+                            <?php endif; ?>
+                        </article>
+                        <p></p>
+
+                        <!-- XSMN Predictions -->
+                        <h3 id="trick3">
+                            Soi cầu Việt XSMN
+                            <?= $current_date ?>
+                        </h3>
+                        <p style="text-align: justify">
+                            Soi cầu Việt Miền Nam hôm nay giúp anh em tìm ra những cặp số giải 8, đặc biệt, bao lô 2 số,
+                            lô cặp thứ 4 quay thưởng tại các tỉnh
+                            <?php foreach ($xsmn_prediction_data as $i => $it): ?>
+                                <a class="font-weight-bold" href="<?= $it['url'] ?? '#' ?>">
+                                    <?= $it['name'] ?>
+                                </a>
+                                <?= $i !== array_key_last($xsmn_prediction_data) ? ', ' : '' ?>
+                            <?php endforeach; ?>
+                            có khả năng về cao nhất trong ngày. Cụ thể như sau:
+                        </p>
+                        <p style="text-align: justify"></p>
+
+                        <?php foreach ($xsmn_prediction_data as $data): ?>
+                            <table class="table-default w-100 mt-3 text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-orange" colspan="2">Dự đoán xổ số
+                                            <?= $data['name'] ?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td width="50%">Giải 8</td>
+                                        <td class="text-red">
+                                            <?= $data['predictions']['giai_8'] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Đặc biệt</td>
+                                        <td>Đầu <span class="text-red">
+                                                <?= $data['predictions']['dac_biet_dau'] ?>
+                                            </span>,
+                                            Đuôi <span class="text-red">
+                                                <?= $data['predictions']['dac_biet_duoi'] ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loto 2 số</td>
+                                        <td class="text-red">
+                                            <?= $data['predictions']['loto_2_so'][0] ?> -
+                                            <?= $data['predictions']['loto_2_so'][1] ?> -
+                                            <?= $data['predictions']['loto_2_so'][2] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loto cặp</td>
+                                        <td class="text-red">
+                                            <?= $data['predictions']['loto_2_so'][0] ?> -
+                                            <?= strrev($data['predictions']['loto_2_so'][0]) ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php endforeach; ?>
+
+                        <p></p>
+
+                        <!-- XSMT Previous Result -->
+                        <h3 id="trick4">
+                            Kết quả xổ số miền Trung kỳ quay trước
+                        </h3>
+                        <p>
+                            Cùng soi cầu lô Việt xem lại kết quả XSMT kỳ quay trước nhé!
+                        </p>
+                        <p style="text-align: center"></p>
+                        <article class="my-2">
+                            <?php if (!empty($xsmt_result_data)): ?>
+                                <?php $this->partial('partials/home/result_multi', $xsmt_result_data); ?>
+                            <?php endif; ?>
+                        </article>
+                        <p></p>
+
+                        <!-- XSMT Predictions -->
+                        <h3 id="trick5">
+                            Soi cầu Việt XSMT
+                            <?= $current_date ?>
+                        </h3>
+                        <p style="text-align: justify">
+                            Soi cầu Việt Miền Trung hôm nay đưa ra những cặp số giải 8, đặc biệt, bao lô 2 số, lô cặp
+                            thứ 4 quay thưởng tại các tỉnh
+                            <?php foreach ($xsmt_prediction_data as $i => $it): ?>
+                                <a class="font-weight-bold" href="<?= $it['url'] ?? '#' ?>">
+                                    <?= $it['name'] ?>
+                                </a>
+                                <?= $i !== array_key_last($xsmt_prediction_data) ? ', ' : '' ?>
+                            <?php endforeach; ?>
+                            chính xác nhất, mời anh em tham khảo.
+                        </p>
+                        <p style="text-align: justify"></p>
+
+                        <?php foreach ($xsmt_prediction_data as $data): ?>
+                            <table class="table-default w-100 mt-3 text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="bg-orange" colspan="2">Dự đoán xổ số
+                                            <?= $data['name'] ?>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td width="50%">Giải 8</td>
+                                        <td class="text-red">
+                                            <?= $data['predictions']['giai_8'] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Đặc biệt</td>
+                                        <td class="text-center">Đầu <span class="text-red">
+                                                <?= $data['predictions']['dac_biet_dau'] ?>
+                                            </span>, Đuôi
+                                            <span class="text-red">
+                                                <?= $data['predictions']['dac_biet_duoi'] ?>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loto 2 số</td>
+                                        <td class="text-red">
+                                            <?= $data['predictions']['loto_2_so'][0] ?> -
+                                            <?= $data['predictions']['loto_2_so'][1] ?> -
+                                            <?= $data['predictions']['loto_2_so'][2] ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Loto cặp</td>
+                                        <td class="text-red">
+                                            <?= $data['predictions']['loto_2_so'][0] ?> -
+                                            <?= strrev($data['predictions']['loto_2_so'][0]) ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <?php endforeach; ?>
+
+                        <p></p>
+                        <h3 id="trick6" style="text-align: justify">
+                            Kinh nghiệm soi cầu Việt chắc thắng
+                        </h3>
+                        <p style="text-align: justify">
+                            Soi cầu Việt là một trong những công cụ soi cầu hiện đại được
+                            <a href="/" title="Soi cầu 247">Soi cầu 247 hôm nay</a> thống kê và phân tích bằng hệ thống
+                            máy tính thông minh để đưa ra những con số có độ chính xác rất cao. Anh em có thể tham khảo
+                            thêm một số cách soi cầu lô Việt dưới đây để chắc chắn hơn.
+                        </p>
+                        <p style="text-align: justify">
+                            <span style="color: #ff0000"><strong>»</strong></span> Soi cầu uy tín chất lượng tại các
+                            website uy tín khác như soi cầu Wap, soi cầu 3 miền,...
+                        </p>
+                        <p style="text-align: justify">
+                            <span style="color: #ff0000"><strong>»</strong></span>&nbsp;Tổng hợp thông tin từ nhiều
+                            nguồn khác nhau: soi cầu, sổ mơ, phán đoán, các diễn đàn lô đề.
+                        </p>
+                        <p style="text-align: justify">
+                            <span style="color: #ff0000"><strong>»</strong>&nbsp;</span>Sử dụng các công cụ phân tích
+                            thống kê phổ biến nhưng đem lại độ chính xác rất cao để tìm ra con số may mắn trong ngày cho
+                            mình.
+                        </p>
+                        <p style="text-align: justify">
+                            <span style="color: #ff0000"><strong>»</strong></span> Phải có chiến lược chiến thuật trước
+                            khi chơi. Đánh con nào, đánh bao nhiêu con, đánh bao nhiêu tiền, thắng sẽ lời bao nhiêu,
+                            thua sẽ lỗ bao nhiêu.
+                        </p>
+                        <p style="text-align: justify">
+                            Trên đây là những con số đẹp nhất và kinh nghiệm khi chơi lô đề mà soi cầu Việt đem đến cho
+                            anh em trong ngày hôm nay. Anh em nên cân nhắc để lựa chọn con số tài lốc riêng cho mình
+                            trong ngày.
+                        </p>
+                        <p style="text-align: justify">
+                            Chúc anh em may mắn!!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

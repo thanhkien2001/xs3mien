@@ -1,0 +1,248 @@
+<?php
+$esc = $this->escaper;
+$dateEnd = $dateEnd ?? date('d/m/Y');
+?>
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="&lt;i class='icon-home'&gt;&lt;/i&gt;"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/xo-so-<?= $region === 'XSMN' ? 'mien-nam-xsmn' : 'mien-trung-xsmt' ?>.html" title="<?= $region === 'XSMN' ? 'XSMN' : 'XSMT' ?>"><?= $region === 'XSMN' ? 'XSMN' : 'XSMT' ?></a> </li>
+                        <li class="breadcrumb-item"><a href="<?= $xoSoUrl ?>" title="<?= $provinceCodeUpper ?>"><?= $provinceCodeUpper ?></a> </li>
+                        <li class="breadcrumb-item active"><a href="/soi-cau-<?= $provinceCode ?>.html" title="Soi cầu <?= $provinceCodeUpper ?>">Soi cầu <?= $provinceCodeUpper ?></a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="viewStatistic">
+                    <article>
+                        <div class="static-search">
+                            <h2 class="aside-title-red justify-content-center"> Soi cầu <?= $provinceName ?> </h2>
+                            <div class="container form-search">
+                                <form>
+                                    <div class="row align-items-end">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-6">
+                                            <div for="chon_tinh" class="label">Biên độ ngày</div>
+                                            <div class="input-datetick flex-grow-1"><input id="dateEnd" class="form-control form-control-sm mr-2" name="date_end" type="text" value="<?= $esc->escapeHtmlAttr($dateEnd) ?>"></div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-6"> <label class="label">Số ngày cầu chạy:</label>
+                                            <div class="input-group static-kn">
+                                                <div class="input-group-append"> <span id="btn-minus" class="btn btn-sm btn-minus d-flex align-items-center"> <i class="icon-minus"></i> </span> </div> <input min="2" id="range-day" name="so_cau" class="count form-control form-control-sm" type="text" max="4">
+                                                <div class="input-group-prepend"> <span id="btn-plus" class="btn btn-sm btn-plus d-flex align-items-center"> <i class="icon-plus"></i> </span> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-12 mt-md-0 mt-2"> <button class="btn btn-danger btn-sm btnLogan btnFilterBachThu" type="submit">Thống kê </button> </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="mt-2 bg-white cau-bach-thu-loto">
+                        <div class="logan-result">
+                            <div class="title-blue"> Soi&nbsp;cầu&nbsp;<?= $provinceName ?> </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mt-4"> *Hướng dẫn: di chuột đến ô cầu để xem các vị trí tạo cầu. Nhấn vào một ô cầu để xem cách tính cầu đó. Số lần - số lần xuất hiện của cầu tương ứng. <span class="text-primary">Bấm xem số cầu cho từng bộ số</span> để xem thêm. </div>
+                                        <div class="border-top"></div>
+                                        <div class="col-12 w-100 mt-4">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 mb-1"> <span class="text-red">•</span> <a class="text-blue1" href="/soi-cau-bach-thu.html" title="">Cầu Miền Bắc Bạch Thủ</a> </div>
+                                                <div class="col-lg-6 col-md-6 mb-1"> <span class="text-red">•</span> <a class="text-blue1" href="/soi-cau-mien-trung.html" title="">Cầu Miền Trung</a> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 w-100">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 mb-1"> <span class="text-red">•</span> <a class="text-blue1" href="/soi-cau-lat-lien-tuc.html" title="">Cầu Miền Bắc Lật Liên Tục</a> </div>
+                                                <div class="col-lg-6 col-md-6 mb-1"> <span class="text-red">•</span> <a class="text-blue1" href="/soi-cau-mien-nam.html" title="">Cầu Miền Nam</a> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 w-100 mb-3">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6"> <span class="text-red">•</span> <a class="text-blue1" href="/soi-cau-nhieu-nhay.html" title="">Cầu Miền Bắc Về Nhiều Nháy</a> </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 soi-cau">
+                                        <div class="table-soi-cau">
+                                            <table class="table-soicau-all">
+                                                <tbody>
+                                                    <?php
+                                                    $esc = $this->escaper;
+                                                    $cauData = $cauData ?? [];
+                                                    for ($dau = 0; $dau <= 9; $dau++): ?>
+                                                        <tr>
+                                                            <td><span>Đầu <?= $dau ?></span></td>
+                                                            <?php for ($duoi = 0; $duoi <= 9; $duoi++):
+                                                                $num = str_pad($dau * 10 + $duoi, 2, '0', STR_PAD_LEFT);
+                                                                $count = $cauData[$num]['count'] ?? 0;
+                                                                $positions = $cauData[$num]['positions'] ?? [];
+                                                                $positionsStr = implode(',', $positions);
+                                                                $isHidden = $count === 0 ? 'd-none' : '';
+                                                                $onclickAttr = $count > 0 && !empty($positions) 
+                                                                    ? 'onclick="setcolortoloto(this,' . $esc->escapeHtmlAttr($positionsStr) . ')"' 
+                                                                    : '';
+                                                                $tooltip = $count > 0 && !empty($positionsStr)
+                                                                    ? 'data-toggle="tooltip" title="" data-original-title="Vị trí tạo cầu: ' . $esc->escapeHtmlAttr($positionsStr) . '"'
+                                                                    : '';
+                                                            ?>
+                                                                <td>
+                                                                    <div class="block-number <?= $isHidden ?>" <?= $onclickAttr ?> <?= $tooltip ?>>
+                                                                        <span><?= $num ?></span>
+                                                                        <span>
+                                                                            <number id="count_<?= $num ?>"><?= $count ?></number> lần
+                                                                        </span>
+                                                                    </div>
+                                                                </td>
+                                                            <?php endfor; ?>
+                                                        </tr>
+                                                    <?php endfor; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 soi-cau">
+                                        <div id="kqcaumb">
+                                            <div class="list-tkcau">
+                                                <?php
+                                                $filteredNumbersByBienDo = $filteredNumbersByBienDo ?? [];
+                                                $bienDoList = [4, 3, 2];
+                                                foreach ($bienDoList as $bienDo):
+                                                    $displayNumbers = $filteredNumbersByBienDo[$bienDo] ?? [];
+                                                    if (empty($displayNumbers)) {
+                                                        continue;
+                                                    }
+                                                ?>
+                                                    <div class="list-tkcau check_bien_do" data-bien_do="<?= $bienDo ?>">
+                                                        <div class="rows">+ Biên độ <?= $bienDo ?> ngày:</div>
+                                                        <div class="rows">
+                                                            <?php foreach ($displayNumbers as $num => $info):
+                                                                $positions = $info['positions'] ?? [];
+                                                                $positionsStr = implode(',', $positions);
+                                                                $count = $info['count'] ?? 0;
+                                                            ?>
+                                                                <a class="item-tk-cau-icon">
+                                                                    <span class="soicau_mb" onclick="setcolortoloto(this,<?= $esc->escapeHtmlAttr($positionsStr) ?>);"><?= $esc->escapeHtml($num) ?></span>
+                                                                </a>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <div id="ketqua">
+                        <?php
+                        $esc = $this->escaper;
+                        if (!empty($lotteryResults)):
+                            foreach ($lotteryResults as $item):
+                                $dateObj = $item['date'];
+                                $dmy = $dateObj->format('d/m/Y');
+                                $dateSlug = $dateObj->format('d-m-Y');
+                                $dateId = $dateObj->format('dmY');
+                                $prizes = $item['prizes'];
+                                // Thứ tự: ĐB (index 1), G1 (index 2), G2 (index 3), G3 (index 4), G4 (index 5), G5 (index 6), G6 (index 7), G7 (index 8), G8 (index 9)
+                                $prizeLabels = ['ĐB', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8'];
+                                $prizeIndexes = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+                        ?>
+                        <article class="my-2">
+                            <div class="result result-province rounded">
+                                <div class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16">Xổ số <?= $esc->escapeHtml($provinceName) ?> ngày <?= $esc->escapeHtml($dmy) ?></div>
+                                <div class="breadcrumb-table">
+                                    <h2 class="breadcrumb-table-title"> <a href="<?= $esc->escapeHtmlAttr($xoSoUrl) ?>" title="<?= $esc->escapeHtmlAttr($provinceCodeUpper) ?>"><?= $esc->escapeHtml($provinceCodeUpper) ?></a> / <a href="/<?= $esc->escapeHtmlAttr($provinceCode) ?>-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="<?= $esc->escapeHtmlAttr($provinceCodeUpper . ' ' . $dmy) ?>"><?= $esc->escapeHtml($provinceCodeUpper . ' ' . $dmy) ?></a> </h2>
+                                </div>
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result">
+                                        <tbody class="result-soicau-province">
+                                            <?php
+                                            $numberIndex = 1;
+                                            foreach ($prizeLabels as $idx => $label):
+                                                $prizeIdx = $prizeIndexes[$idx];
+                                                $prizeData = $prizes[$prizeIdx] ?? [];
+                                            ?>
+                                            <tr>
+                                                <td><?= $esc->escapeHtml($label) ?></td>
+                                                <td>
+                                                    <?php if (!empty($prizeData)): 
+                                                        foreach ($prizeData as $num): 
+                                                            $numStr = trim((string)$num);
+                                                            if ($numStr !== ''): ?>
+                                                    <span class="text-number word-spacing--5">
+                                                        <number data-number="<?= $numberIndex ?>" class="soicau_mb clickLotoColor" id="mb_<?= $numberIndex ?>_<?= $dateId ?>"><?= $esc->escapeHtml($numStr) ?></number>
+                                                    </span>
+                                                    <?php 
+                                                            $numberIndex++;
+                                                            endif;
+                                                        endforeach;
+                                                    endif; ?>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </article>
+                        <?php
+                            endforeach;
+                        endif;
+                        ?>
+                    </div>
+                </div>
+                <?php if (!empty($predictions)): ?>
+                <?php $this->partial('kqxsdate/partials/prediction_box', [
+                    'predictions' => $predictions,
+                    'region' => $region,
+                    'regionName' => $regionName
+                ]); ?>
+                <?php endif; ?>
+            </div>
+            
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+$(document).ready(function() {
+    // Initialize datepicker
+    $('#dateEnd').datepicker({
+        format: 'dd/mm/yyyy',
+        language: 'vi',
+        autoclose: true,
+        todayHighlight: true,
+        endDate: new Date()
+    });
+
+    // Plus/Minus buttons
+    $('#btn-plus').on('click', function() {
+        var val = parseInt($('#range-day').val()) || 2;
+        if (val < 4) {
+            $('#range-day').val(val + 1);
+        }
+    });
+
+    $('#btn-minus').on('click', function() {
+        var val = parseInt($('#range-day').val()) || 2;
+        if (val > 2) {
+            $('#range-day').val(val - 1);
+        }
+    });
+});
+</script>
+                                                        

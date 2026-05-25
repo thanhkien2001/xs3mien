@@ -1,0 +1,59 @@
+<main class="main-content util-mt-3">
+    <div class="container">
+        <div class="row">
+            <!-- COL LEFT + CENTER -->
+            <div class="col-xl-610 border-radius-4">
+                <article class="the__article bg-white p-3 util-mb-4 util-border util-rounded">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent px-0">
+                            <li class="breadcrumb-item"><a title="Trang chủ" href="/">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Giới thiệu</li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 class="util-fs-3 util-mt-2 font-weight-bold text-blue1">Giới thiệu về <?php echo $_SERVER['HTTP_HOST'] ?? 'Xổ Số Kiến Thiết'; ?></h1>
+                    
+                    <div class="comp-article-content util-mt-4 text-justify">
+                        <p>Chào mừng bạn đến với <strong><?php echo $_SERVER['HTTP_HOST'] ?? 'Xổ Số Kiến Thiết'; ?></strong> - Chuyên trang tra cứu kết quả xổ số kiến thiết 3 miền và Vietlott hàng đầu Việt Nam.</p>
+                        
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">1. Sứ mệnh của chúng tôi</h2>
+                        <p>Chúng tôi ra đời với sứ mệnh cung cấp thông tin kết quả xổ số một cách nhanh chóng, chính xác và minh bạch nhất cho người chơi trên khắp cả nước. Với hệ thống cập nhật dữ liệu trực tuyến, bạn sẽ không bỏ lỡ bất kỳ kỳ quay thưởng nào.</p>
+                        
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">2. Các dịch vụ cung cấp</h2>
+                        <ul>
+                            <li><strong>Kết quả xổ số 3 miền:</strong> Cập nhật trực tiếp XSMB (18h15), XSMT (17h15) và XSMN (16h15) hàng ngày.</li>
+                            <li><strong>Xổ số Vietlott:</strong> Đầy đủ các loại hình Mega 6/45, Power 6/55, Max 3D, Max 3D Pro và Keno.</li>
+                            <li><strong>Thống kê chuyên sâu:</strong> Cung cấp bảng gan, tần suất lô tô, thống kê giải đặc biệt giúp người chơi có cái nhìn tổng quan.</li>
+                            <li><strong>Tiện ích soi cầu:</strong> Các công cụ hỗ trợ người chơi tìm kiếm những cặp số tiềm năng dựa trên thuật toán và dữ liệu lịch sử.</li>
+                        </ul>
+                        
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">3. Tại sao chọn chúng tôi?</h2>
+                        <ul>
+                            <li><strong>Tốc độ:</strong> Cập nhật kết quả ngay khi có thông báo từ hội đồng xổ số.</li>
+                            <li><strong>Chính xác:</strong> Dữ liệu được đối soát kỹ lưỡng từ nguồn tin cậy.</li>
+                            <li><strong>Giao diện thân thiện:</strong> Thiết kế tối ưu cho cả máy tính và thiết bị di động, giúp bạn tra cứu mọi lúc mọi nơi.</li>
+                            <li><strong>Hoàn toàn miễn phí:</strong> Mọi thông tin trên website đều được cung cấp miễn phí cho cộng đồng.</li>
+                        </ul>
+                        
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">4. Cam kết bảo mật</h2>
+                        <p>Chúng tôi tôn trọng quyền riêng tư của người dùng and cam kết bảo vệ thông tin cá nhân theo đúng chính sách bảo mật đã công bố. Website không chứa các nội dung độc hại hay phần mềm gây nhiễu.</p>
+                        
+                        <div class="alert alert-info util-mt-4">
+                            <p class="util-mb-0 text-center"><strong><?php echo $_SERVER['HTTP_HOST'] ?? 'Xổ Số Kiến Thiết'; ?> - Uy tín - Nhanh chóng - Chính xác</strong></p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- SIDEBAR LEFT -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

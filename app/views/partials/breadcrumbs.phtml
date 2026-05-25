@@ -1,0 +1,69 @@
+<nav aria-label="Breadcrumb" class="breadcrumb-nav">
+    <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+        <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="/" itemprop="item">
+                <span itemprop="name">Trang chủ</span>
+            </a>
+            <meta itemprop="position" content="1" />
+        </li>
+        <?php if (isset($breadcrumbs)): ?>
+            <?php foreach ($breadcrumbs as $index => $breadcrumb): ?>
+                <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <?php if ($index < count($breadcrumbs) - 1): ?>
+                        <a href="<?= $breadcrumb['url'] ?>" itemprop="item">
+                            <span itemprop="name"><?= $breadcrumb['title'] ?></span>
+                        </a>
+                    <?php else: ?>
+                        <span itemprop="name"><?= $breadcrumb['title'] ?></span>
+                    <?php endif; ?>
+                    <meta itemprop="position" content="<?= $index + 2 ?>" />
+                </li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </ol>
+</nav>
+
+<style>
+.breadcrumb-nav {
+    margin: 15px 0;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.breadcrumb {
+    background: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.breadcrumb-item {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+    content: '/';
+    margin: 0 8px;
+    color: #999;
+}
+
+.breadcrumb-item a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-item a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.breadcrumb-item:last-child {
+    color: #666;
+    font-weight: 500;
+}
+</style>

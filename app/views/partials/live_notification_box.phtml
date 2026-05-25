@@ -1,0 +1,61 @@
+<?php
+/**
+ * Live Notification Box Partial
+ * Displays the live lottery broadcast notification banner
+ * 
+ * Usage:
+ * $this->partial('partials/live_notification_box', [
+ *     'regionName' => 'Miền Nam', // Optional, will be set by JS if not provided
+ *     'regionUrl' => '/xsmn-ket-qua-xo-so-mien-nam.html' // Optional
+ * ]);
+ */
+
+$esc = $this->escaper;
+$regionName = $regionName ?? '';
+$regionUrl = $regionUrl ?? '#';
+?>
+
+<div id="notiLive">
+    <script>
+        if (typeof live === "undefined") {
+            var live = {
+                16: {
+                    hourEnd: 16,
+                    title: "Miền Nam",
+                    url: base_url + "xsmn-ket-qua-xo-so-mien-nam.html"
+                },
+                17: {
+                    hourEnd: 17,
+                    title: "Miền Trung",
+                    url: base_url + "xsmt-ket-qua-xo-so-mien-trung.html"
+                },
+                18: {
+                    hourEnd: 18,
+                    title: "Miền Bắc",
+                    url: base_url + "xsmb-ket-qua-xo-so-mien-bac.html"
+                }
+            };
+            let date = new Date();
+            let currentHour = date.getHours();
+            
+            // Set default based on current hour
+            if (live[currentHour]) {
+                $("#notiLiveTitle").html(live[currentHour].title);
+                $("#notiLiveLink").attr('href', live[currentHour].url);
+            } else {
+                // Default to Miền Nam if outside broadcast hours
+                $("#notiLiveTitle").html(live[16].title);
+                $("#notiLiveLink").attr('href', live[16].url);
+            }
+        }
+    </script>
+    <div class="box-tuong-thuat bg-white">
+        <div class="d-flex flex-wrap align-items-center justify-content-center mb-3">
+            <p class="py-3 mb-0 text-center font-weight-bold mr-3">
+                Đang tường thuật Xổ số <span id="notiLiveTitle"><?= $regionName ? $esc->escapeHtml($regionName) : 'Miền Nam' ?></span>
+            </p>
+            <a id="notiLiveLink" href="<?= $esc->escapeHtmlAttr($regionUrl) ?>" class="bg-red1 text-white px-3 py-2">Xem ngay</a>
+        </div>
+    </div>
+</div>
+

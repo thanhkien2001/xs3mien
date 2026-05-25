@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#e51919">
+  <meta name="google-site-verification" content="jVwHIIWOXcuz7qkQ6v2ScINwdUe-s0pi4Pb5NQLg_8U" />
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="//fonts.googleapis.com">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+  <!-- <link rel="preload" href="/css/mobile-optimized.css" as="style">
+  <link rel="preload" href="/css/mobile-table-fix.css" as="style">
+  <link rel="preload" href="/js/mobile-optimized.js" as="script"> -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title><?= isset($seo_title) ? $seo_title : 'Soi Cầu 247 - Dự Đoán Xổ Số Chính Xác 3 Miền' ?></title>
+  <meta name="description"
+    content="<?= isset($seo_description) ? $seo_description : 'Soi cầu 247 - Dự đoán xổ số chính xác 3 miền XSMB, XSMN, XSMT - Cập nhật nhanh chóng và chính xác' ?>">
+  <meta name="keywords"
+    content="<?= isset($seo_keywords) ? $seo_keywords : 'soi cầu 247, soi cầu, kết quả xổ số, xsmb, xsmn, xsmt, vietlott, power 6/55, mega 6/45, dự đoán xổ số, soi cầu' ?>">
+
+  <meta property="og:title"
+    content="<?= isset($og_title) ? $og_title : (isset($seo_title) ? $seo_title : 'Soi Cầu 247') ?>">
+  <meta property="og:description"
+    content="<?= isset($og_description) ? $og_description : (isset($seo_description) ? $seo_description : 'Kết quả xổ số kiến thiết 3 miền') ?>">
+  <meta property="og:type" content="<?= isset($og_type) ? $og_type : 'website' ?>">
+  <meta property="og:url" content="<?= isset($canonical_url) ? $canonical_url : $this->url->get() ?>">
+  <meta property="og:image"
+    content="<?= isset($og_image) ? $og_image : $this->url->get('media/website/logo.png') ?>">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:site_name" content="Soi Cầu 247">
+  <meta property="og:locale" content="vi_VN">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title"
+    content="<?= isset($og_title) ? $og_title : (isset($seo_title) ? $seo_title : 'Soi Cầu 247') ?>">
+  <meta name="twitter:description"
+    content="<?= isset($og_description) ? $og_description : (isset($seo_description) ? $seo_description : 'Kết quả xổ số kiến thiết 3 miền') ?>">
+  <meta name="twitter:image"
+    content="<?= isset($og_image) ? $og_image : $this->url->get('media/website/logo.png') ?>">
+  <meta name="twitter:image:alt" content="Logo Soi Cầu 247">
+
+  <meta name="author" content="Soi Cầu 247">
+
+  <?php if (isset($noindex) && $noindex): ?>
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <?php else: ?>
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <?php endif; ?>
+
+
+  <link rel="canonical" href="<?= isset($canonical_url) ? $canonical_url : $this->url->get() ?>">
+
+
+  <?php if (isset($customindex) || isset($customfooter) || isset($customthongke) || isset($customthongke1) || isset($custompagination)): ?>
+    <?php if (isset($customindex)): ?>
+      <link rel="stylesheet" href="<?= $customindex ?>" media="all">
+    <?php endif; ?>
+    <?php if (isset($customthongke1)): ?>
+      <link rel="stylesheet" href="<?= $customthongke1 ?>" media="all">
+    <?php endif; ?>
+    <?php if (isset($custompagination)): ?>
+      <link rel="stylesheet" href="<?= $custompagination ?>" media="all">
+    <?php endif; ?>
+  <?php endif; ?>
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <link rel="stylesheet" href="/css/main.min.css">
+
+  <link rel="icon" type="image/png" href="/media/favicon.ico" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/media/favicon.ico" />
+  <link rel="shortcut icon" href="/media/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/media/favicon.ico" />
+  <link rel="manifest" href="/img/favicon/site.webmanifest" />
+
+  <!-- Preload và cache các ảnh favicon -->
+  <link rel="preload" href="/media/favicon.ico" as="image" type="image/png" />
+  <link rel="preload" href="/media/favicon.ico" as="image" type="image/x-icon" />
+  <link rel="preload" href="/media/favicon.ico" as="image" type="image/png" />
+
+  <?php
+
+  use App\Library\SchemaHelper;
+
+  $schemas = [];
+  // Chỉ load WebSite schema ở homepage
+  // if (isset($page_schema_type) && $page_schema_type === 'homepage') {
+  //   $schemas[] = SchemaHelper::getWebsiteSchema();
+  // }
+  $schemas[] = SchemaHelper::getOrganizationSchema();
+  if (isset($page_schema_type)) {
+    $pageSchemas = SchemaHelper::getPageSchema($page_schema_type, $page_schema_data ?? []);
+    $schemas = array_merge($schemas, $pageSchemas);
+  }
+  if (isset($structured_data_json)) {
+    $schemas[] = json_decode($structured_data_json, true);
+  }
+  if (isset($organization_structured_data)) {
+    $schemas[] = json_decode($organization_structured_data, true);
+  }
+  echo SchemaHelper::generateMultipleJsonLd($schemas);
+  ?>
+  <!-- jQuery (required for Bootstrap and Datepicker) - Load early -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap Datepicker JS - Load early -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <!-- Bootstrap Datepicker Vietnamese locale - Load early -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.vi.min.js"></script>
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+</head>
+
+<body>
+  <?php $this->partial('layouts/header'); ?>
+
+  <div class="layout-wrapper">
+    <?php echo $this->getContent(); ?>
+  </div>
+
+  <?php $this->partial('layouts/footer'); ?>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" async crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js" async crossorigin></script>
+
+
+  <script src="/js/menu.js"></script>
+  <script src="/js/home/tabs.js" defer></script>
+  <script src="/js/api-key-manager.js" defer></script>
+
+  <link rel="preload" href="/js/menu.js" as="script">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C3TN6PTFVN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-C3TN6PTFVN');
+  </script>
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js" as="script">
+
+  <script defer>
+    (function () {
+      function initDOM() {
+        var skeleton = document.getElementById('loading-skeleton');
+        var dataContainer = document.getElementById('lottery-data-container');
+
+        if (skeleton && dataContainer) {
+          setTimeout(function () {
+            skeleton.style.display = 'none';
+            dataContainer.style.display = 'block';
+            dataContainer.style.opacity = '0';
+            dataContainer.style.transition = 'opacity 0.3s ease-in-out';
+
+            dataContainer.offsetHeight;
+            dataContainer.style.opacity = '1';
+          }, 100);
+        }
+        try {
+          var observer = lozad('.util-lazy-load', {
+            loaded: function (el) {
+              el.classList.add('util-loaded');
+            }
+          });
+          observer.observe();
+        } catch (e) { }
+
+        var tables = document.querySelectorAll('.lottery-table');
+        tables.forEach(function (table) {
+          table.style.contain = 'layout style paint';
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDOM);
+      } else {
+        initDOM();
+      }
+      window.addEventListener('load', function () {
+        var nextPageLink = document.querySelector('.comp-pagination .comp-page-item:last-child a');
+        if (nextPageLink && nextPageLink.href !== '#') {
+          var link = document.createElement('link');
+          link.rel = 'prefetch';
+          link.href = nextPageLink.href;
+          document.head.appendChild(link);
+        }
+      });
+    })();
+  </script>
+  <script src="/js/non-blocking.js" defer></script>
+</body>
+
+</html>

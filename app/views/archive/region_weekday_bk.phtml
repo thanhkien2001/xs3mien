@@ -1,0 +1,576 @@
+<?php
+$esc = $this->escaper;
+$region = strtolower($region);
+
+function getProvinceUrl($provinceName)
+{
+    $urlMap = [
+        // XSMN - Miền Nam
+        'An Giang' => '/ket-qua-xo-so-an-giang-xsag.html',
+        'Bạc Liêu' => '/ket-qua-xo-so-bac-lieu-xsblieu.html',
+        'Bến Tre' => '/ket-qua-xo-so-ben-tre-xsbtr.html',
+        'Bình Dương' => '/ket-qua-xo-so-binh-duong-xsbduong.html',
+        'Bình Phước' => '/ket-qua-xo-so-binh-phuoc-xsbp.html',
+        'Bình Thuận' => '/ket-qua-xo-so-binh-thuan-xsbthuan.html',
+        'Cà Mau' => '/ket-qua-xo-so-ca-mau-xscm.html',
+        'Cần Thơ' => '/ket-qua-xo-so-can-tho-xsct.html',
+        'Đà Lạt' => '/ket-qua-xo-so-da-lat-xsdl.html',
+        'Đồng Nai' => '/ket-qua-xo-so-dong-nai-xsdn.html',
+        'Đồng Tháp' => '/ket-qua-xo-so-dong-thap-xsdthap.html',
+        'Hậu Giang' => '/ket-qua-xo-so-hau-giang-xshg.html',
+        'TP. Hồ Chí Minh' => '/ket-qua-xo-so-ho-chi-minh-xshcm.html',
+        'Kiên Giang' => '/ket-qua-xo-so-kien-giang-xskg.html',
+        'Long An' => '/ket-qua-xo-so-long-an-xsla.html',
+        'Sóc Trăng' => '/ket-qua-xo-so-soc-trang-xsst.html',
+        'Tây Ninh' => '/ket-qua-xo-so-tay-ninh-xstn.html',
+        'Tiền Giang' => '/ket-qua-xo-so-tien-giang-xstg.html',
+        'Trà Vinh' => '/ket-qua-xo-so-tra-vinh-xstv.html',
+        'Vĩnh Long' => '/ket-qua-xo-so-vinh-long-xsvl.html',
+        'Vũng Tàu' => '/ket-qua-xo-so-vung-tau-xsvt.html',
+
+        // XSMT - Miền Trung
+        'Bình Định' => '/ket-qua-xo-so-binh-dinh-xsbdinh.html',
+        'Đà Nẵng' => '/ket-qua-xo-so-da-nang-xsdna.html',
+        'Đắk Lắk' => '/ket-qua-xo-so-dak-lak-xsdlk.html',
+        'Đắk Nông' => '/ket-qua-xo-so-dak-nong-xsdnong.html',
+        'Gia Lai' => '/ket-qua-xo-so-gia-lai-xsgl.html',
+        'Huế' => '/ket-qua-xo-so-hue-xstth.html',
+        'Khánh Hòa' => '/ket-qua-xo-so-khanh-hoa-xskhoa.html',
+        'Kon Tum' => '/ket-qua-xo-so-kon-tum-xskontum.html',
+        'Ninh Thuận' => '/ket-qua-xo-so-ninh-thuan-xsnt.html',
+        'Phú Yên' => '/ket-qua-xo-so-phu-yen-xspy.html',
+        'Quảng Bình' => '/ket-qua-xo-so-quang-binh-xsqb.html',
+        'Quảng Nam' => '/ket-qua-xo-so-quang-nam-xsqn.html',
+        'Quảng Ngãi' => '/ket-qua-xo-so-quang-ngai-xsqng.html',
+        'Quảng Trị' => '/ket-qua-xo-so-quang-tri-xsqtri.html',
+    ];
+
+    return $urlMap[$provinceName] ?? '/ket-qua-xo-so-' . strtolower(str_replace(' ', '-', $provinceName));
+}
+
+function printCells($items)
+{
+    if (empty($items)) {
+        return;
+    }
+    foreach ($items as $n) {
+        echo '<div>' . htmlspecialchars((string)$n, ENT_QUOTES, 'UTF-8') . '</div>';
+    }
+}
+
+function getWeekdayUrl($region, $weekdaySlug)
+{
+    $regionLower = strtolower($region);
+    $regionUrls = [
+        'xsmb' => "/xsmb-{$weekdaySlug}-ket-qua-xo-so-mien-bac.html",
+        'xsmn' => "/xsmn-{$weekdaySlug}-ket-qua-xo-so-mien-nam.html",
+        'xsmt' => "/xsmt-{$weekdaySlug}-ket-qua-xo-so-mien-trung.html",
+    ];
+    return $regionUrls[$regionLower] ?? $regionUrls['xsmb'];
+}
+
+function getDateUrl($region, $dateObj)
+{
+    $regionLower = strtolower($region);
+    $dayMonth = $dateObj->format('j-n'); // 11-10 (no leading zeros)
+    $fullDate = $dateObj->format('j-n-Y'); // 11-10-2025
+
+    $regionUrls = [
+        'xsmb' => "/xsmb-{$dayMonth}-ket-qua-xo-so-mien-bac-ngay-{$fullDate}.html",
+        'xsmn' => "/xsmn-{$dayMonth}-ket-qua-xo-so-mien-nam-ngay-{$fullDate}.html",
+        'xsmt' => "/xsmt-{$dayMonth}-ket-qua-xo-so-mien-trung-ngay-{$fullDate}.html",
+    ];
+    return $regionUrls[$regionLower] ?? $regionUrls['xsmb'];
+}
+?>
+
+<div class="util-bg-white util-shadow-sm">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub util-flex util-justify-center util-w-100 util-m-0 util-p-0 util-list-unstyled">
+                    <?php
+                    // Tạo URLs theo miền
+                    $regionUrls = [
+                        'xsmb' => [
+                            'thu-2' => '/xsmb-thu-2-ket-qua-xo-so-mien-bac.html',
+                            'thu-3' => '/xsmb-thu-3-ket-qua-xo-so-mien-bac.html',
+                            'thu-4' => '/xsmb-thu-4-ket-qua-xo-so-mien-bac.html',
+                            'thu-5' => '/xsmb-thu-5-ket-qua-xo-so-mien-bac.html',
+                            'thu-6' => '/xsmb-thu-6-ket-qua-xo-so-mien-bac.html',
+                            'thu-7' => '/xsmb-thu-7-ket-qua-xo-so-mien-bac.html',
+                            'chu-nhat' => '/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html'
+                        ],
+                        'xsmn' => [
+                            'thu-2' => '/xsmn-thu-2-ket-qua-xo-so-mien-nam.html',
+                            'thu-3' => '/xsmn-thu-3-ket-qua-xo-so-mien-nam.html',
+                            'thu-4' => '/xsmn-thu-4-ket-qua-xo-so-mien-nam.html',
+                            'thu-5' => '/xsmn-thu-5-ket-qua-xo-so-mien-nam.html',
+                            'thu-6' => '/xsmn-thu-6-ket-qua-xo-so-mien-nam.html',
+                            'thu-7' => '/xsmn-thu-7-ket-qua-xo-so-mien-nam.html',
+                            'chu-nhat' => '/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html'
+                        ],
+                        'xsmt' => [
+                            'thu-2' => '/xsmt-thu-2-ket-qua-xo-so-mien-trung.html',
+                            'thu-3' => '/xsmt-thu-3-ket-qua-xo-so-mien-trung.html',
+                            'thu-4' => '/xsmt-thu-4-ket-qua-xo-so-mien-trung.html',
+                            'thu-5' => '/xsmt-thu-5-ket-qua-xo-so-mien-trung.html',
+                            'thu-6' => '/xsmt-thu-6-ket-qua-xo-so-mien-trung.html',
+                            'thu-7' => '/xsmt-thu-7-ket-qua-xo-so-mien-trung.html',
+                            'chu-nhat' => '/xsmt-chu-nhat-ket-qua-xo-so-mien-trung.html'
+                        ]
+                    ];
+
+                    $regionName = strtoupper($region) === 'XSMT' ? 'Xổ số Miền Trung' : (strtoupper($region) === 'XSMN' ? 'Xổ số Miền Nam' : 'Xổ số Miền Bắc');
+                    $currentRegionUrls = $regionUrls[$region] ?? $regionUrls['xsmb'];
+                    ?>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-2' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Thứ 2" href="<?= $currentRegionUrls['thu-2'] ?>"><span class="util-hidden util-inline-md">Thứ 2</span><span class="util-inline-md-none">T2</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-3' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Thứ 3" href="<?= $currentRegionUrls['thu-3'] ?>"><span class="util-hidden util-inline-md">Thứ 3</span><span class="util-inline-md-none">T3</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-4' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Thứ 4" href="<?= $currentRegionUrls['thu-4'] ?>"><span class="util-hidden util-inline-md">Thứ 4</span><span class="util-inline-md-none">T4</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-5' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Thứ 5" href="<?= $currentRegionUrls['thu-5'] ?>"><span class="util-hidden util-inline-md">Thứ 5</span><span class="util-inline-md-none">T5</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-6' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Thứ 6" href="<?= $currentRegionUrls['thu-6'] ?>"><span class="util-hidden util-inline-md">Thứ 6</span><span class="util-inline-md-none">T6</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'thu-7' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Thứ 7" href="<?= $currentRegionUrls['thu-7'] ?>"><span class="util-hidden util-inline-md">Thứ 7</span><span class="util-inline-md-none">T7</span></a></li>
+                    <li class="util-flex-fill util-text-center util-m-0 util-p-0"><a class="<?= $active === 'chu-nhat' ? 'active-day' : '' ?> util-block util-text-center" title="KQ <?= strtoupper($region) ?> Chủ Nhật" href="<?= $currentRegionUrls['chu-nhat'] ?>"><span class="util-hidden util-inline-md">Chủ Nhật</span><span class="util-inline-md-none">CN</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-01 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><a href="<?= $esc->escapeHtmlAttr($todayHref) ?>"><span>
+                                    <?= strtoupper($region) === 'XSMT' ? 'Xổ số Miền Trung' : (strtoupper($region) === 'XSMN' ? 'Xổ số Miền Nam' : 'Xổ số Miền Bắc') ?>
+                                </span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Kết quả <?= strtoupper($region) === 'XSMT' ? 'Xổ số Miền Trung' : (strtoupper($region) === 'XSMN' ? 'Xổ số Miền Nam' : 'Xổ số Miền Bắc') ?> <?= $esc->escapeHtml($weekdayText) ?></span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header">
+                    <h1 class="page-title-h1 util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                        <?php
+                        $regionText = strtoupper($region) === 'XSMT' ? 'Xổ Số Miền Trung' : (strtoupper($region) === 'XSMN' ? 'Xổ Số Miền Nam' : 'Xổ Số Miền Bắc');
+                        $regionAbbr = strtoupper($region);
+                        echo $regionText . ' ' . $esc->escapeHtml($weekdayText) . ' - ' . $regionAbbr . ' ' . $esc->escapeHtml($weekdayText) . ' - Hàng Tuần';
+                        ?>
+                    </h1>
+                </div>
+            </div>
+
+            <?php foreach ($sections as $secIndex => $sec):
+                $dateObj = $sec['date'];
+                $ymd = $dateObj->format('Ymd');
+                $dmy = $dateObj->format('d/m/Y');
+
+                $provinces = $sec['provinces'];
+                $results   = $sec['resultsForView'];
+
+                $get = function ($pvId, $idx) use ($results) {
+                    $pr = $results[$pvId]['prizes'] ?? null;
+                    return $pr ? ($pr[$idx] ?? []) : [];
+                };
+                $dau = function ($pvId, $head) use ($results) {
+                    $d = $results[$pvId]['dau'] ?? array_fill(0, 10, []);
+                    return $d[$head] ?? [];
+                };
+                $duoi = function ($pvId, $head) use ($results) {
+                    $d = $results[$pvId]['duoi'] ?? array_fill(0, 10, []);
+                    return $d[$head] ?? [];
+                };
+            ?>
+                <div id="position-<?= $esc->escapeHtmlAttr($ymd) ?>"
+                    class="lottery-result js-table-result js-table-<?= $esc->escapeHtmlAttr($region) ?>"
+                    data-ketqua="" data-mien="Xổ Số <?= strtoupper($region) ?>">
+                    <header class="lottery-result-header util-sticky-top">
+                        <div class="breadcrumb-nav">
+                            <h2 class="lottery-result-tree">
+                                <a href="<?= $esc->escapeHtmlAttr($todayHref) ?>" title="Kết quả xổ số <?= strtoupper($region) ?>">
+                                    <?= strtoupper($region) ?>
+                                </a>
+                                <span class="sep">»</span>
+                                <a href="<?= $esc->escapeHtmlAttr(getWeekdayUrl(strtoupper($region), $weekdaySlug)) ?>" title="Kết quả <?= strtoupper($region) ?> <?= $esc->escapeHtmlAttr($weekdayText) ?>"><?= $esc->escapeHtml($weekdayText) ?></a>
+                                <span class="sep">»</span>
+                                <a href="<?= $esc->escapeHtmlAttr(getDateUrl(strtoupper($region), $dateObj)) ?>" title="Kết quả <?= strtoupper($region) ?> ngày <?= $esc->escapeHtmlAttr($dmy) ?>"><?= $esc->escapeHtml($dmy) ?></a>
+                            </h2>
+                        </div>
+                    </header>
+
+                    <?php if (strtoupper($region) === 'XSMB'): ?>
+                        <!-- XSMB: Hiển thị như byDate.phtml (1 cột kết quả) -->
+                        <table class="comp-table util-align-items-center lottery-table xsmb js-lottery-kq-table">
+                            <tbody>
+                                <?php
+                                // Lấy kết quả đầu tiên (XSMB chỉ có 1 kết quả)
+                                $firstResult = null;
+                                if (!empty($results)) {
+                                    $firstProvinceId = $provinces[0]['id'];
+                                    $firstResult = $results[$firstProvinceId] ?? null;
+                                }
+                                ?>
+                                <?php if ($firstResult): ?>
+                                    <tr>
+                                        <td class="util-small util-text-nowrap">Giải ĐB</td>
+                                        <td><span class="lottery-number big" data-page-id="152" data-id-giai="1" data-num="<?= $esc->escapeHtmlAttr($firstResult['prizes'][1][0] ?? '') ?>"><?= $esc->escapeHtml($firstResult['prizes'][1][0] ?? '') ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 1</td>
+                                        <td><span class="lottery-number" data-page-id="152" data-id-giai="2" data-num="<?= $esc->escapeHtmlAttr($firstResult['prizes'][2][0] ?? '') ?>"><?= $esc->escapeHtml($firstResult['prizes'][2][0] ?? '') ?></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 2</td>
+                                        <td class="util-small">
+                                            <?php
+                                            $secondPrizes = $firstResult['prizes'][3] ?? [];
+                                            foreach ($secondPrizes as $index => $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="util-w-50 lottery-number" data-page-id="152" data-id-giai="3" data-num="<?= $esc->escapeHtmlAttr($prize) ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 3</td>
+                                        <td class="util-small">
+                                            <?php
+                                            $thirdPrizes = $firstResult['prizes'][4] ?? [];
+                                            foreach ($thirdPrizes as $index => $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="util-w-33 lottery-number" data-page-id="152" data-id-giai="4" data-num="<?= $esc->escapeHtmlAttr($prize) ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 4</td>
+                                        <td>
+                                            <?php
+                                            $fourthPrizes = $firstResult['prizes'][5] ?? [];
+                                            foreach ($fourthPrizes as $index => $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="util-w-50 util-md-w-25 lottery-number" data-page-id="152" data-id-giai="5" data-num="<?= $esc->escapeHtmlAttr($prize) ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 5</td>
+                                        <td>
+                                            <?php
+                                            $fifthPrizes = $firstResult['prizes'][6] ?? [];
+                                            foreach ($fifthPrizes as $index => $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="util-w-33 lottery-number" data-page-id="152" data-id-giai="6" data-num="<?= $esc->escapeHtmlAttr($prize) ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 6</td>
+                                        <td>
+                                            <?php
+                                            $sixthPrizes = $firstResult['prizes'][7] ?? [];
+                                            foreach ($sixthPrizes as $index => $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="util-w-33 lottery-number" data-page-id="152" data-id-giai="7" data-num="<?= $esc->escapeHtmlAttr($prize) ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 7</td>
+                                        <td>
+                                            <?php
+                                            $seventhPrizes = $firstResult['prizes'][8] ?? [];
+                                            foreach ($seventhPrizes as $index => $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="util-w-25 lottery-number big" data-page-id="152" data-id-giai="8" data-num="<?= $esc->escapeHtmlAttr($prize) ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr>
+                                        <td class="util-small util-text-nowrap">Giải ĐB</td>
+                                        <td><span class="lottery-number big"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 1</td>
+                                        <td><span class="lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 2</td>
+                                        <td class="util-small"><span class="util-w-50 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-50 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 3</td>
+                                        <td class="util-small"><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 4</td>
+                                        <td><span class="util-w-50 util-md-w-25 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-50 util-md-w-25 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-50 util-md-w-25 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-50 util-md-w-25 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 5</td>
+                                        <td><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 6</td>
+                                        <td><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-33 lottery-number"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="util-small">Giải 7</td>
+                                        <td><span class="util-w-25 lottery-number big"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-25 lottery-number big"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-25 lottery-number big"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span><span class="util-w-25 lottery-number big"><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <!-- XSMN/XSMT: Hiển thị bảng nhiều tỉnh như cũ -->
+                        <table class="comp-table util-align-items-center lottery-table <?= $esc->escapeHtmlAttr($region) ?> js-lottery-kq-table">
+                            <thead class="comp-table-header util-sticky-top util-align-items-center">
+                                <tr>
+                                    <th class="util-small util-text-start util-bg-primary-subtle util-text-black" style="--i:0">Giải</th>
+                                    <?php $i = 1;
+                                    foreach ($provinces as $province): ?>
+                                        <th class="util-bg-primary-subtle" style="--i:<?= $i ?>">
+                                            <a href="<?= getProvinceUrl($province['name']) ?>"
+                                                title="Kết quả xổ số <?= $esc->escapeHtmlAttr($province['name']) ?>"
+                                                aria-label="Xem kết quả xổ số <?= $esc->escapeHtmlAttr($province['name']) ?>">
+                                                <?= $esc->escapeHtml($province['name'] === 'TP. Hồ Chí Minh' ? 'Hồ Chí Minh' : $province['name']) ?>
+                                            </a>
+                                        </th>
+                                    <?php $i++;
+                                    endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="--row-index:9">
+                                    <td class="util-small util-text-nowrap util-text-start">Giải ĐB</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number medium" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="1" data-num=""><?php printCells($get($p['id'], 1)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:8">
+                                    <td class="util-small util-text-start">Giải 1</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="2" data-num=""><?php printCells($get($p['id'], 2)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:7">
+                                    <td class="util-small util-text-start">Giải 2</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="3" data-num=""><?php printCells($get($p['id'], 3)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:6">
+                                    <td class="util-small util-text-start">Giải 3</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="4" data-num=""><?php printCells($get($p['id'], 4)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:5">
+                                    <td class="util-small util-text-start">Giải 4</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="5" data-num=""><?php printCells($get($p['id'], 5)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:4">
+                                    <td class="util-small util-text-start">Giải 5</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="6" data-num=""><?php printCells($get($p['id'], 6)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:3">
+                                    <td class="util-small util-text-start">Giải 6</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="7" data-num=""><?php printCells($get($p['id'], 7)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:2">
+                                    <td class="util-small util-text-start">Giải 7</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="8" data-num=""><?php printCells($get($p['id'], 8)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                                <tr style="--row-index:1">
+                                    <td class="util-small util-text-start">Giải 8</td>
+                                    <?php foreach ($provinces as $p): ?><td><span class="lottery-number big" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-id-giai="9" data-num=""><?php printCells($get($p['id'], 9)); ?></span></td><?php endforeach; ?>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+
+                    <?php if (strtoupper($region) === 'XSMB'): ?>
+                        <!-- XSMB: Hiển thị lô tô như byDate.phtml -->
+                        <p class="util-bg-primary-subtle util-p-2 util-mb-0">Lô tô Miền Bắc - <?= $esc->escapeHtml($weekdayText) ?> Ngày <?= $esc->escapeHtml($dmy) ?> </p>
+                        <table class="comp-table util-align-items-center util-text-center util-m-0">
+                            <thead class="util-align-items-center">
+                                <th>Đầu</th>
+                                <th>Lô tô</th>
+                                <th>Lô tô</th>
+                                <th>Đuôi</th>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i <= 9; $i++): ?>
+                                    <tr>
+                                        <td class="util-text-red util-font-bold"><?= $i ?></td>
+                                        <td class="js-number-dau-duoi" data-find="dau" data-page-id="152" data-num="<?= $i ?>">
+                                            <?php
+                                            // Sử dụng hàm $dau đã có sẵn
+                                            $dauVals = $dau($firstProvinceId, $i);
+                                            if (!empty($dauVals)) {
+                                                echo implode(', ', array_map(fn($x) => '<span class="lottery-number">' . htmlspecialchars($x, ENT_QUOTES, 'UTF-8') . '</span>', $dauVals));
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="js-number-dau-duoi" data-find="duoi" data-page-id="152" data-num="<?= $i ?>">
+                                            <?php
+                                            // Sử dụng hàm $duoi đã được sửa
+                                            $duoiVals = $duoi($firstProvinceId, $i);
+                                            if (!empty($duoiVals)) {
+                                                echo implode(', ', array_map(fn($x) => '<span class="lottery-number">' . htmlspecialchars($x, ENT_QUOTES, 'UTF-8') . '</span>', $duoiVals));
+                                            }
+                                            ?>
+                                        </td>
+                                        <td class="util-text-red util-font-bold"><?= $i ?></td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    <?php else: ?>
+                        <!-- XSMN/XSMT: Hiển thị lô tô nhiều tỉnh như cũ -->
+                        <table class="comp-table util-align-items-center util-text-center util-m-0">
+                            <tr>
+                                <td colspan="<?= count($provinces) + 1 ?>" class="util-bg-primary-subtle util-p-2 util-text-start">Lô tô - <?= $esc->escapeHtml($weekdayText) ?> Ngày <?= $esc->escapeHtml($dmy) ?></td>
+                            </tr>
+                            <tr class="util-align-items-center">
+                                <td>Đầu</td>
+                                <?php foreach ($provinces as $p): ?>
+                                    <td>
+                                        <a href="<?= $esc->escapeHtmlAttr(getProvinceUrl($p['name'])) ?>" title="Kết quả xổ số <?= $esc->escapeHtmlAttr($p['name']) ?>"><?= $esc->escapeHtml($p['code']) ?></a>
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+                            <?php for ($head = 0; $head <= 9; $head++): ?>
+                                <tr>
+                                    <td class="util-text-red util-font-bold"><?= $head ?></td>
+                                    <?php foreach ($provinces as $p): ?>
+                                        <?php $vals = $dau($p['id'], $head); ?>
+                                        <td class="js-number-dau-duoi" data-find="dau" data-page-id="<?= $esc->escapeHtmlAttr($p['keyid']) ?>" data-num="<?= $head ?>">
+                                            <?php
+                                            if (!empty($vals)) {
+                                                $formattedVals = array_map(fn($v) => '<span class="lottery-number">' . htmlspecialchars($v, ENT_QUOTES, 'UTF-8') . '</span>', $vals);
+                                                echo implode(', ', $formattedVals);
+                                            }
+                                            ?>
+                                        </td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endfor; ?>
+                        </table>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+
+            <?php
+            $currentPage = (int)$page;
+            $totalPages = isset($totalPages) ? (int)$totalPages : 10;
+            function generatePageUrl($baseUrl, $pageNum)
+            {
+                $pageNum = max(1, $pageNum);
+                $url = preg_replace('/[?&]page=\d+/', '', $baseUrl);
+                return $url . (strpos($url, '?') === false ? '?' : '&') . 'page=' . $pageNum;
+            }
+            if ($nextUrl && $nextUrl !== '#') {
+                $baseUrl = preg_replace('/[?&]page=\d+/', '', $nextUrl);
+            } elseif ($prevUrl && $prevUrl !== '#') {
+                $baseUrl = preg_replace('/[?&]page=\d+/', '', $prevUrl);
+            }
+
+            $firstUrl = generatePageUrl($baseUrl, 1);
+            $lastUrl = generatePageUrl($baseUrl, $totalPages);
+
+            $maxPagesToShow = 6;
+            $startPage = max(1, $currentPage - floor($maxPagesToShow / 2));
+            $endPage = min($totalPages, $startPage + $maxPagesToShow - 1);
+
+            if ($endPage - $startPage + 1 < $maxPagesToShow) {
+                $startPage = max(1, $endPage - $maxPagesToShow + 1);
+            }
+            ?>
+            <nav aria-label="pagination">
+                <ul class="comp-pagination util-justify-center util-mt-3">
+                    <li class="comp-page-item <?= $currentPage == 1 ? 'disabled' : '' ?>">
+                        <a class="comp-page-link" href="<?= $firstUrl ?>" aria-label="First">
+                            <span aria-hidden="true">« Đầu</span>
+                        </a>
+                    </li>
+                    <li class="comp-page-item <?= $prevUrl ? '' : 'disabled' ?>">
+                        <a class="comp-page-link" href="<?= $prevUrl ?: '#' ?>" aria-label="Previous">
+                            <span aria-hidden="true">‹ Trước</span>
+                        </a>
+                    </li>
+
+                    <?php for ($p = $startPage; $p <= $endPage; $p++): ?>
+                        <li class="comp-page-item <?= $p == $currentPage ? 'is-active' : '' ?>">
+                            <a class="comp-page-link" href="<?= generatePageUrl($baseUrl, $p) ?>"><?= $p ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <li class="comp-page-item <?= $currentPage == $totalPages ? 'disabled' : '' ?>">
+                        <a class="comp-page-link" href="<?= $nextUrl ?: '#' ?>" aria-label="Next">
+                            <span aria-hidden="true">Sau ›</span>
+                        </a>
+                    </li>
+                    <li class="comp-page-item <?= $currentPage == $totalPages ? 'disabled' : '' ?>">
+                        <a class="comp-page-link" href="<?= $lastUrl ?>" aria-label="Last">
+                            <span aria-hidden="true">Cuối »</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<link rel="stylesheet" href="/css/pagination.css">
+<style>
+    @media (max-width: 767px) {
+        .layout-wrapper-fluid.util-mt-3 {
+            padding-left: 0px !important;
+            padding-right: 0px !important;
+        }
+
+        .util-bg-white.util-shadow-sm {
+            margin-top: 52px !important;
+        }
+
+        .nav-sub li a {
+            width: 100% !important;
+            text-align: center !important;
+            display: block !important;
+            margin: 0 !important;
+            padding: 8px 4px !important;
+        }
+        .layout-row {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+    }
+</style>

@@ -1,0 +1,245 @@
+<?php
+/**
+ * Partial: Danh sách bài viết dự đoán
+ * Hiển thị: Dự đoán XSMB (2 bài mới nhất), Win2888 (2 bài), Dự đoán số đề (2 bài)
+ */
+
+use App\Models\PredictionArticles;
+
+// Chỉ khai báo function h() nếu chưa tồn tại
+if (!function_exists('h')) {
+    function h($s)
+    {
+        return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+    }
+}
+
+// Thiết lập timezone
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+$now = new \DateTime('now', new \DateTimeZone('Asia/Ho_Chi_Minh'));
+$currentHour = (int)$now->format('H');
+$currentMinute = (int)$now->format('i');
+
+// Tính toán ngày hiển thị cho Win2888 và dự đoán số đề
+// Nếu trước 18h10: hiển thị ngày hiện tại và ngày trước đó
+// Nếu sau 18h10: hiển thị ngày tiếp theo và ngày hiện tại
+$isAfter1810 = ($currentHour > 18) || ($currentHour == 18 && $currentMinute >= 10);
+
+if ($isAfter1810) {
+    // Sau 18h10: ngày tiếp theo và ngày hiện tại
+    $date1 = clone $now;
+    $date1->modify('+1 day');
+    $date2 = clone $now;
+} else {
+    // Trước 18h10: ngày hiện tại và ngày trước đó
+    $date1 = clone $now;
+    $date2 = clone $now;
+    $date2->modify('-1 day');
+}
+
+// Format ngày cho URL (d-m-Y)
+$formatDateForUrl = function($dateObj) {
+    return $dateObj->format('d-m-Y');
+};
+
+// Format ngày cho hiển thị (d/m/Y)
+$formatDateForDisplay = function($dateObj) {
+    return $dateObj->format('d/m/Y');
+};
+
+// Tính thời gian đã qua
+$getTimeAgo = function($dateObj) use ($now) {
+    if (!$dateObj) {
+        return '';
+    }
+    
+    $diff = $now->diff($dateObj);
+    $totalSeconds = $now->getTimestamp() - $dateObj->getTimestamp();
+    
+    // Nếu là ngày trong tương lai hoặc cùng ngày nhưng chưa đến giờ
+    if ($totalSeconds < 0) {
+        return 'Vừa mới';
+    }
+    
+    $days = floor($totalSeconds / 86400);
+    if ($days > 0) {
+        return $days . ' ngày trước';
+    }
+    
+    $hours = floor($totalSeconds / 3600);
+    if ($hours > 0) {
+        return $hours . ' giờ trước';
+    }
+    
+    $minutes = floor($totalSeconds / 60);
+    return ($minutes > 0 ? $minutes : 1) . ' phút trước';
+};
+
+// Lấy 2 bài dự đoán XSMB mới nhất từ DB
+$xsmbPredictions = PredictionArticles::find([
+    'conditions' => 'region = :region: AND (province_id IS NULL OR province_id = 0)',
+    'bind' => ['region' => 'XSMB'],
+    'order' => 'prediction_date DESC, created_at DESC',
+    'limit' => 2
+]);
+
+// Tạo danh sách bài viết Win2888
+$win2888Articles = [
+    [
+        'url' => '/soi-cau-xsmb-win2888-asia-' . $formatDateForUrl($date1) . '.html',
+        'title' => 'Soi cầu XSMB Win2888 ' . $formatDateForDisplay($date1) . ' chính xác nhất hôm nay',
+        'date' => $formatDateForDisplay($date1),
+        'time_ago' => $getTimeAgo($date1),
+        'image' => '/media/thumb/Thumb-Cate/soicau-win-2888-410x215.jpg',
+        'content' => 'Soi cầu XSMB Win2888 Asia ' . $formatDateForDisplay($date1) . ' - Dự đoán XSMB Win2888 từ các chuyên gia phân tích hàng đầu về xổ số với mong muốn đưa anh em vào bờ an toàn hôm nay. Những con số đẹp nhất đã được tìm thấy giúp anh em có thêm cơ hội dành được những giải thưởng lớn nhất.'
+    ],
+    [
+        'url' => '/soi-cau-xsmb-win2888-asia-' . $formatDateForUrl($date2) . '.html',
+        'title' => 'Soi cầu XSMB Win2888 ' . $formatDateForDisplay($date2) . ' chính xác nhất hôm nay',
+        'date' => $formatDateForDisplay($date2),
+        'time_ago' => $getTimeAgo($date2),
+        'image' => '/media/thumb/Thumb-Cate/soicau-win-2888-410x215.jpg',
+        'content' => 'Soi cầu XSMB Win2888 Asia ' . $formatDateForDisplay($date2) . ' - Dự đoán XSMB Win2888 từ các chuyên gia phân tích hàng đầu về xổ số với mong muốn đưa anh em vào bờ an toàn hôm nay. Những con số đẹp nhất đã được tìm thấy giúp anh em có thêm cơ hội dành được những giải thưởng lớn nhất.'
+    ]
+];
+
+// Tạo danh sách bài viết dự đoán số đề
+$soDeArticles = [
+    [
+        'url' => '/du-doan-so-de-hom-nay-' . $formatDateForUrl($date1) . '.html',
+        'title' => 'Dự đoán số đề ' . $formatDateForDisplay($date1) . ' - Chốt số đề XSMB hôm nay',
+        'date' => $formatDateForDisplay($date1),
+        'time_ago' => $getTimeAgo($date1),
+        'image' => '/media/thumb/Thumb-Cate/du-doan-so-de-410x215.jpg',
+        'content' => 'Dự đoán số đề luôn là phương pháp soi cầu đặc biệt được nhiều anh em tin tưởng và chờ đón mỗi ngày. Dự đoán số đề ' . $formatDateForDisplay($date1) . ' đem đến cho anh em những cặp đặc biệt đã chọn lọc đẹp nhất. Cùng theo dõi ngay nhé!'
+    ],
+    [
+        'url' => '/du-doan-so-de-hom-nay-' . $formatDateForUrl($date2) . '.html',
+        'title' => 'Dự đoán số đề ' . $formatDateForDisplay($date2) . ' - Chốt số đề XSMB hôm nay',
+        'date' => $formatDateForDisplay($date2),
+        'time_ago' => $getTimeAgo($date2),
+        'image' => '/media/thumb/Thumb-Cate/du-doan-so-de-410x215.jpg',
+        'content' => 'Dự đoán số đề luôn là phương pháp soi cầu đặc biệt được nhiều anh em tin tưởng và chờ đón mỗi ngày. Dự đoán số đề ' . $formatDateForDisplay($date2) . ' đem đến cho anh em những cặp đặc biệt đã chọn lọc đẹp nhất. Cùng theo dõi ngay nhé!'
+    ]
+];
+
+// Gom tất cả bài viết vào một mảng để sắp xếp
+$allArticles = [];
+
+// Thêm 2 bài dự đoán XSMB từ DB
+if ($xsmbPredictions && count($xsmbPredictions) > 0) {
+    foreach ($xsmbPredictions as $prediction) {
+        $predDate = $prediction->prediction_date ? new \DateTime($prediction->prediction_date, new \DateTimeZone('Asia/Ho_Chi_Minh')) : null;
+        $timestamp = 0;
+        
+        if ($predDate) {
+            // Set thời gian là 0h00 của ngày đó để sắp xếp đúng
+            $predDate->setTime(0, 0, 0);
+            $timestamp = $predDate->getTimestamp();
+        }
+        
+        $displayDate = $predDate ? $predDate->format('d/m/Y') : '';
+        $slug = $prediction->slug;
+        $url = '/' . (strpos($slug, '.html') !== false ? $slug : $slug . '.html');
+        $title = h($prediction->title);
+        $contentRaw = strip_tags($prediction->content ?? '');
+        $content = mb_strlen($contentRaw) > 150 ? mb_substr($contentRaw, 0, 150) . '...' : $contentRaw;
+        if (empty($content)) {
+            $content = 'Dự đoán XSMB ' . $displayDate . ' - Dự đoán kết quả xổ số miền Bắc hôm nay. Soi cầu XSMB ngày ' . $displayDate . ' phân tích kết quả XSMB chốt số lô giải tám, đặc biệt đầu đuôi, bao lô 2 số siêu chính xác.';
+        }
+        // Luôn dùng ảnh cứng cho bài dự đoán MB
+        $image = '/media/thumb/Thumb-Cate/du-doan-MB-410x215.jpg';
+        
+        $allArticles[] = [
+            'url' => $url,
+            'title' => $title,
+            'content' => $content,
+            'image' => $image,
+            'time_ago' => $predDate ? $getTimeAgo($predDate) : '',
+            'timestamp' => $timestamp,
+            'date_obj' => $predDate
+        ];
+    }
+}
+
+// Thêm 2 bài Win2888
+foreach ($win2888Articles as $article) {
+    $dateObj = \DateTime::createFromFormat('d/m/Y', $article['date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+    if (!$dateObj) {
+        continue;
+    }
+    // Set thời gian là 0h00 của ngày đó để sắp xếp đúng
+    $dateObj->setTime(0, 0, 0);
+    $timestamp = $dateObj->getTimestamp();
+    
+    $allArticles[] = [
+        'url' => $article['url'],
+        'title' => $article['title'],
+        'content' => $article['content'],
+        'image' => $article['image'],
+        'time_ago' => $getTimeAgo($dateObj),
+        'timestamp' => $timestamp,
+        'date_obj' => $dateObj
+    ];
+}
+
+// Thêm 2 bài dự đoán số đề
+foreach ($soDeArticles as $article) {
+    $dateObj = \DateTime::createFromFormat('d/m/Y', $article['date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+    if (!$dateObj) {
+        continue;
+    }
+    // Set thời gian là 0h00 của ngày đó để sắp xếp đúng
+    $dateObj->setTime(0, 0, 0);
+    $timestamp = $dateObj->getTimestamp();
+    
+        $allArticles[] = [
+        'url' => $article['url'],
+        'title' => $article['title'],
+        'content' => $article['content'],
+        'image' => $article['image'],
+        'time_ago' => $getTimeAgo($dateObj),
+        'timestamp' => $timestamp,
+        'date_obj' => $dateObj
+    ];
+}
+
+// Sắp xếp theo timestamp giảm dần (mới nhất trước)
+usort($allArticles, function($a, $b) {
+    return $b['timestamp'] - $a['timestamp'];
+});
+
+// Helper function để hiển thị một bài viết
+$renderArticle = function($article) {
+    ?>
+    <div class="row">
+        <div class="col-12 mt-3 mb-2">
+            <a class="text-blue1 font-16 font-weight-bold" href="<?= h($article['url']) ?>" title="<?= h($article['title']) ?>">
+                <?= h($article['title']) ?>
+            </a>
+        </div>
+        <div class="col-4 pr-2">
+            <a href="<?= h($article['url']) ?>" title="<?= h($article['title']) ?>">
+                <img loading="lazy" width="410" height="215" src="<?= h($article['image']) ?>" alt="<?= h($article['title']) ?>">
+            </a>
+        </div>
+        <div class="col-8 pl-2">
+            <p class="text-black1 font-14 lh-18px line-3 text-justify"><?= h($article['content']) ?></p>
+            <p class="mb-0 font-13 text-gray1"><?= h($article['time_ago']) ?></p>
+        </div>
+    </div>
+    <?php
+};
+?>
+
+<div class="my-3">
+    <h3 class="title-bg-blue border-radius-top mb-0">Dự đoán xổ số</h3>
+    <div class="border border-radius-bottom px-3 pb-3">
+        <?php
+        // Hiển thị tất cả bài viết đã được sắp xếp theo ngày mới nhất
+        foreach ($allArticles as $article) {
+            $renderArticle($article);
+        }
+        ?>
+    </div>
+</div>

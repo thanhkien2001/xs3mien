@@ -1,0 +1,284 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper" style="padding-left: 0;">
+        <div class="layout-row">
+            <div class="layout-col-12" style="padding-left: 0;">
+                <ul class="nav-sub" style="gap: 15px; padding: 0; margin: 0;">
+                    <li style="padding-left: 0;"><a title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a></li>
+                    <li><a title="Thống kê xổ số Miền Nam" href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+                    <li><a title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                    <li><a class="util-text-red" title="Thống kê Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power 6/55</a></li>
+                    <li><a title="Thống kê Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Thống kê Power 6/55</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1">Bảng thống kê chi tiết Vietlott Mega 6/55 cập nhật liên tục</h1>
+                    <ul class="list__subpage">
+                        <li><a title="Kết quả Power 6/55" href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y')) ?>">Kết Quả Power</a></li>
+                        <li><a title="Dự đoán Power 6/55" href="<?= $this->url->get('/du-doan-soi-cau-xo-so-power-6-55-vietlott-ngay-' . $nextDate1) . '-co-nen-xuong-tay' ?>">Dự đoán Power</a></li>
+                        <li><a title="Quay thử Power 6/55" href="/quay-thu-xo-so-power-6-55-hom-nay.html">Quay thử Power</a></li>
+                        <li><a class="util-text-red" title="Thống kê xổ số Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Thống kê Power 6/55 trong 100 kỳ quay
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            foreach ($numberFrequency as $number => $freq) {
+                                if ($count % 4 == 0) echo '<tr>';
+                            ?>
+                                <td><span class="ball small power"><?php echo $number; ?></span></td>
+                                <td><?php echo $freq; ?> lần</td>
+                            <?php
+                                $count++;
+                                if ($count % 4 == 0) echo '</tr>';
+                            }
+                            if ($count % 4 != 0) echo '</tr>';
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Thống kê 20 số Power xuất hiện nhiều
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            foreach ($top20Numbers as $number => $freq) {
+                                if ($count % 3 == 0) echo '<tr>';
+                            ?>
+                                <td><span class="ball small power"><?php echo $number; ?></span></td>
+                                <td><?php echo $freq; ?> lần</td>
+                            <?php
+                                $count++;
+                                if ($count % 3 == 0) echo '</tr>';
+                            }
+                            if ($count % 3 != 0) echo '</tr>';
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Thống kê 20 số Power ít xuất hiện
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php if (!empty($rareNumbers)): ?>
+                                <?php for ($i = 0; $i < 5; $i++): ?>
+                                    <tr>
+                                        <?php for ($j = $i * 4; $j < $i * 4 + 4 && isset($rareNumbers[$j]); $j++): ?>
+                                            <td><span class="ball small power"><?= htmlspecialchars($rareNumbers[$j]['number'] ?? '') ?></span></td>
+                                            <td><?= htmlspecialchars($rareNumbers[$j]['frequency'] ?? '0') ?> lần</td>
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="8" class="util-text-center">Không có dữ liệu số hiếm</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    20 số Power đặc biệt xuất hiện nhiều
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php if (!empty($top20SpecialNumbers)): ?>
+                                <?php
+                                $count = 0;
+                                foreach ($top20SpecialNumbers as $number => $freq) {
+                                    if ($count % 3 == 0) echo '<tr>';
+                                ?>
+                                    <td><span class="ball small green"><?php echo htmlspecialchars($number ?? ''); ?></span></td>
+                                    <td><?php echo htmlspecialchars($freq ?? '0'); ?> lần</td>
+                                <?php
+                                    $count++;
+                                    if ($count % 3 == 0) echo '</tr>';
+                                }
+                                if ($count % 3 != 0) echo '</tr>';
+                                ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="6" class="util-text-center">Không có dữ liệu số đặc biệt</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Cặp số Power 6/55 về nhiều thống kê
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            foreach ($top20Pairs as $pair => $freq) {
+                                if ($count % 2 == 0) echo '<tr>';
+                                $numbers = explode(',', $pair);
+                            ?>
+                                <td>
+                                    <div class="balls">
+                                        <?php foreach ($numbers as $num) { ?>
+                                            <span class="ball small power"><?php echo $num; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                                <td><?php echo $freq; ?> lần</td>
+                            <?php
+                                $count++;
+                                if ($count % 2 == 0) echo '</tr>';
+                            }
+                            if ($count % 2 != 0) echo '</tr>';
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Cặp số Power 6/55 ra liên tiếp thống kê
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            foreach ($top20ConsecutivePairs as $pair => $freq) {
+                                if ($count % 2 == 0) echo '<tr>';
+                                $numbers = explode(',', $pair);
+                            ?>
+                                <td>
+                                    <div class="balls">
+                                        <?php foreach ($numbers as $num) { ?>
+                                            <span class="ball small power"><?php echo $num; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                                <td><?php echo $freq; ?> lần</td>
+                            <?php
+                                $count++;
+                                if ($count % 2 == 0) echo '</tr>';
+                            }
+                            if ($count % 2 != 0) echo '</tr>';
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Bộ 3 số Power 6/55 xuất hiện nhiều
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            foreach ($topTriplets as $triplet => $freq) {
+                                if ($count % 2 == 0) echo '<tr>';
+                                $numbers = explode(',', $triplet);
+                            ?>
+                                <td>
+                                    <div class="balls">
+                                        <?php foreach ($numbers as $num) { ?>
+                                            <span class="ball small util-mx-1 power"><?php echo $num; ?></span>
+                                        <?php } ?>
+                                    </div>
+                                </td>
+                                <td><?php echo $freq; ?> lần</td>
+                            <?php
+                                $count++;
+                                if ($count % 2 == 0) echo '</tr>';
+                            }
+                            if ($count % 2 != 0) echo '</tr>';
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">
+                    Giá trị Jackpot Power 6/55 cao nhất
+                </h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Giải Jackpot</th>
+                                <th>Ngày quay thưởng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $stt = 1;
+                            foreach ($topJackpots as $jackpot) {
+                                $amount = number_format($jackpot['jackpot_amount'], 0, '.', ',') . ' ₫';
+                                $date = date('d/m/Y', strtotime($jackpot['draw_date']));
+                            ?>
+                                <tr>
+                                    <td><?php echo $stt++; ?></td>
+                                    <td class="fs-6"><?php echo $amount; ?></td>
+                                    <td><?php echo $date; ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+
+        .util-bg-white.util-shadow-sm {
+            margin-top: 54px !important;
+        }
+    }
+</style>

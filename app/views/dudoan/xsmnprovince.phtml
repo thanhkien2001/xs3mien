@@ -1,0 +1,159 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class=" " title="Dự đoán xổ số Miền Bắc" href="/du-doan-xsmb-c59.html">Dự đoán XSMB</a></li>
+                    <li><a class="util-text-red" title="Dự đoán xổ số Miền Nam" href="/du-doan-xsmn-c61.html">Dự đoán XSMN</a></li>
+                    <li><a class=" " title="Dự đoán xổ số Miền Trung" href="/du-doan-xsmt-c60.html">Dự đoán XSMT</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><a title="Dự đoán xổ số" href="/du-doan-xo-so-soi-cau.html"><span>Dự đoán xổ số</span></a></li>
+                        <li class="nav-breadcrumb-item"><span> Dự đoán <?= htmlspecialchars($provinceName) ?></span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header">
+                    <h1 class="page-title-h1 util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">Dự đoán Xổ Số <?= htmlspecialchars($provinceName) ?> - Soi Cầu <?= htmlspecialchars($provinceName) ?> - Dự đoán hôm nay</h1>
+                </div>
+            </div>
+            <h2 class="util-fs-6 util-ms-3 util-font-medium util-lh-base util-mt-4 util-mb-3">
+                Dự đoán kết quả XSMN <?= htmlspecialchars($provinceName) ?> hôm nay, soi cầu <?= htmlspecialchars($provinceName) ?> với những con số gợi ý cho giải tám, đặc biệt đầu đuôi và lô 2 số có tỷ lệ về cao.
+            </h2>
+            <ul class="list__subpage js-province-today"></ul>
+            <div class="util-mb-5">
+                <p class="comp-box-title util-lh-base">Dự đoán xổ số <?= htmlspecialchars($provinceName) ?> hôm nay</p>
+                <ul class="comp-list-articles js-comp-article-listing">
+                    <?php if ($predictions->count() > 0): ?>
+                    <?php foreach ($predictions as $index => $pred): ?>
+                    <li class="<?= $index === 0 ? 'is-first' : '' ?>">
+                        <a class="util-flex util-shadow-sm util-text-decoration-none util-p-4" href="/<?= htmlspecialchars($pred->slug) ?>.html" title="<?= htmlspecialchars($pred->title) ?>">
+                            <img class="comp-thumb-medium util-float-start util-me-3 util-lazy-load" src="<?= htmlspecialchars($pred->image_url ?? '/img/soicaududoan/xsmn/dudoanxsmn.png') ?>" style="display: block !important; opacity: 1 !important;" alt="<?= htmlspecialchars($pred->title) ?>">
+                            <aside>
+                                <h3 class="util-fs-7 util-font-medium util-lh-base"><?= htmlspecialchars($pred->title) ?></h3>
+                                <p class="util-text-body util-line-clamp-2"><?= htmlspecialchars(mb_substr(strip_tags($pred->content), 0, 200)) ?>...</p>
+                                <div class="article-meta">
+                                    <span class="util-text-muted util-small"><?= date('d/m/Y', strtotime($pred->prediction_date)) ?></span>
+                                </div>
+                            </aside>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <li class="util-text-center util-p-4">
+                        <p class="util-text-muted">Không có bài dự đoán nào cho tỉnh <?= htmlspecialchars($provinceName) ?>.</p>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+
+                <?php if ($predictions->count() > 0): ?>
+                <div class="util-grid util-mt-4">
+                    <div class="btn-base btn-green btn-lg util-rounded util-shadow-sm js-load-readmore-post-item" data-last-id="<?= $lastId ?>" data-type="dd" data-mien="12" data-province-id="<?= $province->id ?>">
+                        <span>Xem thêm</span>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+
+            <div class="comp-article-content util-shadow-sm util-rounded util-bg-white util-p-3 util-mt-2">
+                <p><a href="/du-doan-xo-so-soi-cau.html"><strong>Dự đoán XSMN</strong></a> - <strong>Soi cầu <?= htmlspecialchars($provinceName) ?></strong> trên soicau247.com không phải dự đoán mà thật chất là quá trình phân tích dựa trên cơ sở kỳ quay trước đó cùng với phương pháp xác suất thống kê chặt chẽ. Giúp người chơi chốt số đẹp tiềm năng cho tỉnh <?= htmlspecialchars($provinceName) ?>.</p>
+                <p>Lịch ra <strong>DD XSMN <?= htmlspecialchars($provinceName) ?></strong> ngày mới vào lúc <strong>19h00 mỗi ngày, </strong>các bạn chú ý để có thể xem sớm nhất.</p>
+                <p><span style="color: #ff0000;"><em>Lưu ý rằng: Soi cầu dự đoán Xổ số <?= htmlspecialchars($provinceName) ?> chính xác 100% đó là điều không thể. Kết quả dự đoán chỉ mang tính chất tham khảo, người chơi nên cân nhắc và không nên chơi lô đề, chỉ nên chơi xổ số do nhà nước phát hành.</em></span></p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+</main>
+
+<script src="/js/dudoan/dudoanmn.js"></script>
+<script>
+    // Schedule for XSMN provinces
+    const SCHEDULE_MN = {
+        1: ["Cà Mau", "Hồ Chí Minh", "Đồng Tháp"],
+        2: ["Bạc Liêu", "Bến Tre", "Vũng Tàu"],
+        3: ["Cần Thơ", "Sóc Trăng", "Đồng Nai"],
+        4: ["An Giang", "Bình Thuận", "Tây Ninh"],
+        5: ["Bình Dương", "Trà Vinh", "Vĩnh Long"],
+        6: ["Bình Phước", "Hậu Giang", "Hồ Chí Minh", "Long An"],
+        0: ["Kiên Giang", "Tiền Giang", "Đà Lạt"]
+    };
+
+    // Province mapping for XSMN
+    const PROV_SLUG_MAP = {
+        "An Giang": "xsag",
+        "Bạc Liêu": "xsblieu",
+        "Bến Tre": "xsbtr",
+        "Bình Dương": "xsbd",
+        "Bình Phước": "xsbp",
+        "Bình Thuận": "xsbthuan",
+        "Cà Mau": "xscm",
+        "Cần Thơ": "xsct",
+        "Đà Lạt": "xsdl",
+        "Đồng Nai": "xsdn",
+        "Đồng Tháp": "xsdthap",
+        "Hậu Giang": "xshg",
+        "Hồ Chí Minh": "xshcm",
+        "Kiên Giang": "xskg",
+        "Long An": "xsla",
+        "Sóc Trăng": "xsst",
+        "Tây Ninh": "xstn",
+        "Tiền Giang": "xstg",
+        "Trà Vinh": "xstv",
+        "Vĩnh Long": "xsvl",
+        "Vũng Tàu": "xsvt"
+    };
+
+    function createProvinceUrl(provinceName) {
+        const provinceSlug = PROV_SLUG_MAP[provinceName];
+        if (!provinceSlug) {
+            console.warn(`No slug mapping found for province: ${provinceName}`);
+            return '#';
+        }
+        return `/du-doan-${provinceSlug}.html`;
+    }
+
+    function renderTodayProvinces() {
+        const now = new Date();
+        const dayOfWeek = now.getDay();
+        const todayProvinces = SCHEDULE_MN[dayOfWeek] || [];
+
+        const container = document.querySelector('.js-province-today');
+        if (!container) return;
+
+        let html = '';
+        todayProvinces.forEach(provinceName => {
+            const url = createProvinceUrl(provinceName);
+            const title = `Dự đoán XSMN ${provinceName}`;
+            const currentClass = provinceName === '<?= htmlspecialchars($provinceName) ?>' ? ' class="current"' : '';
+            html += `<li><a${currentClass} title="${title}" href="${url}"> Dự đoán ${provinceName}</a></li>`;
+        });
+
+        container.innerHTML = html;
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        renderTodayProvinces();
+    });
+</script>
+
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+    }
+</style>

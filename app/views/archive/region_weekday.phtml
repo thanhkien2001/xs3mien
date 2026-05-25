@@ -1,0 +1,556 @@
+<?php
+$esc = $this->escaper;
+$region = strtolower($region);
+$active = $weekdaySlug ?? '';
+
+function getProvinceUrl($provinceName)
+{
+    $urlMap = [
+        // XSMN - Miền Nam
+        'An Giang' => '/ket-qua-xo-so-an-giang-xsag.html',
+        'Bạc Liêu' => '/ket-qua-xo-so-bac-lieu-xsblieu.html',
+        'Bến Tre' => '/ket-qua-xo-so-ben-tre-xsbtr.html',
+        'Bình Dương' => '/ket-qua-xo-so-binh-duong-xsbduong.html',
+        'Bình Phước' => '/ket-qua-xo-so-binh-phuoc-xsbp.html',
+        'Bình Thuận' => '/ket-qua-xo-so-binh-thuan-xsbthuan.html',
+        'Cà Mau' => '/ket-qua-xo-so-ca-mau-xscm.html',
+        'Cần Thơ' => '/ket-qua-xo-so-can-tho-xsct.html',
+        'Đà Lạt' => '/ket-qua-xo-so-da-lat-xsdl.html',
+        'Đồng Nai' => '/ket-qua-xo-so-dong-nai-xsdn.html',
+        'Đồng Tháp' => '/ket-qua-xo-so-dong-thap-xsdthap.html',
+        'Hậu Giang' => '/ket-qua-xo-so-hau-giang-xshg.html',
+        'TP. Hồ Chí Minh' => '/ket-qua-xo-so-ho-chi-minh-xshcm.html',
+        'Kiên Giang' => '/ket-qua-xo-so-kien-giang-xskg.html',
+        'Long An' => '/ket-qua-xo-so-long-an-xsla.html',
+        'Sóc Trăng' => '/ket-qua-xo-so-soc-trang-xsst.html',
+        'Tây Ninh' => '/ket-qua-xo-so-tay-ninh-xstn.html',
+        'Tiền Giang' => '/ket-qua-xo-so-tien-giang-xstg.html',
+        'Trà Vinh' => '/ket-qua-xo-so-tra-vinh-xstv.html',
+        'Vĩnh Long' => '/ket-qua-xo-so-vinh-long-xsvl.html',
+        'Vũng Tàu' => '/ket-qua-xo-so-vung-tau-xsvt.html',
+
+        // XSMT - Miền Trung
+        'Bình Định' => '/ket-qua-xo-so-binh-dinh-xsbdinh.html',
+        'Đà Nẵng' => '/ket-qua-xo-so-da-nang-xsdna.html',
+        'Đắk Lắk' => '/ket-qua-xo-so-dak-lak-xsdlk.html',
+        'Đắk Nông' => '/ket-qua-xo-so-dak-nong-xsdnong.html',
+        'Gia Lai' => '/ket-qua-xo-so-gia-lai-xsgl.html',
+        'Huế' => '/ket-qua-xo-so-hue-xstth.html',
+        'Khánh Hòa' => '/ket-qua-xo-so-khanh-hoa-xskhoa.html',
+        'Kon Tum' => '/ket-qua-xo-so-kon-tum-xskontum.html',
+        'Ninh Thuận' => '/ket-qua-xo-so-ninh-thuan-xsnt.html',
+        'Phú Yên' => '/ket-qua-xo-so-phu-yen-xspy.html',
+        'Quảng Bình' => '/ket-qua-xo-so-quang-binh-xsqb.html',
+        'Quảng Nam' => '/ket-qua-xo-so-quang-nam-xsqn.html',
+        'Quảng Ngãi' => '/ket-qua-xo-so-quang-ngai-xsqng.html',
+        'Quảng Trị' => '/ket-qua-xo-so-quang-tri-xsqtri.html',
+    ];
+
+    return $urlMap[$provinceName] ?? '#';
+}
+
+function getWeekdayUrl($region, $weekdaySlug)
+{
+    $regionLower = strtolower($region);
+    $regionUrls = [
+        'xsmb' => "/xsmb-{$weekdaySlug}-ket-qua-xo-so-mien-bac.html",
+        'xsmn' => "/xsmn-{$weekdaySlug}-ket-qua-xo-so-mien-nam.html",
+        'xsmt' => "/xsmt-{$weekdaySlug}-ket-qua-xo-so-mien-trung.html",
+    ];
+    return $regionUrls[$regionLower] ?? $regionUrls['xsmb'];
+}
+
+function getDateUrl($region, $dateObj)
+{
+    $regionLower = strtolower($region);
+    $dayMonth = $dateObj->format('j-n');
+    $fullDate = $dateObj->format('j-n-Y');
+
+    $regionUrls = [
+        'xsmb' => "/xsmb-{$dayMonth}-ket-qua-xo-so-mien-bac-ngay-{$fullDate}.html",
+        'xsmn' => "/xsmn-{$dayMonth}-ket-qua-xo-so-mien-nam-ngay-{$fullDate}.html",
+        'xsmt' => "/xsmt-{$dayMonth}-ket-qua-xo-so-mien-trung-ngay-{$fullDate}.html",
+    ];
+    return $regionUrls[$regionLower] ?? $regionUrls['xsmb'];
+}
+?>
+
+<main>
+    <div class="container">
+        <!-- Submenu ngày trong tuần -->
+        <div class="row">
+            <div class="w-100">
+                <div class="submenu2">
+                    <ul class="row flex-nowrap text-nowrap overflow-auto mx-0 rounded lh-25 submenu2-bg pl-0 pl-md-3">
+                    <?php
+                    $regionUrls = [
+                        'xsmb' => [
+                                'base' => '/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html',
+                            'thu-2' => '/xsmb-thu-2-ket-qua-xo-so-mien-bac.html',
+                            'thu-3' => '/xsmb-thu-3-ket-qua-xo-so-mien-bac.html',
+                            'thu-4' => '/xsmb-thu-4-ket-qua-xo-so-mien-bac.html',
+                            'thu-5' => '/xsmb-thu-5-ket-qua-xo-so-mien-bac.html',
+                            'thu-6' => '/xsmb-thu-6-ket-qua-xo-so-mien-bac.html',
+                            'thu-7' => '/xsmb-thu-7-ket-qua-xo-so-mien-bac.html',
+                            'chu-nhat' => '/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html'
+                        ],
+                        'xsmn' => [
+                                'base' => '/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html',
+                            'thu-2' => '/xsmn-thu-2-ket-qua-xo-so-mien-nam.html',
+                            'thu-3' => '/xsmn-thu-3-ket-qua-xo-so-mien-nam.html',
+                            'thu-4' => '/xsmn-thu-4-ket-qua-xo-so-mien-nam.html',
+                            'thu-5' => '/xsmn-thu-5-ket-qua-xo-so-mien-nam.html',
+                            'thu-6' => '/xsmn-thu-6-ket-qua-xo-so-mien-nam.html',
+                            'thu-7' => '/xsmn-thu-7-ket-qua-xo-so-mien-nam.html',
+                            'chu-nhat' => '/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html'
+                        ],
+                        'xsmt' => [
+                                'base' => '/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html',
+                            'thu-2' => '/xsmt-thu-2-ket-qua-xo-so-mien-trung.html',
+                            'thu-3' => '/xsmt-thu-3-ket-qua-xo-so-mien-trung.html',
+                            'thu-4' => '/xsmt-thu-4-ket-qua-xo-so-mien-trung.html',
+                            'thu-5' => '/xsmt-thu-5-ket-qua-xo-so-mien-trung.html',
+                            'thu-6' => '/xsmt-thu-6-ket-qua-xo-so-mien-trung.html',
+                            'thu-7' => '/xsmt-thu-7-ket-qua-xo-so-mien-trung.html',
+                            'chu-nhat' => '/xsmt-chu-nhat-ket-qua-xo-so-mien-trung.html'
+                        ]
+                    ];
+
+                        $currentRegionUrls = $regionUrls[$region] ?? $regionUrls['xsmt'];
+                        $regionName = strtoupper($region) === 'XSMT' ? 'Miền Trung' : (strtoupper($region) === 'XSMN' ? 'Miền Nam' : 'Miền Bắc');
+                        ?>
+                        <li class="px-2 px-lg-3 <?= empty($active) ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['base'] ?>" title="<?= $regionName ?>"><?= strtoupper($region) ?></a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-2' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['thu-2'] ?>" title="thứ 2">thứ 2</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-3' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['thu-3'] ?>" title="thứ 3">thứ 3</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-4' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['thu-4'] ?>" title="thứ 4">thứ 4</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-5' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['thu-5'] ?>" title="thứ 5">thứ 5</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-6' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['thu-6'] ?>" title="thứ 6">thứ 6</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-7' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['thu-7'] ?>" title="thứ 7">thứ 7</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'chu-nhat' ? 'active' : '' ?>">
+                            <a href="<?= $currentRegionUrls['chu-nhat'] ?>" title="chủ nhật">chủ nhật</a>
+                        </li>
+                </ul>
+        </div>
+    </div>
+</div>
+
+        <!-- Breadcrumb -->
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="<?= $esc->escapeHtmlAttr($todayHref) ?>" title="<?= strtoupper($region) ?>">
+                                <?= strtoupper($region) ?>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="<?= $esc->escapeHtmlAttr(getWeekdayUrl(strtoupper($region), $weekdaySlug)) ?>" title="Xổ số <?= $regionName ?> <?= $esc->escapeHtml($weekdayText) ?>">
+                                Xổ số <?= $regionName ?> <?= $esc->escapeHtml($weekdayText) ?>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-610">
+                <div id="ajax_content" class="category-dayofweek d-flex flex-column">
+
+            <?php foreach ($sections as $secIndex => $sec):
+                $dateObj = $sec['date'];
+                $dmy = $dateObj->format('d/m/Y');
+                        $dateSlug = $dateObj->format('d-m-Y');
+
+                $provinces = $sec['provinces'];
+                        $results = $sec['resultsForView'];
+                    ?>
+                    
+                    <article class="my-2">
+                        <?php if (strtoupper($region) === 'XSMB'): ?>
+                            <!-- XSMB: Bảng 1 cột -->
+                            <div class="result result-single rounded">
+                                <h2 class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+                                    Xổ số Miền Bắc ngày <?= $esc->escapeHtml($dmy) ?>
+                                </h2>
+                                
+                                <div class="breadcrumb-table">
+                                    <h4 class="breadcrumb-table-title">
+                                        <a href="<?= $currentRegionUrls['base'] ?>" title="<?= $regionName ?>">
+                                            <?= strtoupper($region) ?>
+                                        </a>
+                                        /
+                                        <a href="<?= $esc->escapeHtmlAttr(getWeekdayUrl(strtoupper($region), $weekdaySlug)) ?>" title="<?= strtoupper($region) ?> <?= $esc->escapeHtml($weekdayText) ?>">
+                                            <?= strtoupper($region) ?> <?= $esc->escapeHtml($weekdayText) ?>
+                                        </a>
+                                        /
+                                        <a href="/xsmb-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMB <?= $esc->escapeHtml($dmy) ?>">
+                                            XSMB <?= $esc->escapeHtml($dmy) ?>
+                                        </a>
+                                    </h4>
+                        </div>
+
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result" data-code="XSMB">
+                            <tbody>
+                                <?php
+                                            // XSMB chỉ có 1 tỉnh
+                                            $firstProvinceId = $provinces[0]['id'] ?? null;
+                                            $firstResult = $firstProvinceId ? ($results[$firstProvinceId] ?? null) : null;
+                                            
+                                            if ($firstResult && !empty($firstResult['prizes'])):
+                                            ?>
+                                            <!-- Mã đặc biệt (LV codes) -->
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div class="d-flex justify-content-between font-16 p-2">
+                                                        <?php
+                                                        $lvCodes = is_array($firstResult['lv'] ?? null) ? $firstResult['lv'] : [];
+                                                        foreach ($lvCodes as $lv):
+                                                            $lv = trim($lv);
+                                                            if ($lv):
+                                                                // Tách các mã theo dấu -
+                                                                $codes = explode('-', $lv);
+                                                                foreach ($codes as $code):
+                                                                    $code = trim($code);
+                                                                    if ($code):
+                                                        ?>
+                                                        <span class="text-number" nc="5"><?= $esc->escapeHtml($code) ?></span>
+                                                        <?php
+                                                                    endif;
+                                                                endforeach;
+                                                            endif;
+                                                        endforeach;
+                                                        ?>
+                                                    </div>
+                                                </td>
+                                    </tr>
+                                    <tr>
+                                                <td>ĐB</td>
+                                                <td>
+                                                    <?php
+                                                    $dbPrizes = $firstResult['prizes'][1] ?? [];
+                                                    foreach ($dbPrizes as $prize):
+                                                        $prize = trim($prize);
+                                                        if ($prize):
+                                                    ?>
+                                                    <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                    </tr>
+                                    <tr>
+                                                <td>G1</td>
+                                                <td>
+                                            <?php
+                                                    $g1Prizes = $firstResult['prizes'][2] ?? [];
+                                                    foreach ($g1Prizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                                <td>G2</td>
+                                                <td>
+                                            <?php
+                                                    $g2Prizes = $firstResult['prizes'][3] ?? [];
+                                                    foreach ($g2Prizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                                <td>G3</td>
+                                        <td>
+                                            <?php
+                                                    $g3Prizes = $firstResult['prizes'][4] ?? [];
+                                                    foreach ($g3Prizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                                <td>G4</td>
+                                        <td>
+                                            <?php
+                                                    $g4Prizes = $firstResult['prizes'][5] ?? [];
+                                                    foreach ($g4Prizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="text-number" nc="4"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                                <td>G5</td>
+                                        <td>
+                                            <?php
+                                                    $g5Prizes = $firstResult['prizes'][6] ?? [];
+                                                    foreach ($g5Prizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="text-number" nc="4"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                                <td>G6</td>
+                                        <td>
+                                            <?php
+                                                    $g6Prizes = $firstResult['prizes'][7] ?? [];
+                                                    foreach ($g6Prizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                                    <span class="text-number" nc="3"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                            <tr>
+                                                <td>G7</td>
+                                                <td>
+                                                    <?php
+                                                    $g7Prizes = $firstResult['prizes'][8] ?? [];
+                                                    foreach ($g7Prizes as $prize):
+                                                        $prize = trim($prize);
+                                                        if ($prize):
+                                                    ?>
+                                                    <span class="text-number" nc="2"><?= $esc->escapeHtml($prize) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                                </div>
+                            </div>
+
+                            <!-- Lô tô XSMB -->
+                            <div class="loto loto-single">
+                                <table class="table table-bordered table-striped table-xslt-single-col">
+                                    <thead>
+                                        <tr>
+                                <th>Đầu</th>
+                                <th>Lô tô</th>
+                                            <th>Đuôi</th>
+                                <th>Lô tô</th>
+                                        </tr>
+                            </thead>
+                            <tbody>
+                                        <?php for ($head = 0; $head <= 9; $head++): ?>
+                                        <tr>
+                                            <td><?= $head ?></td>
+                                            <td>
+                                                <?php
+                                                $dauVals = $firstResult['dau'][$head] ?? [];
+                                                if (!empty($dauVals)):
+                                                    foreach ($dauVals as $v):
+                                                ?>
+                                                <span><?= $esc->escapeHtml($v) ?></span>
+                                            <?php
+                                                    endforeach;
+                                                endif;
+                                            ?>
+                                        </td>
+                                            <td><?= $head ?></td>
+                                            <td>
+                                                <?php
+                                                $duoiVals = $firstResult['duoi'][$head] ?? [];
+                                                if (!empty($duoiVals)):
+                                                    foreach ($duoiVals as $v):
+                                                ?>
+                                                <span><?= $esc->escapeHtml($v) ?></span>
+                                            <?php
+                                                    endforeach;
+                                                endif;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                            </div>
+
+                    <?php else: ?>
+                            <!-- XSMT/XSMN: Bảng nhiều cột -->
+                            <div class="result result-multi rounded">
+                                <h2 class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+                                    Xổ số <?= $regionName ?> ngày <?= $esc->escapeHtml($dmy) ?>
+                                </h2>
+                                
+                                <div class="breadcrumb-table">
+                                    <h4 class="breadcrumb-table-title">
+                                        <a href="<?= $currentRegionUrls['base'] ?>" title="<?= $regionName ?>">
+                                            <?= strtoupper($region) ?>
+                                        </a>
+                                        /
+                                        <a href="<?= $esc->escapeHtmlAttr(getWeekdayUrl(strtoupper($region), $weekdaySlug)) ?>" title="<?= strtoupper($region) ?> <?= $esc->escapeHtml($weekdayText) ?>">
+                                            <?= strtoupper($region) ?> <?= $esc->escapeHtml($weekdayText) ?>
+                                        </a>
+                                        /
+                                        <a href="<?= getDateUrl(strtoupper($region), $dateObj) ?>" title="<?= strtoupper($region) ?> <?= $esc->escapeHtml($dmy) ?>">
+                                            <?= strtoupper($region) ?> <?= $esc->escapeHtml($dmy) ?>
+                                        </a>
+                                    </h4>
+                                </div>
+
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result" data-code="<?= strtoupper($region) ?>">
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <?php foreach ($provinces as $province): ?>
+                                                <td>
+                                                    <a href="<?= getProvinceUrl($province['name']) ?>" title="XS<?= $esc->escapeHtmlAttr($province['code']) ?>">
+                                                        <?= $esc->escapeHtml($province['name']) ?>
+                                                    </a>
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+
+                                            <?php
+                                            $prizeLabels = ['G8', 'G7', 'G6', 'G5', 'G4', 'G3', 'G2', 'G1', 'ĐB'];
+                                            $prizeIndexes = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+                                            $ncValues = [2, 3, 4, 4, 5, 5, 5, 5, 6];
+                                            
+                                            foreach ($prizeLabels as $idx => $label):
+                                                $prizeIdx = $prizeIndexes[$idx];
+                                                $nc = $ncValues[$idx];
+                                            ?>
+                                            <tr>
+                                                <td><?= $label ?></td>
+                                                <?php foreach ($provinces as $province): ?>
+                                                <td>
+                                                    <?php
+                                                    $prizes = $results[$province['id']]['prizes'][$prizeIdx] ?? [];
+                                                    if (is_array($prizes) && !empty($prizes)):
+                                                        foreach ($prizes as $prize):
+                                                            $prize = trim($prize);
+                                                            if ($prize):
+                                                    ?>
+                                                    <span class="text-number" nc="<?= $nc ?>"><?= $esc->escapeHtml($prize) ?></span>
+                                                    <?php
+                                                            endif;
+                                                        endforeach;
+                                                    endif;
+                                                    ?>
+                                                </td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Lô tô XSMT/XSMN -->
+                            <div class="loto loto-multi rounded">
+                                <table class="table table-bordered table-striped table-xslt-multi-col" data-code="<?= strtoupper($region) ?>">
+                                    <thead>
+                                        <tr>
+                                            <th>Đầu</th>
+                                            <?php foreach ($provinces as $province): ?>
+                                            <th><?= $esc->escapeHtml($province['name']) ?></th>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php for ($head = 0; $head <= 9; $head++): ?>
+                                        <tr>
+                                            <td><?= $head ?></td>
+                                            <?php foreach ($provinces as $province): ?>
+                                            <td>
+                                                <?php
+                                                $dau = $results[$province['id']]['dau'] ?? array_fill(0, 10, []);
+                                                $vals = $dau[$head] ?? [];
+                                                if (!empty($vals)):
+                                                    foreach ($vals as $v):
+                                                ?>
+                                                <span><?= $esc->escapeHtml($v) ?></span>
+                                                <?php
+                                                    endforeach;
+                                                endif;
+                                            ?>
+                                        </td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            <?php endfor; ?>
+                                    </tbody>
+                        </table>
+                            </div>
+                    <?php endif; ?>
+                    </article>
+                    
+            <?php endforeach; ?>
+
+                </div>
+
+                <!-- Nội dung text SEO -->
+                <?php $this->partial('archive/weekday_seo_content'); ?>
+
+            </div>
+
+            <!-- Sidebar Left -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- Sidebar Right -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+    </div>
+    </div>
+</main>

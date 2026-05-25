@@ -1,0 +1,89 @@
+<?php
+$regionUpper = strtoupper($region);
+$weekdayText = $weekdayText ?? '';
+$isMB = ($regionUpper === 'XSMB');
+$isMN = ($regionUpper === 'XSMN');
+$isMT = ($regionUpper === 'XSMT');
+
+$drawInfo = [
+    'XSMB' => [
+        'thu-2' => ['province' => 'thủ đô Hà Nội', 'address' => 'số 53E Hàng Bài, quận Hoàn Kiếm, TP. Hà Nội'],
+        'thu-3' => ['province' => 'tỉnh Quảng Ninh', 'address' => 'số 166 Lê Thánh Tông, TP. Hạ Long, tỉnh Quảng Ninh'],
+        'thu-4' => ['province' => 'tỉnh Bắc Ninh', 'address' => 'số 27 đường Nguyễn Đăng Đạo, TP. Bắc Ninh'],
+        'thu-5' => ['province' => 'thủ đô Hà Nội', 'address' => 'số 53E Hàng Bài, quận Hoàn Kiếm, TP. Hà Nội'],
+        'thu-6' => ['province' => 'thành phố Hải Phòng', 'address' => 'số 19 Điện Biên Phủ, quận Hồng Bàng, TP. Hải Phòng'],
+        'thu-7' => ['province' => 'tỉnh Nam Định', 'address' => 'số 157 đường Trần Hưng Đạo, TP. Nam Định'],
+        'chu-nhat' => ['province' => 'tỉnh Thái Bình', 'address' => 'số 03 đường Quang Trung, TP. Thái Bình']
+    ],
+    'XSMN' => [
+        'thu-2' => 'thành phố Hồ Chí Minh, Đồng Tháp và Cà Mau',
+        'thu-3' => 'Bến Tre, Vũng Tàu và Bạc Liêu',
+        'thu-4' => 'Đồng Nai, Cần Thơ và Sóc Trăng',
+        'thu-5' => 'Tây Ninh, An Giang và Bình Thuận',
+        'thu-6' => 'Vĩnh Long, Bình Dương và Trà Vinh',
+        'thu-7' => 'thành phố Hồ Chí Minh, Long An, Bình Phước và Hậu Giang',
+        'chu-nhat' => 'Tiền Giang, Kiên Giang và Đà Lạt'
+    ],
+    'XSMT' => [
+        'thu-2' => 'Thừa Thiên Huế và Phú Yên',
+        'thu-3' => 'Quảng Nam và Đắk Lắk',
+        'thu-4' => 'Đà Nẵng và Khánh Hòa',
+        'thu-5' => 'Bình Định, Quảng Trị và Quảng Ngãi',
+        'thu-6' => 'Gia Lai và Ninh Thuận',
+        'thu-7' => 'Đà Nẵng, Quảng Ngãi và Đắk Nông',
+        'chu-nhat' => 'Kon Tum và Khánh Hòa'
+    ]
+];
+
+$info = $drawInfo[$regionUpper][$weekdaySlug] ?? null;
+?>
+
+<?php if ($info): ?>
+<div class="new-content mt-3 text-justify">
+    <?php if ($isMB): ?>
+        <h2 style="text-align: justify;">Xổ số miền Bắc <?= $weekdayText ?></h2>
+        <p style="text-align: justify;">XSMB <?= $weekdayText ?> - Kết quả XSMB <?= $weekdayText ?> cập nhật kết quả xổ số miền Bắc <?= $weekdayText ?> hàng tuần nhanh chóng và chính xác nhất. Khi truy cập vào XSMB <?= $weekdayText ?> tại <a href="/">Soi cầu 247</a> anh em có thể dễ dàng xem lại kết quả xổ số <?= $weekdayText ?> tuần trước hoặc tháng trước cực kỳ tiện lợi và hoàn toàn miễn phí.</p>
+        <p style="text-align: justify;">Trang kết quả XSMB <?= $weekdayText ?> sẽ cung cấp cho anh em thông tin xổ số miền Bắc <?= $weekdayText ?> trong vòng 7 kỳ quay thưởng liên tiếp. Giúp người chơi có thể tìm được quy luật về số trong mỗi <?= $weekdayText ?> hàng tuần. Đặc biệt chuyên trang của chúng tôi có hệ thống tính toán siêu hiện đại, cực chuẩn xác còn giúp anh em dự đoán những con số may mắn về <?= $weekdayText ?> mỗi tuần, bảng thống kê lô mỗi ngày tăng thêm cơ hội chốt số chính xác nhất cho anh em.</p>
+        
+        <h3 style="text-align: justify;">Thời gian và địa điểm quay thưởng XSMB <?= $weekdayText ?></h3>
+        <p style="text-align: justify;">XSMB <?= $weekdayText ?> được mở thưởng tại đài xổ số <?= $info['province'] ?> vào lúc 18 giờ 15 phút hàng tuần.</p>
+        <p style="text-align: justify;">Địa điểm mở thưởng <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html">xổ số miền Bắc</a> <?= $weekdayText ?>: Công ty Xổ số Kiến Thiết <?= is_array($info) ? ($info['province'] === 'thủ đô Hà Nội' ? 'Hà Nội' : str_replace(['tỉnh ', 'thành phố '], '', $info['province'])) : '' ?> tại <?= $info['address'] ?>.</p>
+
+        <h3 style="text-align: justify;">Cơ cấu giải thưởng XSMB <?= $weekdayText ?></h3>
+        <p style="text-align: justify;">Giải thưởng XSMB <?= $weekdayText ?> có tất cả 81.150 giải thưởng được chia như sau:</p>
+        <p style="text-align: justify;">- Giải đặc biệt có 1 lần quay, 5 chữ số và số lượng 3 giải mỗi giải nhận 1 tỷ đồng.</p>
+        <p style="text-align: justify;">- Giải nhất có 1 lần quay, có 15 giải nhất và mỗi giải nhận thưởng 10 triệu đồng.</p>
+        <p style="text-align: justify;">- Có 30 giải nhì với 2 lần quay, mỗi giải nhận 5 triệu đồng.</p>
+        <p style="text-align: justify;">- Có 90 giải ba với 6 lần quay, mỗi giải nhận 1 triệu đồng.</p>
+        <p style="text-align: justify;">- Có 600 giải tư với 4 lần quay và mỗi giải nhận về 400 nghìn đồng.</p>
+        <p style="text-align: justify;">- Có 900 giải năm với 4 lần quay thưởng và mỗi giải trị giá 200 nghìn đồng.</p>
+        <p style="text-align: justify;">- Có 4.500 giải sáu với 3 lần quay thưởng và mỗi giải trị giá 100 nghìn đồng.</p>
+        <p style="text-align: justify;">- Có 60.000 giải bảy với 4 lần quay và mỗi giải trị giá 40 nghìn đồng.</p>
+        <p style="text-align: justify;">- Ngoài ra, còn có giải phụ là những tờ vé số trùng với các số của giải đặc biệt nhưng khác ký hiệu thì sẽ nhận giải thưởng trị giá 20 triệu đồng và có tất cả 12 giải.</p>
+        <p style="text-align: justify;">- Giải khuyến khích dành cho những tờ vé số trùng 2 số cuối của hàng đơn vị với 2 số cuối của giải ĐB thì nhận giải thưởng trị giá 40 nghìn đồng và có 15.000 giải khuyến khích.</p>
+        <p style="text-align: justify;">Nếu người chơi may mắn sở hữu tấm vé có dãy số trùng with nhiều giải trong kỳ quay thưởng <a href="/xsmb-<?= $weekdaySlug ?>-ket-qua-xo-so-mien-bac.html">XSMB <?= $weekdayText ?></a> thì sẽ nhận được cùng lúc tất cả các giải thưởng đó.</p>
+
+    <?php else: ?>
+        <h2 style="text-align: justify;">Xổ số Miền <?= $isMN ? 'Nam' : 'Trung' ?> <?= $weekdayText ?></h2>
+        <p style="text-align: justify;">XSM<?= $isMN ? 'N' : 'T' ?> <?= $weekdayText ?> - Kết quả XSM<?= $isMN ? 'N' : 'T' ?> <?= $weekdayText ?> cập nhật kết quả xổ số miền <?= $isMN ? 'Nam' : 'Trung' ?> <?= $weekdayText ?> hàng tuần nhanh chóng và chính xác nhất. Khi truy cập vào XSM<?= $isMN ? 'N' : 'T' ?> <?= $weekdayText ?> tại <a href="/">Soi cầu 247</a> anh em có thể dễ dàng xem lại kết quả xổ số <?= $weekdayText ?> tuần trước hoặc tháng trước cực kỳ tiện lợi và hoàn toàn miễn phí.</p>
+        <p style="text-align: justify;">Trang kết quả XSM<?= $isMN ? 'N' : 'T' ?> <?= $weekdayText ?> sẽ cung cấp cho anh em thông tin xổ số miền <?= $isMN ? 'Nam' : 'Trung' ?> <?= $weekdayText ?> trong vòng nhiều kỳ quay thưởng liên tiếp. Giúp người chơi có thể tìm được quy luật về số trong mỗi <?= $weekdayText ?> hàng tuần. Hệ thống tính toán của chúng tôi giúp anh em thống kê và dự đoán những con số may mắn nhất, tăng thêm cơ hội chốt số chính xác.</p>
+        
+        <h3 style="text-align: justify;">Thời gian và địa điểm quay thưởng XSM<?= $isMN ? 'N' : 'T' ?> <?= $weekdayText ?></h3>
+        <p style="text-align: justify;">Lịch quay thưởng xổ số <?= $isMN ? 'Nam' : 'Trung' ?> <?= $weekdayText ?> được thực hiện vào lúc 16h15 hàng tuần đối với miền Nam và 17h15 đối with miền Trung.</p>
+        <p style="text-align: justify;">Các đài quay thưởng <?= $isMN ? 'Miền Nam' : 'Miền Trung' ?> <?= $weekdayText ?> bao gồm: <?= $info ?>.</p>
+
+        <h3 style="text-align: justify;">Cơ cấu giải thưởng XSM<?= $isMN ? 'N' : 'T' ?> <?= $weekdayText ?></h3>
+        <p style="text-align: justify;">Cơ cấu giải thưởng xổ số miền <?= $isMN ? 'Nam' : 'Trung' ?> <?= $weekdayText ?> có 18 lô giải từ giải Tám đến giải Đặc biệt:</p>
+        <p style="text-align: justify;">- 1 giải đặc biệt: giải thưởng trị giá 2 tỷ đồng dành cho những tờ vé số có 6 chữ số trùng với kỳ quay.</p>
+        <p style="text-align: justify;">- 1 giải nhất: giải thưởng 30 triệu đồng - có 5 chữ số.</p>
+        <p style="text-align: justify;">- 1 giải nhì: giải thưởng 15 triệu đồng - có 5 chữ số.</p>
+        <p style="text-align: justify;">- 2 giải ba: mỗi giải nhận 10 triệu đồng - có 5 chữ số.</p>
+        <p style="text-align: justify;">- 7 giải tư: mỗi giải nhận 3 triệu đồng - có 5 chữ số.</p>
+        <p style="text-align: justify;">- 10 giải năm: mỗi giải nhận 1 triệu đồng - có 4 chữ số.</p>
+        <p style="text-align: justify;">- 30 giải sáu: mỗi giải nhận 400 nghìn đồng - có 4 chữ số.</p>
+        <p style="text-align: justify;">- 100 giải bảy: mỗi giải nhận 200 nghìn đồng - có 3 chữ số.</p>
+        <p style="text-align: justify;">- 1000 giải tám: mỗi giải nhận 100 nghìn đồng - có 2 chữ số.</p>
+        <p style="text-align: justify;">Ngoài ra còn các giải phụ đặc biệt và giải khuyến khích cho những tờ vé số chỉ sai 1 chữ số so với giải đặc biệt.</p>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

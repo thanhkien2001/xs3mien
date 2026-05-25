@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Fields Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .page-type-card {
+            transition: transform 0.2s;
+        }
+        .page-type-card:hover {
+            transform: translateY(-2px);
+        }
+        .subtype-badge {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 mb-0">SEO Fields Management</h1>
+                    <div class="d-flex gap-2">
+                        <a href="/admin/seo-fields/init" class="btn btn-outline-primary">
+                            <i class="bi bi-arrow-clockwise"></i> Initialize Default Data
+                        </a>
+                        <a href="/admin/logout" class="btn btn-outline-danger" onclick="return confirm('Bạn có chắc muốn đăng xuất?')">
+                            <i class="bi bi-box-arrow-right"></i> Đăng Xuất
+                        </a>
+                    </div>
+                </div>
+
+                <?php if (isset($this) && $this->flashSession): ?>
+                    <?php 
+                    try {
+                        $messages = $this->flashSession->getMessages();
+                        if (!empty($messages)):
+                    ?>
+                        <?php foreach ($messages as $type => $messageList): ?>
+                            <?php foreach ($messageList as $message): ?>
+                                <div class="alert alert-<?= $type === 'error' ? 'danger' : $type ?> alert-dismissible fade show" role="alert">
+                                    <?= htmlspecialchars($message) ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php 
+                        endif;
+                    } catch (\Exception $e) {
+                        // Silently ignore flash message errors
+                    }
+                    ?>
+                <?php endif; ?>
+
+                <div class="row">
+                    <?php foreach ($pageTypes as $pageType => $subtypes): ?>
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card page-type-card h-100">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">
+                                        <?= ucfirst(str_replace('_', ' ', $pageType)) ?>
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text text-muted">
+                                        <?php
+                                        $descriptions = [
+                                            'archive' => 'Lịch sử kết quả xổ số',
+                                            'lottery_results' => 'Kết quả xổ số 3 miền',
+                                            'predictions' => 'Dự đoán xổ số',
+                                            'statistics' => 'Thống kê xổ số',
+                                            'vietlott' => 'Kết quả Vietlott',
+                                            'quaythu' => 'Quay thử xổ số',
+                                            'homepage' => 'Trang chủ'
+                                        ];
+                                        echo $descriptions[$pageType] ?? 'SEO fields';
+                                        ?>
+                                    </p>
+                                    <div class="mb-3">
+                                        <small class="text-muted">Subtypes:</small>
+                                        <?php foreach ($subtypes as $subtype): ?>
+                                            <span class="badge bg-secondary subtype-badge me-1">
+                                                <?= ucfirst(str_replace('_', ' ', $subtype)) ?>
+                                            </span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="btn-group w-100" role="group">
+                                        <?php foreach ($subtypes as $subtype): ?>
+                                            <a href="/admin/seo-fields/edit/<?= $pageType ?>/<?= $subtype ?>" 
+                                               class="btn btn-outline-primary btn-sm">
+                                                Edit <?= ucfirst(str_replace('_', ' ', $subtype)) ?>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

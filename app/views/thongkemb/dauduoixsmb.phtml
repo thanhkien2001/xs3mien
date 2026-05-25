@@ -1,0 +1,294 @@
+<?php
+// Helpers
+if (!function_exists('h')) {
+    function h($s)
+    {
+        return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+    }
+}
+if (!function_exists('dmy')) {
+    function dmy($d)
+    {
+        return $d ? date('d-m-Y', strtotime($d)) : '';
+    }
+}
+
+// Calculate column totals for display
+$totalHead = array_fill(0, 10, 0);
+if (!empty($perDayHead)) {
+    foreach ($perDayHead as $row) {
+        foreach ($row['counts'] as $k => $v) $totalHead[$k] += $v;
+    }
+}
+
+$totalTail = array_fill(0, 10, 0);
+if (!empty($perDayTail)) {
+    foreach ($perDayTail as $row) {
+        foreach ($row['counts'] as $k => $v) $totalTail[$k] += $v;
+    }
+}
+
+$totalSum = array_fill(0, 10, 0);
+if (!empty($perDaySum)) {
+    foreach ($perDaySum as $row) {
+        foreach ($row['counts'] as $k => $v) $totalSum[$k] += $v;
+    }
+}
+?>
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/thong-ke-xo-so-mien-bac-tk-xsmb.html" title="XSMB">XSMB</a> </li>
+                        <li class="breadcrumb-item active"><a href="/dau-duoi-xsmb.html" title="Thống kê đầu đuôi loto">Thống kê đầu đuôi loto</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-810 border-radius-4" style="margin-right: 15px">
+                <aside class="mb-2">
+                    <table class="table-b">
+                        <tbody>
+                            <tr>
+                                <td><a href="/lo-gan-xsmb.html" title="Lô gan XSMB">Lô gan XSMB</a></td>
+                                <td><a href="/lo-xien-xsmb.html" title="Lô xiên XSMB">Lô xiên XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/lo-kep-xsmb.html" title="Lô kép XSMB">Lô kép XSMB</a></td>
+                                <td><a class="text-red" href="/dau-duoi-xsmb.html" title="Đầu đuôi lô tô XSMB">Đầu đuôi lô tô XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/dac-biet-xsmb.html" title="Đặc biệt XSMB">Đặc biệt XSMB</a></td>
+                                <td><a href="/dac-biet-tuan-xsmb.html" title="Đặc biệt tuần XSMB">Đặc biệt tuần XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/tan-suat-lo-to-xsmb.html" title="Tần suất lô tô XSMB">Tần suất lô tô XSMB</a></td>
+                                <td><a href="/thong-ke-theo-tong-xsmb.html" title="Theo tổng XSMB">Theo tổng XSMB</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+                <div class="viewStatistic">
+                    <article>
+                        <div class="static-search mt-0">
+                            <h2 class="aside-title-red justify-content-center"> Thống kê đầu đuôi Miền Bắc </h2>
+                            <div class="container form-search">
+                                <form method="get" action="/dau-duoi-xsmb.html">
+                                    <div class="row align-items-end justify-content-center">
+                                        <div class="col-xl-3 col-lg-7 col-md-7 pl-1 pr-1 pt-1 d-flex">
+                                            <div class="label mt-2 mr-2 d-flex align-items-center">Chọn tỉnh</div>
+                                            <div class="select-one-arow mt-2 flex-grow-1">
+                                                <select class="form-control form-control-sm select-logan" name="province" id="selectProvince" disabled>
+                                                    <option selected="selected" value="xsmb">Miền Bắc </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-7 col-md-7 pl-1 pr-1 pt-1 d-flex">
+                                            <div class="label mr-2 d-flex align-items-center flex-grow-1">Biên độ ngày</div>
+                                            <div class="input-datetick"><input id="dateEnd" class="form-control form-control-sm mr-2" name="date_end" type="text" value="<?= $dateEnd ?? date('d/m/Y') ?>"></div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-7 col-md-7 pl-1 pr-1 pt-1 d-flex"> <label class="label d-flex align-items-center mt-2 mr-2">Khoảng ngày</label>
+                                            <div class="input-group static-kn">
+                                                <div class="input-group-append"><button type="button" id="btn-minus" class="btn btn-sm btn-minus"><i class="icon-minus" aria-hidden="true"></i></button></div>
+                                                <input min="1" max="100" id="range-day" name="around" class="count form-control form-control-sm" type="text" value="<?= $limit ?? 10 ?>">
+                                                <div class="input-group-prepend"> <button type="button" id="btn-plus" class="btn btn-sm btn-plus"> <i class="icon-plus" aria-hidden="true"> </i> </button> </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-7 col-md-7 pl-1 pr-1 pt-1 d-flex"> <button id="btn-Statistic-search" class="btn btn-danger btn-sm btnLogan" type="submit">XEM THỐNG KÊ</button> </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                    <div id="view_data">
+                        <article>
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> Thống kê đầu loto xổ số Miền Bắc trong vòng <?= $limit ?> lần từ <?= $dateEnd ?? date('d/m/Y') ?> </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="text-center table-total table-dauduoi">
+                                            <thead>
+                                                <tr class="text-center child-weight-bold">
+                                                    <th>Ngày</th>
+                                                    <?php for ($i = 0; $i <= 9; $i++) echo "<th>Đầu $i</th>"; ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($perDayHead)): ?>
+                                                    <?php foreach ($perDayHead as $row): ?>
+                                                        <tr>
+                                                            <td><a rel="nofollow" href="#"><?= dmy($row['date']) ?></a></td>
+                                                            <?php for ($i = 0; $i <= 9; $i++) echo "<td>" . $row['counts'][$i] . " lần</td>"; ?>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                                <tr>
+                                                    <td>Tổng</td>
+                                                    <?php for ($i = 0; $i <= 9; $i++) echo "<td>" . $totalHead[$i] . " lần</td>"; ?>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> Thống kê đuôi loto xổ số Miền Bắc trong vòng <?= $limit ?> lần từ <?= $dateEnd ?? date('d/m/Y') ?> </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="text-center table-total table-dauduoi">
+                                            <thead>
+                                                <tr class="text-center child-weight-bold">
+                                                    <th>Ngày</th>
+                                                    <?php for ($i = 0; $i <= 9; $i++) echo "<th>Đuôi $i</th>"; ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($perDayTail)): ?>
+                                                    <?php foreach ($perDayTail as $row): ?>
+                                                        <tr>
+                                                            <td><a rel="nofollow" href="#"><?= dmy($row['date']) ?></a></td>
+                                                            <?php for ($i = 0; $i <= 9; $i++) echo "<td>" . $row['counts'][$i] . " lần</td>"; ?>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                                <tr>
+                                                    <td>Tổng</td>
+                                                    <?php for ($i = 0; $i <= 9; $i++) echo "<td>" . $totalTail[$i] . " lần</td>"; ?>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article>
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> Thống kê theo tổng loto </div>
+                                <div class="table-logan">
+                                    <div class="overflow-auto">
+                                        <table class="text-center table-total table-dauduoi">
+                                            <thead>
+                                                <tr class="text-center child-weight-bold">
+                                                    <th>Ngày</th>
+                                                    <?php for ($i = 0; $i <= 9; $i++) echo "<th>Tổng $i</th>"; ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if (!empty($perDaySum)): ?>
+                                                    <?php foreach ($perDaySum as $row): ?>
+                                                        <tr>
+                                                            <td><a rel="nofollow" href="#"><?= dmy($row['date']) ?></a></td>
+                                                            <?php for ($i = 0; $i <= 9; $i++) echo "<td>" . $row['counts'][$i] . " lần</td>"; ?>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                                <tr>
+                                                    <td>Tổng</td>
+                                                    <?php for ($i = 0; $i <= 9; $i++) echo "<td>" . $totalSum[$i] . " lần</td>"; ?>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+<style>
+    .bg-blue {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .title-bg-blue {
+        background: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .bg-yellow {
+        background-color: #fff3cd;
+    }
+
+    .text-red,
+    .text-danger {
+        color: #dc3545 !important;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .text-success {
+        color: #28a745 !important;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dee2e6;
+        vertical-align: middle;
+        padding: 0.5rem;
+    }
+
+    .table-b {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .table-b td {
+        padding: 5px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .viewStatistic table th {
+        background: #f8f9fa;
+    }
+
+    /* Plus/Minus buttons */
+    .btn-minus,
+    .btn-plus {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+    }
+
+    .static-kn input.count {
+        text-align: center;
+        max-width: 60px;
+    }
+
+    .table-dauduoi td,
+    .table-dauduoi th {
+        font-size: 13px;
+    }
+</style>
+<script>
+    // +/- buttons logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('range-day');
+        document.getElementById('btn-plus').addEventListener('click', () => {
+            let v = parseInt(input.value) || 0;
+            input.value = Math.min(100, v + 1);
+        });
+        document.getElementById('btn-minus').addEventListener('click', () => {
+            let v = parseInt(input.value) || 0;
+            input.value = Math.max(1, v - 1);
+        });
+    });
+</script>

@@ -1,0 +1,19 @@
+{
+  "name": "645scrape",
+  "version": "1.0.0",
+  "description": "Mega645 scraper with cache management",
+  "main": "645scrape.js",
+  "scripts": {
+    "start": "node 645scrape.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0",
+    "mysql2": "^3.6.0",
+    "axios": "^1.6.0",
+    "redis": "^4.6.0"
+  },
+  "keywords": ["scraper", "vietlott", "mega645", "cache"],
+  "author": "XSKT Team",
+  "license": "MIT"
+}

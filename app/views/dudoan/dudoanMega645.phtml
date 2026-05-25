@@ -1,0 +1,116 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a title="Dự đoán xổ số Miền Bắc" href="/du-doan-xsmb-c59.html">Dự đoán XSMB</a></li>
+                    <li><a title="Dự đoán xổ số Miền Nam" href="/du-doan-xsmn-c61.html">Dự đoán XSMN</a></li>
+                    <li><a title="Dự đoán xổ số Miền Trung" href="/du-doan-xsmt-c60.html">Dự đoán XSMT</a></li>
+                    <?php $nextDate = DateHelper::getNextLotteryDate645(); ?>
+                    <li><a class="util-text-red" title="Dự đoán Mega 6/45 ngày <?= $nextDate ?>" href="<?= $this->url->get('/du-doan-soi-cau-xo-so-mega-6-45-vietlott-ngay-' . $nextDate) . '-co-nen-xuong-tay' ?>">Dự đoán Mega 6/45</a></li>
+                    <?php $nextDate1 = DateHelper::getNextLotteryDate655(); ?>
+                    <li><a title="Dự đoán Mega 6/45 ngày <?= $nextDate1 ?>" href="<?= $this->url->get('/du-doan-soi-cau-xo-so-power-6-55-vietlott-ngay-' . $nextDate1) . '-co-nen-xuong-tay' ?>">Dự đoán Power 6/55</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <?php $nextDate = DateHelper::getNextLotteryDate645(); ?>
+                        <li class="nav-breadcrumb-item"><a title="Dự đoán Mega 6/45" href="<?= $this->url->get('/du-doan-soi-cau-xo-so-mega-6-45-vietlott-ngay-' . $nextDate) . '-co-nen-xuong-tay' ?>"><span>Dự đoán Mega 6/45</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Dự đoán soi cầu xổ số Mega 6/45 Vietlott ngày <?= htmlspecialchars($nextDrawDate) ?>, Số nào sẽ về hôm nay</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header">
+                    <h1 class="page-title-h1 util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">Dự đoán soi cầu xổ số Mega 6/45 Vietlott ngày <?= htmlspecialchars($nextDrawDate) ?>, Số nào sẽ về hôm nay</h1>
+                </div>
+            </div>
+            <article class="the__article" template="content-dudoan-mega645-desktop">
+                <div class="comp-article-content util-mt-4">
+                    <p>Chúng tôi phân tích dữ liệu Mega 6/45 bằng thuật toán thống kê tiên tiến, kết hợp nhận định từ các chuyên gia uy tín. Cập nhật kết quả mới nhất:</p>
+                    <p style="text-align: center;">
+                        <img style="display: inline-block; margin: 0; box-shadow: none;" src="/img/click1.gif" />
+                        <a style="font-size: 30px;" title="Kết quả Vietlott Mega 6/45" href="<?= $this->url->get('/ket-qua-xo-so-mega-6-45-vietlott-' . date('d-m-Y')) ?>"><strong>Kết quả Vietlott Mega 6/45</strong></a>
+                        <img style="display: inline-block; margin: 0; box-shadow: none;" src="/img/click2.gif" />
+                    </p>
+                    <p>KQXS Mega 6/45 kỳ <?= htmlspecialchars($latest->draw_number) ?> - Mở thưởng <?= htmlspecialchars(date('d/m/Y', strtotime($latest->draw_date))) ?>:</p>
+                    <div class="lottery-balls util-justify-center js-result-number">
+                        <?php foreach (explode(',', $latest->numbers) as $number): ?>
+                        <span class="lottery-ball mega big util-mx-1"><?= htmlspecialchars(trim($number)) ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                    <h3>Phân tích soi cầu Mega 6/45</h3>
+                    <?php if (!empty($analysis['patterns'])): ?>
+                    <?php foreach ($analysis['patterns'] as $number => $followUps): ?>
+                    <p>Kỳ quay trước ra <strong><?= htmlspecialchars($number) ?></strong>, kỳ sau thường ra <strong><?= htmlspecialchars(implode(', ', array_keys($followUps))) ?></strong></p>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <p>Chưa có đủ dữ liệu để phân tích soi cầu.</p>
+                    <?php endif; ?>
+                    <p>Xem thêm <a href="/thong-ke-xo-so-mega-6-45">thống kê Mega 6/45</a> qua các kỳ quay gần nhất.</p>
+                    <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                        <h2 class="util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0">Thống kê 20 số Mega xuất hiện nhiều</h2>
+                        <div class="comp-table-responsive">
+                            <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                                <tbody>
+                                    <?php for ($i = 0; $i < 5; $i++): ?>
+                                    <tr>
+                                        <?php for ($j = $i * 4; $j < $i * 4 + 4 && isset($frequentNumbers[$j]); $j++): ?>
+                                        <td><span class="lottery-ball mega"><?= htmlspecialchars($frequentNumbers[$j]['number']) ?></span></td>
+                                        <td><?= htmlspecialchars($frequentNumbers[$j]['frequency']) ?> lần</td>
+                                        <?php endfor; ?>
+                                    </tr>
+                                    <?php endfor; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                        <h2 class="util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0">Thống kê 20 số Mega ít xuất hiện</h2>
+                        <div class="comp-table-responsive">
+                            <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                                <tbody>
+                                    <?php for ($i = 0; $i < 5; $i++): ?>
+                                    <tr>
+                                        <?php for ($j = $i * 4; $j < $i * 4 + 4 && isset($rareNumbers[$j]); $j++): ?>
+                                        <td><span class="lottery-ball mega"><?= htmlspecialchars($rareNumbers[$j]['number']) ?></span></td>
+                                        <td><?= htmlspecialchars($rareNumbers[$j]['frequency']) ?> lần</td>
+                                        <?php endfor; ?>
+                                    </tr>
+                                    <?php endfor; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <h3>Dự đoán Mega 6/45 kỳ quay ngày <?= htmlspecialchars($nextDrawDate) ?></h3>
+                    <p>Dựa trên việc phân tích sâu dữ liệu lịch sử và áp dụng các phương pháp thống kê xác suất hiện đại, đội ngũ chuyên gia của chúng tôi đưa ra bộ 6 con số được đánh giá có khả năng trúng thưởng cao nhất cho kỳ quay sắp tới:</p>
+                    <p style="font-weight: bold; font-size: 20px; color: red; text-align: center;"><?= htmlspecialchars(implode(' - ', $prediction)) ?></p>
+                    <p><em><strong>Lưu ý quan trọng:</strong> Các con số dự đoán trên chỉ mang tính chất tham khảo dựa trên phân tích thống kê. Người chơi cần cân nhắc kỹ lưỡng và chỉ nên tham gia xổ số với mức chi tiêu hợp lý, phù hợp với khả năng tài chính của bản thân.</em></p>
+                    <p>Bạn có dự đoán riêng cho kỳ quay này? Hãy chia sẻ bộ số may mắn của bạn cùng cộng đồng trong phần bình luận bên dưới để cùng thảo luận và so sánh nhé!</p>
+                </div>
+            </article>
+
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+    }
+</style>

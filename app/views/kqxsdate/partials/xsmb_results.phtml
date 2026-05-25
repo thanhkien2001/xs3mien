@@ -1,0 +1,155 @@
+<?php
+/**
+ * Partial: XSMB Results  
+ * Variables: $results (array), $date, $dayOfWeek
+ */
+$esc = $this->escaper;
+$result = $results[0] ?? null; // XSMB always has 1 result
+if (!$result) return;
+
+$daySlug = str_replace(' ', '-', $dayOfWeek);
+$dateSlug = str_replace('/', '-', $date);
+?>
+
+<div class="result result-single rounded">
+    <h2 class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+        Xổ số Miền Bắc ngày <?= $esc->escapeHtml($date) ?>
+    </h2>
+    <div class="breadcrumb-table">
+        <h4 class="breadcrumb-table-title">
+            <a href="/xsmb-<?= $daySlug ?>.html" title="XSMB <?= $esc->escapeHtmlAttr($dayOfWeek) ?>">
+                XSMB <?= $esc->escapeHtml($dayOfWeek) ?>
+            </a>
+            /
+            <a href="/xsmb-<?= $dateSlug ?>.html" title="XSMB <?= $esc->escapeHtmlAttr($date) ?>">
+                XSMB <?= $esc->escapeHtml($date) ?>
+            </a>
+        </h4>
+    </div>
+    
+    <div class="table-flex-border">
+        <table class="table-flex table-result">
+            <tbody>
+                <!-- LV Codes Row -->
+                <tr>
+                    <td colspan="2">
+                        <div class="d-flex justify-content-between font-16 p-2">
+                            <?php
+                            $lvCodes = $result['lv'] ?? [];
+                            if (!empty($lvCodes) && is_array($lvCodes)):
+                                foreach ($lvCodes as $lv):
+                                    $codes = explode('-', $lv);
+                                    foreach ($codes as $code):
+                                        $code = trim($code);
+                                        if ($code):
+                            ?>
+                            <span class="text-number" nc="5"><?= $esc->escapeHtml($code) ?></span>
+                            <?php
+                                        endif;
+                                    endforeach;
+                                endforeach;
+                            endif;
+                            ?>
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Prize Rows -->
+                <?php
+                $prizes = [
+                    'special_prize' => ['ĐB', 5],
+                    'first_prize' => ['G1', 5],
+                    'second_prize' => ['G2', 5],
+                    'third_prize' => ['G3', 5],
+                    'fourth_prize' => ['G4', 4],
+                    'fifth_prize' => ['G5', 4],
+                    'sixth_prize' => ['G6', 3],
+                    'seventh_prize' => ['G7', 2]
+                ];
+                
+                foreach ($prizes as $key => [$label, $nc]):
+                    $prizeData = $result[$key] ?? [];
+                ?>
+                <tr>
+                    <td><?= $label ?></td>
+                    <td>
+                        <?php if (is_array($prizeData) && !empty($prizeData)): ?>
+                            <?php foreach ($prizeData as $number): ?>
+                            <span class="text-number" nc="<?= $nc ?>">
+                                <?= $esc->escapeHtml($number) ?>
+                            </span>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Loto Table -->
+<div class="loto loto-single">
+    <table class="table table-bordered table-striped table-xslt-single-col">
+        <thead>
+            <tr>
+                <th>Đầu</th>
+                <th>Lô tô</th>
+                <th>Đuôi</th>
+                <th>Lô tô</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Build loto data (head and tail)
+            $lotoByHead = [];
+            $lotoByTail = [];
+            
+            for ($i = 0; $i <= 9; $i++) {
+                $lotoByHead[$i] = [];
+                $lotoByTail[$i] = [];
+            }
+            
+            // Collect all 2-digit numbers
+            foreach ($prizes as $key => [$label, $nc]) {
+                if (!empty($result[$key]) && is_array($result[$key])) {
+                    foreach ($result[$key] as $number) {
+                        $last2 = substr($number, -2);
+                        $head = (int)$last2[0];
+                        $tail = (int)$last2[1];
+                        $lotoByHead[$head][] = $last2;
+                        $lotoByTail[$tail][] = $last2;
+                    }
+                }
+            }
+            
+            // Remove duplicates and sort
+            for ($i = 0; $i <= 9; $i++) {
+                $lotoByHead[$i] = array_unique($lotoByHead[$i]);
+                $lotoByTail[$i] = array_unique($lotoByTail[$i]);
+                sort($lotoByHead[$i]);
+                sort($lotoByTail[$i]);
+            }
+            
+            // Render rows
+            for ($i = 0; $i <= 9; $i++):
+            ?>
+            <tr>
+                <td><?= $i ?></td>
+                <td>
+                    <?php foreach ($lotoByHead[$i] as $num): ?>
+                    <span><?= $num ?></span>
+                    <?php endforeach; ?>
+                </td>
+                <td><?= $i ?></td>
+                <td>
+                    <?php foreach ($lotoByTail[$i] as $num): ?>
+                    <span><?= $num ?></span>
+                    <?php endforeach; ?>
+                </td>
+            </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+</div>
+

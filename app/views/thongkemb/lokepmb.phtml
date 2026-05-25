@@ -1,0 +1,220 @@
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                                title="XSMB">XSMB</a> </li>
+                        <li class="breadcrumb-item active"><a href="/lo-kep-xsmb.html" title="Thống kê lô kép">Thống kê
+                                lô kép</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610 border-radius-4">
+                <table class="table-b">
+                    <tbody>
+                        <tr>
+                            <td><a href="/lo-gan-xsmb.html" title="lô gan XSMB">Lô gan XSMB</a></td>
+                            <td><a href="/lo-xien-xsmb.html" title="lô xiên XSMB">Lô xiên XSMB</a></td>
+                        </tr>
+                        <tr>
+                            <td><a class="text-red" href="/lo-kep-xsmb.html" title="lô kép XSMB">Lô kép XSMB</a></td>
+                            <td><a href="/dau-duoi-xsmb.html" title="đầu đuôi lô tô XSMB">Đầu đuôi lô tô XSMB</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="/dac-biet-xsmb.html" title="đặc biệt XSMB">Đặc biệt XSMB</a></td>
+                            <td><a href="/dac-biet-tuan-xsmb.html" title="đặc biệt tuần XSMB">Đặc biệt tuần XSMB</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/tan-suat-lo-to-xsmb.html" title="tần suất lô tô XSMB">Tần suất lô tô XSMB</a>
+                            </td>
+                            <td><a href="/thong-ke-theo-tong-xsmb.html" title="theo tổng XSMB">Theo tổng XSMB</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 class="aside-title-red mb-0 justify-content-center"> Thống kê lô kép Miền Bắc</h2>
+                <form class="row my-3" action="/lo-kep-xsmb.html" method="post">
+                    <div class="col-12 col-lg-3 mb-2"> <label class="label text-6b">Thứ</label>
+                        <div class="select-arow">
+                            <select class="form-control form-control-sm bg-grey2 font-weight-bold" name="dow"
+                                id="detectProvinceByDow">
+                                <option value="" <?= empty($dow) ? 'selected' : '' ?>>Tất cả</option>
+                                <option value="1" <?= (isset($dow) && $dow == 1) ? 'selected' : '' ?>>Thứ 2</option>
+                                <option value="2" <?= (isset($dow) && $dow == 2) ? 'selected' : '' ?>>Thứ 3</option>
+                                <option value="3" <?= (isset($dow) && $dow == 3) ? 'selected' : '' ?>>Thứ 4</option>
+                                <option value="4" <?= (isset($dow) && $dow == 4) ? 'selected' : '' ?>>Thứ 5</option>
+                                <option value="5" <?= (isset($dow) && $dow == 5) ? 'selected' : '' ?>>Thứ 6</option>
+                                <option value="6" <?= (isset($dow) && $dow == 6) ? 'selected' : '' ?>>Thứ 7</option>
+                                <option value="7" <?= (isset($dow) && $dow == 7) ? 'selected' : '' ?>>Chủ Nhật</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-2"> <label class="label text-6b">Tỉnh/thành</label>
+                        <div class="select-arow">
+                            <select class="form-control form-control-sm bg-grey2 font-weight-bold" id="selectProvince">
+                                <option data-prize='["1","2","3","4","5","6","7"]' value="/lo-kep-xsmb.html"
+                                    selected="selected">Miền Bắc</option>
+                                <option data-prize='["3","7"]' value="/lo-kep-xskh.html" class="d-none">Khánh Hòa
+                                </option>
+                                <option data-prize='["3","6"]' value="/lo-kep-xsdna.html" class="d-none">Đà Nẵng
+                                </option>
+                                <option data-prize='["6"]' value="/lo-kep-xsqng.html" class="d-none">Quảng Ngãi</option>
+                                <option data-prize='["1","7"]' value="/lo-kep-xstth.html" class="d-none">Thừa Thiên Huế
+                                </option>
+                                <option data-prize='["1"]' value="/lo-kep-xspy.html" class="d-none">Phú Yên</option>
+                                <option data-prize='["4"]' value="/lo-kep-xsbdi.html">Bình Định</option>
+                                <option data-prize='["7"]' value="/lo-kep-xskt.html" class="d-none">Kon Tum</option>
+                                <option data-prize='["2"]' value="/lo-kep-xsdlk.html" class="d-none">Đắk Lắk</option>
+                                <option data-prize='["2"]' value="/lo-kep-xsqna.html" class="d-none">Quảng Nam</option>
+                                <option data-prize='["6"]' value="/lo-kep-xsdno.html" class="d-none">Đắk Nông</option>
+                                <option data-prize='["5"]' value="/lo-kep-xsgl.html" class="d-none">Gia Lai</option>
+                                <option data-prize='["5"]' value="/lo-kep-xsnt.html" class="d-none">Ninh Thuận</option>
+                                <option data-prize='["4"]' value="/lo-kep-xsqb.html">Quảng Bình</option>
+                                <option data-prize='["4"]' value="/lo-kep-xsqt.html">Quảng Trị</option>
+                                <option data-prize='["1","6"]' value="/lo-kep-xshcm.html" class="d-none">Hồ Chí Minh
+                                </option>
+                                <option data-prize='["3"]' value="/lo-kep-xsdn.html" class="d-none">Đồng Nai</option>
+                                <option data-prize='["4"]' value="/lo-kep-xsag.html">An Giang</option>
+                                <option data-prize='["7"]' value="/lo-kep-xstg.html" class="d-none">Tiền Giang</option>
+                                <option data-prize='["7"]' value="/lo-kep-xskg.html" class="d-none">Kiên Giang</option>
+                                <option data-prize='["4"]' value="/lo-kep-xstn.html">Tây Ninh</option>
+                                <option data-prize='["5"]' value="/lo-kep-xsbd.html" class="d-none">Bình Dương</option>
+                                <option data-prize='["3"]' value="/lo-kep-xsst.html" class="d-none">Sóc Trăng</option>
+                                <option data-prize='["5"]' value="/lo-kep-xsvl.html" class="d-none">Vĩnh Long</option>
+                                <option data-prize='["5"]' value="/lo-kep-xstv.html" class="d-none">Trà Vinh</option>
+                                <option data-prize='["3"]' value="/lo-kep-xsct.html" class="d-none">Cần Thơ</option>
+                                <option data-prize='["2"]' value="/lo-kep-xsbtr.html" class="d-none">Bến Tre</option>
+                                <option data-prize='["2"]' value="/lo-kep-xsvt.html" class="d-none">Vũng Tàu</option>
+                                <option data-prize='["2"]' value="/lo-kep-xsbl.html" class="d-none">Bạc Liêu</option>
+                                <option data-prize='["4"]' value="/lo-kep-xsbth.html">Bình Thuận</option>
+                                <option data-prize='["1"]' value="/lo-kep-xsdt.html" class="d-none">Đồng Tháp</option>
+                                <option data-prize='["6"]' value="/lo-kep-xsla.html" class="d-none">Long An</option>
+                                <option data-prize='["1"]' value="/lo-kep-xscm.html" class="d-none">Cà Mau</option>
+                                <option data-prize='["6"]' value="/lo-kep-xsbp.html" class="d-none">Bình Phước</option>
+                                <option data-prize='["6"]' value="/lo-kep-xshg.html" class="d-none">Hậu Giang</option>
+                                <option data-prize='["7"]' value="/lo-kep-xsdl.html" class="d-none">Đà Lạt</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-2"> <label class="label text-6b">Biên độ</label>
+                        <div class="select-arow">
+                            <select class="form-control form-control-sm bg-grey2 font-weight-bold" name="rangeday">
+                                <?php foreach ([5, 10, 15, 20, 25, 30] as $opt): ?>
+                                    <option value="<?= $opt ?>" <?= (isset($limit) && $limit == $opt) ? 'selected' : '' ?>>
+                                        <?= $opt ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3"> <label class="label text-6b">&nbsp;</label> <button
+                            class="btn btn-danger btn-sm flex-grow-1" type="submit">Thống kê </button> </div>
+                </form>
+
+                <div class="my-3">
+                    <div id="xien_2">
+                        <div class="title-bg-blue border-radius-top"> THỐNG KÊ LÔ KÉP XỔ SỐ Miền Bắc BIÊN ĐỘ
+                            <?= $limit ?> LẦN </div>
+                        <div class="overflow-auto pb-3"> <!-- Added pb-3 for some spacing -->
+                            <table
+                                class="table table-bordered text-center table-striped table-statistic-width-td-first">
+                                <thead class="bg-orange font-13 text-nowrap">
+                                    <tr>
+                                        <th>Bộ số</th>
+                                        <th>Số ngày về</th>
+                                        <th class="text-left">Ngày đã về</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-14">
+                                    <?php if (!empty($lokep_stats)): ?>
+                                        <?php foreach ($lokep_stats as $stat): ?>
+                                            <?php if ($stat['count'] > 0): ?>
+                                                <tr class="lh2">
+                                                    <td class="font-weight-bold text-nowrap text-red3"> <?= $stat['num'] ?> </td>
+                                                    <td class="px-2"> <span
+                                                            class="text-red font-weight-bold"><?= $stat['count'] ?></span> <span
+                                                            class="font-weight-normal">ngày</span> </td>
+                                                    <td class="pl-3 text-left">
+                                                        <?php
+                                                        $links = [];
+                                                        foreach ($stat['dates'] as $d) {
+                                                            $links[] = '<a rel="nofollow" href="' . $d['url'] . '" title="XSMB ngày ' . $d['full'] . '" class="text-gray2">' . $d['full'] . '</a>';
+                                                        }
+                                                        echo implode(', ', $links);
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="3">Không có dữ liệu</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-3">
+                    <div id="xien_3">
+                        <div class="title-bg-blue border-radius-top"> THỐNG KÊ LÔ KÉP 2 XỔ SỐ Miền Bắc BIÊN ĐỘ
+                            <?= $limit ?> LẦN </div>
+                        <div class="overflow-auto pb-3">
+                            <table
+                                class="table table-bordered text-center table-striped table-statistic-width-td-first">
+                                <thead class="bg-orange font-13 text-nowrap">
+                                    <tr>
+                                        <th>Bộ số</th>
+                                        <th>Số ngày về</th>
+                                        <th class="text-left">Ngày đã về</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-14">
+                                    <?php if (!empty($lokep_2_stats)): ?>
+                                        <?php foreach ($lokep_2_stats as $stat): ?>
+                                            <tr class="lh2">
+                                                <td class="font-weight-bold text-nowrap text-red3"> <?= $stat['pair'] ?> </td>
+                                                <td class="px-2"> <span
+                                                        class="text-red font-weight-bold"><?= $stat['count'] ?></span> <span
+                                                        class="font-weight-normal">ngày</span> </td>
+                                                <td class="pl-3 text-left">
+                                                    <?php
+                                                    $links = [];
+                                                    foreach ($stat['dates'] as $d) {
+                                                        $links[] = '<a rel="nofollow" href="' . $d['url'] . '" title="XSMB ngày ' . $d['full'] . '" class="text-gray2">' . $d['full'] . '</a>';
+                                                    }
+                                                    echo implode(', ', $links);
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="3">Chưa có lô kép 2 nào về cùng nhau trong biên độ này.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php $this->partial('partials/prediction_articles_list'); ?>
+            </div>
+
+            <!-- COL LEFT (Sidebar trái) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

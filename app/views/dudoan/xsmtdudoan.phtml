@@ -1,0 +1,137 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class=" " title="Dự đoán xổ số Miền Bắc" href="/du-doan-xsmb-c59.html">Dự đoán XSMB</a></li>
+                    <li><a class=" " title="Dự đoán xổ số Miền Nam" href="/du-doan-xsmn-c61.html">Dự đoán XSMN</a></li>
+                    <li><a class="util-text-red" title="Dự đoán xổ số Miền Trung" href="/du-doan-xsmt-c60.html">Dự đoán XSMT</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><a title="Dự đoán xổ số" href="/du-doan-xo-so-soi-cau.html"><span>Dự đoán xổ số</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Dự đoán XSMT</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header">
+                    <h1 class="page-title-h1 util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">Dự đoán XSMT hôm nay - Soi cầu 24/7 XSMT- Dự đoán Miền Trung</h1>
+                </div>
+            </div>
+            <h2 class="util-fs-6 util-ms-3 util-font-medium util-lh-base util-mt-4 util-mb-3">Dự đoán Xổ số Miền Trung (XSMT), soi cầu MT hôm nay để chọn ra con số tiềm năng cho giải tám, giải đặc biệt đầu đuôi và bao lô 2 số.</h2>
+            <ul class="list__subpage js-province-today"></ul>
+            <div class="util-mb-5">
+                <p class="comp-box-title util-lh-base">Dự đoán xổ số Miền Trung hôm nay</p>
+                <ul class="comp-list-articles js-comp-article-listing">
+                    <?php foreach ($predictions as $index => $pred) { ?>
+                    <li class="<?php echo $index === 0 ? 'is-first' : ''; ?>">
+                        <a class="util-flex util-shadow-sm util-text-decoration-none util-p-4" href="/<?php echo htmlspecialchars($pred->slug); ?>.html" title="<?php echo htmlspecialchars($pred->title); ?>">
+                            <img class="comp-thumb-medium util-float-start util-me-3 util-lazy-load" src="<?php echo htmlspecialchars($pred->image_url); ?>" style="display: block !important; opacity: 1 !important;" alt="<?php echo htmlspecialchars($pred->title); ?>">
+                            <aside>
+                                <h3 class="util-fs-5-5 util-font-medium util-lh-base"><?php echo htmlspecialchars($pred->title); ?></h3>
+                                <p class="util-text-body util-line-clamp-2"><?php echo htmlspecialchars(substr($pred->content, 0, 200)) . '...'; ?></p>
+                            </aside>
+                        </a>
+                    </li>
+                    <?php } ?>
+                </ul>
+                <div class="util-grid util-mt-4">
+                    <div class="btn-base btn-green btn-lg util-rounded util-shadow-sm js-load-readmore-post-item" data-last-id="<?php echo $lastId; ?>" data-type="dd" data-mien="13"><span>Xem thêm</span></div>
+                </div>
+            </div>
+            </article>
+            <div class="comp-article-content util-shadow-sm util-rounded util-bg-white util-p-3 util-mt-2">
+                <p><a href="/du-doan-xsmt-c60.html"><strong>Dự đoán XSMT</strong></a> - <strong>Soi cầu miền Trung</strong> trên soicau247.com được thực hiện dựa trên phương pháp phân tích thống kê từ các kỳ quay số trước đó, kết hợp với xác suất toán học để đưa ra những con số tiềm năng cho người chơi tham khảo.</p>
+
+                <p><strong>Lịch cập nhật DD XSMT</strong> mới nhất vào lúc <strong>17h30 hàng ngày</strong>. Hãy theo dõi để cập nhật dự đoán sớm nhất!</p>
+
+                <p><span style="color: #ff0000;"><em><strong>Lưu ý quan trọng:</strong> Dự đoán xổ số miền Trung chính xác 100% là điều không thể xảy ra. Các con số dự đoán chỉ mang tính chất tham khảo. Người chơi nên cân nhắc kỹ lưỡng, không nên tham gia lô đề và chỉ nên mua xổ số do Nhà nước phát hành hợp pháp.</em></span></p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<script src="/js/dudoan/dudoanmt.js"></script>
+<script>
+    const SCHEDULE_MT = {
+        1: ["Dự đoán Huế", "Dự đoán Phú Yên"],
+        2: ["Dự đoán Đắk Lắk", "Dự đoán Quảng Nam"],
+        3: ["Dự đoán Đà Nẵng", "Dự đoán Khánh Hòa"],
+        4: ["Dự đoán Bình Định", "Dự đoán Quảng Bình", "Dự đoán Quảng Trị"],
+        5: ["Dự đoán Gia Lai", "Dự đoán Ninh Thuận"],
+        6: ["Dự đoán Đà Nẵng", "Dự đoán Đắk Nông", "Dự đoán Quảng Ngãi"],
+        0: ["Dự đoán Khánh Hòa", "Dự đoán Kon Tum", "Dự đoán Huế"]
+    };
+
+    const PROV_SLUG_MAP = {
+        "Huế": "xsh",
+        "Phú Yên": "xspy",
+        "Đắk Lắk": "xsdlk",
+        "Quảng Nam": "xsqn",
+        "Đà Nẵng": "xsdn",
+        "Khánh Hòa": "xskh",
+        "Bình Định": "xsbd",
+        "Quảng Bình": "xsqb",
+        "Quảng Trị": "xsqt",
+        "Gia Lai": "xsgl",
+        "Ninh Thuận": "xsnt",
+        "Đắk Nông": "xsdnong",
+        "Quảng Ngãi": "xsqng",
+        "Kon Tum": "xskt"
+    };
+
+    function createProvinceUrl(provinceName) {
+        // Remove "Dự đoán " prefix to get clean province name
+        const cleanName = provinceName.replace(/^Dự đoán /, '');
+        const provinceSlug = PROV_SLUG_MAP[cleanName];
+        if (!provinceSlug) {
+            console.warn(`No slug mapping found for province: ${cleanName}`);
+            return '#';
+        }
+        return `/du-doan-${provinceSlug}.html`;
+    }
+
+    function renderTodayProvinces() {
+        const now = new Date();
+        const dayOfWeek = now.getDay();
+        const provinces = SCHEDULE_MT[dayOfWeek] || [];
+
+        const container = document.querySelector('.js-province-today');
+        if (!container) return;
+
+        let html = '';
+        provinces.forEach(provinceName => {
+            const url = createProvinceUrl(provinceName);
+            const title = `Dự đoán XSMT ${provinceName}`;
+            html += `<li><a class="" title="${title}" href="${url}">${provinceName}</a></li>`;
+        });
+
+        container.innerHTML = html;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        renderTodayProvinces();
+    });
+</script>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+    }
+</style>

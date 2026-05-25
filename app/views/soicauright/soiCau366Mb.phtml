@@ -1,0 +1,348 @@
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active"><a href="<?= $page_schema_data['url'] ?>"
+                                title="<?= $page_schema_data['title'] ?>"><?= $page_schema_data['title'] ?></a>
+                        </li>
+                        <script type="application/ld+json">
+                        <?= json_encode($page_schema_data['breadcrumbs']) ?>
+                        </script>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h1 class="font-20 my-2">
+                        <strong><?= $seo_title ?></strong>
+                    </h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"><?= $current_date_full ?></div>
+                            <div class="allRate">
+                                <input type="range" value="0" step="0.25" id="backing5" style="display: none" />
+                                <input type="text" value="page/109" hidden="" id="voteLink" />
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5"
+                                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0"
+                                    data-rateit-max="5" data-rateit-mode="font" data-rateit-icon=""
+                                    style="font-family: fontawesome">
+                                    <button id="rateit-reset-2" type="button" data-role="none" class="rateit-reset"
+                                        aria-label="reset rating" aria-controls="rateit-range-2" style="display: none">
+                                        <span></span>
+                                    </button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider"
+                                        aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0"
+                                        aria-valuemax="5" aria-valuenow="0" aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset"
+                                            style="width: <?= ($rating_value / 5) * 100 ?>%">
+                                            ★★★★★
+                                        </div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div>
+                                <span class="danhgia">
+                                    <span class="avg-rate"><?= $rating_value ?></span>
+                                    /<span>5</span> của
+                                    <span class="count-rate"><?= $rating_count ?></span> đánh
+                                    giá</span>
+                                <script type="application/ld+json">
+                                {
+                                    "@context": "https://schema.org/",
+                                    "@type": "AggregateRating",
+                                    "ratingValue": "<?= $rating_value ?>",
+                                    "bestRating": "5",
+                                    "ratingCount": "<?= $rating_count ?>",
+                                    "itemReviewed": {
+                                        "@type": "CreativeWorkSeries",
+                                        "name": "<?= $seo_title ?>"
+                                    }
+                                }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3">
+                        <strong>Soi cầu 366 xổ số miền Bắc cung cấp những cặp lô kép đẹp nhất trong ngày hôm nay. Các
+                            con số của chúng tôi đưa ra từ những chuyên gia phân tích và soi cầu xổ số lâu năm để đưa ra
+                            những con số chính xác nhất.</strong>
+                    </h2>
+                    <div class="text-center">
+                        <img width="600" height="314"
+                            src="https://soicau247s.org/public/media/thumb/Thumb-Cate/soi-cau-366-600x314.jpg"
+                            alt="<?= $seo_title ?>" />
+                    </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4">
+                                <i class="fa fa-bars mr-2"></i>Mục lục
+                            </legend>
+                            <ol class="text-news-link">
+                                <li>
+                                    <a rel="nofollow" href="#trick0">Xem lại kết quả XSMB kì quay trước</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick1">Soi cầu 366 miền Bắc hôm nay ngày
+                                        <?= $current_date ?></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick2">Lô chơi nhiều ngày <?= $current_date ?></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick3">Soi cầu lô kép 366 hôm nay</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick4">Soi cầu MB 366 là gì?</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick5">Thống kê lô kép 366</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick6">Kinh nghiệm soi cầu 366 chuấn nhất</a>
+                                </li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify">
+                            <a href="<?= $this->url->get('/soi-cau-366-mb.html') ?>">Soi cầu 366</a>
+                            là phương pháp soi cầu XSMB đã có từ rất lâu và được rất nhiều anh em tin tưởng và sử dụng.
+                            Phương pháp soi cầu MB 366 giúp cho anh em tìm được các cặp lô bạch thủ, lô kép và dàn đề
+                            đặc biệt có độ chính xác cao với tỷ lệ về gần như tuyệt đối.
+                        </p>
+
+                        <h3 id="trick0" style="text-align: justify">
+                            Xem lại kết quả XSMB kì quay trước
+                        </h3>
+                        <p style="text-align: justify">
+                            Trước hết anh em hãy cùng diễn đàn 366 theo dõi kết quả XSMB kỳ quay trước và nhìn lại những
+                            con số may mắn đã về trong ngày hôm qua nhé!
+                        </p>
+                        <p style="text-align: justify"></p>
+                        <article class="my-2">
+                             <?php if (!empty($xsmb_result_data)): ?>
+                                <?php $this->partial('partials/home/result_xsmb', $xsmb_result_data); ?>
+                            <?php endif; ?>
+                        </article>
+                        <p></p>
+
+                        <h3 id="trick1" style="text-align: justify">
+                            Soi cầu 366 miền Bắc hôm nay ngày <?= $current_date ?>
+                        </h3>
+                        <p style="text-align: justify">
+                            Soi cầu 366 MB mang tới cho anh em những cặp số lô kép, cầu bạch thủ, cầu lô xiên, cầu đặc
+                            biệt cho anh em tham khảo và lựa chọn cặp số may mắn cho mình trong hôm nay. Cụ thể như sau:
+                        </p>
+                        <p></p>
+                        <p class="text-center">
+                            Đầu đuôi giải ĐB:
+                            <b class="text-red1"><?= $xsmb_predictions['dau_db'] ?? '?' ?><?= $xsmb_predictions['duoi_db'] ?? '?' ?></b><br />
+                            Cặp lô tô 2 số đẹp hôm nay:
+                            <b class="text-red1"><?= isset($xsmb_predictions['lo_dep']) ? implode(', ', $xsmb_predictions['lo_dep']) : '?' ?></b><br />
+                            Loto xiên 2, 3:
+                            <b class="text-red1"><?= isset($xsmb_predictions['lo_xien_2']) ? implode(' - ', $xsmb_predictions['lo_xien_2']) : '?' ?></b><br />
+                            Lô kép:
+                            <b class="text-red1"><?= isset($xsmb_predictions['lo_kep']) ? implode(' - ', $xsmb_predictions['lo_kep']) : '?' ?></b><br />
+                            Soi cầu VIP 4 số:
+                            <b class="text-red1"><?= isset($xsmb_predictions['vip_4_so']) ? implode(' - ', $xsmb_predictions['vip_4_so']) : '?' ?></b>
+                        </p>
+                        <p></p>
+
+                        <h3 id="trick2">Lô chơi nhiều ngày <?= $current_date ?></h3>
+                        <p></p>
+                        <div class="bg-orange p-2 text-center mb-0 text-white font-weight-bold font-14">
+                            Lô chơi nhiều ngày <?= $current_date ?>
+                        </div>
+                        <div class="container">
+                            <div class="border d-flex text-center row">
+                                <?php 
+                                $colCount = 0; 
+                                $bgClass = '';
+                                if (!empty($top_frequent_loto)):
+                                    $chunks = array_chunk($top_frequent_loto, 3, true);
+                                    foreach ($chunks as $chunk):
+                                        $bgClass = ($colCount % 2 != 0) ? 'bg-blue2' : ''; 
+                                ?>
+                                <div class="col-3 d-flex flex-column <?= $bgClass ?>">
+                                    <?php foreach ($chunk as $num => $count): ?>
+                                    <span class="d-block py-1">
+                                        <b class="text-red1"><?= str_pad($num, 2, '0', STR_PAD_LEFT) ?></b> - <?= $count ?> lần
+                                    </span>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php 
+                                        $colCount++;
+                                    endforeach;
+                                endif; 
+                                ?>
+                            </div>
+                        </div>
+                        <p></p>
+                        <p style="text-align: justify"></p>
+
+                        <h3 id="trick3" style="text-align: justify">
+                            Soi cầu lô kép 366 hôm nay
+                        </h3>
+                        <p style="text-align: justify">
+                            Soi cầu lô kép 366 là công cụ soi cầu được nhiều anh em quan tâm và sử dụng. Trong bảng soi
+                            cầu này, chúng tôi mang đến cho anh cầu lô kép 366 khung 2 ngày. Mời anh em theo dõi.
+                        </p>
+                        <p style="text-align: justify"></p>
+                        <table class="table-default w-100 text-center">
+                            <thead>
+                                <tr>
+                                    <th>Lô kép</th>
+                                    <th>Ngày</th>
+                                    <th>Kết quả</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($lo_kep_predictions_table)): ?>
+                                    <?php foreach($lo_kep_predictions_table as $row): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold"><?= $row['pair'] ?></td>
+                                        <td><?= $row['date'] ?></td>
+                                        <td><?= $row['result'] ?></td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                        <p></p>
+                        <p style="text-align: justify"></p>
+                        <p style="text-align: center">
+                            <span style="color: #ff0000">»
+                                <a href="/soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888">Soi cầu XSMB
+                                    Win2888</a>
+                                «</span>
+                        </p>
+
+                        <h3 id="trick4" style="text-align: justify">
+                            Soi cầu MB 366 là gì?
+                        </h3>
+                        <p style="text-align: justify">
+                            Soi cầu 366 là phương pháp soi cầu XSMB kết hợp các con số giữa hai vị trí bất kỳ trong bảng
+                            kết quả xổ số hàng ngày. Anh em sẽ nghiên cứu và tìm ra vị trí soi cầu hiệu quả nhất của các
+                            ngày hôm trước để xác định được con số bạch thủ lô cho ngày hôm sau.
+                        </p>
+                        <p style="text-align: justify">
+                            Anh em cao thủ chốt số có kinh nghiệm để có thể áp dụng cách soi cầu nhanh chóng và hiệu quả
+                            nhất.Anh em mới chơi ban đầu sẽ gặp phải những khó khăn. Tuy nhiên, chỉ cần có sự kiên trì
+                            và học hỏi kinh nghiệm của những người chơi lâu năm thì anh em sẽ dễ dàng có được những phần
+                            thưởng có giá trị.
+                        </p>
+
+                        <h3 id="trick5">Thống kê lô kép 366</h3>
+                        <p>
+                            Để cho anh em tiện theo dõi hơn, Soi cầu 247 đã đưa ra cho anh em bảng thống kê các cặp lô
+                            kép đã xuất hiện trong vòng 30 ngày vừa qua. Cụ thể:
+                        </p>
+                        <p></p>
+                        <div class="logan-result">
+                            <div class="table-logan">
+                                <div class="overflow-auto">
+                                    <table class="table-total table-logan-lcvn lo-xien">
+                                        <thead>
+                                            <tr class="text-nowrap text-center text-uppercase lh2">
+                                                <th>Bộ số</th>
+                                                <th>Số ngày về</th>
+                                                <th class="text-left pl-3">
+                                                    Ngày đã về
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php if (!empty($lo_kep_stats)): ?>
+                                                <?php foreach ($lo_kep_stats as $pair => $info): ?>
+                                                <tr class="lh2">
+                                                    <td class="text-center font-weight-bold text-nowrap px-2">
+                                                        <?= $pair ?>
+                                                    </td>
+                                                    <td class="px-2 text-center">
+                                                        <span class="text-red"><?= $info['count'] ?></span>
+                                                        <span class="font-weight-normal">ngày</span>
+                                                    </td>
+                                                    <td class="pl-3 text-left">
+                                                        <?php foreach ($info['dates'] as $index => $dateData): ?>
+                                                            <a rel="nofollow" href="<?= $dateData['url'] ?>" title="XSMB ngày <?= $dateData['date'] ?>"><?= $dateData['date'] ?></a><?= $index < count($info['dates']) - 1 ? ',' : '' ?>
+                                                        <?php endforeach; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            <?php else: ?>
+                                                <tr><td colspan="3">Chưa có dữ liệu</td></tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <p></p>
+
+                        <h3 id="trick6" style="text-align: justify">
+                            Kinh nghiệm soi cầu 366 chuấn nhất
+                        </h3>
+                        <ul style="text-align: justify">
+                            <li style="text-align: justify">
+                                Anh em nên dành nhiều thời gian để theo dõi các cầu mà mình lựa chọn (nên theo dõi từ
+                                10-15 ngày). Xem xét cầu nào đặc biệt về nhiều, cầu nào gan trong bảng kết quả và thống
+                                kê XSMB. Cuối cùng anh em mới quyết định để chọn con số cho mình nhé.
+                            </li>
+                            <li style="text-align: justify">
+                                Anh em có thể kết hợp của giải đặc biệt với số cuối cùng của giải nhất về trong cùng một
+                                ngày để đưa ra một con số đẹp cho mình.
+                            </li>
+                            <li style="text-align: justify">
+                                Sau khi anh em đã tạo được cầu đẹp dành riêng cho mình thì hãy nuôi cầu này theo khung
+                                từ 3-5 ngày. Chú ý chia nguồn vốn của mình hợp lí nhất để đủ vốn đến lúc cầu về nhé.
+                            </li>
+                        </ul>
+                        <p style="text-align: center"></p>
+                        <p style="text-align: justify">
+                            Những con số soi cầu 366 trên của
+                            <a href="/" title="Soi cầu 247">Soi cầu 247</a> chỉ mang tính chất tham khảo. Anh em nên suy
+                            nghĩ kĩ xem có nên sử dụng để tham gia quay số hôm nay không. Chúc anh em may mắn!
+                        </p>
+                    </div>
+                </div>
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,77 @@
+<main class="main-content util-mt-3">
+    <div class="container">
+        <div class="row">
+            <!-- COL LEFT + CENTER -->
+            <div class="col-xl-610 border-radius-4">
+                <article class="the__article bg-white p-3 util-mb-4 util-border util-rounded">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent px-0">
+                            <li class="breadcrumb-item"><a title="Trang chủ" href="/">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Liên hệ</li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 class="util-fs-3 util-mt-2 font-weight-bold text-blue1">Liên hệ với chúng tôi</h1>
+                    
+                    <div class="comp-article-content util-mt-4">
+                        <p>Chúng tôi luôn lắng nghe ý kiến đóng góp và sẵn sàng giải đáp mọi thắc mắc của bạn. Vui lòng gửi thông tin cho chúng tôi theo các hình thức sau:</p>
+
+                        <div class="row util-mt-4">
+                            <div class="col-md-6 util-mb-4">
+                                <div class="util-p-3 util-border util-rounded bg-light h-100">
+                                    <h2 class="util-fs-5 font-weight-bold"><i class="icon-mail"></i> Email hỗ trợ</h2>
+                                    <p class="util-mb-0">info@<?php echo $_SERVER['HTTP_HOST'] ?? 'soicau247.com'; ?></p>
+                                    <p>Thời gian phản hồi: Trong vòng 24h làm việc.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 util-mb-4">
+                                <div class="util-p-3 util-border util-rounded bg-light h-100">
+                                    <h2 class="util-fs-5 font-weight-bold"><i class="icon-phone"></i> Hotline</h2>
+                                    <p class="util-mb-0">Đang cập nhật...</p>
+                                    <p>Thứ 2 - Chủ Nhật (8h00 - 20h00)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 class="util-fs-4 util-mt-2 util-mb-3 font-weight-bold">Gửi tin nhắn cho chúng tôi</h2>
+                        <form action="" method="post" class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" id="name" name="name" required placeholder="Nhập họ và tên của bạn">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required placeholder="example@gmail.com">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Tiêu đề</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required placeholder="Vấn đề bạn cần hỗ trợ">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Nội dung</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Chi tiết nội dung tin nhắn..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary px-4 py-2">Gửi liên hệ</button>
+                        </form>
+
+                        <div class="alert alert-info util-mt-4">
+                            <p class="util-mb-0"><strong>Lưu ý:</strong> Chúng tôi chỉ cung cấp thông tin tra cứu kết quả xổ số, không bán vé số hay tổ chức cá cược. Các nội dung quảng bá nếu có đều tuân thủ quy định pháp luật.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- SIDEBAR LEFT -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

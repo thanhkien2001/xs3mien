@@ -1,0 +1,400 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix" data-preload-date="<?= $preloadDate ?? '' ?>">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3" id="breadcrumb-container">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item" id="game-breadcrumb" <?= isset($isSpecificDate) && $isSpecificDate ? '' : 'style="display: none;"' ?>><a title="Xổ số Mega 6/45 - Vietlott" href="/ket-qua-xoso-mega-6-45-vietlott.html"><span>Xổ số Mega 6/45 - Vietlott</span></a></li>
+                        <li class="nav-breadcrumb-item" id="date-breadcrumb"><span><?= isset($isSpecificDate) && $isSpecificDate && isset($selectedDate) ? 'Kết Quả Xổ Số Mega 6/45 Ngày ' . date('d/m/Y', strtotime($selectedDate)) . ' (' . date('l', strtotime($selectedDate)) . ' ' . date('d-m', strtotime($selectedDate)) . ')' : 'Xổ số Mega 6/45' ?></span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm" id="page-header">
+                    <h1 class="page-title-h1" id="page-title"><?= isset($isSpecificDate) && $isSpecificDate && isset($selectedDate) ? 'Kết Quả Xổ Số Điện Toán Mega 6/45 Ngày ' . date('d/m/Y', strtotime($selectedDate)) . ' (' . date('l', strtotime($selectedDate)) . ' ' . date('d-m', strtotime($selectedDate)) . ')' : 'Kết Quả Xổ Số Điện Toán Mega 6/45 Vietlott Hôm Nay' ?></h1>
+                </div>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm util-mt-3 util-mb-3 util-p-3">
+                <p><strong><a title="Xổ số Mega" href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y') . '.html') ?>">Xổ số
+                            Mega</a>,</strong> Trực tiếp kết quả <strong>Xổ số Mega 6/45 Vietlott</strong> hôm
+                    nay, <strong>XSMega 645</strong> vào các ngày thứ 4, thứ 6 và chủ nhật hàng tuần, <strong>KQXS
+                        Mega 6/45</strong> mới nhất.</p>
+            </div>
+            <ul class="nav nav-tabs util-rounded-top util-bg-max3d" id="myTab" role="tablist">
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Power 655</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase util-bg-orange" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-black">Mega 645</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-max-3d-pro-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Max 3D Pro</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-max-3d-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Max 3D</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-keno-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Keno</a>
+                </li>
+            </ul>
+            <div class="lottery-result util-p-0 js-result-mega-wrap">
+                <div class="lottery-result-header util-bg-red">
+                    <h2 class="lottery-result-tree util-text-center util-text-uppercase">
+                        <a href="/ket-qua-xo-so-mega-6-45-vietlott.html" class="util-text-decoration-none util-fs-5" title="Kết quả xổ số Vietlott Mega 6/45">Kết Quả Xổ Số Mega 6/45 Vietlott</a>
+                    </h2>
+                </div>
+                <div class="util-p-3 util-text-center util-bg-dark-vietlott js-vietlott-item-content">
+                    <p>Chúc các bạn dò kết quả <strong>xổ số kiểu mỹ Vietlott Mega 6/45</strong> mới nhất giành giải đặc biệt Jackpot siêu khủng.</p>
+
+                    <div class="js-result-content">
+                        <?php if ($latestResult) { ?>
+                            <h3 class="util-text-center util-font-bold util-fs-6 util-mb-3">Kỳ quay thưởng <span class="util-text-warning"><?= $latestResult['draw_number'] ?> <?= date('l, d/m/Y', strtotime($latestResult['draw_date'])) ?></span></h3>
+                            <div class="lottery-balls util-justify-center mega-645 js-result-number" data-mega="<?= $latestResult['id'] ?>">
+                                <?php
+                                $numbers = explode(',', $latestResult['numbers']);
+                                $mainNumbers = array_slice($numbers, 0, 6);
+                                foreach ($mainNumbers as $number) {
+                                ?>
+                                    <span class="lottery-ball mega big util-mx-1"><?= sprintf('%02d', $number) ?></span>
+                                <?php } ?>
+                            </div>
+                            <div class="util-mt-3 util-mb-3">
+                                Jackpot: <span class="util-font-bold util-fs-1 util-text-red util-block util-lh-1 js_mega_jackpot"><?= number_format($latestResult['jackpot_amount'], 0, ',', '.') ?>₫</span>
+                                <?php if ($jackpotIncrease > 0) { ?>
+                                    <span class="util-block util-small js-tang-them" style="color: #0fbb36;">
+                                        Tăng + <?= number_format($jackpotIncrease, 0, ',', '.') ?>₫ so với kỳ trước
+                                    </span>
+                                <?php } ?>
+                            </div>
+                            <div class="comp-table-responsive util-mt-3 util-mb-3">
+                                <table class="comp-table util-table-bordered util-text-start util-align-items-center util-small vietlott__winners__table util-bg-dark-vietlott">
+                                    <thead>
+                                        <tr>
+                                            <th>Giải</th>
+                                            <th>Trùng khớp</th>
+                                            <th class="util-text-end">SL trúng</th>
+                                            <th class="util-text-end">Giá trị</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Jackpot</td>
+                                            <td><span class="util-small util-text-orange">●●●●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['jackpot_1_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['jackpot_amount'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giải nhất</td>
+                                            <td><span class="util-small util-text-orange">●●●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['giai_nhat_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['giai_nhat_gia_tri'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giải nhì</td>
+                                            <td><span class="util-small util-text-orange">●●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['giai_nhi_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['giai_nhi_gia_tri'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Giải ba</td>
+                                            <td><span class="util-small util-text-orange">●●●</span></td>
+                                            <td class="util-text-end"><?= $latestResult['giai_ba_sl'] ?></td>
+                                            <td class="util-text-end util-text-white"><?= number_format($latestResult['giai_ba_gia_tri'], 0, ',', '.') ?>₫</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="util-fs-10 util-m-0 util-text-start">Lưu ý: Các con số dự thưởng phải trùng với số kết quả nhưng không cần theo đúng thứ tự.</p>
+                            <p class="util-fs-10 util-m-0 util-text-start">Thời hạn lĩnh thưởng của vé trúng thưởng: là 60 (sáu mươi) ngày, kể từ ngày xác định Kết quả quay số mở thưởng. Quá thời hạn trên, các vé trúng thưởng không còn giá trị lĩnh thưởng.</p>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comp-box">
+                <h2 class="comp-box-title">Các kỳ Mega 645 gần đây</h2>
+                <ul class="comp-list-links layout-row util-gx-0 util-mb-0 util-me-4">
+                    <?php foreach ($recentResults as $result) { ?>
+                        <li class="layout-col-4">
+                            <a href="/ket-qua-xoso-mega-6-45-vietlott-<?= date('d-m-Y', strtotime($result['draw_date'])) ?>.html"
+                                title="Kết quả xổ số Vietlott Mega 6/45 ngày <?= date('d/m/Y', strtotime($result['draw_date'])) ?>"
+                                class="js-mega-date-link"
+                                data-date="<?= date('Y-m-d', strtotime($result['draw_date'])) ?>">
+                                Mega <?= date('d/m/Y', strtotime($result['draw_date'])) ?>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <p class="util-p-1 util-text-center util-pb-3 align-item-center">
+                    <a class="js-date-picker-vietlott util-text-body util-text-decoration-none util-fs-6"
+                        data-type="mega"
+                        day-of-week="[0,2,4]"
+                        day-of-week-used="[3,5,0]"
+                        href="javascript:void(0)">
+                        <i class="icon-calendar util-me-1 util-align-items-center util-mb-1"></i> Xem ngày khác
+                    </a>
+                </p>
+            </div>
+
+            <div class="comp-box">
+                <h2 class="comp-box-title">Kết quả Mega 6/45 những kỳ quay trước</h2>
+                <div class="comp-table-responsive">
+                    <table class="comp-table util-small util-align-items-center util-mb-0 util-text-center">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Kết quả</th>
+                                <th class="util-text-end">Jackpot</th>
+                            </tr>
+                        </thead>
+                        <tbody class="js-results-tbody">
+                            <?php foreach ($recentResults as $result) { ?>
+                                <tr>
+                                    <td>
+                                        <a title="Kết quả xổ số Vietlott Mega 6/45 ngày <?= date('d/m/Y', strtotime($result['draw_date'])) ?>"
+                                            href="/ket-qua-xo-so-mega-6-45-vietlott-<?= date('d-m-Y', strtotime($result['draw_date'])) ?>.html"
+                                            class="js-mega-date-link"
+                                            data-date="<?= date('Y-m-d', strtotime($result['draw_date'])) ?>">
+                                            <?= date('d/m/Y', strtotime($result['draw_date'])) ?>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="lottery-balls">
+                                            <?php
+                                            $numbers = explode(',', $result['numbers']);
+                                            $mainNumbers = array_slice($numbers, 0, 6);
+                                            foreach ($mainNumbers as $number) {
+                                            ?>
+                                                <span class="lottery-ball mega util-me-1"><?= sprintf('%02d', $number) ?></span>
+                                            <?php } ?>
+                                        </div>
+                                    </td>
+                                    <td class="util-text-end"><span class="util-text-nowrap"><?= number_format($result['jackpot_amount'], 0, ',', '.') ?></span></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="util-grid util-mt-3">
+                    <button class="btn-base btn-green btn-lg util-rounded util-shadow-sm js-btn-load-more-mega"
+                        data-page="<?= $currentPage + 1 ?>"
+                        data-limit="10">
+                        Xem thêm kết quả <i class="bi bi-three-dots util-ms-2"></i>
+                    </button>
+                </div>
+            </div>
+            <div
+                class="comp-article-content util-bg-white util-shadow-sm util-p-3 util-mt-5 util-rounded js-bottom-content">
+            <p>
+                    <strong>Mega 6/45</strong> là sản phẩm xổ số tự chọn tiên phong
+                    tại Việt Nam với lối chơi mới lạ và hấp dẫn khi cho phép 
+                    người chơi tự lựa chọn 6 con số khác nhau trong khoảng 01 - 45 để 
+                    tham gia. Nếu trùng khớp cả 6 số với
+                    <strong>KQXS Mega</strong> nghĩa là đã giành được giải Jackpot 
+                    với mệnh giá khởi điểm 12 tỷ đồng và tiếp tục tăng sau mỗi kỳ 
+                    quay chưa có người chiến thắng.
+                </p>
+                <p>
+                    <strong>Vietlott Mega 6/45</strong> ra mắt năm 2016
+                    dựa trên mô hình xổ số PowerBall nổi tiếng của Mỹ thông qua 
+                    liên doanh giữa Công ty xổ số điện toán
+                    Việt Nam (Vietlott) và Tập đoàn Berjaya (Malaysia).
+                    <strong>Xổ số Mega</strong> được phát sóng trực tiếp từ
+                    18h đến 18h30 vào các ngày thứ Tư, thứ Sáu và Chủ Nhật hàng tuần trên 
+                    kênh VTC3. Người chơi cần hoàn tất chọn số trước giờ quay 
+                    15 phút.
+                </p>
+                <h2>
+                    <strong>Bảng giải thưởng xổ số Mega và tỷ lệ phân chia được 
+                        quy định như sau:</strong>
+                </h2>
+                <ul>
+                    <li>
+                        Giải Jackpot (trùng 6/6 số) có mệnh giá khởi điểm 12 tỷ 
+                        đồng và tích lũy nếu không có người trúng. Tỷ lệ phân chia 
+                        là 41,31% quỹ giải thưởng.
+                    </li>
+                    <li>
+                        Giải nhất (trùng 5/6 số) có giá trị 10.000.000
+                        đồng với tỷ lệ phân chia 2,87%.
+                    </li>
+                    <li>
+                        Giải nhì (trùng 4/6 số) có giá trị 300.000
+                        đồng với tỷ lệ phân chia 4,09%.
+                    </li>
+                    <li>
+                        Giải ba (trùng 3/6 số) có giá trị 30.000 đồng
+                        với tỷ lệ phân chia 6,73%.
+                    </li>
+                </ul>
+                <p>
+                    <strong>Lưu ý</strong>: nếu trúng nhiều giải trong cùng một vé 
+                    <strong>Mega 6/45</strong>, người chơi chỉ nhận giải có 
+                    giá trị cao nhất. Khi có nhiều vé cùng trúng Jackpot, 
+                    tổng giải thưởng sẽ được phân chia đều cho tất cả 
+                    người trúng giải.
+                </p>
+                <p>
+                    Bên cạnh hình thức chơi thông thường, người chơi có thể tăng 
+                    cơ hội trúng thưởng Mega bằng cách chơi bao - chọn nhiều hơn 
+                    6 số trong mỗi kỳ quay. Số lượng số được chọn sẽ tạo ra 
+                    các tổ hợp dự thưởng tương ứng như sau:
+                </p>
+                <table
+                    style="border-collapse: collapse; width: 100%; height: 262px">
+                    <tbody>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                <strong>Số lượng bao</strong>
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                <strong>Số lượng bộ số dự thưởng </strong><br /><strong>(tương ứng số lượng vé dự thưởng)</strong>
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 22px; text-align: center">
+                                Bao 7
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 22px; text-align: center">
+                                7 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 8
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                28 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 9
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                84 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 10
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                210 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 11
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                462 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 12
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                924 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 13
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                1.716 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 14
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                3.003 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 15
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                5.005 bộ số
+                            </td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td
+                                style="width: 37.5894%; height: 24px; text-align: center">
+                                Bao 18
+                            </td>
+                            <td
+                                style="width: 62.4106%; height: 24px; text-align: center">
+                                18.564 bộ số
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h2>
+                    <strong>Chi tiết cơ cấu giải thưởng chơi bao XS Mega 6/45 như
+                        sau:</strong>
+                </h2>
+                <p>
+                    <img
+                        class="aligncenter"
+                        src="/img/645/Choi-bao-Mega-645-1.png"
+                        alt="Chơi bao xổ số Mega 6/45"
+                        width="1024"
+                        height="792" />
+                </p>
+                <p>
+                    <img
+                        class="aligncenter"
+                        src="/img/645/Choi-bao-Mega-645-2.png"
+                        alt="Chơi bao xổ số Mega 6/45"
+                        width="1024"
+                        height="844" />
+                </p>
+                <p>
+                    <img
+                        class="aligncenter"
+                        src="/img/645/Choi-bao-Mega-645-3.png"
+                        alt="Chơi bao xổ số Mega 6/45"
+                        width="1024"
+                        height="844" />
+                </p>
+                <p>
+                    Các bạn có thể tham khảo thêm kết quả mới nhất, cách chơi, cách
+                    dò, cơ cấu giải thưởng và hướng dẫn cụ thể bên dưới: 
+                </p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+
+</main>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" media="print" onload="this.media='all'">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+<script src="/js/645index/645index.js" defer></script>

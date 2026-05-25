@@ -1,0 +1,343 @@
+<?php
+
+/**
+ * Trang kết quả XSMB theo ngày - Giao diện mới
+ * @var \DateTime $pageDate
+ * @var array|null $result
+ * @var array $dau
+ * @var array $duoi
+ * @var string $thuText
+ * @var array $otherLinks
+ */
+
+use App\Library\LotteryHelper;
+use App\Library\LotteryStatisticsHelper;
+
+$esc = $this->escaper;
+$day = (int)$pageDate->format('j');
+$month = (int)$pageDate->format('n');
+$year = (int)$pageDate->format('Y');
+$dateFormatted = sprintf('%02d/%02d/%d', $day, $month, $year);
+$dateSlug = sprintf('%02d-%02d-%d', $day, $month, $year);
+
+// Tính toán thống kê nếu có kết quả
+$statistics = null;
+if ($result && !empty($result)) {
+    $statistics = LotteryStatisticsHelper::analyzeXSMB($result);
+}
+
+// Map active day - Chỉ sử dụng cho trường hợp không có $active từ controller
+$weekday = (int)$pageDate->format('N'); // 1=Monday, 7=Sunday
+$dayMap = [
+    1 => 'thu-2',
+    2 => 'thu-3',
+    3 => 'thu-4',
+    4 => 'thu-5',
+    5 => 'thu-6',
+    6 => 'thu-7',
+    7 => 'chu-nhat'
+];
+// Sử dụng $active từ controller nếu có, nếu không thì tính từ pageDate
+$active = $active ?? ($dayMap[$weekday] ?? '');
+?>
+
+<link rel="stylesheet" href="/css/live-animations.css">
+
+<main>
+    <div class="container">
+        <!-- Submenu ngày trong tuần -->
+        <div class="row">
+            <div class="w-100">
+                <div class="submenu2">
+                    <ul class="row flex-nowrap text-nowrap overflow-auto mx-0 rounded lh-25 submenu2-bg pl-0 pl-md-3">
+                        <li class="px-2 px-lg-3 <?= $active === 'xsmb' ? 'active' : '' ?>">
+                            <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="Miền Bắc">XSMB</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-2' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-2-ket-qua-xo-so-mien-bac.html" title="thứ 2">thứ 2</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-3' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-3-ket-qua-xo-so-mien-bac.html" title="thứ 3">thứ 3</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-4' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-4-ket-qua-xo-so-mien-bac.html" title="thứ 4">thứ 4</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-5' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-5-ket-qua-xo-so-mien-bac.html" title="thứ 5">thứ 5</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-6' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-6-ket-qua-xo-so-mien-bac.html" title="thứ 6">thứ 6</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-7' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-7-ket-qua-xo-so-mien-bac.html" title="thứ 7">thứ 7</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'chu-nhat' ? 'active' : '' ?>">
+                            <a href="/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html" title="chủ nhật">chủ nhật</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <?php if (isset($isBasePage) && $isBasePage): ?>
+                            <li class="breadcrumb-item active">
+                                <span>Xổ số Miền Bắc</span>
+                            </li>
+                        <?php else: ?>
+                            <li class="breadcrumb-item active">
+                                <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="Xổ số Miền Bắc">Xổ số Miền Bắc</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            <!-- COL CENTER (Content chính) -->
+            <div class="col-xl-610">
+                <div id="ajax_content" class="d-flex flex-column category-result">
+                    <?php
+                    // Include partial kết quả chính
+                    $this->partial('ketquaxsmb/partials/result_table', [
+                        'result' => $result,
+                        'dau' => $dau,
+                        'duoi' => $duoi,
+                        'pageDate' => $pageDate,
+                        'thuText' => $thuText,
+                        'thuLink' => $thuLink ?? '#',
+                        'dateFormatted' => $dateFormatted,
+                        'currentVal' => $currentVal ?? date('Y-m-d'),
+                        'todayMax' => $todayMax ?? date('Y-m-d')
+                    ]);
+                    ?>
+
+                    <!-- Kết quả các ngày gần nhất -->
+                    <?php if (isset($latestResults) && !empty($latestResults)): ?>
+                        <?php foreach ($latestResults as $index => $latestResult): ?>
+                            <?php
+                            $latestDate = new \DateTime($latestResult['draw_date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+                            $latestDay = (int)$latestDate->format('j');
+                            $latestMonth = (int)$latestDate->format('n');
+                            $latestYear = (int)$latestDate->format('Y');
+                            $latestDateFormatted = sprintf('%02d/%02d/%d', $latestDay, $latestMonth, $latestYear);
+                            $latestYmd = $latestResult['draw_date'] ? str_replace('-', '', $latestResult['draw_date']) : 'unknown';
+                            ?>
+
+                            <?php
+                            // Include partial cho kết quả gần đây
+                            $this->partial('ketquaxsmb/partials/latest_result', [
+                                'latestResult' => $latestResult,
+                                'latestDate' => $latestDate,
+                                'latestDateFormatted' => $latestDateFormatted,
+                                'latestYmd' => $latestYmd,
+                                'index' => $index
+                            ]);
+                            ?>
+
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <!-- Links liên quan -->
+                    <p class="text-red1">» <a href="/rong-bach-kim-666-hom-nay.html" title="Rồng Bạch Kim 666" class="text-blue">Rồng Bạch Kim 666</a></p>
+                    <p class="text-red1">» <a href="/soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888" class="text-blue">Soi cầu XSMB Win2888</a></p>
+                    <p class="text-red1">» <a href="/soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi Cầu 24h" class="text-blue">Soi Cầu 24h</a></p>
+
+                    <!-- Thống kê và dự đoán -->
+                    <div class="bg-white p-3">
+                        <h3 class="font-weight-bold font-15">
+                            Thống kê KQXSMB ngày <span style="color: #ff0000;"><?= $dateFormatted ?></span>
+                        </h3>
+                        <p class="text-justify">
+                            Dựa trên bảng kết quả xổ số miền Bắc ngày hôm qua
+                            <span style="color: #ff0000;"><?= $dateFormatted ?></span>,
+                            chúng ta có được những thông tin thống kê MB sau:
+                        </p>
+                        <p>- Bạch thủ đề: Đầu <span style="color: #ff0000;"><?= $this->dynamicStats['bach_thu']['dau'] ?? '6' ?></span> đuôi <span style="color: #ff0000;"><?= $this->dynamicStats['bach_thu']['duoi'] ?? '3' ?></span>. Tổng <span style="color: #ff0000;"><?= $this->dynamicStats['bach_thu']['tong'] ?? '9' ?></span></p>
+                        <p>- Lô tô lộn về cả cặp: <span style="color: #ff0000;"><?= implode(', ', $this->dynamicStats['lo_lon'] ?? ['15 - 51', '47 - 74', '69 - 96']) ?></span></p>
+                        <p>- Lô kép: <span style="color: #ff0000;"><?= implode(' - ', $this->dynamicStats['lo_kep'] ?? ['44', '88', '99']) ?></span></p>
+                        <p>- Lô 2 nháy: <span style="color: #ff0000;"><?= implode(' - ', $this->dynamicStats['lo_nhay_2'] ?? ['63', '99']) ?></span></p>
+                        <p>- Lô 3 nháy: <span style="color: #ff0000;"><?= implode(' - ', $this->dynamicStats['lo_nhay_3'] ?? []) ?: 'Không có' ?></span></p>
+                        <p>- Đầu câm: <span style="color: #ff0000;"><?= !empty($this->dynamicStats['dau_cam']) ? implode(' - ', $this->dynamicStats['dau_cam']) : 'Không có' ?></span></p>
+                        <p>- Đuôi câm: <span style="color: #ff0000;"><?= !empty($this->dynamicStats['duoi_cam']) ? implode(' - ', $this->dynamicStats['duoi_cam']) : 'Không có' ?></span></p>
+                        <p>- Đầu về nhiều nhất: <span style="color: #ff0000;"><?= implode(' - ', $this->dynamicStats['dau_max'] ?? ['6', '4']) ?></span></p>
+                        <p>- Đuôi về nhiều nhất: <span style="color: #ff0000;"><?= implode(' - ', $this->dynamicStats['duoi_max'] ?? ['3', '9']) ?></span></p>
+                        <div class="my-3">
+                            <p class="text-red1">» <a href="/soi-cau-xsmb.html" title="Soi cầu XSMB" class="text-blue">Soi cầu XSMB</a></p>
+                            <p class="text-red1">» <a href="/lo-gan-xsmb.html" title="Lô gan XSMB" class="text-blue">Lô gan XSMB</a></p>
+                            <p class="text-red1">» <a href="/thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html" title="Sổ kết quả XSMB" class="text-blue">Sổ kết quả XSMB</a></p>
+                            <p class="text-red1">» <a href="/xsmb-<?= $dateSlug ?>.html" title="Kết quả XSMB" class="text-blue">Kết quả XSMB</a></p>
+                            <p class="text-red1">» <a href="/du-doan-xsmb-c59.html" title="Dự đoán XSMB" class="text-blue">Dự đoán XSMB</a></p>
+                        </div>
+                        <h3 class="font-weight-bold font-15">Dự đoán KQXSMB ngày <span><?php
+                            $nextDate = new \DateTime($pageDate->format('Y-m-d'));
+                            $nextDate->modify('+1 day');
+                            echo $nextDate->format('d/m/Y');
+                        ?></span></h3>
+                        <p>+ Bạch thủ lô: <span style="color: #ff0000;"><?php
+                            $bachThu = rand(10, 99);
+                            echo $bachThu;
+                        ?></span></p>
+                        <p>+ Cặp song thủ lô đẹp: <span style="color: #ff0000;"><?php
+                            $songThu1 = rand(10, 99);
+                            $songThu2 = rand(10, 99);
+                            echo $songThu1 . ' - ' . $songThu2;
+                        ?></span></p>
+                        <p>+ Lô xiên 2: <span style="color: #ff0000;"><?php
+                            $xien2_1 = rand(10, 99);
+                            $xien2_2 = rand(10, 99);
+                            echo $xien2_1 . ' - ' . $xien2_2;
+                        ?></span></p>
+                        <p>+ Lô xiên 3: <span style="color: #ff0000;"><?php
+                            $xien3_1 = rand(10, 99);
+                            $xien3_2 = rand(10, 99);
+                            $xien3_3 = rand(10, 99);
+                            echo $xien3_1 . ' - ' . $xien3_2 . ' - ' . $xien3_3;
+                        ?></span></p>
+                        <p>+ Lô 3 càng: <span style="color: #ff0000;"><?php
+                            $cang1 = rand(100, 999);
+                            $cang2 = rand(100, 999);
+                            $cang3 = rand(100, 999);
+                            echo $cang1 . ' - ' . $cang2 . ' - ' . $cang3;
+                        ?></span></p>
+                        <p>+ Lô kép: <span style="color: #ff0000;"><?php
+                            $kep1 = rand(0, 9) * 11;
+                            $kep2 = rand(0, 9) * 11;
+                            echo $kep1 . ' - ' . $kep2;
+                        ?></span></p>
+                    </div>
+
+                    <!-- Aside Dự đoán XSMB -->
+                    <aside class="news border-radius-4">
+                        <h3 class="title-bg-blue border-radius-top">Dự đoán xổ số Miền Bắc</h3>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/du-doan-xsmb-c59.html" title="Dự đoán XSMB">Dự đoán XSMB hôm nay</a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/soi-cau-xsmb.html" title="Soi cầu XSMB">Soi cầu XSMB chính xác</a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/lo-gan-xsmb.html" title="Lô gan XSMB">Lô gan XSMB</a></p>
+                    </aside>
+
+                    <!-- Bảng lô gan -->
+                    <div class="logan-result">
+                        <div class="title-bg-blue border-radius-top">BẢNG LOGAN Miền Bắc LÂU CHƯA VỀ NHẤT</div>
+                        <div class="table-logan">
+                            <div class="overflow-auto">
+                                <table class="text-center table-total table-logan-lcvn table-fixed w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>Bộ số</th>
+                                            <th>Lần chưa về</th>
+                                            <th>Về gần nhất</th>
+                                            <th>Gan cực đại</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>04</td>
+                                            <td>22</td>
+                                            <td><a rel="nofollow" href="/xsmb-06-12-2025.html" target="_blank">06/12/2025</a></td>
+                                            <td>34</td>
+                                        </tr>
+                                        <tr>
+                                            <td>39</td>
+                                            <td>14</td>
+                                            <td><a rel="nofollow" href="/xsmb-14-12-2025.html" target="_blank">14/12/2025</a></td>
+                                            <td>38</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button load more -->
+                <button class="btnLoadMore mt-2" data-url="/xo-so-mien-bac-xsmb/page/" data-page="2">Xem thêm kết quả</button>
+                <!-- SEO Content -->
+                <div class="new-content text-justify mt-4">
+                    <h3 style="text-align: justify;">Xổ số miền Bắc - Trực tiếp KQ XSMB hôm nay</h3>
+                    <p style="text-align: justify;"><a href="/xo-so-mien-bac-xsmb.html" title="Xổ số miền Bắc">Xổ số miền Bắc</a> - KQXSMB hôm nay được Soi cầu 247 cập nhật nhanh chóng vào lúc 18h10. Mang đến cho anh em kết quả xổ số miền Bắc các ngày trong tuần nhanh chóng và chính xác nhất. Tại chuyên mục XSMB chúng tôi còn chia sẻ cho anh em kinh nghiệm soi cầu chốt số cực hiệu quả từ các chuyên gia lô đề lâu năm, giúp anh em chọn được con số may mắn cho lần quay thưởng tiếp theo.</p>
+                    <p style="text-align: justify;">Kết quả xổ số miền Bắc mới nhất sẽ được cập nhật hàng ngày, hàng giờ cực chi tiết. Xổ số miền Bắc là đài mở thưởng lớn nhất, quay thưởng tất cả các ngày trong tuần với 6 tỉnh quay thưởng cố định, mỗi ngày sẽ mở thưởng một tỉnh. Trong đó, XSKT Hà Nội sẽ được mở thưởng 2 lần trong tuần.</p>
+                    <h3 class="font-15 font-weight-bold pb-2">Lịch mở thưởng Xổ số Miền Bắc</h3>
+                    <p>Thứ 2: Xổ số kiến thiết Hà Nội</p>
+                    <p>Thứ 3: Xổ số kiến thiết Quảng Ninh</p>
+                    <p>Thứ 4: Xổ số kiến thiết Bắc Ninh</p>
+                    <p>Thứ 5: Xổ số kiến thiết Hà Nội</p>
+                    <p>Thứ 6: Xổ số kiến thiết Hải Phòng</p>
+                    <p>Thứ 7: Xổ số kiến thiết Nam Định</p>
+                    <p>Chủ Nhật: Xổ số kiến thiết Thái Bình</p>
+                    <p>Khi may mắn trúng giải thưởng của Xổ số Miền Bắc, mời quý khách vui lòng liên hệ với các công ty phát hành vé số. Chi tiết liên hệ các công ty phát hành vé số Xổ số Miền Bắc:</p>
+                    <h4 class="font-15 font-weight-bold pb-2">Xổ số kiến thiết Hà Nội</h4>
+                    <p>Công ty TNHH Một thành viên Xổ số kiến thiết Thủ đô</p>
+                    <p>Địa chỉ: 53E - Hàng Bài - Hoàn Kiếm - Hà Nội</p>
+                    <p>Điện thoại: 04.9433636 - Fax: 04.9438874 - Đường dây nóng: 04.9439928, 04.9433123</p>
+                    <h4 class="font-15 font-weight-bold pb-2">Xổ số kiến thiết Quảng Ninh</h4>
+                    <p>CÔNG TY TNHH MTV Xổ số kiến thiết Quảng Ninh</p>
+                    <p>Trụ sở chính: Số 2 - phố Kim Hoàn - phường Bạch Đằng - TP Hạ Long - Tỉnh Quảng Ninh</p>
+                    <p>Ðiện thoại: 0333.825.355 * Fax: 0333.829.723 * Email: xosokienthietquangninh@gmail.com</p>
+                    <h4 class="font-15 font-weight-bold pb-2">Xổ số kiến thiết Bắc Ninh</h4>
+                    <p>CÔNG TY TNHH MTV xổ số kiến thiết Bắc Ninh</p>
+                    <p>Địa chỉ: Số 27 Đ.Nguyễn Đăng Đạo, P.Suối Hoa, TP.Bắc Ninh, T.Bắc Ninh</p>
+                    <p>Điện thoại: 0222.3821.256 - Fax: 0222.3822.748</p>
+                    <h4 class="font-15 font-weight-bold pb-2">Xổ số kiến thiết Hải Phòng</h4>
+                    <p>Công Ty Trách Nhiệm Hữu Hạn Một Thành Viên Xổ Số Hải Phòng</p>
+                    <p>Địa chỉ: Số 19 Điện Biên Phủ - Phường Máy Tơ - Quận Ngô Quyền - Hải Phòng</p>
+                    <p>Điện thoại: 0313551243 - Fax: 0313836139</p>
+                    <h4 class="font-15 font-weight-bold pb-2">Xổ số kiến thiết Nam Định</h4>
+                    <p>CÔNG TY TNHH MTV Xổ số kiến thiết Nam Định</p>
+                    <p>Địa chỉ: 157 Trần Hưng Đạo - Thành phố Nam Định.</p>
+                    <p>Điện thoại: 228.3849241 - Fax: 228.3844377</p>
+                    <p>Email: xosonamdinh@gmail.com</p>
+                    <h4 class="font-15 font-weight-bold pb-2">Xổ số kiến thiết Thái Bình</h4>
+                    <p>Công ty TNHH một thành viên xổ số kiến thiết Thái Bình</p>
+                    <p>Số 03 - Phố Quang Trung, Phường Quang Trung, Thành Phố Thái Bình, tỉnh Thái Bình</p>
+                    <p>Điện thoại : (0363).831.731 - Fax: (0363).833.029</p>
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Cơ cấu giải thưởng XSMB mới nhất</span></h3>
+                    <p style="text-align: justify;">Mỗi tờ vé số miền Bắc trị giá 10.000 đồng và có 81.150 giải thưởng với giá trị như sau:</p>
+                    <p style="text-align: justify;">- 03 giải đặc biệt với 1 lần quay trùng 5 chữ số, giá trị mỗi giải đặc biệt là 1 tỷ đồng, tổng giá trị giải thưởng của 3 giải lên đến 3 tỷ đồng.</p>
+                    <p style="text-align: justify;">- Có 15 giải nhất với 1 lần quay thưởng, gồm có 5 số, giá trị mỗi giải là 10 triệu đồng, tổng giá trị 15 giải nhất lên đến 150 triệu đồng.</p>
+                    <p style="text-align: justify;">- Có 30 giải nhì với 2 lần quay thưởng, gồm 5 chữ số, giá trị mỗi giải là 5 triệu đồng, tổng giá trị 30 giải nhì là 150 triệu đồng.</p>
+                    <p style="text-align: justify;">- Có 90 giải ba với 6 lần quay, gồm có 5 chữ số, giá trị mỗi giải ba là 1 triệu đồng.</p>
+                    <p style="text-align: justify;">- 600 giải tư với 4 lần quay, gồm có 4 chữ số, giá trị mỗi giải tư là 400 nghìn đồng.</p>
+                    <p style="text-align: justify;">- 900 giải năm với 6 lần quay, gồm có 4 chữ số, giá trị mỗi giải nhận được 200 nghìn đồng. 4500 giải sáu với 3 lần quay, gồm 3 chữ số, trị giá mỗi giải là 100 nghìn đồng.</p>
+                    <p style="text-align: justify;">- 60.000 giải bảy với 4 lần quay, gồm có 2 chữ số, mỗi giải nhận được 40 nghìn đồng.</p>
+                    <p style="text-align: justify;">- 12 giải phụ đặc biệt dành cho những tấm vé may mắn trùng số với giải ĐB nhưng khác ký hiệu, nhận thưởng mỗi giải 20 triệu đồng.</p>
+                    <p style="text-align: justify;">- 15.000 giải khuyến khích dành cho tờ vé số trùng 2 chữ số hàng đơn vị và hàng trục với giải đặc biệt, sẽ nhận được phần thưởng trị giá 40 nghìn đồng.</p>
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Cách thức nhận giải khi trúng thưởng xổ số miền Bắc</span></h3>
+                    <p style="text-align: justify;">Khi may mắn trúng thưởng bất kỳ giải nào của XSMB, anh em cần liên hệ ngay với công ty xổ số kiến thiết miền Bắc hoặc đại lý vé số gần nhất để được hướng dẫn nhận thưởng.</p>
+                    <p style="text-align: justify;">Tờ vé số nhận giải phải trùng khớp các số khi quay thưởng, khớp ngày quay thưởng và phải còn nguyên vẹn, không bị rách nát hay tẩy xóa, chắp vá. Thời gian nhận thưởng xổ số miền bắc là tối đa 30 ngày kể từ ngày công bố giải thưởng.</p>
+                    <p style="text-align: justify;">Để dò vé số miền Bắc nhanh chóng anh em có thể theo dõi chương trình quay thưởng trên tivi, đài VOV hoặc xem trực tiếp tại <a href="/" title="chuyên trang Soi cầu 247">chuyên trang Soi cầu 247</a> của chúng tôi. Cam kết cập nhật kết quả xổ số nhanh chóng nhất tới anh em. Chúc anh em may mắn!</p>
+                </div>
+            </div>
+
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- Sidebar Right -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+
+<script>
+    window.appProvinces = <?= json_encode($this->view->provinces ?? []) ?>;
+    console.log(window.appProvinces);
+</script>
+<link rel="preload" href="/js/kqxs/kqxsmb-live.js" as="script">
+<script src="/js/kqxs/kqxsmb-live.js" async></script>
+
+<link rel="preload" href="/js/kqxs/kqxsmb.js" as="script">
+<script src="/js/kqxs/kqxsmb.js" async></script>

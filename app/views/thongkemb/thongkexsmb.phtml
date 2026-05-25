@@ -1,0 +1,221 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<?php
+function h($s)
+{
+    return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+}
+
+function renderSpecial($num)
+{
+    $num = trim((string)$num);
+    if ($num === '') return '';
+    $head = substr($num, 0, max(0, strlen($num) - 2));
+    $tail = substr($num, -2);
+    return $num;
+}
+
+$sp30 = is_array($specialPrize30) ? $specialPrize30 : iterator_to_array($specialPrize30 ?? []);
+?>
+
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class="util-text-red" title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a></li>
+                    <li><a class=" " title="Thống kê xổ số Miền Nam" href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+                    <li><a class=" " title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                    <li><a title="Thống kê Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power 6/55</a></li>
+                    <li><a title="Thống kê Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Thống kê XSMB</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header  util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1">Thống Kê Xổ Số Miền Bắc - TK XSMB Chi Tiết, Lô Gan, Chu Kỳ, Tần Suất</h1>
+                    <ul class="list__subpage">
+                        <li><a title="Lô gan xổ số Miền Bắc" href="/lo-gan-xsmb.html">Lô gan Miền Bắc</a></li>
+                        <li><a title="Thống kê đặc biệt xổ số Miền Bắc" href="/dac-biet-xsmb.html">Giải đặc biệt Miền Bắc</a></li>
+                        <li><a title="Thống kê đầu đuôi xổ số Miền Bắc" href="/">Đầu đuôi Miền Bắc</a></li>
+                        <li><a title="Thống kê tần suất xổ số Miền Bắc" href="/tan-suat-lo-to-xsmb.html">Tần suất Miền Bắc</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p>
+                    Trước khi tra cứu <strong>thống kê xổ số Miền Bắc</strong>, bạn nên xem lại
+                    <a title="Kết quả XSMB" href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"><strong>kết quả XSMB</strong></a>
+                    <?= $latest ? 'mới nhất ngày <strong>' . date('d/m/Y', strtotime($latest->draw_date)) . '</strong>' : '' ?>
+                    được cập nhật nhanh và chính xác tại soicau247.com.
+                </p>
+
+                <p>
+                    Chuyên trang <strong>Thống kê XSMB</strong> cung cấp dữ liệu tần suất, lô gan và
+                    <strong>giải đặc biệt</strong> trong các chu kỳ 5, 30 và 100 kỳ quay gần nhất.
+                </p>
+
+                <p>
+                    Toàn bộ dữ liệu được lưu trữ dài hạn, giúp kết quả phân tích ổn định và đáng tin cậy hơn.
+                </p>
+
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange util-text-black-2">Thống kê giải đặc biệt Miền Bắc trong 100 kỳ quay</h2>
+            <div class="comp-table-responsive util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-text-center util-mb-0 util-small">
+                    <thead>
+                        <tr>
+                            <th class="util-font-medium">Ngày</th>
+                            <th class="util-font-medium">Giải ĐB</th>
+                            <th class="util-font-medium">Ngày</th>
+                            <th class="util-font-medium">Giải ĐB</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($sp30)): ?>
+                            <?php for ($i = 0; $i < count($sp30); $i += 2): ?>
+                                <?php
+                                $r1 = $sp30[$i] ?? null;
+                                $r2 = $sp30[$i + 1] ?? null;
+                                ?>
+                                <tr>
+                                    <td><?= $r1 ? date('d/m/Y', strtotime($r1->draw_date)) : '' ?></td>
+                                    <td class="util-font-bold util-fs-6"><?= $r1 ? renderSpecial($r1->special_prize) : '' ?></td>
+                                    <td><?= $r2 ? date('d/m/Y', strtotime($r2->draw_date)) : '' ?></td>
+                                    <td class="util-font-bold util-fs-6"><?= $r2 ? renderSpecial($r2->special_prize) : '' ?></td>
+                                </tr>
+                            <?php endfor; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4" class="util-text-center">Chưa có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange util-text-black-2">Lô gan Miền Bắc trong 100 lần quay</h2>
+            <div class="comp-table-responsive util-mb-4" style="overflow: hidden;">
+                <table class="comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead>
+                        <tr>
+                            <th class="util-font-medium">Con số</th>
+                            <th class="util-font-medium">Lần chưa ra</th>
+                            <th class="util-font-medium">Ra gần nhất</th>
+                            <th class="util-font-medium">Gan cực đại</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($loGanTop)): ?>
+                            <?php foreach ($loGanTop as $row): ?>
+                                <tr>
+                                    <td><span class="util-font-bold util-fs-6 util-text-red" data-kyquay="30" data-mientinh="mb"><?= h($row['number']) ?></span></td>
+                                    <td><?= (int)($row['miss'] ?? 0) ?> lần</td>
+                                    <td><?= !empty($row['last_appeared']) ? date('d/m/Y', strtotime($row['last_appeared'])) : '—' ?></td>
+                                    <td><?= (int)($row['max_gap'] ?? 0) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="4" class="util-text-center">Chưa có dữ liệu.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-10-10 util-m-0 util-p-2 util-px-3 util-bg-orange util-text-black-2">10 con lô xuất hiện nhiều nhất trong 100 lần quay</h2>
+            <table class="comp-table util-table-bordered util-text-center util-align-items-center util-small util-mb-4">
+                <thead>
+                    <tr>
+                        <th class="util-font-medium">Con số</th>
+                        <th class="util-font-medium">Số lần về</th>
+                        <th class="util-font-medium"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($freqTop10)): ?>
+                        <?php foreach ($freqTop10 as $row): ?>
+                            <?php
+                            $cnt   = (int)($row['count'] ?? 0);
+                            $max   = (int)($freqMaxCount ?? 0);
+                            $width = $max > 0 ? round($cnt / $max * 100, 3) : 0;
+                            ?>
+                            <tr>
+                                <td style="width: 15%; text-align: center;">
+                                    <span class="util-font-bold util-fs-6 util-text-red js-tk-number" data-kyquay="30" data-mientinh="mb">
+                                        <?= h($row['number']) ?>
+                                    </span>
+                                </td>
+                                <td style="width: 20%; vertical-align: middle; text-align: center;"><?= $cnt ?> lần</td>
+                                <td style="width: 45%;">
+                                    <div class="progress" style="height: 5px;">
+                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="<?= $width ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?= $width ?>%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="3" class="util-text-center">Chưa có dữ liệu.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
+            <div class="comp-box">
+                <div class="comp-box-title">Tiện ích Miền Bắc</div>
+                <ul class="comp-list-links layout-row util-gx-0">
+                    <li class="layout-col-6 layout-col-md-3">
+                        <a title="Kết quả xổ số Miền Bắc" href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html">Kết quả XSMB</a>
+                    </li>
+                    <li class="layout-col-6 layout-col-md-3">
+                        <a title="Soi cầu dự đoán xổ số Miền Bắc" href="/du-doan-xsmb-c59.html">Dự đoán XSMB</a>
+                    </li>
+                    <li class="layout-col-6 layout-col-md-3">
+                        <a title="Quay thử xổ số Miền Bắc" href="/quay-thu-xsmb-quay-thu-xo-so-mien-bac-hom-nay.html">Quay thử XSMB</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p>
+                    <strong><a title="Thống kê XSMB - Thống kê xổ số Miền Bắc hôm nay" href="/thong-ke-xsmb.html">Thống kê XSMB</a></strong>
+                    trên soicau247.com tổng hợp và phân tích lô tô Miền Bắc hằng ngày. Kết hợp các bảng thống kê
+                    <strong>giải đặc biệt</strong>, <strong>lô gan lâu về</strong>, và <strong>top tần suất</strong> để có cái nhìn tổng quan trước khi chốt số.
+                </p>
+                <p>
+                    Bạn cũng có thể xem chuyên mục <strong><a title="soi cầu miền Bắc" href="/du-doan-xsmb-c59.html">Soi cầu miền Bắc</a></strong>
+                    để tham khảo thêm nhiều phương pháp phân tích.
+                </p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0 !important;
+        }
+    }
+</style>

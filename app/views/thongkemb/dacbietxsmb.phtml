@@ -1,0 +1,365 @@
+<?php
+// Helper functions
+if (!function_exists('h')) {
+    function h($s)
+    {
+        return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+    }
+}
+if (!function_exists('dmy')) {
+    function dmy($d)
+    {
+        return $d ? date('d/m/Y', strtotime($d)) : '';
+    }
+}
+
+$asOfDateStr = dmy($asOfDate);
+
+// Organize Head/Tail stats for easy lookup 0-9
+$headMap = array_fill(0, 10, 0);
+if (!empty($headStats)) {
+    foreach ($headStats as $item) $headMap[$item['digit']] = $item['times'];
+}
+$tailMap = array_fill(0, 10, 0);
+if (!empty($tailStats)) {
+    foreach ($tailStats as $item) $tailMap[$item['digit']] = $item['times'];
+}
+
+// Calculate Sum stats from gridRows
+$sumMap = array_fill(0, 10, 0);
+if (!empty($gridRows)) {
+    foreach ($gridRows as $chunk) {
+        foreach ($chunk as $day) {
+            $numStr = preg_replace('/\D+/', '', $day['num']);
+            if (strlen($numStr) >= 2) {
+                $last2 = substr($numStr, -2);
+                $d1 = (int)$last2[0];
+                $d2 = (int)$last2[1];
+                $s = ($d1 + $d2) % 10;
+                $sumMap[$s]++;
+            }
+        }
+    }
+}
+?>
+
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/thong-ke-xo-so-mien-bac-tk-xsmb.html" title="XSMB">XSMB</a> </li>
+                        <li class="breadcrumb-item active"><a href="/dac-biet-xsmb.html" title="Thống kê đặc biệt">Thống kê đặc biệt</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610 border-radius-4">
+                <aside>
+                    <table class="table-b">
+                        <tbody>
+                            <tr>
+                                <td><a href="/lo-gan-xsmb.html" title="Lô gan XSMB">Lô gan XSMB</a></td>
+                                <td><a href="/lo-xien-xsmb.html" title="Lô xiên XSMB">Lô xiên XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/lo-kep-xsmb.html" title="Lô kép XSMB">Lô kép XSMB</a></td>
+                                <td><a href="/" title="Đầu đuôi lô tô XSMB">Đầu đuôi lô tô XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a class="text-red" href="/dac-biet-xsmb.html" title="Đặc biệt XSMB">Đặc biệt XSMB</a></td>
+                                <td><a href="/dac-biet-tuan-xsmb.html" title="Đặc biệt tuần XSMB">Đặc biệt tuần XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/tan-suat-lo-to-xsmb.html" title="Tần suất lô tô XSMB">Tần suất lô tô XSMB</a></td>
+                                <td><a href="/thong-ke-theo-tong-xsmb.html" title="Theo tổng XSMB">Theo tổng XSMB</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+                <div class="viewStatistic">
+                    <article>
+                        <div class="static-search">
+                            <h2 class="aside-title-red justify-content-center"> Thống kê đặc biệt XSMB đến <?= $asOfDateStr ?> </h2>
+                            <div class="container form-search">
+                                <form method="post">
+                                    <div class="row align-items-end">
+                                        <div class="col-xl-6 pr-2 pl-2 pt-2 d-flex">
+                                            <div class="label mr-2 d-flex align-items-center">Tỉnh/Thành phố</div>
+                                            <div class="select-arow flex-grow-1">
+                                                <select class="form-control form-control-sm select-logan" id="selectProvince" onchange="if(this.value) window.location.href=this.value;">
+                                                    <option selected="selected" value="/dac-biet-xsmb.html">Miền Bắc </option>
+                                                    <!-- Other provinces currently hardcoded to links -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 d-flex pr-2 pl-2 pt-2">
+                                            <div class="input-datetick flex-grow-1"><input id="dateEnd" class="form-control form-control-sm mr-2" name="date_end" type="text" value="31/12/2025"></div>
+                                        </div>
+                                        <div class="col-xl-3 d-flex pr-2 pl-2 pt-2">
+                                            <button id="btn-Statistic-search" class="btn btn-danger btn-sm w-100 btnLogan" type="submit">Thống kê</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                    <div id="view_data">
+                        <article>
+                            <div class="logan-result">
+                                <div class="title-bg-blue border-radius-top"> Hai số cuối giải đặc biệt có xác suất về cao nhất </div>
+                                <div class="table-dacbiet overflow-auto">
+                                    <table class="text-center table-total w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Số thứ nhất</th>
+                                                <th>Số thứ hai</th>
+                                                <th>Số thứ ba</th>
+                                                <th>Số thứ tư</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="table-dacbiet-tr1 bg-white">
+                                                <?php for ($i = 0; $i < 4; $i++): ?>
+                                                    <td>
+                                                        <?php if (isset($forecastPairs[$i])): ?>
+                                                            <span class="text-red font-weight-bold font-20"><?= $forecastPairs[$i] ?></span>
+                                                        <?php else: ?>
+                                                            -
+                                                        <?php endif; ?>
+                                                    </td>
+                                                <?php endfor; ?>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- TOP 10 FREQ -->
+                                    <div class="bg-blue text-white font-weight-bold p-2 text-center mt-3">
+                                        10 cặp số về nhiều nhất (trong <?= $totalDay ?> kỳ)
+                                    </div>
+                                    <table class="text-center table-total w-100">
+                                        <tr class="font-weight-bold">
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                        </tr>
+                                        <?php
+                                        $chunks = array_chunk($top10Freq ?? [], 2);
+                                        foreach ($chunks as $chunk):
+                                        ?>
+                                            <tr class="bg-white">
+                                                <?php foreach ($chunk as $item): ?>
+                                                    <td><span class="text-red font-weight-bold"><?= $item->number ?></span></td>
+                                                    <td><span class="font-weight-bold"><?= $item->count ?></span> lần</td>
+                                                <?php endforeach; ?>
+                                                <?php if (count($chunk) < 2): ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endif; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+
+                                    <!-- TOP 10 LEAST FREQ -->
+                                    <div class="bg-blue text-white font-weight-bold p-2 text-center mt-3">
+                                        10 cặp số về ít nhất (trong <?= $totalDay ?> kỳ)
+                                    </div>
+                                    <table class="text-center table-total w-100">
+                                        <tr class="font-weight-bold">
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                        </tr>
+                                        <?php
+                                        $chunks = array_chunk($top10Least ?? [], 2);
+                                        foreach ($chunks as $chunk):
+                                        ?>
+                                            <tr class="bg-white">
+                                                <?php foreach ($chunk as $item): ?>
+                                                    <td><span class="text-red font-weight-bold"><?= $item->number ?></span></td>
+                                                    <td><span class="font-weight-bold"><?= $item->count ?></span> lần</td>
+                                                <?php endforeach; ?>
+                                                <?php if (count($chunk) < 2): ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endif; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+
+                                    <!-- FOLLOW HISTORY -->
+                                    <?php if ($latestSeed): ?>
+                                        <div class="table-dacbiet-tr2 mt-3 p-2 text-center" style="background-color: #FFF9DC;">
+                                            <h3 class="mb-2" style="font-weight: bold;">Các kết quả mà ngày trước đó cũng có loto đặc biệt <span class="text-red font-20"><?= h($latestSeed) ?></span></h3>
+                                            <div class="table-thongke-time"> Ngày <?= $asOfDateStr ?> về <span class="text-red font-20 font-weight-bold"><?= h($latestSeed) ?></span></div>
+                                        </div>
+                                        <table class="text-center table-total w-100">
+                                            <tr class="table-dacbiet-tr3 font-weight-bold">
+                                                <td colspan="2">Ngày xuất hiện Loto ĐB <?= h($latestSeed) ?></td>
+                                                <td colspan="2">Loto ĐB ngày tiếp theo</td>
+                                            </tr>
+                                            <tbody>
+                                                <?php if (!empty($followHistory)): ?>
+                                                    <?php foreach ($followHistory as $row):
+                                                        $pre = substr($row['special'], 0, -2);
+                                                        $l2  = substr($row['special'], -2);
+                                                        $nextPre = substr($row['next_special'], 0, -2);
+                                                        $nextL2  = substr($row['next_special'], -2);
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= dmy($row['date']) ?></td>
+                                                            <td class="font-weight-bold"><?= $pre ?><span class="text-red"><?= $l2 ?></span></td>
+                                                            <td><?= dmy($row['next_date']) ?></td>
+                                                            <td class="font-weight-bold"><?= $nextPre ?><span class="text-red"><?= $nextL2 ?></span></td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                <?php else: ?>
+                                                    <tr>
+                                                        <td colspan="4">Chưa có dữ liệu lịch sử tương ứng</td>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            </tbody>
+                                        </table>
+
+                                        <!-- NEXT DAY FREQUENCY -->
+                                        <div class="mt-3 text-center">
+                                            <h3 class="font-weight-bold mb-0">Thống kê tần suất loto đặc biệt sau khi giải ĐB xuất hiện <span class="text-red font-16"><?= h($latestSeed) ?></span></h3>
+                                        </div>
+                                        <table class="text-center table-total w-100 mt-2">
+                                            <thead>
+                                                <tr class="font-weight-bold">
+                                                    <td>Bộ số</td>
+                                                    <td>Số lần</td>
+                                                    <td>Bộ số</td>
+                                                    <td>Số lần</td>
+                                                    <td>Bộ số</td>
+                                                    <td>Số lần</td>
+                                                    <td>Bộ số</td>
+                                                    <td>Số lần</td>
+                                                    <td>Bộ số</td>
+                                                    <td>Số lần</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="lh2">
+                                                <?php
+                                                // Split into rows of 5 items
+                                                $statChunks = array_chunk($followNextStats ?? [], 5);
+                                                foreach ($statChunks as $chunk):
+                                                ?>
+                                                    <tr>
+                                                        <?php foreach ($chunk as $st): ?>
+                                                            <td class="text-red font-weight-bold"><?= $st->number ?></td>
+                                                            <td><?= $st->count ?> lần</td>
+                                                        <?php endforeach; ?>
+                                                        <?php
+                                                        $missing = 5 - count($chunk);
+                                                        if ($missing > 0) {
+                                                            for ($m = 0; $m < $missing; $m++) echo "<td></td><td></td>";
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    <?php endif; ?>
+
+                                    <!-- TOUCH STATS -->
+                                    <div class="bg-grey p-2 mt-3">
+                                        <h2 class="text-center font-weight-bold m-0">THỐNG KÊ CHẠM</h2>
+                                    </div>
+                                    <table class="text-center w-100 border table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Số</th>
+                                                <th>Đã về Đầu</th>
+                                                <th>Đã về Đuôi</th>
+                                                <th>Đã về Tổng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php for ($d = 0; $d <= 9; $d++): ?>
+                                                <tr class="bg-white">
+                                                    <td class="text-red font-weight-bold"><?= $d ?></td>
+                                                    <td><?= $headMap[$d] ?> lần</td>
+                                                    <td><?= $tailMap[$d] ?> lần</td>
+                                                    <td><?= $sumMap[$d] ?> lần</td>
+                                                </tr>
+                                            <?php endfor; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="bg-white p-3 mt-3 text-justify new-content">
+                    <h3>Thống kê đặc biệt xổ số Miền Bắc</h3>
+                    <p>Bảng thống kê đặc biệt XSMB cho người xem cái nhìn tổng quát về các con số đã xuất hiện ở giải đặc biệt trong thời gian qua.</p>
+                    <p>Dựa vào bảng thống kê, bạn có thể phân tích được nhịp lô tô, lô gan, đầu đuôi câm, tổng đặc biệt...</p>
+                </div>
+            </div>
+
+            <!-- COL LEFT (Sidebar trái) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+<style>
+    /* Reusing styles from loganxsmb or defining new ones */
+    .bg-blue {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .bg-blue2 {
+        background-color: #e9ecef;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .text-red {
+        color: #dc3545;
+    }
+
+    .table-total th,
+    .table-total td {
+        border: 1px solid #dee2e6;
+        padding: 5px;
+    }
+
+    .font-20 {
+        font-size: 20px;
+    }
+
+    .font-16 {
+        font-size: 16px;
+    }
+
+    .border-radius-4 {
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .table-b {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .table-b td {
+        padding: 5px;
+        border: 1px solid #e0e0e0;
+    }
+</style>

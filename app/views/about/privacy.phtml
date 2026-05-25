@@ -1,0 +1,55 @@
+<main class="main-content util-mt-3">
+    <div class="container">
+        <div class="row">
+            <!-- COL LEFT + CENTER -->
+            <div class="col-xl-610 border-radius-4">
+                <article class="the__article bg-white p-3 util-mb-4 util-border util-rounded">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent px-0">
+                            <li class="breadcrumb-item"><a title="Trang chủ" href="/">Trang chủ</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Chính sách bảo mật</li>
+                        </ol>
+                    </nav>
+                    
+                    <h1 class="util-fs-3 util-mt-2 font-weight-bold text-blue1">Chính sách bảo mật</h1>
+                    
+                    <div class="comp-article-content util-mt-4 text-justify">
+                        <p>Chào mừng bạn đến với <strong><?php echo $_SERVER['HTTP_HOST'] ?? 'Xổ Số Kiến Thiết'; ?></strong>. Chúng tôi đánh giá cao sự tin tưởng của bạn và cam kết bảo vệ quyền riêng tư của bạn. Chính sách bảo mật này mô tả cách chúng tôi thu thập, sử dụng và bảo mật thông tin của bạn khi sử dụng website.</p>
+
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">1. Thông tin chúng tôi thu thập</h2>
+                        <p>Chúng tôi không yêu cầu bạn phải cung cấp bất kỳ thông tin cá nhân nào để tra cứu kết quả xổ số. Tuy nhiên, chúng tôi có thể thu thập một số thông tin kỹ thuật tự động thông qua cookies hoặc nhật ký máy chủ như địa chỉ IP, loại trình duyệt, hệ điều hành và các trang đã truy cập.</p>
+
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">2. Mục đích sử dụng thông tin</h2>
+                        <p>Thông tin thu thập tự động được sử dụng để duy trì hoạt động, đảm bảo an toàn hệ thống, cải thiện trải nghiệm người dùng và phân tích lưu lượng truy cập tổng quát của website.</p>
+
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">3. Cookies và công nghệ theo dõi</h2>
+                        <p>Chúng tôi sử dụng cookies để ghi nhớ một số tùy chọn của bạn, ví dụ như tỉnh thành hay miền mà bạn quan tâm. Bạn có thể chọn cách quản lý cookies thông qua cài đặt của trình duyệt nhưng lưu ý rằng điều này có thể làm ảnh hưởng đến một số chức năng của website.</p>
+
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">4. Liên kết tới bên thứ ba</h2>
+                        <p>Website có thể chứa các liên kết tới các dịch vụ của bên thứ ba (như mạng xã hội, dịch vụ phân tích dữ liệu chuyên nghiệp). Chúng tôi không kiểm soát các chính sách bảo mật của các bên này và khuyến khích bạn xem xét chính sách của họ trước khi sử dụng.</p>
+
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">5. Bảo mật dữ liệu</h2>
+                        <p>Chúng tôi áp dụng các công nghệ bảo mật tiêu chuẩn để ngăn chặn việc truy cập trái phép hoặc mất mát dữ liệu. Mọi thông tin giữa máy tính của bạn và máy chủ của chúng tôi đều được mã hóa (HTTPS).</p>
+
+                        <h2 class="util-fs-4 util-mt-4 util-mb-3 font-weight-bold">6. Thay đổi chính sách</h2>
+                        <p>Chúng tôi có quyền cập nhật chính sách bảo mật bất kỳ lúc nào để phù hợp với quy định pháp luật hoặc các điều chỉnh về dịch vụ. Phiên bản mới nhất sẽ luôn được đăng tải tại trang này.</p>
+
+                        <div class="alert alert-info util-mt-4">
+                            <p class="util-mb-0 text-center"><strong>Cập nhật lần cuối: <?php echo date('d/m/Y'); ?></strong></p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- SIDEBAR LEFT -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

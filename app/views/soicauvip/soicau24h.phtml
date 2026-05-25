@@ -1,0 +1,255 @@
+<main>
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: "<?= $base_url ?>xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: "<?= $base_url ?>xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: "<?= $base_url ?>xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= $base_url ?>" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item active"><a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h - Dự đoán xổ số 24 bạch thủ đẹp miễn phí">Soi cầu 24h - Dự đoán xổ số 24 bạch thủ đẹp miễn phí</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h1 class="font-20 my-2"> <strong>Soi cầu 24h - Dự đoán xổ số 24 bạch thủ đẹp miễn phí</strong> </h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date">
+                                <?php
+                                $tomorrow = new DateTime('tomorrow');
+                                $weekdayMap = [
+                                    'Monday' => 'Thứ 2',
+                                    'Tuesday' => 'Thứ 3',
+                                    'Wednesday' => 'Thứ 4',
+                                    'Thursday' => 'Thứ 5',
+                                    'Friday' => 'Thứ 6',
+                                    'Saturday' => 'Thứ 7',
+                                    'Sunday' => 'Chủ nhật'
+                                ];
+                                $weekdayEn = $tomorrow->format('l');
+                                $weekdayVi = isset($weekdayMap[$weekdayEn]) ? $weekdayMap[$weekdayEn] : $weekdayEn;
+                                ?>
+                                <?= $weekdayVi ?>, <?= $tomorrow->format('d/m/Y - H:i') ?>
+                            </div>
+                            <div class="allRate"> <input type="range" value="0" step="0.25" id="backing5" style="display: none;"> <input type="text" value="page/60" hidden="" id="voteLink">
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-mode="font" data-rateit-icon="" style="font-family:fontawesome"> <button id="rateit-reset-2" type="button" data-role="none" class="rateit-reset" aria-label="reset rating" aria-controls="rateit-range-2" style="display: none;"><span></span></button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset" style="width: 0px;">★★★★★</div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div> <span class="danhgia"> <span class="avg-rate">3.7</span> /<span>5</span> của <span class="count-rate">3432</span> đánh giá</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3"><strong>Soi cầu 24h - Dự đoán xổ số 24 siêu chuẩn xác luôn cung cấp cho anh em những cầu bạch thủ có xác suất về siêu cao. Xem dự đoán xổ số 24h hôm nay ngay!</strong></h2>
+                    <div class="text-center"> <img width="600" height="314" src="https://soicau247s.org/public/media/thumb/Thumb-Cate/soi-cau-24h-600x314.jpg" alt="Soi cầu 24h - Dự đoán xổ số 24 bạch thủ đẹp miễn phí"> </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Dự đoán xổ số 24 chốt số ngày hôm nay</a></li>
+                                <li><a rel="nofollow" href="#trick1">Soi cầu 24 ngày <?= $date ?></a></li>
+                                <li><a rel="nofollow" href="#trick2">Vì sao nên soi cầu 24h hàng ngày?</a></li>
+                                <li><a rel="nofollow" href="#trick3">Kinh nghiệm soi cầu XSMB 24h</a></li>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Đến với soi cầu 24h ngày hôm nay, anh em sẽ có được cặp lô bạch thủ XSMB có xác suất về cao nhất được xác định dựa trên các phân tích, thống kê chuyên sâu. Các chuyên gia soi cầu 247 luôn đưa ra những bộ số đẹp, chuẩn xác nhất giúp anh em có cơ hội cao nhất nắm trọn vận may!&quot;}" data-sheets-userformat="{&quot;2&quot;:513,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0}"><a href="/soi-cau-24h-du-doan-xo-so-24h-mien-bac.html">Soi cầu 24h</a> ngày hôm nay giúp anh em có được cặp lô bạch thủ XSMB xác suất về cao nhất được xác định dựa trên các phân tích, thống kê chuyên sâu. Các chuyên gia Soi cầu 247 luôn đưa ra những bộ số đẹp, chuẩn xác nhất giúp anh em có cơ hội cao nhất nắm trọn vận may hôm nay!</span></p>
+
+                        <h3 id="trick0">Dự đoán xổ số 24 chốt số ngày hôm nay</h3>
+                        <p style="text-align: justify;">Hôm nay các chuyên gia của chúng tôi sẽ chốt cầu đặc biệt, lô xiên, lô kép và song thủ lô đẹp và chính xác nhất. Cùng theo dõi nhé.</p>
+                        <p></p>
+                        <table class="table-default text-center w-100">
+                            <tbody>
+                                <tr>
+                                    <td>Đặc biệt 24h</td>
+                                    <td>Chạm <span class="text-red font-weight-bold"><?= implode(' - ', $predictions24h['dac_biet_cham']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô xiên MB 24h</td>
+                                    <td><span class="text-red font-weight-bold"><?= implode(' - ', $predictions24h['lo_xien']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô kép MB 24h</td>
+                                    <td><span class="text-red font-weight-bold"><?= implode(' - ', $predictions24h['lo_kep']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Song thủ lô 24h</td>
+                                    <td><span class="text-red font-weight-bold"><?= implode(' - ', $predictions24h['song_thu_lo']) ?></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p></p>
+
+                        <h3 id="trick1" style="text-align: justify;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Đến với soi cầu 24h ngày hôm nay, anh em sẽ có được cặp lô bạch thủ XSMB có xác suất về cao nhất được xác định dựa trên các phân tích, thống kê chuyên sâu. Các chuyên gia soi cầu 247 luôn đưa ra những bộ số đẹp, chuẩn xác nhất giúp anh em có cơ hội cao nhất nắm trọn vận may!&quot;}" data-sheets-userformat="{&quot;2&quot;:513,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0}">Soi cầu 24 ngày <?= $date ?></span></h3>
+                        <p style="text-align: justify;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Đến với soi cầu 24h ngày hôm nay, anh em sẽ có được cặp lô bạch thủ XSMB có xác suất về cao nhất được xác định dựa trên các phân tích, thống kê chuyên sâu. Các chuyên gia soi cầu 247 luôn đưa ra những bộ số đẹp, chuẩn xác nhất giúp anh em có cơ hội cao nhất nắm trọn vận may!&quot;}" data-sheets-userformat="{&quot;2&quot;:513,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0}">Soi cầu 24 giờ hôm nay chốt số bạch thủ đẹp nhất cho anh em cùng với phương pháp ghép cầu cụ thể cho anh em thuận tiện theo dõi.&nbsp;</span></p>
+                        <p style="text-align: justify;"><span class="text-red">•</span> <span class="font-weight-bold">Cặp lô bạch thủ:</span> <span class="text-red font-weight-bold"><?= implode(' - ', $predictions24h['bach_thu_lo']) ?></span> </p>
+                        <p style="text-align: justify;"><em>Để xem chi tiết các cầu lô, anh em kéo xuống dưới.</em></p>
+                        <span class="font-weight-bold">Soi cầu 24h – Cặp bạch thủ lô:</span> <span class="text-red font-weight-bold"><?= implode(' - ', $predictions24h['bach_thu_lo']) ?></span>
+
+                        <?php if (!empty($recentResults)): ?>
+                            <?php foreach ($recentResults as $resData):
+                                $res = $resData['raw'];
+                                $prizes = [
+                                    'ĐB' => $res->special_prize,
+                                    'G1' => $res->first_prize,
+                                    'G2' => $res->second_prize,
+                                    'G3' => $res->third_prize,
+                                    'G4' => $res->fourth_prize,
+                                    'G5' => $res->fifth_prize,
+                                    'G6' => $res->sixth_prize,
+                                    'G7' => $res->seventh_prize,
+                                ];
+                            ?>
+                                <article class="my-2">
+                                    <div class="result result-single rounded">
+                                        <div class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16">Xổ số Miền Bắc ngày <?= $resData['date'] ?></div>
+                                        <div class="breadcrumb-table">
+                                            <h2 class="breadcrumb-table-title">
+                                                <a href="#" title="XSMB thứ <?= date('N', strtotime($res->draw_date)) + 1 ?>">XSMB thứ <?= date('N', strtotime($res->draw_date)) + 1 ?></a> /
+                                                <a href="#" title="XSMB <?= $resData['date'] ?>">XSMB <?= $resData['date'] ?></a>
+                                            </h2>
+                                        </div>
+                                        <div class="table-flex-border">
+                                            <table class="table-flex" data-code="XSMB">
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div class="d-flex p-2 justify-content-around">
+                                                                <span class="text-number"></span> <span class="text-number"></span> <span class="text-number"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <?php foreach ($prizes as $name => $val): ?>
+                                                        <tr>
+                                                            <td><?= $name ?></td>
+                                                            <td>
+                                                                <?php
+                                                                $clean = str_replace(['[', ']', '"'], '', $val);
+                                                                $parts = preg_split('/[, \-]+/', $clean);
+                                                                foreach ($parts as $p):
+                                                                    $p = trim($p);
+                                                                    if ($p === '') continue;
+                                                                ?>
+                                                                    <span class="text-number word-spacing--5">
+                                                                        <?php
+                                                                        $chars = str_split($p);
+                                                                        foreach ($chars as $char):
+                                                                        ?>
+                                                                            <span class="soicau_mb"><?= $char ?></span>
+                                                                        <?php endforeach; ?>
+                                                                    </span>
+                                                                <?php endforeach; ?>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </article>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <p></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><strong>»</strong></span> <a href="/rong-bach-kim.html">Rồng Bạch Kim</a></p>
+                        <p></p>
+                        <h3 id="trick2" style="text-align: justify;">Vì sao nên soi cầu 24h hàng ngày?</h3>
+                        <p style="text-align: justify;">Việc soi cầu XSMB 24h - Xem dự đoán xổ số 24h Miền Bắc sẽ mang đến cho anh em rất nhiều lợi ích như:</p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;">•&nbsp;<span style="color: #000000;">Anh em sẽ dễ dàng chọn được cặp bạch thủ có cơ hội về cao nhất trong ngày.</span></span></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span><span style="color: #ff0000;">•</span> Dễ dàng loại bỏ được các cặp lô gan ít khả năng nổ trong hôm nay.</span></span></span></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span><span style="color: #ff0000;">•</span> Soi cầu XSMB 24h giúp anh em biết được các vị trí cầu đang ăn thông và dự đoán được khả năng chạy tiếp trong thời gian tới.</span></span></span></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span><span style="color: #ff0000;">•</span> Tính toán được cách chơi hợp lý: đánh trong ngày, đánh theo dàn, đánh nuôi...</span></span></span></p>
+                        <h3 id="trick3" style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span>Kinh nghiệm soi cầu XSMB 24h</span></span></span></h3>
+                        <p style="text-align: justify;"><strong><span style="color: #ff0000;"><span style="color: #000000;"><span style="color: #ff0000;">»</span> Bắt bạch thủ dựa vào lô 2 nháy hôm trước</span></span></strong></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;">Anh em thống kê xem hôm qua có cặp nào về 2 nháy thì hôm nay đánh chặn đầu đuôi của cặp đó. Ví dụ hôm qua có 2 nháy 37 thì hôm nay đánh 36 và 38.</span></span></p>
+                        <p><strong><span style="color: #ff0000;">» </span>Đánh lô song thủ 24h XSMB</strong></p>
+                        <p style="text-align: justify;">Dự đoán xổ số 24 với phương pháp đánh lô song thủ sẽ mang đến cho anh em tỷ lệ ăn cược siêu cao. Lô song thủ sẽ lấy từ những cặp lô bị kẹp giữa những con lô đã ra trong ngày hôm trước. Chẳng hạn như hôm nay về 44 và 46 nhưng không về số 45 thì anh em hãy nhanh chóng đánh cặp song thủ 45 - 54 trong 2 ngày tiếp theo. Với cách đánh như này sẽ có tỷ lệ về số rất cao, cơ hội trúng thưởng cho anh em là rất lớn.</p>
+                        <p style="text-align: justify;"><strong><span style="color: #ff0000;"><span style="color: #000000;"><span><span style="color: #ff0000;">»</span>&nbsp;</span>Soi cầu 24 giờ ghép bắt bạch thủ lô</span></span></strong></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Soi cầu ghép bắt bạch thủ lô&quot;}" data-sheets-userformat="{&quot;2&quot;:16897,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0,&quot;17&quot;:1}">Dựa vào các KQXSMB đã về thì tìm vị trí đang ăn thông. Từ đây anh em sẽ tiến hành ghép cầu số và tạo ra các cặp lô chuẩn để đầu tư.</span></span></span></p>
+                        <p style="text-align: justify;"><strong><span style="color: #ff0000;"><span style="color: #000000;"><span><span style="color: #ff0000;">»</span>&nbsp;</span>Sử dụng các cầu lô huyền thoại&nbsp;soi cầu 2 nháy 24h</span></span></strong></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Soi cầu ghép bắt bạch thủ lô&quot;}" data-sheets-userformat="{&quot;2&quot;:16897,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0,&quot;17&quot;:1}">Sử dụng các cầu tổng giải đặc biệt, cầu quả trám, cầu tam giác ma thuật, cầu góc khuyết, tiến khuyết, lô kẹp…để tìm ra con lô ưng ý nhất.</span></span></span></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Soi cầu ghép bắt bạch thủ lô&quot;}" data-sheets-userformat="{&quot;2&quot;:16897,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0,&quot;17&quot;:1}">Trên đây là những dự đoán và kinh nghiệm soi cầu dự đoán xổ số 24h miền Bắc miễn phí ngày hôm nay muốn gửi đến cho anh em. Hy vọng với chia sẻ này của các <a href="/">chuyên gia Soicau247</a> anh em sẽ có được thắng lợi lớn trong ngày hôm nay.</span></span></span></p>
+                        <p style="text-align: justify;"><span style="color: #ff0000;"><span style="color: #000000;"><span data-sheets-value="{&quot;1&quot;:2,&quot;2&quot;:&quot;Soi cầu ghép bắt bạch thủ lô&quot;}" data-sheets-userformat="{&quot;2&quot;:16897,&quot;3&quot;:{&quot;1&quot;:0},&quot;12&quot;:0,&quot;17&quot;:1}">Chúc anh em may mắn!</span></span></span></p>
+                    </div>
+                </div>
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</main>
+
+<style>
+    #trick1,
+    #trick2,
+    #trick3,
+    #trick4 {
+        margin-top: 10px;
+    }
+</style>

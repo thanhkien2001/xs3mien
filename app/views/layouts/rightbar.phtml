@@ -1,0 +1,113 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<div class="layout-col-lg-4">
+    <div class="util-bg-white util-border util-rounded util-mb-3 util-shadow-sm1">
+        <div class="util-bg-red util-text-white util-border-bottom util-fs-6 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+            <a class="util-text-black util-text-decoration-none" href="/">Lịch mở thưởng hôm nay</a>
+        </div>
+        <?php $esc = $this->escaper;
+        $slots = $scheduleSlots ?? []; ?>
+        <div class="layout-row util-gx-0 util-p-3">
+            <?php foreach ($slots as $slot): ?>
+                <div class="layout-col-4">
+                    <span class="util-block"><?= $esc->escapeHtml($slot['time_label']) ?></span>
+                    <ul class="util-list-unstyled">
+                        <?php foreach ($slot['items'] as $item): ?>
+                            <li>
+                                <a class="util-pt-1 util-pb-1 util-line-clamp-1"
+                                    href="<?= $esc->escapeHtmlAttr($item['url']) ?>"
+                                    title="Kết quả xổ số <?= $esc->escapeHtmlAttr($item['title']) ?>">
+                                    <?= $esc->escapeHtml($item['title']) ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    <div class="util-bg-white util-border util-rounded util-mb-3 util-shadow-sm1">
+        <div class="util-bg-red util-text-white util-border-bottom util-fs-6 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+            <a class="util-bg-red util-text-black util-text-decoration-none" href="xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html">Xổ số Miền Nam</a>
+        </div>
+        <ul class="layout-row util-gx-0 util-pt-3 util-pb-3">
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số An Giang" href="/ket-qua-xo-so-an-giang-xsag.html">An Giang</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Bạc Liêu" href="/ket-qua-xo-so-bac-lieu-xsblieu.html">Bạc Liêu</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Bến Tre" href="/ket-qua-xo-so-ben-tre-xsbtr.html">Bến Tre</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Bình Dương" href="/ket-qua-xo-so-binh-duong-xsbduong.html">Bình Dương</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Bình Phước" href="/ket-qua-xo-so-binh-phuoc-xsbp.html">Bình Phước</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Bình Thuận " href="/ket-qua-xo-so-binh-thuan-xsbthuan.html">Bình Thuận </a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Cà Mau" href="/ket-qua-xo-so-ca-mau-xscm.html">Cà Mau</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Cần Thơ" href="/ket-qua-xo-so-can-tho-xsct.html">Cần Thơ</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Đà Lạt" href="/ket-qua-xo-so-da-lat-xsdl.html">Đà Lạt</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Đồng Nai" href="/ket-qua-xo-so-dong-nai-xsdn.html">Đồng Nai</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Đồng Tháp" href="/ket-qua-xo-so-dong-thap-xsdthap.html">Đồng Tháp</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Hậu Giang" href="/ket-qua-xo-so-hau-giang-xshg.html">Hậu Giang</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Hồ Chí Minh" href="/ket-qua-xo-so-ho-chi-minh-xshcm.html">Hồ Chí Minh</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Kiên Giang" href="/ket-qua-xo-so-kien-giang-xskg.html">Kiên Giang</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Long An" href="/ket-qua-xo-so-long-an-xsla.html">Long An</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Sóc Trăng" href="/ket-qua-xo-so-soc-trang-xsst.html">Sóc Trăng</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Tây Ninh" href="/ket-qua-xo-so-tay-ninh-xstn.html">Tây Ninh</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Tiền Giang" href="/ket-qua-xo-so-tien-giang-xstg.html">Tiền Giang</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Trà Vinh" href="/ket-qua-xo-so-tra-vinh-xstv.html">Trà Vinh</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Vĩnh Long" href="/ket-qua-xo-so-vinh-long-xsvl.html">Vĩnh Long</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Vũng Tàu" href="/ket-qua-xo-so-vung-tau-xsvt.html">Vũng Tàu</a></li>
+        </ul>
+    </div>
+    <div class="util-bg-white util-border util-rounded util-mb-3 util-shadow-sm1">
+        <div class="util-bg-red util-text-white util-border-bottom util-fs-6 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+            <a class="util-bg-red util-text-black util-text-decoration-none" href="xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html">Xổ số Miền Trung</a>
+        </div>
+        <ul class="layout-row util-gx-0 util-pt-3 util-pb-3">
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Bình Định" href="/ket-qua-xo-so-binh-dinh-xsbdinh.html">Bình Định</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Đà Nẵng" href="/ket-qua-xo-so-da-nang-xsdna.html">Đà Nẵng</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Đắk Lắk" href="/ket-qua-xo-so-dak-lak-xsdlk.html">Đắk Lắk</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Đắk Nông" href="/ket-qua-xo-so-dak-nong-xsdnong.html">Đắk Nông</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Gia Lai" href="/ket-qua-xo-so-gia-lai-xsgl.html">Gia Lai</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Huế" href="/ket-qua-xo-so-hue-xstth.html">Huế</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Khánh Hòa" href="/ket-qua-xo-so-khanh-hoa-xskhoa.html">Khánh Hòa</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Kon Tum" href="/ket-qua-xo-so-kon-tum-xskontum.html">Kon Tum</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Ninh Thuận" href="/ket-qua-xo-so-ninh-thuan-xsnt.html">Ninh Thuận</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Phú Yên" href="/ket-qua-xo-so-phu-yen-xspy.html">Phú Yên</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Quảng Bình" href="/ket-qua-xo-so-quang-binh-xsqb.html">Quảng Bình</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Quảng Nam" href="/ket-qua-xo-so-quang-nam-xsqn.html">Quảng Nam</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Quảng Ngãi" href="/ket-qua-xo-so-quang-ngai-xsqng.html">Quảng Ngãi</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết Quả Xổ số Quảng Trị" href="/ket-qua-xo-so-quang-tri-xsqtri.html">Quảng Trị</a></li>
+        </ul>
+    </div>
+    <div class="util-bg-white util-border util-rounded util-mb-3 util-shadow-sm1">
+        <div class="util-bg-red util-text-white util-border-bottom util-fs-6 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+            <div class="util-bg-red util-text-black util-text-decoration-none">Xổ số Miền Bắc</div>
+        </div>
+        <ul class="layout-row util-gx-0 util-pt-3 util-pb-3">
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Thứ 2 hàng tuần" href="/xsmb-thu-2-ket-qua-xo-so-mien-bac.html">XSMB Thứ 2</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Thứ 3 hàng tuần" href="/xsmb-thu-3-ket-qua-xo-so-mien-bac.html">XSMB Thứ 3</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Thứ 4 hàng tuần" href="/xsmb-thu-4-ket-qua-xo-so-mien-bac.html">XSMB Thứ 4</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Thứ 5 hàng tuần" href="/xsmb-thu-5-ket-qua-xo-so-mien-bac.html">XSMB Thứ 5</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Thứ 6 hàng tuần" href="/xsmb-thu-6-ket-qua-xo-so-mien-bac.html">XSMB Thứ 6</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Thứ 7 hàng tuần" href="/xsmb-thu-7-ket-qua-xo-so-mien-bac.html">XSMB Thứ 7</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Miền Bắc Chủ Nhật hàng tuần" href="/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html">XSMB Chủ Nhật</a></li>
+        </ul>
+    </div>
+    <div class="util-bg-white util-border util-rounded util-mb-3">
+        <div class="util-bg-red util-text-black util-border-bottom util-fs-6 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">Xổ số Vietlott</div>
+        <ul class="layout-row util-gx-0 util-pt-3 util-pb-3">
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Vietlott Power 6/55" href="/ket-qua-xoso-power-6-55-vietlott.html">Power 6/55</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Vietlott Mega 6/45" href="/ket-qua-xoso-mega-6-45-vietlott.html">Mega 6/45</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Max 3D" href="/ket-qua-xoso-max-3d-vietlott.html">Max 3D</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Max 3D Pro" href="/ket-qua-xoso-max-3d-pro-vietlott.html">Max 3D Pro</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1 " title="Kết quả xổ số Keno" href="/ket-qua-xoso-keno-vietlott.html">Keno</a></li>
+        </ul>
+    </div>
+    <div class="util-bg-white util-border util-rounded util-mb-3 util-shadow-sm1">
+        <div class="util-bg-red util-text-white util-border-bottom util-fs-6 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+            <div class="util-bg-red util-text-black util-text-decoration-none">Thống kê xổ số</div>
+        </div>
+        <ul class="layout-row util-gx-0 util-pt-3 util-pb-3">
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1" title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1" title="Lô gan xổ số Miền Bắc" href="/lo-gan-xsmb.html">Lô gan XSMB</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1" title="Thống kê đặc biệt xổ số Miền Bắc" href="/dac-biet-xsmb.html">Đặc biệt XSMB</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1" title="Thống kê đầu đuôi xổ số Miền Bắc" href="/">Đầu đuôi XSMB</a></li>
+            <li class="layout-col-6"><a class="util-block util-pt-1 util-pb-1" title="Thống kê tần suất xổ số Miền Bắc" href="/tan-suat-lo-to-xsmb.html">Tần suất XSMB</a></li>
+        </ul>
+    </div>
+</div>

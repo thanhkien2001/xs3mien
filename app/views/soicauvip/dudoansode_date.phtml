@@ -1,0 +1,493 @@
+<?php
+function h($s)
+{
+    return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+}
+
+function safeDecode($src)
+{
+    if ($src === null) return [];
+    $s = trim((string)$src);
+    $j = json_decode($s, true);
+    if (json_last_error() === JSON_ERROR_NONE) {
+        $arr = is_array($j) ? $j : [$j];
+        $out = [];
+        foreach ($arr as $v) {
+            if ($v === null) continue;
+            $v = trim((string)$v);
+            if ($v !== '') $out[] = $v;
+        }
+        return $out;
+    }
+    $s = str_replace(['[', ']'], ' ', $s);
+    $s = preg_replace('/"{2,}/', '" "', $s);
+    $s = str_replace(['"', ',', ';', '|'], ' ', $s);
+    $s = preg_replace('/\s+/', ' ', trim($s));
+    if ($s === '') return [];
+    $parts = explode(' ', $s);
+    $out = [];
+    foreach ($parts as $p) {
+        $p = trim($p);
+        if ($p !== '') $out[] = $p;
+    }
+    return $out;
+}
+
+$currentDate = $dateDisplay ?? $date;
+$now = new \DateTime('now', new \DateTimeZone('Asia/Ho_Chi_Minh'));
+$currentDateTime = $now->format('d/m/Y - H:i');
+
+// Tính toán dự đoán số đề
+$dauDuoi = ['dau' => rand(0, 9), 'duoi' => rand(0, 9)];
+$chamDe = [rand(0, 9), rand(0, 9)];
+$so3Dep = [
+    str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT),
+    str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT),
+    str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT)
+];
+$danDe6So = [];
+for ($i = 0; $i < 6; $i++) {
+    $danDe6So[] = str_pad(rand(0, 99), 2, '0', STR_PAD_LEFT);
+}
+?>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white border-radius-4 py-3">
+                    <h1 class="font-20"><strong>Dự đoán số đề <?= h($currentDate) ?> - Chốt số đề XSMB hôm nay</strong></h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"><?= h($dayOfWeek) ?>, <?= h($currentDateTime) ?></div>
+                            <div class="allRate">
+                                <input type="range" value="0" step="0.25" id="backing5" style="display: none;">
+                                <input type="text" value="news/12365" hidden="" id="voteLink">
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-mode="font" data-rateit-icon="" style="font-family:fontawesome">
+                                    <button id="rateit-reset-2" type="button" data-role="none" class="rateit-reset" aria-label="reset rating" aria-controls="rateit-range-2" style="display: none;"><span></span></button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset" style="width: 0px;">★★★★★</div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div>
+                                <span class="danhgia">
+                                    <span class="avg-rate">5</span> /<span>5</span> của <span class="count-rate">1</span> đánh giá
+                                </span>
+                                <script type="application/ld+json">
+                                {
+                                    "@context": "https://schema.org/",
+                                    "@type": "AggregateRating",
+                                    "ratingValue": "5",
+                                    "bestRating": "5",
+                                    "ratingCount": "1",
+                                    "itemReviewed": {
+                                        "@type": "CreativeWorkSeries",
+                                        "name": "Dự đoán số đề <?= h($currentDate) ?> - Chốt số đề XSMB hôm nay"
+                                    }
+                                }
+                                </script>
+                            </div>
+                        </div>
+                        <div class="new-category">
+                            <span><i class="icon-circle text-red font-6 align-middle" aria-hidden="true"></i></span>
+                            <a href="/du-doan-xsmb.html" title="Dự đoán XSMB">Dự đoán XSMB</a>
+                        </div>
+                    </div>
+                    <h2 class="new-description font-weight-bold">
+                        Dự đoán số đề luôn là phương pháp soi cầu đặc biệt được nhiều anh em tin tưởng và chờ đón mỗi ngày. Dự đoán số đề <?= h($currentDate) ?> đem đến cho anh em những cặp đặc biệt đã chọn lọc đẹp nhất. Cùng theo dõi ngay nhé!
+                    </h2>
+                    <div class="other_post p-3">
+                        <ul class="other_post_list">
+                            <li class="other_post_item text-news-link">
+                                <i class="icon-circle font-5 align-middle"></i>
+                                <a class="font-14" href="/du-doan-xsmb-<?= $dateObj->format('d-m-Y') ?>-hom-nay-thu-<?= $dow ?>.html" title="Dự đoán XSMB ngày <?= h($currentDate) ?> - Phân tích XSMB hôm nay">
+                                    Dự đoán XSMB ngày <?= h($currentDate) ?> - Thống kê XSMB <?= h($dayOfWeek) ?> - XSMB
+                                </a>
+                            </li>
+                            <li class="other_post_item text-news-link">
+                                <i class="icon-circle font-5 align-middle"></i>
+                                <a class="font-14" href="/soi-cau-xsmb-win2888-asia-<?= $dateObj->format('d-m-Y') ?>.html" title="Soi cầu XSMB Win2888 Asia <?= h($currentDate) ?> chuẩn xác 100%">
+                                    Soi cầu XSMB Win2888 <?= h($currentDate) ?> chính xác nhất hôm nay
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center my-2" id="news-thumbnail">
+                        <img loading="lazy" width="600" height="314" alt="Dự đoán số đề <?= h($currentDate) ?> - Chốt số đề XSMB hôm nay" src="/media/thumb/Thumb-Cate/du-doan-so-de-600x314.jpg">
+                    </div>
+                    <div class="new-content text-justify">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Kết quả XSMB ngày <?= $previousResult ? date('d/m/Y', strtotime($previousResult->draw_date)) : '' ?></a></li>
+                                <li><a rel="nofollow" href="#trick1">Dự đoán số đề hôm nay <?= h($currentDate) ?></a></li>
+                                <li><a rel="nofollow" href="#trick2">Thống kê đặc biệt XSMB <?= h($currentDate) ?></a></li>
+                                <li><a rel="nofollow" href="#trick3">Thống kê đặc biệt về nhiều XSMB</a></li>
+                                <li><a rel="nofollow" href="#trick4">Thống kê đặc biệt về ít XSMB</a></li>
+                                <li><a rel="nofollow" href="#trick5">Thống kê chạm đề XSMB <?= h($currentDate) ?></a></li>
+                            </ol>
+                        </div>
+                        <p>
+                            <a href="/du-doan-so-de-hom-nay-<?= $dateObj->format('d-m-Y') ?>.html">Dự đoán số đề hôm nay <?= h($currentDate) ?></a>
+                            mới nhất được các chuyên gia của chúng tôi nghiên cứu soi cầu kĩ lưỡng để có được những cặp số đẹp cho anh em. Cụ thể như sau:
+                        </p>
+                        <h3 id="trick0">Kết quả XSMB ngày <?= $previousResult ? date('d/m/Y', strtotime($previousResult->draw_date)) : '' ?></h3>
+                        <?php if ($previousResult): ?>
+                        <article class="my-2">
+                            <div class="result result-single rounded">
+                                <div class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+                                    Xổ số Miền Bắc ngày <?= date('d/m/Y', strtotime($previousResult->draw_date)) ?>
+                                </div>
+                                <div class="breadcrumb-table">
+                                    <h4 class="breadcrumb-table-title">
+                                        <a href="/xsmb-<?= strtolower(str_replace(' ', '-', $dayOfWeek)) ?>.html" title="XSMB <?= h($dayOfWeek) ?>">XSMB <?= h($dayOfWeek) ?></a> / 
+                                        <a href="/xsmb-<?= date('d-m-Y', strtotime($previousResult->draw_date)) ?>.html" title="XSMB <?= date('d/m/Y', strtotime($previousResult->draw_date)) ?>">XSMB <?= date('d/m/Y', strtotime($previousResult->draw_date)) ?></a>
+                                    </h4>
+                                </div>
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result" data-code="XSMB">
+                                        <tbody>
+                                            <tr>
+                                                <td>ĐB</td>
+                                                <td><span class="text-number" nc="5"><?= h($previousResult->special_prize) ?></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>G1</td>
+                                                <td><span class="text-number" nc="5"><?= h($previousResult->first_prize) ?></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>G2</td>
+                                                <td>
+                                                    <?php
+                                                    $secondPrizes = safeDecode($previousResult->second_prize);
+                                                    foreach ($secondPrizes as $prize):
+                                                        if (trim($prize)):
+                                                    ?>
+                                                            <span class="text-number" nc="5"><?= h(trim($prize)) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G3</td>
+                                                <td>
+                                                    <?php
+                                                    $thirdPrizes = safeDecode($previousResult->third_prize);
+                                                    foreach ($thirdPrizes as $prize):
+                                                        if (trim($prize)):
+                                                    ?>
+                                                            <span class="text-number" nc="5"><?= h(trim($prize)) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G4</td>
+                                                <td>
+                                                    <?php
+                                                    $fourthPrizes = safeDecode($previousResult->fourth_prize);
+                                                    foreach ($fourthPrizes as $prize):
+                                                        if (trim($prize)):
+                                                    ?>
+                                                            <span class="text-number" nc="4"><?= h(trim($prize)) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G5</td>
+                                                <td>
+                                                    <?php
+                                                    $fifthPrizes = safeDecode($previousResult->fifth_prize);
+                                                    foreach ($fifthPrizes as $prize):
+                                                        if (trim($prize)):
+                                                    ?>
+                                                            <span class="text-number" nc="4"><?= h(trim($prize)) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G6</td>
+                                                <td>
+                                                    <?php
+                                                    $sixthPrizes = safeDecode($previousResult->sixth_prize);
+                                                    foreach ($sixthPrizes as $prize):
+                                                        if (trim($prize)):
+                                                    ?>
+                                                            <span class="text-number" nc="3"><?= h(trim($prize)) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G7</td>
+                                                <td>
+                                                    <?php
+                                                    $seventhPrizes = safeDecode($previousResult->seventh_prize);
+                                                    foreach ($seventhPrizes as $prize):
+                                                        if (trim($prize)):
+                                                    ?>
+                                                            <span class="text-number" nc="2"><?= h(trim($prize)) ?></span>
+                                                    <?php
+                                                        endif;
+                                                    endforeach;
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <?php if (!empty($lotoData)): ?>
+                            <div class="loto loto-single">
+                                <table class="table table-bordered table-striped table-xslt-single-col">
+                                    <thead>
+                                        <tr>
+                                            <th>Đầu</th>
+                                            <th>Lô tô</th>
+                                            <th>Đuôi</th>
+                                            <th>Lô tô</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php for ($i = 0; $i <= 9; $i++): ?>
+                                        <tr>
+                                            <td><?= $i ?></td>
+                                            <td>
+                                                <?php if (!empty($lotoData['dau'][$i])): ?>
+                                                    <?php foreach ($lotoData['dau'][$i] as $num): ?>
+                                                        <span><?= h($num) ?></span>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?= $i ?></td>
+                                            <td>
+                                                <?php if (!empty($lotoData['duoi'][$i])): ?>
+                                                    <?php foreach ($lotoData['duoi'][$i] as $num): ?>
+                                                        <span><?= h($num) ?></span>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <?php endfor; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <?php endif; ?>
+                        </article>
+                        <?php endif; ?>
+                        <p class="text-center font-weight-bold">
+                            <span class="text-red">»</span> <a href="/xo-so-mien-bac-xsmb.html">Kết quả XSMB</a> <span class="text-red">«</span>
+                        </p>
+                        <h3 id="trick1">Dự đoán số đề hôm nay <?= h($currentDate) ?></h3>
+                        <table class="table-default w-100 text-center">
+                            <tbody>
+                                <tr>
+                                    <td>Đặc biệt đầu đuôi</td>
+                                    <td><span class="font-weight-bold">Đầu <span class="text-red"><?= h($dauDuoi['dau']) ?></span> - Đuôi <span class="text-red"><?= h($dauDuoi['duoi']) ?></span></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Chạm đề</td>
+                                    <td><span class="font-weight-bold">Chạm <span class="text-red"><?= h($chamDe[0]) ?>, <?= h($chamDe[1]) ?></span></span></td>
+                                </tr>
+                                <tr>
+                                    <td>3 số đẹp nhất</td>
+                                    <td><span class="text-red font-weight-bold"><?= h($so3Dep[0]) ?>, <?= h($so3Dep[1]) ?>, <?= h($so3Dep[2]) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Dàn đề 6 số</td>
+                                    <td><span class="text-red font-weight-bold"><?= implode(', ', $danDe6So) ?></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="text-align: justify;">
+                            <span style="color: #ff0000;"><strong>»</strong></span> <a href="/dan-de-10-so-nuoi-khung-5-ngay.html">Dàn đề 10 số chắc ăn</a><br>
+                            <span style="color: #ff0000;"><strong>»</strong></span> <a href="/soi-cau-3-cang-mien-bac.html">Soi cầu 3 càng miền Bắc</a>
+                        </p>
+                        <p class="mb-1">
+                            <span class="text-red">»</span> <a href="/kqxs-ngay-<?= $dateObj->format('d-m-Y') ?>.html" title="Kết quả xổ số 3 miền ngày <?= h($currentDate) ?>">Kết quả xổ số 3 miền ngày <?= h($currentDate) ?></a>
+                        </p>
+                        <p class="mb-1">
+                            <span class="text-red">»</span> <a href="/xsmb-<?= $dateObj->format('d-m-Y') ?>.html" title="Kết quả xổ số miền Bắc ngày <?= h($currentDate) ?>">Kết quả xổ số miền Bắc ngày <?= h($currentDate) ?></a>
+                        </p>
+                        <h3 id="trick2">Thống kê đặc biệt XSMB <?= h($currentDate) ?></h3>
+                        <h4 id="trick3">Thống kê đặc biệt về nhiều XSMB</h4>
+                        <table class="tableizer-table text-center">
+                            <thead>
+                                <tr class="tableizer-firstrow">
+                                    <th colspan="4">2 SỐ CUỐI GIẢI ĐẶC BIỆT VỀ NHIỀU NHẤT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bộ số</strong></td>
+                                    <td><strong>Số lần về</strong></td>
+                                    <td><strong>Bộ số</strong></td>
+                                    <td><strong>Số lần về</strong></td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <?php
+                                $frequentPairs = array_chunk($specialPrizeLast2Frequent ?? [], 2);
+                                $maxRows = 5;
+                                $rowCount = 0;
+                                foreach ($frequentPairs as $pair):
+                                    if ($rowCount >= $maxRows) break;
+                                    $num1 = $pair[0] ?? '';
+                                    $num2 = $pair[1] ?? '';
+                                    $count1 = isset($last2Count[$num1]) ? $last2Count[$num1] : 0;
+                                    $count2 = isset($last2Count[$num2]) ? $last2Count[$num2] : 0;
+                                ?>
+                                <tr>
+                                    <td><span class="text-red font-weight-bold"><?= h($num1) ?></span></td>
+                                    <td><?= $count1 ?> lần</td>
+                                    <td><span class="text-red font-weight-bold"><?= h($num2) ?></span></td>
+                                    <td><?= $count2 ?> lần</td>
+                                </tr>
+                                <?php 
+                                    $rowCount++;
+                                endforeach; 
+                                // Fill empty rows if needed
+                                while ($rowCount < $maxRows):
+                                ?>
+                                <tr>
+                                    <td><span class="text-red font-weight-bold">-</span></td>
+                                    <td>-</td>
+                                    <td><span class="text-red font-weight-bold">-</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <?php 
+                                    $rowCount++;
+                                endwhile;
+                                ?>
+                            </tbody>
+                        </table>
+                        <h4 id="trick4">Thống kê đặc biệt về ít XSMB</h4>
+                        <table class="tableizer-table text-center">
+                            <thead>
+                                <tr class="tableizer-firstrow">
+                                    <th colspan="4">2 SỐ CUỐI GIẢI ĐẶC BIỆT VỀ ÍT NHẤT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bộ số</strong></td>
+                                    <td><strong>Số lần về</strong></td>
+                                    <td><strong>Bộ số</strong></td>
+                                    <td><strong>Số lần về</strong></td>
+                                </tr>
+                            </tbody>
+                            <tbody>
+                                <?php
+                                $rarePairs = array_chunk($specialPrizeLast2Rare ?? [], 2);
+                                $maxRows = 5;
+                                $rowCount = 0;
+                                foreach ($rarePairs as $pair):
+                                    if ($rowCount >= $maxRows) break;
+                                    $num1 = $pair[0] ?? '';
+                                    $num2 = $pair[1] ?? '';
+                                    $count1 = isset($last2Count[$num1]) ? $last2Count[$num1] : 0;
+                                    $count2 = isset($last2Count[$num2]) ? $last2Count[$num2] : 0;
+                                ?>
+                                <tr>
+                                    <td><span class="text-red font-weight-bold"><?= h($num1) ?></span></td>
+                                    <td><?= $count1 ?> lần</td>
+                                    <td><span class="text-red font-weight-bold"><?= h($num2) ?></span></td>
+                                    <td><?= $count2 ?> lần</td>
+                                </tr>
+                                <?php 
+                                    $rowCount++;
+                                endforeach; 
+                                // Fill empty rows if needed
+                                while ($rowCount < $maxRows):
+                                ?>
+                                <tr>
+                                    <td><span class="text-red font-weight-bold">-</span></td>
+                                    <td>-</td>
+                                    <td><span class="text-red font-weight-bold">-</span></td>
+                                    <td>-</td>
+                                </tr>
+                                <?php 
+                                    $rowCount++;
+                                endwhile;
+                                ?>
+                            </tbody>
+                        </table>
+                        <h4 id="trick5">Thống kê chạm đề XSMB <?= h($currentDate) ?></h4>
+                        <table class="tableizer-table text-center">
+                            <thead>
+                                <tr class="tableizer-firstrow">
+                                    <th colspan="4" style="text-align: center;">THỐNG KÊ CHẠM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="font-weight-bold">
+                                    <td>Số</td>
+                                    <td>Đã về Đầu</td>
+                                    <td>Đã về Đuôi</td>
+                                    <td>Đã về Tổng</td>
+                                </tr>
+                                <?php for ($i = 0; $i <= 9; $i++): ?>
+                                <tr>
+                                    <td class="text-red font-weight-bold"><?= $i ?></td>
+                                    <td><?= ($chamStats[$i]['dau'] ?? 0) ?> lần</td>
+                                    <td><?= ($chamStats[$i]['duoi'] ?? 0) ?> lần</td>
+                                    <td><?= ($chamStats[$i]['tong'] ?? 0) ?> lần</td>
+                                </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                        <p>Hy vọng những con số mà <a href="/">chuyên gia Soi cầu 247</a> đưa ra sẽ không làm anh em thất vọng. Hơn thế nó còn đem lại cho anh em những giải thưởng lớn nhất. Tuy nhiên các con số dự đoán của chúng tôi chỉ mang tính chất tam khảo. Anh em nên xem xét hợp lí nhất để lựa chọn con số cho mình</p>
+                        <p>Chúc anh em may mắn!!</p>
+                    </div>
+                    <div class="box-info-post border-top py-3">
+                        <div class="row bg-white pt-3">
+                            <div class="col-3">
+                                <img loading="lazy" width="100" height="100" class="circle" src="/media/thumb/Author/minat-doan-100x100.png" alt="Minat Doan">
+                            </div>
+                            <div class="col-9">
+                                <div class="d-flex flex-wrap">
+                                    <div>
+                                        <p class="font-weight-bold">Minat Doan</p>
+                                        <p><i>Chuyên gia soi cầu 247</i></p>
+                                    </div>
+                                </div>
+                                <p class="pt-3 border-top-dashed text-justify">
+                                    Tôi là Minat Doan, hiện đang là CEO, Co-Founder của Soi Cầu 247. Với kinh nghiệm nhiều năm trong lĩnh vực soi cầu dự đoán xổ số, tôi hy vọng những kiến thức miễn phí tôi chia sẻ có thể giúp anh em đạt nhiều thành công hơn
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="page-comment" class="mt-2">
+                        <div style="background: #ffe94e;font-style: italic;font-weight: 600;padding: 5px;">
+                            <span style="color: #ff0000;">Cảnh báo:</span> Tất cả spam bán số đều là lừa đảo. Những comment bán số, văng tục, chửi bậy sẽ bị ban nick.
+                        </div>
+                        <div class="fb-comments" data-href="<?= $base_url ?>du-doan-so-de-hom-nay-<?= $dateObj->format('d-m-Y') ?>.html" data-width="100%" data-numposts="5"></div>
+                    </div>
+                </div>
+                <?php $this->partial('partials/prediction_articles_list'); ?>
+            </div>
+            <!-- COL LEFT (Sidebar trái) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

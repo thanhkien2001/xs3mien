@@ -1,0 +1,180 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class="util-text-red" title="Trực tiếp kết quả xổ số Miền Bắc" href="/truc-tiep-ket-qua-xo-so-mien-bac-ttxsmb-xsmb.html">Trực tiếp XSMB</a></li>
+                    <li><a title="Trực tiếp kết quả xổ số Miền Nam" href="/truc-tiep-ket-qua-xo-so-mien-nam-ttxsmn-xsmn.html">Trực tiếp XSMN</a></li>
+                    <li><a title="Trực tiếp kết quả xổ số Miền Trung" href="/truc-tiep-ket-qua-xo-so-mien-trung-ttxsmt-xsmt.html">Trực tiếp XSMT</a></li>
+                    <li><a title="Trực tiếp kết quả xổ số Mega 6/45 Vietlott" href="/truc-tiep-ket-qua-xo-so-mega-6-45-vietlott.html">Live Mega 6/45</a></li>
+                    <li><a title="Trực tiếp kết quả xổ số Power 6/55 Vietlott" href="/truc-tiep-ket-qua-xo-so-power-6-55-vietlott.html">Live Power 6/55</a></li>
+                    <li><a title="Trực tiếp kết quả xổ số Max 3D Vietlott" href="/truc-tiep-ket-qua-xo-so-max-3d-vietlott.html">Live Max 3D</a></li>
+                    <li><a title="Trực tiếp kết quả xổ số Max 3D Pro Vietlott" href="/truc-tiep-ket-qua-xo-so-max-3d-pro-vietlott.html">Live Max 3D Pro</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="layout-wrapper util-mt-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><a title="Xổ số Miền Bắc" href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"><span>Xổ số Miền Bắc</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>XSMB <?php echo date('d/m/Y'); ?></span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header">
+                    <h1 class="page-title-h1 util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">XSMB <?php echo date('d/m/Y'); ?> – Kết Quả Xổ Số Miền Bắc Ngày <?php echo date('d/m/Y'); ?></h1>
+                </div>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm util-mb-3">
+                <h2 class="util-fs-6 util-font-medium util-lh-base util-p-3">XSMB <?php echo date('d/m/Y'); ?>, Cập nhật kết quả xổ số Miền Bắc ngày <?php echo date('d/m/Y'); ?> đầy đủ và chính xác nhất được công bố từ hội đồng xổ số kiến thiết Miền Bắc.</h2>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm util-mb-3" style="border-left: none;">
+                <div class="live-banner">
+                    <span class="live-dot">🔴 LIVE</span>
+                    <span class="text-live">
+                        Cập nhật kết quả xổ số Miền Bắc (XSMB) trực tiếp vào lúc <strong>18h15</strong> hôm nay <?php echo date('d/m/Y'); ?>,
+                        nhanh chóng – chính xác – uy tín, được công bố từ hội đồng xổ số kiến thiết Miền Bắc.
+                    </span>
+                    <div class="continuous-4">
+                    </div>
+
+                </div>
+            </div>
+            <div id="position-<?php echo date('Ymd'); ?>" class="lottery-result js-table-result js-table-mien-bac" data-ketqua="22593,22596,22597,22598" data-mien="Xổ Số Miền Bắc">
+                <header class="lottery-result-header util-sticky-top">
+                    <div class="breadcrumb-nav">
+                        <h2 class="lottery-result-tree">
+                            <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="Kết quả xổ số Miền Bắc">XSMB</a>
+                            <span class="sep">»</span>
+                            <span class="breadcrumb-current">XSMB <?php echo $this->view->currentDayName; ?></span>
+                            <span class="sep">»</span>
+                            <span class="breadcrumb-current">XSMB <?php echo date('d/m/Y'); ?></span>
+                        </h2>
+                    </div>
+                </header>
+                <table class="comp-table util-align-items-center lottery-table xsmb js-lottery-kq-table">
+                    <thead class="table-header util-sticky-top util-align-items-center">
+                        <tr>
+                            <th class="util-small util-text-start util-bg-primary-subtle" style="--i:0">Giải</th>
+                            <?php $i = 1;
+                            foreach ($this->view->provincesForView as $province): ?>
+                                <th class="util-bg-primary-subtle" style="--i:<?php echo $i; ?>">
+                                    <a href="/ket-qua-xo-so-<?= strtolower(str_replace(' ', '-', $province['name'])) ?>-<?= strtolower($province['code']) ?>.html"
+                                        title="Kết quả xổ số <?php echo $province['name']; ?>"
+                                        aria-label="Xem kết quả xổ số <?php echo $province['name']; ?>">
+                                        <?php echo $province['name']; ?>
+                                    </a>
+                                </th>
+                            <?php $i++;
+                            endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="--row-index:9">
+                            <td class="util-small util-text-nowrap util-text-start">Giải ĐB</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number medium" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="1" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:8">
+                            <td class="util-small util-text-start">Giải 1</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="2" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:7">
+                            <td class="util-small util-text-start">Giải 2</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="3" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:6">
+                            <td class="util-small util-text-start">Giải 3</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="4" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:5">
+                            <td class="util-small util-text-start">Giải 4</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="5" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:4">
+                            <td class="util-small util-text-start">Giải 5</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="6" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:3">
+                            <td class="util-small util-text-start">Giải 6</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="7" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr style="--row-index:2">
+                            <td class="util-small util-text-start">Giải 7</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td><span class="lottery-number" data-page-id="<?php echo $province['keyid']; ?>" data-id-giai="8" data-num=""><span class="spinner-border spinner-border-sm util-text-warning util-fs-6" role="status"></span></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr>
+                            <td colspan="<?php echo count($this->view->provincesForView) + 1; ?>" class="util-bg-primary-subtle util-p-2 util-text-start">
+                                Lô tô Miền Bắc - <?php echo $this->view->currentDayName; ?> Ngày <?php echo date('d/m/Y'); ?>
+                            </td>
+                        </tr>
+                        <tr class="util-align-items-center">
+                            <td>Đầu</td>
+                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                <td class="lotto-number-cell">
+                                    <?php echo $province['code']; ?>
+                                </td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php for ($i = 0; $i <= 9; $i++): ?>
+                            <tr style="--lotto-delay:<?php echo $i + 1; ?>">
+                                <td class="util-text-red util-font-bold"><?php echo $i; ?></td>
+                                <?php foreach ($this->view->provincesForView as $province): ?>
+                                    <td class="lotto-number-cell js-number-dau-duoi" data-find="dau" data-page-id="<?php echo $province['keyid']; ?>" data-num="<?php echo $i; ?>">
+                                    </td>
+                                <?php endforeach; ?>
+                            </tr>
+                        <?php endfor; ?>
+                    </tbody>
+                </table>
+                <div class="comp-article-content util-p-3 util-bg-white util-shadow-sm -util-mt-5 util-rounded js-bottom-content">
+                    <p>Để thuận tiện tham gia dự thưởng Miền Bắc, mời các bạn tham khảo lịch quay sau đây:</p>
+                    <h3><strong>Lịch mở thưởng <a title="xổ số Miền Bắc" href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html">xổ số Miền Bắc</a></strong></h3>
+
+                    <p>Thứ 2: <a title="Thủ Đô Hà Nội" href="/ket-qua-xo-so-ha-noi-xshn.html">Hà Nội</a></p>
+                    <p>Thứ 3: <a title="Quảng Ninh" href="/ket-qua-xo-so-quang-ninh-xsqn.html">Quảng Ninh</a></p>
+                    <p>Thứ 4: <a title="Bắc Ninh" href="/ket-qua-xo-so-bac-ninh-xsbn.html">Bắc Ninh</a></p>
+                    <p>Thứ 5: <a title="Thủ Đô Hà Nội" href="/ket-qua-xo-so-ha-noi-xshn.html">Hà Nội</a></p>
+                    <p>Thứ 6: <a title="Hải Phòng" href="/ket-qua-xo-so-hai-phong-xshp.html">Hải Phòng</a></p>
+                    <p>Thứ 7: <a title="Nam Định" href="/ket-qua-xo-so-nam-dinh-xsnd.html">Nam Định</a></p>
+                    <p>Chủ Nhật: <a title="Thái Bình" href="/ket-qua-xo-so-thai-binh-xstb.html">Thái Bình</a></p>
+
+                    <p><strong>Chúc bạn may mắn trúng thưởng!</strong></p>
+                </div>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+</main>
+<link rel="stylesheet" href="/css/live-animations.css">
+<link rel="preload" href="/js/live/limb.js" as="script">
+<script>
+    window.appProvinces = <?php echo json_encode($this->view->provinces); ?>;
+    window.baseUrl = '<?php echo $this->view->baseUrl; ?>';
+</script>
+<script src="/js/live/limb.js" async></script>
+<style>
+    
+</style>

@@ -1,0 +1,248 @@
+<?php
+
+/** @var array  $dateList */
+/** @var array  $matrix   */
+/** @var int    $totalDay */
+/** @var ?string $asOfDate */
+/** @var string $freqJSON */
+?>
+<link rel="stylesheet" href="/css/thongke/thongke1.css">
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class="util-text-red" title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a></li>
+                    <li><a class=" " title="Thống kê xổ số Miền Nam" href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+                    <li><a class=" " title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                    <li><a title="Thống kê Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power 6/55</a></li>
+                    <li><a title="Thống kê Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item">
+                            <a title="Trang chủ" href="/"><span>Trang chủ</span></a>
+                        </li>
+                        <li class="nav-breadcrumb-item"><span>Thống kê tần suất XSMB</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1">Tần Suất Lô Tô XSMB – Phân Tích
+                        <span class="util-text-red"><?= (int)$totalDay ?></span> Ngày Gần Nhất Miền Bắc
+                    </h1>
+
+                    <ul class="list__subpage">
+                        <li><a title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê Miền Bắc</a></li>
+                        <li><a title="Lô gan xổ số Miền Bắc" href="/lo-gan-xsmb.html">Lô gan Miền Bắc</a></li>
+                        <li><a title="Thống kê đặc biệt xổ số Miền Bắc" href="/dac-biet-xsmb.html">Giải đặc biệt Miền Bắc</a></li>
+                        <li><a title="Thống kê đầu đuôi xổ số Miền Bắc" href="/">Đầu đuôi Miền Bắc</a></li>
+                    </ul>
+
+
+                </div>
+                <?php if ($asOfDate): ?>
+                    <div class="util-small util-text-muted">Dữ liệu đến hết ngày <strong><?= date('d/m/Y', strtotime($asOfDate)) ?></strong></div>
+                <?php endif; ?>
+            </div>
+            <div class="legend util-small util-text-muted util-mb-4 util-flex util-align-items-center" style="gap: 4px;margin-top: 20px;">
+                <span class="util-me-2">Chú thích:</span>
+                <?php for ($b = 0; $b <= 9; $b++): ?>
+                    <span class="box hb-<?= $b ?>"></span>
+                <?php endfor; ?>
+                <span class="util-ms-2">Nhạt → đậm: tần suất thấp → cao (trong từng ngày).</span>
+            </div>
+
+            <div class="table__tansuat__wrap">
+                <form class="util-flex util-align-items-end util-bg-primary-subtle util-small util-mb-2 util-p-2 util-px-3 util-gap-3 util-flex-wrap">
+                    <div>
+                        <label class="util-text-nowrap util-me-2 util-block">Chẵn/lẻ</label>
+                        <select class="form-select util-border util-bg-white js-filter-chan-le">
+                            <option value="all">Tất cả</option>
+                            <option value="chan">Số chẵn</option>
+                            <option value="le">Số lẻ</option>
+                        </select>
+                    </div>
+                    <div class="util-ms-xxl-3">
+                        <label class="util-text-nowrap util-me-2 util-block">Đầu số</label>
+                        <select class="form-select util-border util-bg-white js-filter-dau">
+                            <option value="all">Tất cả</option>
+                            <?php for ($i = 0; $i <= 9; $i++): ?>
+                                <option value="<?= $i ?>">Đầu <?= $i ?></option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                    <div class="util-ms-xxl-3">
+                        <label class="util-text-nowrap util-me-2 util-block">Đuôi số</label>
+                        <select class="form-select util-border util-bg-white js-filter-duoi">
+                            <option value="all">Tất cả</option>
+                            <?php for ($i = 0; $i <= 9; $i++): ?>
+                                <option value="<?= $i ?>">Đuôi <?= $i ?></option>
+                            <?php endfor; ?>
+                        </select>
+                    </div>
+                    <div class="form-check util-ms-auto">
+                        <input class="form-check-input js-toggle-zero" type="checkbox" id="toggleZero" checked>
+                        <label class="form-check-label" for="toggleZero">Ẩn ô bằng 0</label>
+                    </div>
+                </form>
+
+                <div class="comp-table-responsive table__tansuat__container util-mb-4">
+                    <table class="comp-table util-table-bordered table-sm util-align-items-center util-text-center table__tansuat js-freq-table util-mb-0">
+                        <thead></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                    <p>Công cụ <a title="Thống kê tần suất lô miền Bắc" href="/tan-suat-lo-to-xsmb.html"><strong>phân tích tần suất lô miền Bắc</strong></a> của soicau247.com cung cấp dữ liệu chi tiết về mức độ xuất hiện của 100 cặp số từ 00 đến 99 qua các kỳ quay XSMB. Dựa vào thông tin này, người chơi dễ dàng nắm bắt chu kỳ ra số và đưa ra những dự báo chính xác hơn về khả năng các con lô sẽ về trong những kỳ tiếp theo.</p>
+
+                    <p>Bảng <strong>phân tích loto MB</strong> được thiết kế với trục dọc liệt kê các cặp số theo thứ tự tăng dần, trục ngang thể hiện các mốc thời gian 10/30/60/100 kỳ quay gần nhất. Anh em có thể tra cứu cặp số mình quan tâm, xem tổng số lần về cùng khoảng thời gian chưa xuất hiện để lựa chọn những bộ số có tiềm năng cao nhất cho <strong><a title="Xổ số miền Bắc hôm nay" href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html">XSMB hôm nay</a></strong>.</p>
+
+                    <p>Dữ liệu tần suất XSMB được cập nhật liên tục ngay sau mỗi kỳ mở thưởng, đảm bảo thông tin mới nhất cho người chơi. Hãy khai thác hiệu quả nguồn số liệu này để tối ưu hóa chiến lược <strong><a title="soi cầu dự đoán xsmb chính xác 100" href="/du-doan-xsmb-c59.html">soi cầu XSMB</a></strong> và nâng cao tỷ lệ trúng thưởng trong các kỳ quay sắp tới.</p>
+                </div>
+
+                <?php if (!$totalDay): ?>
+                    <div class="alert alert-warning">Chưa có dữ liệu để thống kê.</div>
+                <?php endif; ?>
+            </div>
+
+            <script type="application/json" id="freq-data">
+                <?= $freqJSON ?: '{"dates":[],"matrix":{}}' ?>
+            </script>
+
+            <script>
+                (function() {
+                    const elData = document.getElementById('freq-data');
+                    let payload = {
+                        dates: [],
+                        matrix: {}
+                    };
+                    try {
+                        payload = JSON.parse(elData.textContent || '{}');
+                    } catch (e) {}
+
+                    const dates = payload.dates || [];
+                    const matrix = payload.matrix || {};
+
+                    const table = document.querySelector('.js-freq-table');
+                    const thead = table.querySelector('thead');
+                    const tbody = table.querySelector('tbody');
+
+                    const fmtVN = d => {
+                        if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+                        const [y, m, dd] = d.split('-');
+                        return `${dd}/${m}/${y}`;
+                    };
+
+                    const bucket = (v) => {
+                        if (v <= 0) return 0;
+                        if (v === 1) return 2;
+                        if (v === 2) return 3;
+                        if (v === 3) return 4;
+                        if (v === 4) return 5;
+                        if (v === 5) return 6;
+                        if (v <= 7) return 7;
+                        if (v <= 9) return 8;
+                        return 9;
+                    };
+
+                    const allNums = [];
+                    for (let i = 0; i <= 99; i++) allNums.push(String(i).padStart(2, '0'));
+
+                    const ths = [];
+                    ths.push(`<th class="sticky-col corner-cell">Con lô/Tổng</th>`);
+                    dates.forEach(d => ths.push(`<th class="sticky-header">${fmtVN(d)}</th>`));
+                    thead.innerHTML = `<tr>${ths.join('')}</tr>`;
+
+                    const rowsHTML = [];
+                    allNums.forEach(num => {
+                        const info = matrix[num] || {
+                            by_day: Array(dates.length).fill(0),
+                            total: 0,
+                            dau: +num[0],
+                            duoi: +num[1],
+                            type: (+num % 2 === 0 ? 'chan' : 'le')
+                        };
+                        const cells = [];
+                        cells.push(
+                            `<td class="sticky-col num-badge" data-num="${num}">
+             <span class="num-badge">${num}</span>
+             <span class="total-chip" title="Tổng xuất hiện ${num} trong ${dates.length} ngày">${info.total || 0}</span>
+           </td>`
+                        );
+                        for (let i = 0; i < dates.length; i++) {
+                            const c = (info.by_day && typeof info.by_day[i] !== 'undefined') ? info.by_day[i] : 0;
+                            const b = bucket(c);
+                            const zeroCls = c === 0 ? 'count-0' : '';
+                            cells.push(`<td class="${zeroCls} hb-${b}" data-c="${c}">${c === 0 ? '0' : c}</td>`);
+                        }
+                        rowsHTML.push(
+                            `<tr class="js-number-row" data-num="${num}" data-dau="${info.dau}" data-duoi="${info.duoi}" data-type="${info.type}">
+             ${cells.join('')}
+           </tr>`
+                        );
+                    });
+                    tbody.innerHTML = rowsHTML.join('');
+
+                    const selParity = document.querySelector('.js-filter-chan-le');
+                    const selHead = document.querySelector('.js-filter-dau');
+                    const selTail = document.querySelector('.js-filter-duoi');
+                    const chkZero = document.querySelector('.js-toggle-zero');
+
+                    function applyFilters() {
+                        const parity = selParity.value;
+                        const head = selHead.value;
+                        const tail = selTail.value;
+                        const hideZero = chkZero.checked;
+
+                        table.querySelectorAll('td.count-0').forEach(td => {
+                            if (hideZero) td.classList.add('hidden-zero');
+                            else td.classList.remove('hidden-zero');
+                        });
+
+                        document.querySelectorAll('.js-number-row').forEach(tr => {
+                            const t = tr.getAttribute('data-type');
+                            const d = tr.getAttribute('data-dau');
+                            const u = tr.getAttribute('data-duoi');
+
+                            let ok = true;
+                            if (parity !== 'all' && t !== parity) ok = false;
+                            if (head !== 'all' && d !== head) ok = false;
+                            if (tail !== 'all' && u !== tail) ok = false;
+
+                            tr.style.display = ok ? '' : 'none';
+                        });
+                    }
+
+                    selParity.addEventListener('change', applyFilters);
+                    selHead.addEventListener('change', applyFilters);
+                    selTail.addEventListener('change', applyFilters);
+                    chkZero.addEventListener('change', applyFilters);
+
+                    applyFilters();
+                })();
+            </script>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0 !important;
+        }
+    }
+</style>

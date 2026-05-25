@@ -1,0 +1,213 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class=" " title="Quay thử xổ số Miền Bắc" href="/quay-thu-xsmb.html">Quay thử XSMB</a></li>
+                    <li><a class="util-text-red" title="Quay thử xổ số Miền Nam" href="/quay-thu-xsmn.html">Quay thử XSMN</a></li>
+                    <li><a class=" " title="Quay thử xổ số Miền Trung" href="/quay-thu-xsmt.html">Quay thử XSMT</a></li>
+                    <li><a class=" " title="Quay thử Power 6/55" href="/quay-thu-xo-so-power-6-55-hom-nay.html">Quay thử Power 6/55</a></li>
+                    <li><a class=" " title="Quay thử Mega 6/45" href="/quay-thu-xo-so-mega-6-45-hom-nay.html">Quay thử Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="layout-wrapper util-mt-3 layout-clearfix">
+    <div class="layout-row util-gx-3" template="quay-thu-mien-nam-page.desktop">
+        <div class="layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><a title="Quay thử xổ số" href="/quay-thu-xo-so.html"><span>Quay thử xổ số</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Quay thử <?= isset($selectedProvinceCode) ? htmlspecialchars($selectedProvinceCode) : 'XSMN' ?></span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1"><?= htmlspecialchars($seo_title ?? "Quay Thử XSMN hôm nay - Quay Thử XSMN - Số Thử MN") ?></h1>
+                    <form class="util-mb-3 util-small util-rounded js-form-change-location" method="POST">
+                        <div class="layout-row util-gx-3">
+                            <div class="layout-col-5">
+                                <label class="util-mb-1">Tỉnh thành</label>
+                                <select aria-label="Chọn tỉnh thành"
+                                    class="form-select util-border util-border-dark-subtle util-fs-8 js-select-other-day"
+                                    name="choose_mien_tinh">
+                                    <option value="">Chọn miền/tỉnh</option>
+                                    <option value="/quay-thu-xsmn.html" selected>Miền Nam</option>
+                                    <option value="/quay-thu-xsmt.html">Miền Trung</option>
+                                    <option value="/quay-thu-xsmb.html">Miền Bắc</option>
+
+                                    <optgroup label="Miền Nam">
+                                        <option value="xsag" <?php echo (isset($provinceCode) && $provinceCode == 'xsag') ? 'selected' : ''; ?>>An Giang</option>
+                                        <option value="xshcm" <?php echo (isset($provinceCode) && $provinceCode == 'xshcm') ? 'selected' : ''; ?>>Hồ Chí Minh</option>
+                                        <option value="xstn" <?php echo (isset($provinceCode) && $provinceCode == 'xstn') ? 'selected' : ''; ?>>Tây Ninh</option>
+                                        <option value="xsvl" <?php echo (isset($provinceCode) && $provinceCode == 'xsvl') ? 'selected' : ''; ?>>Vĩnh Long</option>
+                                        <option value="xsbd" <?php echo (isset($provinceCode) && $provinceCode == 'xsbd') ? 'selected' : ''; ?>>Bình Dương</option>
+                                        <option value="xsdt" <?php echo (isset($provinceCode) && $provinceCode == 'xsdt') ? 'selected' : ''; ?>>Đồng Tháp</option>
+                                        <option value="xsdn" <?php echo (isset($provinceCode) && $provinceCode == 'xsdn') ? 'selected' : ''; ?>>Đồng Nai</option>
+                                        <option value="xsbt" <?php echo (isset($provinceCode) && $provinceCode == 'xsbt') ? 'selected' : ''; ?>>Bến Tre</option>
+                                        <option value="xsbp" <?php echo (isset($provinceCode) && $provinceCode == 'xsbp') ? 'selected' : ''; ?>>Bình Phước</option>
+                                        <option value="xstg" <?php echo (isset($provinceCode) && $provinceCode == 'xstg') ? 'selected' : ''; ?>>Tiền Giang</option>
+                                        <option value="xsbl" <?php echo (isset($provinceCode) && $provinceCode == 'xsbl') ? 'selected' : ''; ?>>Bạc Liêu</option>
+                                        <option value="xsbth" <?php echo (isset($provinceCode) && $provinceCode == 'xsbth') ? 'selected' : ''; ?>>Bình Thuận</option>
+                                        <option value="xscm" <?php echo (isset($provinceCode) && $provinceCode == 'xscm') ? 'selected' : ''; ?>>Cà Mau</option>
+                                        <option value="xsct" <?php echo (isset($provinceCode) && $provinceCode == 'xsct') ? 'selected' : ''; ?>>Cần Thơ</option>
+                                        <option value="xshg" <?php echo (isset($provinceCode) && $provinceCode == 'xshg') ? 'selected' : ''; ?>>Hậu Giang</option>
+                                        <option value="xskg" <?php echo (isset($provinceCode) && $provinceCode == 'xskg') ? 'selected' : ''; ?>>Kiên Giang</option>
+                                        <option value="xsla" <?php echo (isset($provinceCode) && $provinceCode == 'xsla') ? 'selected' : ''; ?>>Long An</option>
+                                        <option value="xsdl" <?php echo (isset($provinceCode) && $provinceCode == 'xsdl') ? 'selected' : ''; ?>>Đà Lạt</option>
+                                        <option value="xsst" <?php echo (isset($provinceCode) && $provinceCode == 'xsst') ? 'selected' : ''; ?>>Sóc Trăng</option>
+                                        <option value="xstv" <?php echo (isset($provinceCode) && $provinceCode == 'xstv') ? 'selected' : ''; ?>>Trà Vinh</option>
+                                        <option value="xsvt" <?php echo (isset($provinceCode) && $provinceCode == 'xsvt') ? 'selected' : ''; ?>>Vũng Tàu</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="layout-col-7">
+                                <label class="util-mb-1">Loại hình quay thử</label>
+                                <select aria-label="Chọn hình thức quay thử"
+                                    class="form-select util-border util-border-dark-subtle util-fs-8 js-select-type-quay-thu">
+                                    <option value="bn">Quay thử theo bạc nhớ</option>
+                                    <option value="birthday">Quay thử theo ngày tháng năm sinh</option>
+                                    <option value="rand" selected>Quay thử ngẫu nhiên</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="util-mt-3 js-birthday-select-wrap hidden">
+                            <p class="util-mb-1">Nhập ngày tháng năm sinh của bạn</p>
+                            <div class="layout-row util-gx-3">
+                                <div class="layout-col-4 util-mb-2">
+                                    <select aria-label="Chọn ngày sinh" class="form-select util-border util-border-dark-subtle js-select-ngay-sinh cat-item" name="day">
+                                        <option value="">Chọn ngày</option>
+                                        <script>
+                                            document.write([...Array(31)].map((_, i) => `<option value="${i+1}">${i+1}</option>`).join(''))
+                                        </script>
+                                    </select>
+                                </div>
+                                <div class="layout-col-4 util-mb-2">
+                                    <select aria-label="Chọn tháng sinh" class="form-select util-border util-border-dark-subtle js-select-thang-sinh cat-item" name="month">
+                                        <option value="">Chọn tháng</option>
+                                        <script>
+                                            document.write([...Array(12)].map((_, i) => `<option value="${i+1}">${i+1}</option>`).join(''))
+                                        </script>
+                                    </select>
+                                </div>
+                                <div class="layout-col-4">
+                                    <select aria-label="Chọn năm sinh" class="form-select util-border util-border-dark-subtle js-select-nam-sinh cat-item" name="year">
+                                        <option value="">Chọn năm</option>
+                                        <script>
+                                            for (let y = 1950; y <= new Date().getFullYear(); y++) document.write(`<option value="${y}">${y}</option>`)
+                                        </script>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="util-flex util-mt-3">
+                            <button type="button" class="btn-base btn-lg btn-success util-fs-6 util-w-100 util-me-1 util-text-nowrap js-btn-quay-thu-detail" data-quay="tinh">Bắt đầu quay thử</button>
+                            <button type="button" class="btn-base btn-lg btn-primary util-fs-6 util-w-100 util-ms-1 js-btn-quay-thu-nhanh" data-quay="tinh">Quay nhanh</button>
+                        </div>
+                    </form>
+                    <ul class="list__subpage"></ul>
+                </div>
+            </div>
+
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p><strong>Quay thử <?= htmlspecialchars($selectedProvinceName ?? 'Miền Nam') ?></strong> tại soicau247.com mô phỏng quy trình mở thưởng thực tế, chạy tự động bằng máy tính, không can thiệp thủ công. Công cụ chỉ mang tính tham khảo, giải trí và giúp thư giãn, vui lòng không sử dụng sai mục đích.</p>
+            </div>
+            <div class="ketqua_quaythu_wrapper js-wrap-content-quay-thu util-mb-3"></div>
+
+            <div class="comp-box">
+                <?php if (!empty($selectedProvinceCode) && !empty($selectedProvinceName) && $selectedProvinceCode !== 'XSMN'): ?>
+                    <?php
+                    $provinceSlug = strtolower($selectedProvinceCode);
+                    // Convert province name to slug
+                    $provinceNameSlug = strtolower($selectedProvinceName);
+                    $provinceNameSlug = str_replace(['đ', 'Đ'], 'd', $provinceNameSlug);
+                    $provinceNameSlug = preg_replace('/[àáạảãâầấậẩẫăằắặẳẵ]/u', 'a', $provinceNameSlug);
+                    $provinceNameSlug = preg_replace('/[èéẹẻẽêềếệểễ]/u', 'e', $provinceNameSlug);
+                    $provinceNameSlug = preg_replace('/[ìíịỉĩ]/u', 'i', $provinceNameSlug);
+                    $provinceNameSlug = preg_replace('/[òóọỏõôồốộổỗơờớợởỡ]/u', 'o', $provinceNameSlug);
+                    $provinceNameSlug = preg_replace('/[ùúụủũưừứựửữ]/u', 'u', $provinceNameSlug);
+                    $provinceNameSlug = preg_replace('/[ỳýỵỷỹ]/u', 'y', $provinceNameSlug);
+                    $provinceNameSlug = str_replace(' ', '-', $provinceNameSlug);
+                    ?>
+                    <div class="comp-box-title">Tiện ích <?= htmlspecialchars($selectedProvinceName) ?></div>
+                    <ul class="comp-list-links layout-row util-gx-0">
+                        <li class="layout-col-6 layout-col-md-7">Hôm nay quay <a title="Kết quả XSMN" href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html">XSMN</a></li>
+                        <li class="layout-col-6 layout-col-md-7">Cập nhật <a title="Dự đoán <?= htmlspecialchars($selectedProvinceCode) ?>" href="/du-doan-<?= $provinceSlug ?>.html">dự đoán <?= htmlspecialchars($selectedProvinceCode) ?></a> chuẩn</li>
+                        <li class="layout-col-6 layout-col-md-7"><a title="Thống kê <?= htmlspecialchars($selectedProvinceCode) ?>" href="/thong-ke-<?= $provinceSlug ?>.html">Thống kê <?= htmlspecialchars($selectedProvinceCode) ?></a> dễ hiểu, dễ tra</li>
+                        <li class="layout-col-6 layout-col-md-7">Chọn số lâu ra từ <a title="Lô gan <?= htmlspecialchars($selectedProvinceName) ?>" href="/thong-ke-lo-gan-<?= $provinceSlug ?>.html">lô gan <?= htmlspecialchars($selectedProvinceName) ?></a></li>
+                        <li class="layout-col-6 layout-col-md-7">Dò trúng nhanh <a title="Kết quả <?= htmlspecialchars($selectedProvinceCode) ?>" href="/ket-qua-xo-so-<?= $provinceNameSlug ?>-<?= $provinceSlug ?>.html"><?= htmlspecialchars($selectedProvinceCode) ?></a></li>
+                        <li class="layout-col-6 layout-col-md-7">Hoặc kết quả <a title="Kết quả XSMN" href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html">Xổ số Miền Nam</a></li>
+                    </ul>
+                <?php else: ?>
+                    <div class="comp-box-title">Tiện ích Miền Nam</div>
+                    <ul class="comp-list-links layout-row util-gx-0">
+                        <li class="layout-col-6 layout-col-md-3"><a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html">Kết quả XSMN</a></li>
+                        <li class="layout-col-6 layout-col-md-3"><a href="/du-doan-xsmn-c61.html">Dự đoán XSMN</a></li>
+                        <li class="layout-col-6 layout-col-md-3"><a href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+                        <li class="layout-col-6 layout-col-md-3"><a href="/thong-ke-lo-gan-xsmn-thong-ke-xo-so-mien-nam-tk-xsmn.html">Lô gan Miền Nam</a></li>
+                    </ul>
+                <?php endif; ?>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p><a href="/quay-thu-xsmn.html"><strong>Quay thử XSMN</strong></a> giúp người chơi chọn nhanh những con số may mắn dựa trên mô phỏng quá trình quay số thực tế. Hệ thống tại soicau247.com hoạt động tự động, mang tính tham khảo và giải trí.</p>
+
+                <p><strong>Quay thử vận may</strong> mang đến ba hình thức thú vị: <strong>theo ngày tháng năm sinh</strong>, <strong>theo bạc nhớ</strong> và <strong>ngẫu nhiên</strong>. Mỗi cách quay mang lại những dãy số khác nhau để người chơi thử vận hên của mình.</p>
+
+                <p><strong>Thực hiện quay thử 3 miền:</strong></p>
+                <ul>
+                    <li><a href="/quay-thu-xsmb-quay-thu-xo-so-mien-bac-hom-nay.html"><strong>Quay thử XSMB</strong></a>: 1 đài duy nhất mỗi kỳ.</li>
+                    <li><a href="/quay-thu-xsmt.html"><strong>Quay thử XSMT</strong></a>: 2–3 đài mỗi ngày.</li>
+                    <li><a href="/quay-thu-xsmn.html"><strong>Quay thử XSMN</strong></a>: 3–4 đài mở thưởng liên tục.</li>
+                </ul>
+
+                <p><em>Lưu ý: Công cụ chỉ phục vụ mục đích giải trí, không đảm bảo trúng thưởng. Hãy ủng hộ xổ số kiến thiết chính thống vì “Ích nước, lợi nhà”.</em></p>
+            </div>
+
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+</main>
+<?php if (isset($provinceCode)): ?>
+    <script>
+        window.provinceCode = '<?= $provinceCode ?>';
+    </script>
+<?php endif; ?>
+<script src="/js/quaythu/qtmn.js"></script>
+<script>
+    // Handle province selection to change URL
+    (function() {
+        const selectEl = document.querySelector('.js-select-other-day');
+        if (!selectEl) return;
+
+        // Override existing listener
+        const newSelect = selectEl.cloneNode(true);
+        selectEl.parentNode.replaceChild(newSelect, selectEl);
+
+        newSelect.addEventListener('change', function(e) {
+            const value = e.target.value.trim();
+
+            // If it's a URL (miền), redirect
+            if (value.startsWith('/')) {
+                window.location.href = value;
+                return;
+            }
+
+            // If it's a province code, redirect to province URL
+            if (value && value.startsWith('xs')) {
+                window.location.href = '/quay-thu-' + value + '.html';
+            }
+        });
+    })();
+</script>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+    }
+</style>

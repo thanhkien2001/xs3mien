@@ -1,0 +1,508 @@
+<?php
+/**
+ * Trang kết quả XSMB theo ngày - Giao diện mới
+ * @var \DateTime $pageDate
+ * @var array|null $result
+ * @var array $dau
+ * @var array $duoi
+ * @var string $thuText
+ * @var string $thuLink
+ * @var array $otherLinks
+ * @var array $latestResults
+ * @var array|null $statistics
+ */
+
+use App\Library\LotteryHelper;
+use App\Library\LotteryStatisticsHelper;
+
+$esc = $this->escaper;
+$day = (int)$pageDate->format('j');
+$month = (int)$pageDate->format('n');
+$year = (int)$pageDate->format('Y');
+$dateFormatted = sprintf('%02d/%02d/%d', $day, $month, $year);
+$dateSlug = sprintf('%d-%d-%d', $day, $month, $year);
+
+// Map active day
+$weekday = (int)$pageDate->format('N'); // 1=Monday, 7=Sunday
+$dayMap = [
+    1 => 'thu-2',
+    2 => 'thu-3',
+    3 => 'thu-4',
+    4 => 'thu-5',
+    5 => 'thu-6',
+    6 => 'thu-7',
+    7 => 'chu-nhat'
+];
+$active = $dayMap[$weekday] ?? '';
+?>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <div class="submenu2">
+                    <ul class="row flex-nowrap text-nowrap overflow-auto mx-0 rounded lh-25 submenu2-bg pl-0 pl-md-3">
+                        <li class="px-2 px-lg-3 active">
+                            <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="Miền Bắc">XSMB</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-2' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-2-ket-qua-xo-so-mien-bac.html" title="thứ 2">thứ 2</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-3' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-3-ket-qua-xo-so-mien-bac.html" title="thứ 3">thứ 3</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-4' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-4-ket-qua-xo-so-mien-bac.html" title="thứ 4">thứ 4</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-5' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-5-ket-qua-xo-so-mien-bac.html" title="thứ 5">thứ 5</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-6' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-6-ket-qua-xo-so-mien-bac.html" title="thứ 6">thứ 6</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-7' ? 'active' : '' ?>">
+                            <a href="/xsmb-thu-7-ket-qua-xo-so-mien-bac.html" title="thứ 7">thứ 7</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'chu-nhat' ? 'active' : '' ?>">
+                            <a href="/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html" title="chủ nhật">chủ nhật</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="XSMB">XSMB</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="<?= $esc->escapeHtmlAttr($thuLink ?? '#') ?>" title="XSMB <?= $esc->escapeHtml($thuText ?? '') ?>">XSMB <?= $esc->escapeHtml($thuText ?? '') ?></a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="/xsmb-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMB ngày <?= $esc->escapeHtml($dateFormatted) ?>">XSMB ngày <?= $esc->escapeHtml($dateFormatted) ?></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <article class="my-2">
+                    <div class="result result-single rounded">
+                        <h2 class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+                            Xổ số Miền Bắc ngày <?= $esc->escapeHtml($dateFormatted) ?>
+                        </h2>
+                        <div class="breadcrumb-table">
+                            <h4 class="breadcrumb-table-title">
+                                <a href="<?= $esc->escapeHtmlAttr($thuLink ?? '#') ?>" title="XSMB <?= $esc->escapeHtml($thuText ?? '') ?>">XSMB <?= $esc->escapeHtml($thuText ?? '') ?></a>
+                                /
+                                <a href="/xsmb-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMB <?= $esc->escapeHtml($dateFormatted) ?>">XSMB <?= $esc->escapeHtml($dateFormatted) ?></a>
+                            </h4>
+                        </div>
+                        <div class="table-flex-border">
+                            <table class="table-flex table-result" data-code="XSMB">
+                                <tbody>
+                                    <?php if ($result): ?>
+                                    <!-- Hàng mã đài -->
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="d-flex justify-content-between font-16 p-2">
+                                                <?php
+                                                $lvCodes = is_array($result['lv'] ?? null) ? $result['lv'] : [];
+                                                foreach ($lvCodes as $lv):
+                                                    $lv = trim($lv);
+                                                    if ($lv):
+                                                        $codes = explode('-', $lv);
+                                                        foreach ($codes as $code):
+                                                            $code = trim($code);
+                                                            if ($code):
+                                                ?>
+                                                <span class="text-number" nc="5"><?= $esc->escapeHtml($code) ?></span>
+                                                <?php
+                                                            endif;
+                                                        endforeach;
+                                                    endif;
+                                                endforeach;
+                                                ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải ĐB -->
+                                    <tr>
+                                        <td>ĐB</td>
+                                        <td>
+                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($result['special_prize'] ?? '') ?></span>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 1 -->
+                                    <tr>
+                                        <td>G1</td>
+                                        <td>
+                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($result['first_prize'] ?? '') ?></span>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 2 -->
+                                    <tr>
+                                        <td>G2</td>
+                                        <td>
+                                            <?php
+                                            $secondPrizes = is_array($result['second_prize'] ?? null) 
+                                                ? $result['second_prize'] 
+                                                : LotteryHelper::cleanPrizeData($result['second_prize'] ?? '');
+                                            foreach ($secondPrizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 3 -->
+                                    <tr>
+                                        <td>G3</td>
+                                        <td>
+                                            <?php
+                                            $thirdPrizes = is_array($result['third_prize'] ?? null) 
+                                                ? $result['third_prize'] 
+                                                : LotteryHelper::cleanPrizeData($result['third_prize'] ?? '');
+                                            foreach ($thirdPrizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 4 -->
+                                    <tr>
+                                        <td>G4</td>
+                                        <td>
+                                            <?php
+                                            $fourthPrizes = is_array($result['fourth_prize'] ?? null) 
+                                                ? $result['fourth_prize'] 
+                                                : LotteryHelper::cleanPrizeData($result['fourth_prize'] ?? '');
+                                            foreach ($fourthPrizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                            <span class="text-number" nc="4"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 5 -->
+                                    <tr>
+                                        <td>G5</td>
+                                        <td>
+                                            <?php
+                                            $fifthPrizes = is_array($result['fifth_prize'] ?? null) 
+                                                ? $result['fifth_prize'] 
+                                                : LotteryHelper::cleanPrizeData($result['fifth_prize'] ?? '');
+                                            foreach ($fifthPrizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                            <span class="text-number" nc="4"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 6 -->
+                                    <tr>
+                                        <td>G6</td>
+                                        <td>
+                                            <?php
+                                            $sixthPrizes = is_array($result['sixth_prize'] ?? null) 
+                                                ? $result['sixth_prize'] 
+                                                : LotteryHelper::cleanPrizeData($result['sixth_prize'] ?? '');
+                                            foreach ($sixthPrizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                            <span class="text-number" nc="3"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Giải 7 -->
+                                    <tr>
+                                        <td>G7</td>
+                                        <td>
+                                            <?php
+                                            $seventhPrizes = is_array($result['seventh_prize'] ?? null) 
+                                                ? $result['seventh_prize'] 
+                                                : LotteryHelper::cleanPrizeData($result['seventh_prize'] ?? '');
+                                            foreach ($seventhPrizes as $prize):
+                                                $prize = trim($prize);
+                                                if ($prize):
+                                            ?>
+                                            <span class="text-number" nc="2"><?= $esc->escapeHtml($prize) ?></span>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <?php else: ?>
+                                    <!-- Đang chờ kết quả -->
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="d-flex justify-content-between font-16 p-2">
+                                                <?php for ($i = 0; $i < 8; $i++): ?>
+                                                <span class="text-number" nc="5"><i class="icon icon-loading123"></i></span>
+                                                <?php endfor; ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ĐB</td>
+                                        <td><span class="text-number" nc="5"><i class="icon icon-loading123"></i></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>G1</td>
+                                        <td><span class="text-number" nc="5"><i class="icon icon-loading123"></i></span></td>
+                                    </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="loto loto-single">
+                        <table class="table table-bordered table-striped table-xslt-single-col">
+                            <thead>
+                                <tr>
+                                    <th>Đầu</th>
+                                    <th>Lô tô</th>
+                                    <th>Đuôi</th>
+                                    <th>Lô tô</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($i = 0; $i <= 9; $i++): ?>
+                                <tr>
+                                    <td><?= $i ?></td>
+                                    <td>
+                                        <?php
+                                        if (!empty($dau[$i])) {
+                                            sort($dau[$i]);
+                                            foreach ($dau[$i] as $num) {
+                                                echo '<span>' . $esc->escapeHtml($num) . '</span>';
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+                                    <td><?= $i ?></td>
+                                    <td>
+                                        <?php
+                                        if (!empty($duoi[$i])) {
+                                            sort($duoi[$i]);
+                                            foreach ($duoi[$i] as $num) {
+                                                echo '<span>' . $esc->escapeHtml($num) . '</span>';
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+                <p class="text-red1">» <a href="/rong-bach-kim-666-hom-nay.html" title="Rồng Bạch Kim 666" class="text-blue">Rồng Bạch Kim 666</a></p>
+                <p class="text-red1">» <a href="/soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888" class="text-blue">Soi cầu XSMB Win2888</a></p>
+                <p class="text-red1">» <a href="/soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi Cầu 24h" class="text-blue">Soi Cầu 24h</a></p>
+                
+                <?php if ($statistics): ?>
+                <div class="my-3">
+                    <h3 class="font-weight-bold font-18 mb-3">Thống kê kết quả XSMB <?= $esc->escapeHtml($dateFormatted) ?></h3>
+                    <?= LotteryStatisticsHelper::formatStatistics($statistics) ?>
+                </div>
+                <?php endif; ?>
+                
+                <?php if (!empty($predictions)): ?>
+                <aside class="news border-radius-4">
+                    <h3 class="title-bg-blue border-radius-top mb-0">Dự đoán xổ số miền Bắc <?= $esc->escapeHtml($dateFormatted) ?> mới nhất</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <?php foreach (array_slice($predictions, 0, 4) as $pred): ?>
+                        <div class="row">
+                            <div class="col-12 mt-3 mb-2">
+                                <a class="text-blue1 font-16 font-weight-bold" href="<?= $esc->escapeHtmlAttr($pred['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                    <?= $esc->escapeHtml($pred['title'] ?? '') ?>
+                                </a>
+                            </div>
+                            <?php if (!empty($pred['image_url'])): ?>
+                            <div class="col-4 pr-2">
+                                <a href="<?= $esc->escapeHtmlAttr($pred['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                    <img loading="lazy" width="410" height="215" src="<?= $esc->escapeHtmlAttr($pred['image_url']) ?>" alt="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                </a>
+                            </div>
+                            <div class="col-8 pl-2">
+                                <p class="text-black1 font-14 lh-18px line-3 text-justify"><?= $esc->escapeHtml(mb_substr($pred['title'] ?? '', 0, 150)) ?>...</p>
+                            </div>
+                            <?php else: ?>
+                            <div class="col-12 mt-3 mb-1">
+                                <a class="text-blue1 font-16 font-weight-bold" href="<?= $esc->escapeHtmlAttr($pred['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                    <?= $esc->escapeHtml($pred['title'] ?? '') ?>
+                                </a>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </aside>
+                <?php endif; ?>
+                
+                <p class="mb-1"><span class="text-red">»</span> Thống kê <a href="/lo-gan-xsmb.html" title="lô gan XSMB">lô gan XSMB</a></p>
+                <p class="mb-1"><span class="text-red">»</span> Thống kê <a href="/lo-xien-xsmb.html" title="lô xiên XSMB">lô xiên XSMB</a></p>
+                <p class="mb-1"><span class="text-red">»</span> Thống kê <a href="/lo-kep-xsmb.html" title="lô kép XSMB">lô kép XSMB</a></p>
+                <p class="mb-1"><span class="text-red">»</span> Thống kê <a href="/tan-suat-lo-to-xsmb.html" title="tần suất lô tô XSMB">tần suất lô tô XSMB</a></p>
+                
+                <?php if (!empty($specialPrizeLast2Frequency)): ?>
+                <div class="logan-result">
+                    <div class="table-dacbiet logan-result">
+                        <div class="title-bg-blue border-radius-top">Hai số cuối giải đặc biệt có xác suất về cao nhất trong ngày</div>
+                        <div class="overflow-auto">
+                            <table class="text-center table-total w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Số thứ nhất</th>
+                                        <th>Số thứ hai</th>
+                                        <th>Số thứ ba</th>
+                                        <th>Số thứ tư</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                    // Hiển thị 8 số (2 hàng x 4 cột)
+                                    $displayItems = array_slice($specialPrizeLast2Frequency, 0, 8);
+                                    $rowCount = 0;
+                                    foreach ($displayItems as $index => $item):
+                                        if ($index % 4 == 0):
+                                    ?>
+                                    <tr class="table-dacbiet-tr1 bg-white">
+                                        <td><?= $esc->escapeHtml($item['number']) ?></td>
+                                        <?php if (isset($displayItems[$index + 1])): ?>
+                                        <td><?= $esc->escapeHtml($displayItems[$index + 1]['number']) ?></td>
+                                        <?php else: ?>
+                                        <td></td>
+                                        <?php endif; ?>
+                                        <?php if (isset($displayItems[$index + 2])): ?>
+                                        <td><?= $esc->escapeHtml($displayItems[$index + 2]['number']) ?></td>
+                                        <?php else: ?>
+                                        <td></td>
+                                        <?php endif; ?>
+                                        <?php if (isset($displayItems[$index + 3])): ?>
+                                        <td><?= $esc->escapeHtml($displayItems[$index + 3]['number']) ?></td>
+                                        <?php else: ?>
+                                        <td></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
+                <div class="logan-result">
+                    <div class="title-bg-blue border-radius-top">BẢNG LOGAN Miền Bắc LÂU CHƯA VỀ NHẤT</div>
+                    <div class="table-logan">
+                        <div class="overflow-auto">
+                            <table class="text-center table-total table-logan-lcvn table-fixed w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Bộ số</th>
+                                        <th>Lần chưa về</th>
+                                        <th>Về gần nhất</th>
+                                        <th>Gan cực đại</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if (!empty($loganData)): ?>
+                                        <?php foreach ($loganData as $logan): ?>
+                                        <tr>
+                                            <td><?= $esc->escapeHtml($logan['number']) ?></td>
+                                            <td><?= (int)$logan['streak'] ?></td>
+                                            <td>
+                                                <?php if ($logan['last_date']): ?>
+                                                    <?php 
+                                                    $lastDate = new \DateTime($logan['last_date']);
+                                                    $lastDateFormatted = $lastDate->format('d/m/Y');
+                                                    $lastDateSlug = $lastDate->format('d-n-Y');
+                                                    ?>
+                                                    <a rel="nofollow" href="/xsmb-<?= $esc->escapeHtmlAttr($lastDateSlug) ?>.html" target="_blank"><?= $esc->escapeHtml($lastDateFormatted) ?></a>
+                                                <?php else: ?>
+                                                    N/A
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?= (int)$logan['max_streak'] ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <tr>
+                                            <td colspan="4" class="text-center">Chưa có dữ liệu</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="font-weight-bold my-3">Xem kết quả XSMB theo ngày</p>
+                <?php if (!empty($otherLinks)): ?>
+                    <?php foreach ($otherLinks as $link): ?>
+                    <p class="mb-1"><span class="text-red">»</span> <a href="<?= $esc->escapeHtmlAttr($link['href'] ?? $link['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($link['title'] ?? '') ?>"><?= $esc->escapeHtml($link['title'] ?? '') ?></a></p>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+                
+                <p class="font-weight-bold my-3">Xem thêm:</p>
+                <p class="mb-1"><span class="text-red">»</span> <a href="/soi-cau-xsmb.html" title="Soi cầu XSMB">Soi cầu XSMB</a> mới nhất</p>
+                <p class="mb-1"><span class="text-red">»</span> <a href="/du-doan-xsmb-c59.html" title="Dự đoán XSMB">Dự đoán XSMB</a> miễn phí</p>
+                <p class="mb-1"><span class="text-red">»</span> Kết quả <a href="/thong-ke-xsmb-30-ngay-xo-so-mien-bac-30-ngay.html" title="XSMB 30 ngày">XSMB 30 ngày</a> miễn phí</p>
+                <p class="mb-1"><span class="text-red">»</span> Kết quả XSMT hôm nay: <a href="/xsmt-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMT <?= $esc->escapeHtml($dateFormatted) ?>">XSMT <?= $esc->escapeHtml($dateFormatted) ?></a></p>
+                <p class="mb-1"><span class="text-red">»</span> Kết quả XSMN hôm nay: <a href="/xsmn-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMN <?= $esc->escapeHtml($dateFormatted) ?>">XSMN <?= $esc->escapeHtml($dateFormatted) ?></a></p>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+

@@ -1,0 +1,606 @@
+<?php
+
+function h($s)
+{
+    return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+}
+function safeDecode($src)
+{
+    if ($src === null) return [];
+    $s = trim((string)$src);
+    $j = json_decode($s, true);
+    if (json_last_error() === JSON_ERROR_NONE) {
+        $arr = is_array($j) ? $j : [$j];
+        $out = [];
+        foreach ($arr as $v) {
+            if ($v === null) continue;
+            $v = trim((string)$v);
+            if ($v !== '') $out[] = $v;
+        }
+        return $out;
+    }
+    $s = str_replace(['[', ']'], ' ', $s);
+    $s = preg_replace('/"{2,}/', '" "', $s);
+    $s = str_replace(['"', ',', ';', '|'], ' ', $s);
+    $s = preg_replace('/\s+/', ' ', trim($s));
+    if ($s === '') return [];
+    $parts = explode(' ', $s);
+
+    $out = [];
+    foreach ($parts as $p) {
+        $p = trim($p);
+        if ($p !== '') $out[] = $p;
+    }
+    return $out;
+}
+function dayVN($ymd)
+{
+    if (!$ymd) return '';
+    $w = date('N', strtotime($ymd));
+    $map = [1 => 'Thứ Hai', 2 => 'Thứ Ba', 3 => 'Thứ Tư', 4 => 'Thứ Năm', 5 => 'Thứ Sáu', 6 => 'Thứ Bảy', 7 => 'Chủ Nhật'];
+    return $map[(int)$w] ?? '';
+}
+function renderSpecial($num)
+{
+    $num = trim((string)$num);
+    if ($num === '') return '';
+    $head = substr($num, 0, max(0, strlen($num) - 2));
+    $tail = substr($num, -2);
+    return $num;
+}
+?>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/du-doan-<?= strtolower(h($prediction->region)) ?>.html" title="Dự đoán <?= h($prediction->region) ?>">
+                                Dự đoán <?= h($prediction->region) ?>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white border-radius-4 py-3">
+                    <h1 class="font-20"><strong><?= h($prediction->title) ?></strong></h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"><?= dayVN($prediction->prediction_date) ?>, <?= h($currentDate) ?> - <?= date('H:i', strtotime($prediction->updated_at)) ?></div>
+                            <div class="allRate">
+                                <input type="range" value="0" step="0.25" id="backing5" style="display: none;">
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5" data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0" data-rateit-max="5" data-rateit-mode="font" data-rateit-icon="" style="font-family:fontawesome">
+                                    <button id="rateit-reset-2" type="button" data-role="none" class="rateit-reset" aria-label="reset rating" aria-controls="rateit-range-2" style="display: none;"><span></span></button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider" aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset" style="width: 0px;">★★★★★</div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div>
+                                <span class="danhgia">
+                                    <span class="avg-rate">5</span> /<span>5</span> của <span class="count-rate">1</span> đánh giá
+                                </span>
+                            </div>
+                        </div>
+                        <div class="new-category">
+                            <span><i class="icon-circle text-red font-6 align-middle" aria-hidden="true"></i></span>
+                            <a href="/du-doan-<?= strtolower(h($prediction->region)) ?>.html" title="Dự đoán <?= h($prediction->region) ?>">
+                                Dự đoán <?= h($prediction->region) ?>
+                            </a>
+                        </div>
+                </div>
+                <?php if (!empty($prediction->content)): ?>
+                        <h2 class="new-description font-weight-bold"><?= h($prediction->content) ?></h2>
+                <?php endif; ?>
+
+                        <div class="other_post p-3">
+                            <ul class="other_post_list">
+                                    <li class="other_post_item text-news-link">
+                                        <i class="icon-circle font-5 align-middle"></i>
+                                        <a class="font-14" href="/soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 Asia <?= h($currentDate) ?>">
+                                Soi cầu XSMB Win2888 Asia <?= h($currentDate) ?>
+                            </a>
+                        </li>
+                                    <li class="other_post_item text-news-link">
+                                        <i class="icon-circle font-5 align-middle"></i>
+                                        <a class="font-14" href="/rong-bach-kim.html" title="Rồng bạch kim <?= h($currentDate) ?>">
+                                Rồng bạch kim <?= h($currentDate) ?>
+                            </a>
+                        </li>
+                        <?php if (!empty($relatedPredictions) && count($relatedPredictions) > 0): ?>
+                        <?php foreach ($relatedPredictions as $related): ?>
+                                    <li class="other_post_item text-news-link">
+                                        <i class="icon-circle font-5 align-middle"></i>
+                                        <a class="font-14" href="/<?= h($related->slug) ?>" title="<?= h($related->title) ?>">
+                                <?= h($related->title) ?>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+
+                    <div class="new-content text-justify">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Dự đoán <?= h($prediction->region) ?> <?= h($currentDate) ?></a></li>
+                                <li><a rel="nofollow" href="#trick1">Xem lại kết quả <?= h($prediction->region) ?> ngày <?= $previousResult ? date('d/m/Y', strtotime($previousResult->draw_date)) : '' ?></a></li>
+                                <li><a rel="nofollow" href="#trick2">Chốt số lô dự đoán <?= h($prediction->region) ?> <?= h($currentDate) ?> <?= dayVN($prediction->prediction_date) ?></a></li>
+                                <li><a rel="nofollow" href="#trick3">Soi cầu <?= h($prediction->region) ?> ngày <?= h($currentDate) ?></a></li>
+                                <li><a rel="nofollow" href="#trick4">Phân tích <?= h($prediction->region) ?> ngày <?= h($currentDate) ?></a></li>
+                                <li><a rel="nofollow" href="#trick5">Thống kê <?= h($prediction->region) ?> <?= h($currentDate) ?> hôm nay</a></li>
+                                <li><a rel="nofollow" href="#trick6">Thống kê giải đặc biệt xổ số <?= h($regionName) ?> 30 ngày qua</a></li>
+                                <li><a rel="nofollow" href="#trick7">Thống kê tần suất lô tô <?= h($prediction->region) ?> <?= h($currentDate) ?></a></li>
+                                <li><a rel="nofollow" href="#trick8">Thống kê lô gan <?= h($prediction->region) ?> <?= h($currentDate) ?></a></li>
+                            </ol>
+                        </div>
+
+                        <p>
+                            <a href="/du-doan-<?= strtolower(h($prediction->region)) ?>.html" title="Dự đoán <?= h($prediction->region) ?>">
+                                Dự đoán <?= h($prediction->region) ?> <?= h($currentDate) ?>
+                            </a>
+                            dựa vào các số liệu thống kê và kỹ năng phân tích số liệu từ các chuyên gia nghiên cứu hàng đầu về xổ số đưa ra gợi ý những con số may mắn nhất.
+                            Các chuyên gia dự đoán xổ số <?= h($regionName) ?> phân tích, đánh giá dựa trên bảng kết quả <?= h($prediction->region) ?> trước đó đưa ra các cặp số có độ chính xác cao nhất, được cập nhật mỗi ngày.
+                        </p>
+
+                        <h2 id="trick0">Dự đoán <?= h($prediction->region) ?> <?= h($currentDate) ?></h2>
+                        <p>
+                            Các chuyên gia hàng đầu với mong muốn giúp anh em có được những cặp số may mắn có xác suất về cao trong phần dự đoán kết quả <?= h($prediction->region) ?> <?= h($currentDate) ?> hoàn toàn miễn phí.
+                            Chúng tôi mang đến lựa chọn con số trúng thưởng nhất.
+                        </p>
+                        <p>
+                            Để có thêm căn cứ chốt số và kết quả dự đoán được chính xác hơn, hãy cùng xem lại bảng
+                            <a href="/ket-qua-<?= strtolower(h($prediction->region)) ?>-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="Kết quả xổ số <?= h($regionName) ?>">
+                                kết quả xổ số <?= h($regionName) ?>
+                            </a>
+                            kỳ quay trước nhé. Dựa vào bảng này chúng ta sẽ có được cơ sở so sánh và đưa ra quyết định chọn con số phù hợp, nâng cao tỉ lệ chiến thắng trong ngày hôm nay.
+                        </p>
+
+                        <h3 id="trick1">Xem lại kết quả <?= h($prediction->region) ?> ngày <?= $previousResult ? date('d/m/Y', strtotime($previousResult->draw_date)) : '' ?></h3>
+
+                        <p></p>
+                    <?php if ($previousResult): ?>
+                            <article class="my-2">
+                                <div class="result result-single rounded">
+                                    <div class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+                                        Xổ số <?= h($regionName) ?> ngày <?= date('d/m/Y', strtotime($previousResult->draw_date)) ?>
+                                    </div>
+                                    <div class="breadcrumb-table">
+                                        <h4 class="breadcrumb-table-title">
+                                            <?= h($prediction->region) ?> <?= dayVN($previousResult->draw_date) ?> / <?= h($prediction->region) ?> <?= date('d/m/Y', strtotime($previousResult->draw_date)) ?>
+                                        </h4>
+                                    </div>
+                                    <div class="table-flex-border">
+                                        <table class="table-flex table-result" data-code="<?= h($prediction->region) ?>">
+                        <tbody>
+                            <tr>
+                                                    <td>ĐB</td>
+                                                    <td><span class="text-number" nc="5"><?= h($previousResult->special_prize) ?></span></td>
+                            </tr>
+                            <tr>
+                                                    <td>G1</td>
+                                                    <td><span class="text-number" nc="5"><?= h($previousResult->first_prize) ?></span></td>
+                            </tr>
+                            <tr>
+                                                    <td>G2</td>
+                                                    <td>
+                                    <?php
+                                        $secondPrizes = safeDecode($previousResult->second_prize);
+                                                        foreach ($secondPrizes as $prize):
+                                                            if (trim($prize)):
+                                        ?>
+                                                                <span class="text-number" nc="5"><?= h(trim($prize)) ?></span>
+                                    <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                                    <td>G3</td>
+                                                    <td>
+                                    <?php
+                                        $thirdPrizes = safeDecode($previousResult->third_prize);
+                                                        foreach ($thirdPrizes as $prize):
+                                                            if (trim($prize)):
+                                        ?>
+                                                                <span class="text-number" nc="5"><?= h(trim($prize)) ?></span>
+                                    <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                                    <td>G4</td>
+                                <td>
+                                    <?php
+                                        $fourthPrizes = safeDecode($previousResult->fourth_prize);
+                                                        foreach ($fourthPrizes as $prize):
+                                                            if (trim($prize)):
+                                        ?>
+                                                                <span class="text-number" nc="4"><?= h(trim($prize)) ?></span>
+                                    <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                                    <td>G5</td>
+                                <td>
+                                    <?php
+                                        $fifthPrizes = safeDecode($previousResult->fifth_prize);
+                                                        foreach ($fifthPrizes as $prize):
+                                                            if (trim($prize)):
+                                        ?>
+                                                                <span class="text-number" nc="4"><?= h(trim($prize)) ?></span>
+                                    <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                                    <td>G6</td>
+                                <td>
+                                    <?php
+                                        $sixthPrizes = safeDecode($previousResult->sixth_prize);
+                                                        foreach ($sixthPrizes as $prize):
+                                                            if (trim($prize)):
+                                        ?>
+                                                                <span class="text-number" nc="3"><?= h(trim($prize)) ?></span>
+                                    <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                </td>
+                            </tr>
+                            <tr>
+                                                    <td>G7</td>
+                                <td>
+                                    <?php
+                                        $seventhPrizes = safeDecode($previousResult->seventh_prize);
+                                                        foreach ($seventhPrizes as $prize):
+                                                            if (trim($prize)):
+                                        ?>
+                                                                <span class="text-number" nc="2"><?= h(trim($prize)) ?></span>
+                                    <?php
+                                            endif;
+                                        endforeach;
+                                        ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                                    </div>
+                                </div>
+                            </article>
+                    <?php else: ?>
+                    <p>Chưa có thông tin kết quả xổ số trước đó.</p>
+                    <?php endif; ?>
+                        <p></p>
+
+                        <h3 id="trick2">Chốt số lô dự đoán <?= h($prediction->region) ?> <?= h($currentDate) ?> <?= dayVN($prediction->prediction_date) ?></h3>
+                        <p>
+                            Đầu đuôi đặc biệt: <b class="text-red1"><?= h($chotSo['giai_dac_biet'] ?? '??') ?></b><br>
+                            Loto 2 số, xiên 2, xiên 3: <b class="text-red1"><?= h($chotSo['lo_2_so'] ?? '??') ?></b><br>
+                            Lô tô 3 số (3 càng đẹp): <b class="text-red1"><?= h($chotSo['lo_3_so'] ?? '??') ?></b><br>
+                            Soi cầu 4 số VIP: <b class="text-red1"><?= h($chotSo['lo_4_so'] ?? '??') ?></b>
+                        </p>
+
+                        <h3 id="trick3">Soi cầu <?= h($prediction->region) ?> ngày <?= h($currentDate) ?></h3>
+                        <p>
+                            Bằng phương pháp soi cầu Pascal chúng tôi sẽ đưa ra cho anh em cặp số có xác suất về siêu cao.
+                            Với phương pháp này chúng tôi sẽ sử dụng giải nhất và giải đặc biệt để tạo cầu.
+                        </p>
+
+                        <h2 id="trick4">Phân tích <?= h($prediction->region) ?> ngày <?= h($currentDate) ?></h2>
+                        <p>
+                            Dựa vào bảng kết quả <?= h($prediction->region) ?> hôm qua ngày <?= $previousResult ? date('d/m/Y', strtotime($previousResult->draw_date)) : '' ?>
+                            các chuyên gia của chúng tôi đưa ra những thông tin thống kê để phân tích để anh em dễ dàng
+                            <a href="/soi-cau-<?= strtolower(h($prediction->region)) ?>.html" title="soi cầu <?= h($prediction->region) ?>">soi cầu <?= h($prediction->region) ?></a>
+                            và tiện theo dõi như sau:
+                        </p>
+                        <p>
+                            • Vị trí bạch thủ chạy nhiều ngày nhất: <b class="text-red1"><?= h($soiCau['bach_thu'] ?? '??') ?></b><br>
+                            • Lật liên tục nhiều ngày: <b class="text-red1"><?= h($soiCau['lat_lien'] ?? '??') ?></b><br>
+                            • Cầu 2 nháy: <b class="text-red1"><?= h($soiCau['cau_2_nhay'] ?? '??') ?></b><br>
+                            • Tam giác Pascal <?= h($currentDate) ?>: <b class="text-red1"><?= h($soiCau['pascal'] ?? '??') ?></b><br>
+                            • Cầu lô kẹp: <b class="text-red1"><?= h($soiCau['lo_kep'] ?? '??') ?></b><br>
+                            • Lô tô hay về (30 kỳ): <b class="text-red1"><?= h($soiCau['lo_to_ve'] ?? '??') ?></b>
+                        </p>
+
+                        <h2 id="trick5">Thống kê <?= h($prediction->region) ?> <?= h($currentDate) ?> hôm nay</h2>
+                        <p>
+                            Không phải ngẫu nhiên mà <a href="/du-doan-<?= strtolower(h($prediction->region)) ?>.html" title="dự đoán <?= h($prediction->region) ?>">dự đoán <?= h($prediction->region) ?></a>
+                            của chúng tôi mang về tỉ lệ chính xác cao và nhận được nhiều sự tin tưởng từ các anh em đến vậy.
+                            Các con số soi cầu dự đoán <?= h($prediction->region) ?> <?= h($currentDate) ?> được phân tích và tổng hợp từ các chuyên gia và luôn mang đến chính xác.
+                        </p>
+                        <p>Theo dõi kết quả thống kê <?= h($prediction->region) ?> dưới đây để có thêm những dữ liệu chốt số trong ngày hôm nay nhé!</p>
+
+                        <h3 id="trick6">Thống kê giải đặc biệt xổ số <?= h($regionName) ?> 30 ngày qua</h3>
+                        <?php if (!empty($specialPrize30) && count($specialPrize30) > 0): ?>
+                            <div class="overflow-auto text-nowrap">
+                                <table class="table table-bordered text-center">
+                                    <thead class="bg-grey">
+                                        <tr>
+                                            <th>Thứ 2</th>
+                                            <th>Thứ 3</th>
+                                            <th>Thứ 4</th>
+                                            <th>Thứ 5</th>
+                                            <th>Thứ 6</th>
+                                            <th>Thứ 7</th>
+                                            <th>CN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                        // Chuyển đổi Resultset thành array
+                                        $specialPrize30Array = is_array($specialPrize30) ? $specialPrize30 : $specialPrize30->toArray();
+
+                                        // Sắp xếp theo ngày giảm dần (mới nhất trước)
+                                        usort($specialPrize30Array, function ($a, $b) {
+                                            $dateA = is_array($a) ? $a['draw_date'] : $a->draw_date;
+                                            $dateB = is_array($b) ? $b['draw_date'] : $b->draw_date;
+                                            return strtotime($dateB) - strtotime($dateA);
+                                        });
+
+                                        // Nhóm theo tuần (Thứ 2 - Chủ Nhật)
+                                        $calendar = [];
+                                        foreach ($specialPrize30Array as $result) {
+                                            $drawDate = is_array($result) ? $result['draw_date'] : $result->draw_date;
+                                            $timestamp = strtotime($drawDate);
+                                            $dayOfWeek = (int)date('N', $timestamp); // 1=Thứ 2, 7=Chủ Nhật
+
+                                            // Tính ngày Thứ 2 của tuần này (lùi lại số ngày cần thiết)
+                                            // dayOfWeek = 1 (Thứ 2) => lùi 0 ngày
+                                            // dayOfWeek = 2 (Thứ 3) => lùi 1 ngày
+                                            // dayOfWeek = 7 (Chủ Nhật) => lùi 6 ngày
+                                            $daysToSubtract = ($dayOfWeek == 1) ? 0 : ($dayOfWeek - 1);
+                                            $mondayTimestamp = $timestamp - ($daysToSubtract * 86400);
+                                            $weekKey = date('Y-W', $mondayTimestamp);
+
+                                            if (!isset($calendar[$weekKey])) {
+                                                $calendar[$weekKey] = array_fill(1, 7, null);
+                                            }
+                                            $calendar[$weekKey][$dayOfWeek] = $result;
+                                        }
+
+                                        // Sắp xếp các tuần theo thứ tự giảm dần (tuần mới nhất trước)
+                                        krsort($calendar);
+
+                                        // Hiển thị các tuần
+                                        foreach ($calendar as $weekKey => $week):
+                                        ?>
+                                <tr>
+                                                <?php for ($day = 1; $day <= 7; $day++): ?>
+                                                    <td class="px-lg-0">
+                                                        <?php if ($week[$day] !== null): ?>
+                                                            <?php
+                                                            $result = $week[$day];
+                                                            $specialPrize = is_array($result) ? $result['special_prize'] : $result->special_prize;
+                                                            $drawDate = is_array($result) ? $result['draw_date'] : $result->draw_date;
+                                                            ?>
+                                                            <div>
+                                                                <b><?= substr($specialPrize, 0, -2) ?></b><b class="text-red1"><?= substr($specialPrize, -2) ?></b>
+                                                                <div>
+                                                                    <a rel="nofollow" href="/<?= strtolower(h($prediction->region)) ?>-<?= date('d-m-Y', strtotime($drawDate)) ?>.html" class="text-black font-13">
+                                                                        <?= date('d-m-Y', strtotime($drawDate)) ?>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                <?php endfor; ?>
+                                </tr>
+                                        <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <?php endif; ?>
+
+                        <h3 id="trick7">Thống kê tần suất lô tô <?= h($prediction->region) ?> <?= h($currentDate) ?></h3>
+                        <?php if (!empty($frequentNumbers) && count($frequentNumbers) > 0): ?>
+                            <?php
+                            // Chuyển đổi Resultset thành array nếu cần
+                            $frequentNumbersArray = is_array($frequentNumbers) ? $frequentNumbers : iterator_to_array($frequentNumbers);
+                            $topNumbers = array_slice($frequentNumbersArray, 0, 5);
+                            ?>
+                            <p>• Lô về nhiều nhất: <b class="text-red1">
+                                    <?php
+                                    $numbersList = [];
+                                    foreach ($topNumbers as $n) {
+                                        $numbersList[] = is_object($n) ? h($n->number) : h($n['number']);
+                                    }
+                                    echo implode(' - ', $numbersList);
+                                    ?>
+                                </b></p>
+                            <table class="table-default mb-3 w-100 text-center">
+                            <thead>
+                                <tr>
+                                        <th colspan="3" class="bg-blue text-white">5 CẶP SỐ XUẤT HIỆN NHIỀU NHẤT</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Cặp số</th>
+                                        <th>Số lần về</th>
+                                        <th>Về gần nhất</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <?php foreach ($topNumbers as $number): ?>
+                                <?php
+                                        $num = is_object($number) ? $number->number : $number['number'];
+                                        $cnt = is_object($number) ? $number->count : $number['count'];
+                                        $lastAppeared = is_object($number) ? ($number->last_appeared ?? null) : ($number['last_appeared'] ?? null);
+                                        ?>
+                                <tr>
+                                            <td class="text-red font-weight-bold"><?= h($num) ?></td>
+                                            <td><?= h($cnt) ?> lần</td>
+                                            <td>
+                                                <?php if (!empty($lastAppeared)): ?>
+                                                    <a rel="nofollow" href="/<?= strtolower(h($prediction->region)) ?>-<?= date('d-m-Y', strtotime($lastAppeared)) ?>.html" class="text-black">
+                                                        <?= date('d/m/Y', strtotime($lastAppeared)) ?>
+                                                    </a>
+                    <?php endif; ?>
+                                            </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+
+                        <h3 id="trick8">Thống kê lô gan <?= h($prediction->region) ?> <?= h($currentDate) ?></h3>
+                    <?php if (!empty($ganNumbers) && count($ganNumbers) > 0): ?>
+                            <?php
+                            // Chuyển đổi Resultset thành array nếu cần
+                            $ganNumbersArray = is_array($ganNumbers) ? $ganNumbers : iterator_to_array($ganNumbers);
+                            $topGan = array_slice($ganNumbersArray, 0, 5);
+                            ?>
+                            <p>• Lô gan nhiều nhất: <b class="text-red1">
+                                    <?php
+                                    $ganList = [];
+                                    foreach ($topGan as $n) {
+                                        $ganList[] = is_object($n) ? h($n->number) : h($n['number']);
+                                    }
+                                    echo implode(' - ', $ganList);
+                                    ?>
+                                </b></p>
+                            <table class="table-default mb-3 w-100 text-center">
+                            <thead>
+                                <tr>
+                                        <th>Lô gan</th>
+                                        <th>Lần chưa về</th>
+                                        <th>Về gần nhất</th>
+                                        <th>Gan cực đại</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <?php foreach ($topGan as $number): ?>
+                                        <?php
+                                        $num = is_object($number) ? $number->number : $number['number'];
+                                        $days = is_object($number) ? $number->days : $number['days'];
+                                        $lastAppeared = is_object($number) ? ($number->last_appeared ?? null) : ($number['last_appeared'] ?? null);
+                                        $maxDays = is_object($number) ? ($number->max_days ?? null) : ($number['max_days'] ?? null);
+                                        ?>
+                                        <tr>
+                                            <td class="text-red font-weight-bold"><?= h($num) ?></td>
+                                            <td><?= h($days) ?> lần</td>
+                                            <td>
+                                                <?php if (!empty($lastAppeared)): ?>
+                                                    <a rel="nofollow" href="/<?= strtolower(h($prediction->region)) ?>-<?= date('d-m-Y', strtotime($lastAppeared)) ?>.html" class="text-black">
+                                                        <?= date('d/m/Y', strtotime($lastAppeared)) ?>
+                                                    </a>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?= !empty($maxDays) ? h($maxDays) : '-' ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <?php endif; ?>
+
+                        <p>
+                            Để có được các cặp số dự đoán xổ số <?= h($regionName) ?> và các phân tích <?= h($prediction->region) ?> như trên,
+                            các chuyên gia của chúng tôi đã dành ra rất nhiều thời gian, tâm huyết và những kinh nghiệm quý báu của mình.
+                            Với mong muốn giúp đỡ anh em cùng vào bờ an toàn và dành nhiều thắng lợi, chúng tôi luôn cố gắng cập nhật những con số
+                            cho anh em đẹp nhất, chuẩn xác nhất, sớm nhất và hoàn toàn miễn phí.
+                        </p>
+                        <p>
+                            <a href="/" title="Soi cầu 247">Soi cầu 247</a> - Chốt số 3 miền tin cậy và hoàn toàn miễn phí!
+                        </p>
+                        <p>
+                            <span class="text-red1">»</span> <i>Lưu ý: Các bộ số chỉ dùng cho mục đích tham khảo, anh em nên cân nhắc trước khi chơi
+                                và không chơi lô đề vì đó là bất hợp pháp, chỉ nên chơi xổ số do nhà nước phát hành vừa vui vừa đảm bảo ích nước lợi nhà bạn nhé.</i>
+                        </p>
+                    </div>
+
+                    <div class="box-info-post border-top py-3">
+                        <div class="row bg-white pt-3">
+                            <div class="col-3">
+                                <img loading="lazy" width="100" height="100" class="circle" src="/img/author/author_9.jpg" alt="Admin">
+                            </div>
+                            <div class="col-9">
+                                <div class="d-flex flex-wrap">
+                                    <div>
+                                        <p class="font-weight-bold">Admin</p>
+                                        <p><i>Chuyên gia soi cầu xổ số</i></p>
+                                    </div>
+                                </div>
+                                <p class="pt-3 border-top-dashed text-justify">
+                                    Với kinh nghiệm nhiều năm trong lĩnh vực soi cầu dự đoán xổ số,
+                                    chúng tôi hy vọng những kiến thức miễn phí chia sẻ có thể giúp anh em đạt nhiều thành công hơn.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="page-comment" class="mt-2">
+                        <div style="background: #ffe94e;font-style: italic;font-weight: 600;padding: 5px;">
+                            <span style="color: #ff0000;">Cảnh báo:</span> Tất cả spam bán số đều là lừa đảo.
+                            Những comment bán số, văng tục, chửi bậy sẽ bị ban nick.
+                </div>
+                        <div class="fb-comments" data-href="<?= $this->url->get() ?>" data-width="100%" data-numposts="5"></div>
+                    </div>
+                </div>
+
+                <?php if (!empty($relatedPredictions) && count($relatedPredictions) > 0): ?>
+                    <h3 class="title-bg-blue border-radius-top mb-0">Dự đoán <?= h($prediction->region) ?></h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <?php foreach ($relatedPredictions as $related): ?>
+                            <div class="row">
+                                <div class="col-12 mt-3 mb-2">
+                                    <a class="text-blue1 font-16 font-weight-bold" href="/<?= h($related->slug) ?>" title="<?= h($related->title) ?>">
+                                        <?= h($related->title) ?>
+                                    </a>
+                                </div>
+                                <div class="col-4 pr-2">
+                                    <a href="/<?= h($related->slug) ?>" title="<?= h($related->title) ?>">
+                                        <img loading="lazy" width="410" height="215" src="<?= h($related->image_url ?? '/img/soicaududoan/xsmb/dudoanxsmb.png') ?>" alt="<?= h($related->title) ?>">
+                                    </a>
+                                </div>
+                                <div class="col-8 pl-2">
+                                    <p class="text-black1 font-14 lh-18px line-3 text-justify">
+                                        <?= h($related->content) ?>
+                                    </p>
+                                    <p class="mb-0 font-13 text-gray1">
+                                        <?php
+                                        $time_diff = time() - strtotime($related->updated_at);
+                                        if ($time_diff < 3600) {
+                                            echo floor($time_diff / 60) . ' phút trước';
+                                        } elseif ($time_diff < 86400) {
+                                            echo floor($time_diff / 3600) . ' giờ trước';
+                                        } else {
+                                            echo floor($time_diff / 86400) . ' ngày trước';
+                                        }
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="/js/quaythu-dudoan.js"></script>

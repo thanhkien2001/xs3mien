@@ -1,0 +1,46 @@
+<?php
+
+/*
+ * Modified: prepend directory path of current file, because of this file own different ENV under between Apache and command line.
+ * NOTE: please remove this comment.
+ */
+defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
+defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
+
+return new \Phalcon\Config\Config([
+    'database' => [
+        'adapter'     => 'mysql',
+        'host'        => getenv('DB_HOST') ?: 'course-phamhuynhngochieu468.d.aivencloud.com',
+        'username'    => getenv('DB_USER') ?: 'avnadmin',
+        'password'    => getenv('DB_PASSWORD') ?: '',
+        'dbname'      => getenv('DB_NAME') ?: 'xoso_db',
+        'port'        => getenv('DB_PORT') ?: 10541,
+        'charset'     => 'utf8mb4',
+    ],
+    'application' => [
+        'appDir'         => APP_PATH . '/',
+        'configDir'         => APP_PATH . '/config/',
+        'controllersDir' => APP_PATH . '/controllers/',
+        'modelsDir'      => APP_PATH . '/models/',
+        'servicesDir'    => APP_PATH . '/services/',
+        'migrationsDir'  => APP_PATH . '/migrations/',
+        'viewsDir'       => APP_PATH . '/views/',
+        'pluginsDir'     => APP_PATH . '/plugins/',
+        'libraryDir'     => APP_PATH . '/library/',
+        'cacheDir'       => BASE_PATH . '/cache/',
+        'baseUri'        => '/',
+    ],
+    'sse_token' => getenv('SSE_TOKEN') ?: 'default-token-change-in-production',
+    'api' => [
+        'url' => getenv('API_URL')
+    ],
+    'data' => [
+        'lottery_dir' => getenv('LOTTERY_DATA_DIR') ?: BASE_PATH . '/data/lottery/',
+        'lottery_files' => [
+            'mega645' => 'mega645_latest.json',
+            'power655' => 'power655_latest.json',
+            'max3d' => 'max3d_latest.json',
+            'max3dpro' => 'max3dpro_latest.json'
+        ]
+    ]
+]);

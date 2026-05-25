@@ -1,0 +1,471 @@
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="<i class='icon-home'></i>"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="<?= $page_schema_data['url'] ?>"
+                                title="<?= $page_schema_data['title'] ?>"><?= $page_schema_data['title'] ?></a>
+                        </li>
+                        <script type="application/ld+json">
+                            <?= json_encode($page_schema_data['breadcrumbs']) ?>
+                        </script>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h1 class="font-20 my-2">
+                        <strong><?= $seo_title ?></strong>
+                    </h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date"><?= $current_date_full ?></div>
+                            <div class="allRate">
+                                <input type="range" value="0" step="0.25" id="backing5" style="display: none" />
+                                <input type="text" value="page/124" hidden="" id="voteLink" />
+                                <div class="rateit rateit-font" data-rateit-backingfld="#backing5"
+                                    data-rateit-resetable="false" data-rateit-ispreset="true" data-rateit-min="0"
+                                    data-rateit-max="5" data-rateit-mode="font" data-rateit-icon=""
+                                    style="font-family: fontawesome">
+                                    <button id="rateit-reset-2" type="button" data-role="none" class="rateit-reset"
+                                        aria-label="reset rating" aria-controls="rateit-range-2" style="display: none">
+                                        <span></span>
+                                    </button>
+                                    <div id="rateit-range-2" class="rateit-range" tabindex="0" role="slider"
+                                        aria-label="rating" aria-owns="rateit-reset-2" aria-valuemin="0"
+                                        aria-valuemax="5" aria-valuenow="0" aria-readonly="false">
+                                        <div class="rateit-empty">★★★★★</div>
+                                        <div class="rateit-selected rateit-preset"
+                                            style="width: <?= ($rating_value / 5) * 100 ?>%">
+                                            ★★★★★
+                                        </div>
+                                        <div class="rateit-hover">★★★★★</div>
+                                    </div>
+                                </div>
+                                <span class="danhgia">
+                                    <span class="avg-rate"><?= $rating_value ?></span>
+                                    /<span>5</span> của
+                                    <span class="count-rate"><?= $rating_count ?></span> đánh
+                                    giá</span>
+                                <script type="application/ld+json">
+                                    {
+                                        "@context": "https://schema.org/",
+                                        "@type": "AggregateRating",
+                                        "ratingValue": "<?= $rating_value ?>",
+                                        "bestRating": "5",
+                                        "ratingCount": "<?= $rating_count ?>",
+                                        "itemReviewed": {
+                                            "@type": "CreativeWorkSeries",
+                                            "name": "<?= $seo_title ?>"
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3">
+                        <strong>Soi cầu tốt - Soi cầu 3 miền chính xác nhất hằng ngày và được cập
+                            nhật hoàn toàn miễn phí. Mời anh em tham khảo kết quả soi cầu của
+                            chúng tôi ngay sau đây</strong>
+                    </h2>
+                    <div class="text-center">
+                        <img width="600" height="314"
+                            src="https://soicau247s.org/public/media/thumb/Thumb-Cate/soi-cau-tot-600x314.jpg"
+                            alt="<?= $seo_title ?>" />
+                    </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4">
+                                <i class="fa fa-bars mr-2"></i>Mục lục
+                            </legend>
+                            <ol class="text-news-link">
+                                <li>
+                                    <a rel="nofollow" href="#trick0">Soi cầu tốt miền Bắc hôm nay
+                                        <?= $current_date ?></a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick1">Thống kê kết quả XSMB kỳ quay trước</a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#trick2">Soi cầu tốt miền Trung hôm
+                                        nay&nbsp;<?= $current_date ?></a>
+                                </li>
+                                <?php $mt_count = 0;
+                                foreach ($xsmt_data as $provinceData):
+                                    $mt_count++; ?>
+                                    <li>
+                                        <a rel="nofollow" href="#trick_mt_<?= $mt_count ?>">Soi cầu tốt
+                                            <?= $provinceData['province_name_short'] ?? $provinceData['name'] ?>
+                                            <?= $current_date ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                                <li>
+                                    <a rel="nofollow" href="#trick5">Thống kê XSMT kỳ quay trước</a>
+                                </li>
+                                <?php $mt_stats_count = 0;
+                                foreach ($xsmt_data as $provinceData):
+                                    $mt_stats_count++; ?>
+                                    <li>
+                                        <a rel="nofollow" href="#trick_mt_stats_<?= $mt_stats_count ?>">Thống kê kết quả xổ
+                                            số <?= $provinceData['name'] ?>     <?= $provinceData['last_date'] ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                                <li>
+                                    <a rel="nofollow" href="#trick8">Soi cầu tốt miền Nam hôm
+                                        nay&nbsp;<?= $current_date ?></a>
+                                </li>
+                                <?php $mn_count = 0;
+                                foreach ($xsmn_data as $provinceData):
+                                    $mn_count++; ?>
+                                    <li>
+                                        <a rel="nofollow" href="#trick_mn_<?= $mn_count ?>">Soi cầu tốt
+                                            <?= $provinceData['province_name_short'] ?? $provinceData['name'] ?>
+                                            <?= $current_date ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                                <li>
+                                    <a rel="nofollow" href="#trick12">Thống kê XSMN kỳ quay trước</a>
+                                </li>
+                                <?php $mn_stats_count = 0;
+                                foreach ($xsmn_data as $provinceData):
+                                    $mn_stats_count++; ?>
+                                    <li>
+                                        <a rel="nofollow" href="#trick_mn_stats_<?= $mn_stats_count ?>">Thống kê kết quả xổ
+                                            số <?= $provinceData['name'] ?>     <?= $provinceData['last_date'] ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ol>
+                        </div>
+                        <p style="text-align: justify">
+                            <a href="<?= $this->url->get('/soi-cau-tot-soi-cau-xo-so-3-mien.html') ?>"
+                                title="Soi cầu tốt">Soi cầu tốt</a>
+                            là một trong những công cụ thống kê soi cầu mới nhất hiện nay.
+                            Chúng tôi mang đến cho anh em những thống kê cầu đầu đuôi giải đặc
+                            biệt, cặp lô, lô xiên 2, xiên 3 đẹp nhất của 3 miền hàng ngày. Các
+                            dự đoán của chúng tôi dựa trên kinh nghiệm lâu năm của cao thủ lô
+                            đề và các cầu kèo giúp anh em có được số đẹp mỗi ngày.
+                        </p>
+
+                        <!-- MB -->
+                        <h3 id="trick0" style="text-align: justify">
+                            Soi cầu tốt miền Bắc hôm nay <?= $current_date ?>
+                        </h3>
+                        <p style="text-align: justify"></p>
+                        <div>
+                            <table class="table-default w-100 text-center">
+                                <thead>
+                                    <tr>
+                                        <th>Giải đặc biệt</th>
+                                        <th>Cặp số lô</th>
+                                        <th>Lô xiên 2</th>
+                                        <th>Lô xiên 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            Đầu <span
+                                                class="text-red"><?= substr($xsmb_predictions['cham_db'][0] ?? '?', -1) ?></span>;
+                                            Đuôi <span
+                                                class="text-red"><?= substr($xsmb_predictions['cham_db'][1] ?? '?', -1) ?></span>
+                                        </td>
+                                        <td class="text-red">
+                                            <?= implode(' - ', array_slice($xsmb_predictions['cau_lo_vip'], 0, 2)) ?>
+                                        </td>
+                                        <td class="text-red">
+                                            <?= implode(' - ', array_slice($xsmb_predictions['lo_xien_2'] ?? [], 0, 2)) ?>
+                                        </td>
+                                        <td class="text-red">
+                                            <?= implode(' - ', array_slice($xsmb_predictions['lo_xien_3'] ?? [], 0, 3)) ?>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p></p>
+
+                        <h3 id="trick1" style="text-align: justify">
+                            Thống kê kết quả XSMB kỳ quay trước
+                        </h3>
+                        <?php if (isset($result_partial_data['rows'][0])):
+                            $xsmbRow = $result_partial_data['rows'][0];
+                            $specialPrize = $xsmbRow['special_prize'];
+                            $dauSpec = substr($specialPrize, 0, 1);
+                            $duoiSpec = substr($specialPrize, -1);
+                            $tongSpec = (int) $dauSpec + (int) $duoiSpec; // This logic might be simple sum of digits, or sum of last 2. Actually "Tổng" usually means sum of last 2 digits.
+                            $last2 = substr($specialPrize, -2);
+                            $tongSpec = ((int) $last2[0] + (int) $last2[1]) % 10;
+                            ?>
+                            <p style="text-align: justify"></p>
+                            <p>
+                                - Giải đặc biệt: Đầu
+                                <span class="text-red font-weight-bold"><?= $last2[0] ?></span>, Đuôi
+                                <span class="text-red font-weight-bold"><?= $last2[1] ?></span>, Tổng
+                                <span class="text-red font-weight-bold"><?= $tongSpec ?></span>
+                            </p>
+                            <p>- Lô về cả cặp:
+                                <?= !empty($xsmb_stats['lo_ve_ca_cap']) ? $xsmb_stats['lo_ve_ca_cap'] : 'Không có' ?>
+                            </p>
+                            <p>- Lô kép:
+                                <?= !empty($xsmb_stats['lo_kep']) ? $xsmb_stats['lo_kep'] : 'Không có' ?>
+                            </p>
+                            <p>- Lô về nhiều nháy:
+                                <?= !empty($xsmb_stats['lo_ve_nhieu_nhay']) ? $xsmb_stats['lo_ve_nhieu_nhay'] : 'Không có' ?>
+                            </p>
+                            <p>
+                                - Đầu câm: Đầu
+                                <span
+                                    class="text-red font-weight-bold"><?= !empty($xsmb_stats['dau_cam']) ? $xsmb_stats['dau_cam'] : 'Không có' ?></span>
+                            </p>
+                            <p>
+                                - Đuôi câm: Đuôi
+                                <span
+                                    class="text-red font-weight-bold"><?= !empty($xsmb_stats['duoi_cam']) ? $xsmb_stats['duoi_cam'] : 'Không có' ?></span>
+                            </p>
+                            <p>
+                                - Đầu về nhiều nhất: Đầu
+                                <span class="text-red font-weight-bold"><?= $xsmb_stats['dau_ve_nhieu_nhat'] ?? '' ?></span>
+                                (<?= $xsmb_stats['dau_ve_nhieu_nhat_count'] ?? 0 ?> lô)
+                            </p>
+                            <p>
+                                - Đuôi về nhiều nhất: Đuôi
+                                <span
+                                    class="text-red font-weight-bold"><?= $xsmb_stats['duoi_ve_nhieu_nhat'] ?? '' ?></span>
+                                (<?= $xsmb_stats['duoi_ve_nhieu_nhat_count'] ?? 0 ?> lô)
+                            </p>
+                        <?php endif; ?>
+                        <p></p>
+                        <p style="text-align: center">
+                            <span style="color: #ff0000">»
+                                <a href="/soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô đề chuẩn">Soi cầu lô đề
+                                    chuẩn</a>
+                                «</span>
+                        </p>
+
+                        <!-- MT -->
+                        <h3 id="trick2" style="text-align: justify">
+                            Soi cầu tốt miền Trung hôm nay&nbsp;<?= $current_date ?>
+                        </h3>
+                        <p style="text-align: justify">
+                            <a href="/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html"
+                                title="Xổ số miền Trung">Xổ số miền Trung</a>
+                            hôm nay quay thưởng tại các tỉnh:
+                            <?php foreach ($xsmt_data as $i => $it): ?>
+                                <a class="font-weight-bold"
+                                    href="<?= $it['url'] ?? '#' ?>"><?= $it['name'] ?></a><?= $i !== array_key_last($xsmt_data) ? ', ' : '' ?>
+                            <?php endforeach; ?>.
+                            Soi cầu tốt đưa ra những cầu số đẹp nhất cho những anh em tham gia quay thưởng.
+                        </p>
+                        <p style="text-align: justify"></p>
+
+                        <?php $mt_count = 0;
+                        foreach ($xsmt_data as $data):
+                            $mt_count++; ?>
+                            <div class="my-3">
+                                <h3 id="trick_mt_<?= $mt_count ?>">Soi cầu tốt
+                                    <?= $data['province_name_short'] ?? $data['name'] ?>     <?= $current_date ?>
+                                </h3>
+                                <table class="table-default w-100 text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Giải đặc biệt</th>
+                                            <th>Cặp số lô</th>
+                                            <th>Lô xiên 2</th>
+                                            <th>Lô xiên 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Đầu <span
+                                                    class="text-red"><?= $data['predictions']['dac_biet_dau'] ?></span>;
+                                                Đuôi <span
+                                                    class="text-red"><?= $data['predictions']['dac_biet_duoi'] ?></span>
+                                            </td>
+                                            <td class="text-red"><?= $data['predictions']['loto_2_so'][0] ?> -
+                                                <?= $data['predictions']['loto_2_so'][1] ?>
+                                            </td>
+                                            <td class="text-red"><?= $data['predictions']['loto_2_so'][0] ?> -
+                                                <?= $data['predictions']['loto_2_so'][1] ?>
+                                            </td>
+                                            <td class="text-red"><?= $data['predictions']['loto_2_so'][0] ?> -
+                                                <?= $data['predictions']['loto_2_so'][1] ?> -
+                                                <?= $data['predictions']['loto_2_so'][2] ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endforeach; ?>
+
+                        <p></p>
+                        <h3 id="trick5" style="text-align: justify">
+                            Thống kê XSMT kỳ quay trước
+                        </h3>
+                        <p></p>
+
+                        <?php $mt_stats_count = 0;
+                        foreach ($xsmt_data as $data):
+                            $mt_stats_count++; ?>
+                            <h4 id="trick_mt_stats_<?= $mt_stats_count ?>">Thống kê kết quả xổ số <?= $data['name'] ?>
+                                <?= $data['last_date'] ?>
+                            </h4>
+                            <?php if ($data['stats']):
+                                $st = $data['stats']; ?>
+                                <p>
+                                    - Giải đặc biệt: Đầu
+                                    <span class="text-red font-weight-bold"><?= $st['dau_dac_biet'] ?? '?' ?></span>, Đuôi
+                                    <span class="text-red font-weight-bold"><?= $st['duoi_dac_biet'] ?? '?' ?></span>, Tổng
+                                    <span class="text-red font-weight-bold"><?= $st['tong_dac_biet'] ?? '?' ?></span>
+                                </p>
+                                <p>
+                                    - Lô về cả cặp:
+                                    <span
+                                        class="text-red font-weight-bold"><?= !empty($st['lo_ve_ca_cap']) ? $st['lo_ve_ca_cap'] : 'Không có' ?></span>
+                                </p>
+                                <p>- Lô kép: <span
+                                        class="text-red font-weight-bold"><?= !empty($st['lo_kep']) ? $st['lo_kep'] : 'Không có' ?></span>
+                                </p>
+                                <p>
+                                    - Lô về nhiều nháy:
+                                    <span
+                                        class="text-red font-weight-bold"><?= !empty($st['lo_ve_nhieu_nhay']) ? $st['lo_ve_nhieu_nhay'] : 'Không có' ?></span>
+                                </p>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                        <p></p>
+                        <p style="text-align: center">
+                            <span style="color: #ff0000">»
+                                <a href="/du-doan-xsmt-c60.html" title="Dự đoán XSMT">Dự
+                                    đoán XSMT</a>
+                                «</span>
+                        </p>
+
+                        <!-- MN -->
+                        <h3 id="trick8" style="text-align: justify">
+                            <span>Soi cầu tốt miền Nam hôm nay&nbsp;</span><?= $current_date ?>
+                        </h3>
+                        <p style="text-align: justify">
+                            <span>Soi cầu tốt miền Nam hôm nay sẽ giúp anh em
+                                <?php foreach ($xsmn_data as $i => $it): ?>
+                                    <a class="font-weight-bold"
+                                        href="<?= $it['url'] ?? '#' ?>"><?= $it['name'] ?></a><?= $i !== array_key_last($xsmn_data) ? ', ' : '' ?>
+                                <?php endforeach; ?>
+                                giành được những giải thưởng giá trị nhất.</span>
+                        </p>
+                        <p style="text-align: justify"><span></span></p>
+
+                        <?php $mn_count = 0;
+                        foreach ($xsmn_data as $data):
+                            $mn_count++; ?>
+                            <div class="my-3">
+                                <h3 id="trick_mn_<?= $mn_count ?>">Soi cầu tốt
+                                    <?= $data['province_name_short'] ?? $data['name'] ?>     <?= $current_date ?>
+                                </h3>
+                                <table class="table-default w-100 text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Giải đặc biệt</th>
+                                            <th>Cặp số lô</th>
+                                            <th>Lô xiên 2</th>
+                                            <th>Lô xiên 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Đầu <span
+                                                    class="text-red"><?= $data['predictions']['dac_biet_dau'] ?></span>;
+                                                Đuôi <span
+                                                    class="text-red"><?= $data['predictions']['dac_biet_duoi'] ?></span>
+                                            </td>
+                                            <td class="text-red"><?= $data['predictions']['loto_2_so'][0] ?> -
+                                                <?= $data['predictions']['loto_2_so'][1] ?>
+                                            </td>
+                                            <td class="text-red"><?= $data['predictions']['loto_2_so'][0] ?> -
+                                                <?= $data['predictions']['loto_2_so'][1] ?>
+                                            </td>
+                                            <td class="text-red"><?= $data['predictions']['loto_2_so'][0] ?> -
+                                                <?= $data['predictions']['loto_2_so'][1] ?> -
+                                                <?= $data['predictions']['loto_2_so'][2] ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php endforeach; ?>
+
+                        <p></p>
+                        <h3 id="trick12" style="text-align: justify">
+                            <span>Thống kê XSMN kỳ quay trước</span>
+                        </h3>
+                        <p><span></span></p>
+
+                        <?php $mn_stats_count = 0;
+                        foreach ($xsmn_data as $data):
+                            $mn_stats_count++; ?>
+                            <h4 id="trick_mn_stats_<?= $mn_stats_count ?>">Thống kê kết quả xổ số <?= $data['name'] ?>
+                                <?= $data['last_date'] ?>
+                            </h4>
+                            <?php if ($data['stats']):
+                                $st = $data['stats']; ?>
+                                <p>
+                                    - Giải đặc biệt: Đầu
+                                    <span class="text-red font-weight-bold"><?= $st['dau_dac_biet'] ?? '?' ?></span>, Đuôi
+                                    <span class="text-red font-weight-bold"><?= $st['duoi_dac_biet'] ?? '?' ?></span>, Tổng
+                                    <span class="text-red font-weight-bold"><?= $st['tong_dac_biet'] ?? '?' ?></span>
+                                </p>
+                                <p>
+                                    - Lô về cả cặp:
+                                    <span
+                                        class="text-red font-weight-bold"><?= !empty($st['lo_ve_ca_cap']) ? $st['lo_ve_ca_cap'] : 'Không có' ?></span>
+                                </p>
+                                <p>- Lô kép: <span
+                                        class="text-red font-weight-bold"><?= !empty($st['lo_kep']) ? $st['lo_kep'] : 'Không có' ?></span>
+                                </p>
+                                <p>
+                                    - Lô về nhiều nháy:
+                                    <span
+                                        class="text-red font-weight-bold"><?= !empty($st['lo_ve_nhieu_nhay']) ? $st['lo_ve_nhieu_nhay'] : 'Không có' ?></span>
+                                </p>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+
+                        <p></p>
+                        <p style="text-align: center">
+                            <span style="color: #ff0000">»
+                                <a href="/du-doan-xsmn-c61.html" title="Dự đoán XSMN">Dự
+                                    đoán XSMN</a>
+                                «</span>
+                        </p>
+                        <p style="text-align: justify">
+                            <span>Soi cầu tốt luôn mong rằng các con số mà chúng tôi đưa ra
+                                có thể phần nào giúp anh em trong việc lựa chọn số đề cho mình và
+                                đem về giải thưởng cao nhất. Tuy nhiên, tất cả các con số của
+                                chúng tôi không chính xác hoàn toàn 100% . Anh em cân nhắc tham
+                                khảo các con số của chúng tôi và quyết định có nên theo hay
+                                không nhé. <a href="/" title="Soi cầu 247">Soicau247</a> chúc
+                                anh em may mắn!!
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

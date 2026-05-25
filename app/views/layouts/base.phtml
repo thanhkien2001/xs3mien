@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><?= isset($seo_title) ? $seo_title : 'Soi Cầu 247 - Dự Đoán Xổ Số Chính Xác 3 Miền' ?></title>
+    <meta name="description" content="<?= isset($seo_description) ? $seo_description : 'Kết quả xổ số kiến thiết 3 miền - XSMB, XSMN, XSMT - Cập nhật nhanh chóng và chính xác' ?>">
+    <meta name="keywords" content="<?= isset($seo_keywords) ? $seo_keywords : 'xổ số, kết quả xổ số, xsmb, xsmn, xsmt, vietlott, power 6/55, mega 6/45' ?>">
+
+    <meta property="og:title" content="<?= isset($seo_title) ? $seo_title : 'Xổ Số Kiến Thiết' ?>">
+    <meta property="og:description" content="<?= isset($seo_description) ? $seo_description : 'Kết quả xổ số kiến thiết 3 miền' ?>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?= isset($canonical_url) ? $canonical_url : $this->url->getCurrent() ?>">
+    <meta property="og:image" content="<?= $this->url->get('img/logo-soicau247.png') ?>">
+    <meta property="og:site_name" content="Soi Cầu 247">
+    <meta property="og:locale" content="vi_VN">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= isset($seo_title) ? $seo_title : 'Soi Cầu 247' ?>">
+    <meta name="twitter:description" content="<?= isset($seo_description) ? $seo_description : 'Soi cầu 247 - Dự đoán xổ số chính xác 3 miền XSMB XSMN XSMT' ?>">
+    <meta name="twitter:image" content="<?= $this->url->get('img/logo-soicau247.png') ?>">
+
+    <meta name="author" content="Soi Cầu 247">
+
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
+    <link rel="canonical" href="<?= isset($canonical_url) ? $canonical_url : $this->url->getCurrent() ?>">
+
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+    <link rel="preload" href="/css/main.min.css" as="style">
+    <link rel="preload" href="/img/logo-soicau247.png" as="image">
+
+    <link rel="stylesheet" href="/css/main.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="/css/main.min.css">
+    </noscript>
+
+    <link rel="icon" href="/img/win-jackpot.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->url->get('img/win-jackpot.svg') ?>" />
+
+    <?php if (isset($structured_data)): ?>
+        <script type="application/ld+json">
+            <?= json_encode($structured_data, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT) ?>
+        </script>
+    <?php endif; ?>
+</head>
+
+<body>
+    <?php $this->partial('layouts/header'); ?>
+
+    <div class="layout-wrapper">
+        <?php echo $this->getContent(); ?>
+    </div>
+
+    <?php $this->partial('layouts/footer'); ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js" defer></script>
+    <script src="/js/menu.js" defer></script>
+    <script src="/js/all.js" defer></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <script defer>
+        (function() {
+            var init = function() {
+                try {
+                    var observer = lozad('.util-lazy-load', {
+                        loaded: function(el) {
+                            el.classList.add('util-loaded');
+                        }
+                    });
+                    observer.observe();
+                } catch (e) {}
+            };
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
+</body>
+
+</html>

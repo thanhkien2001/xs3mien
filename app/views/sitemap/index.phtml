@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9" lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index,follow">
+    <title>XML Sitemap Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 20px 0;
+            color: #000000;
+        }
+        
+        .banner {
+            background-color: #e6f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #000000;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            border: 1px solid #cccccc;
+            padding: 8px;
+            font-weight: bold;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        td {
+            border: 1px solid #cccccc;
+            padding: 8px;
+            font-size: 14px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f0f0f0;
+        }
+        
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .url-cell {
+            font-family: monospace;
+            word-break: break-all;
+        }
+        
+        .date-cell {
+            white-space: nowrap;
+            text-align: right;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #cccccc;
+            font-size: 12px;
+            color: #666666;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>XML Sitemap Index</h1>
+        
+        <div class="banner">
+            Trang này bao gồm các sitemap con của soicau247.com
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 70%;">URL of sub-sitemap</th>
+                    <th style="width: 30%;">Last modified (GMT)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($sitemaps as $sitemap): ?>
+                <tr>
+                    <td class="url-cell">
+                        <a href="<?= htmlspecialchars($sitemap['url']) ?>" target="_blank">
+                            <?= htmlspecialchars($sitemap['url']) ?>
+                        </a>
+                    </td>
+                    <td class="date-cell">
+                        <?= date('Y-m-d H:i', strtotime($sitemap['lastmod'])) ?>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            <p>Tổng cộng có <?= count($sitemaps) ?> sitemap con được liệt kê bên trên</p>
+            <p>Sitemap được cập bởi soicau247.com</p>
+        </div>
+    </div>
+</body>
+</html>

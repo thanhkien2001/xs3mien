@@ -1,0 +1,127 @@
+<?php
+/**
+ * Partial: XSMT Results
+ * Variables: $results (array), $date, $dayOfWeek
+ */
+$esc = $this->escaper;
+$daySlug = str_replace(' ', '-', $dayOfWeek);
+$dateSlug = str_replace('/', '-', $date);
+?>
+
+<div class="result result-multi rounded">
+    <h2 class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+        Xổ số Miền Trung ngày <?= $esc->escapeHtml($date) ?>
+    </h2>
+    <div class="breadcrumb-table">
+        <h4 class="breadcrumb-table-title">
+            <a href="/xsmt-<?= $daySlug ?>.html" title="XSMT <?= $esc->escapeHtmlAttr($dayOfWeek) ?>">
+                XSMT <?= $esc->escapeHtml($dayOfWeek) ?>
+            </a>
+            /
+            <a href="/xsmt-<?= $dateSlug ?>.html" title="XSMT <?= $esc->escapeHtmlAttr($date) ?>">
+                XSMT <?= $esc->escapeHtml($date) ?>
+            </a>
+        </h4>
+    </div>
+    
+    <div class="table-flex-border">
+        <table class="table-flex table-result" data-code="XSMT">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <?php foreach ($results as $result): ?>
+                    <td>
+                        <a href="/xo-so-<?= strtolower($result['province_code']) ?>.html" 
+                           title="<?= $esc->escapeHtmlAttr($result['province']) ?> <?= $esc->escapeHtmlAttr($dayOfWeek) ?> - Kết quả <?= $esc->escapeHtmlAttr($result['province_code']) ?> ngày <?= $esc->escapeHtmlAttr($date) ?>">
+                            <?= $esc->escapeHtml($result['province']) ?>
+                        </a>
+                    </td>
+                    <?php endforeach; ?>
+                </tr>
+                
+                <?php
+                $prizes = ['g8' => 'G8', 'g7' => 'G7', 'g6' => 'G6', 'g5' => 'G5', 
+                          'g4' => 'G4', 'g3' => 'G3', 'g2' => 'G2', 'g1' => 'G1', 'db' => 'ĐB'];
+                $ncMap = ['g8' => 2, 'g7' => 3, 'g6' => 4, 'g5' => 4, 'g4' => 5, 
+                         'g3' => 5, 'g2' => 5, 'g1' => 5, 'db' => 6];
+                
+                foreach ($prizes as $key => $label):
+                ?>
+                <tr>
+                    <td><?= $label ?></td>
+                    <?php foreach ($results as $result): ?>
+                    <td>
+                        <?php 
+                        $prizeData = $result[$key] ?? [];
+                        if (is_array($prizeData) && !empty($prizeData)):
+                            foreach ($prizeData as $number):
+                        ?>
+                        <span class="text-number" nc="<?= $ncMap[$key] ?>">
+                            <?= $esc->escapeHtml($number) ?>
+                        </span>
+                        <?php 
+                            endforeach;
+                        endif;
+                        ?>
+                    </td>
+                    <?php endforeach; ?>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Loto Table -->
+<div class="loto loto-multi rounded">
+    <table class="table table-bordered table-striped table-xslt-multi-col" data-code="XSMT">
+        <thead>
+            <tr>
+                <th>Đầu</th>
+                <?php foreach ($results as $result): ?>
+                <th><?= $esc->escapeHtml($result['province']) ?></th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            // Build loto data for each province
+            $lotoData = [];
+            foreach ($results as $idx => $result) {
+                $lotoData[$idx] = [];
+                for ($i = 0; $i <= 9; $i++) {
+                    $lotoData[$idx][$i] = [];
+                }
+                
+                // Collect all 2-digit endings
+                foreach (['g8', 'g7', 'g6', 'g5', 'g4', 'g3', 'g2', 'g1', 'db'] as $prize) {
+                    if (!empty($result[$prize]) && is_array($result[$prize])) {
+                        foreach ($result[$prize] as $number) {
+                            $last2 = substr($number, -2);
+                            $firstDigit = (int)$last2[0];
+                            $lotoData[$idx][$firstDigit][] = $last2[1];
+                        }
+                    }
+                }
+            }
+            
+            // Render rows
+            for ($i = 0; $i <= 9; $i++):
+            ?>
+            <tr>
+                <td><?= $i ?></td>
+                <?php foreach ($results as $idx => $result): ?>
+                <td>
+                    <?php if (!empty($lotoData[$idx][$i])): ?>
+                        <?php foreach ($lotoData[$idx][$i] as $digit): ?>
+                        <span><?= $digit ?></span>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </td>
+                <?php endforeach; ?>
+            </tr>
+            <?php endfor; ?>
+        </tbody>
+    </table>
+</div>
+

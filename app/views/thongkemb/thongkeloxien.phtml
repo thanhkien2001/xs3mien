@@ -1,0 +1,407 @@
+<?php
+// Helpers
+if (!function_exists('h')) {
+    function h($s)
+    {
+        return htmlspecialchars((string)($s ?? ''), ENT_QUOTES, 'UTF-8');
+    }
+}
+if (!function_exists('dmy')) {
+    function dmy($d)
+    {
+        return $d ? date('d-m-Y', strtotime($d)) : '';
+    }
+}
+?>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#dateEnd").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true
+        });
+
+        // Toggle Xien Tables
+        $('input[name="show-xien"]').change(function() {
+            var val = $(this).val();
+            if (val == 'xien_2') {
+                $('#xien_2').show();
+                $('#xien_3').hide();
+            } else {
+                $('#xien_2').hide();
+                $('#xien_3').show();
+            }
+        });
+        // Default show xien 2
+        $('input[value="xien_2"]').prop('checked', true).trigger('change');
+    });
+</script>
+
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="/thong-ke-xo-so-mien-bac-tk-xsmb.html" title="XSMB">XSMB</a> </li>
+                        <li class="breadcrumb-item active"><a href="/lo-xien-xsmb.html" title="Thống kê lô xiên">Thống kê lô xiên</a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610 border-radius-4">
+                <aside class="mb-2">
+                    <table class="table-b">
+                        <tbody>
+                            <tr>
+                                <td><a href="/lo-gan-xsmb.html" title="Lô gan XSMB">Lô gan XSMB</a></td>
+                                <td><a class="text-red" href="/lo-xien-xsmb.html" title="Lô xiên XSMB">Lô xiên XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/lo-kep-xsmb.html" title="Lô kép XSMB">Lô kép XSMB</a></td>
+                                <td><a href="/dau-duoi-xsmb.html" title="Đầu đuôi lô tô XSMB">Đầu đuôi lô tô XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/dac-biet-xsmb.html" title="Đặc biệt XSMB">Đặc biệt XSMB</a></td>
+                                <td><a href="/dac-biet-tuan-xsmb.html" title="Đặc biệt tuần XSMB">Đặc biệt tuần XSMB</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="/tan-suat-lo-to-xsmb.html" title="Tần suất lô tô XSMB">Tần suất lô tô XSMB</a></td>
+                                <td><a href="/thong-ke-theo-tong-xsmb.html" title="Theo tổng XSMB">Theo tổng XSMB</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </aside>
+
+                <h2 class="aside-title-red mb-0 justify-content-center"> Thống kê lô xiên Miền Bắc</h2>
+                <div class="bg-grey2 border-bottom d-flex align-items-center mb-3 py-2">
+                    <div class="form-inline mx-auto" id="selectXien23">
+                        <label class="check-radio mr-2"> <input type="radio" value="xien_2" name="show-xien" hidden=""> <span class="checkbox"> <i class="icon-check"></i> </span> <span class="ml-2">Xiên 2</span> </label>
+                        <label class="check-radio"> <input type="radio" value="xien_3" name="show-xien" hidden=""> <span class="checkbox"> <i class="icon-check"></i> </span> <span class="ml-2">Xiên 3</span> </label>
+                    </div>
+                </div>
+
+                <form class="row" action="/lo-xien-xsmb.html" method="post">
+                    <div class="col-12 col-lg-3 mb-2">
+                        <label class="label text-6b">Thứ</label>
+                        <div class="select-arow">
+                            <select class="form-control form-control-sm bg-grey2 font-weight-bold" name="dow" id="detectProvinceByDow">
+                                <option value="" <?= empty($dow) ? 'selected' : '' ?>>Tất cả</option>
+                                <option value="1" <?= (isset($dow) && $dow == 1) ? 'selected' : '' ?>>Thứ 2</option>
+                                <option value="2" <?= (isset($dow) && $dow == 2) ? 'selected' : '' ?>>Thứ 3</option>
+                                <option value="3" <?= (isset($dow) && $dow == 3) ? 'selected' : '' ?>>Thứ 4</option>
+                                <option value="4" <?= (isset($dow) && $dow == 4) ? 'selected' : '' ?>>Thứ 5</option>
+                                <option value="5" <?= (isset($dow) && $dow == 5) ? 'selected' : '' ?>>Thứ 6</option>
+                                <option value="6" <?= (isset($dow) && $dow == 6) ? 'selected' : '' ?>>Thứ 7</option>
+                                <option value="7" <?= (isset($dow) && $dow == 7) ? 'selected' : '' ?>>Chủ Nhật</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-2">
+                        <label class="label text-6b">Tỉnh/thành</label>
+                        <div class="select-arow">
+                            <select class="form-control form-control-sm bg-grey2 font-weight-bold" id="selectProvince">
+                                <option data-prize='["1","2","3","4","5","6","7"]' value="/lo-xien-xsmb.html" selected="selected">Miền Bắc</option>
+                                <option data-prize='["3","7"]' value="/lo-xien-xskh.html" class="d-none">Khánh Hòa</option>
+                                <option data-prize='["3","6"]' value="/lo-xien-xsdna.html" class="d-none">Đà Nẵng</option>
+                                <option data-prize='["6"]' value="/lo-xien-xsqng.html" class="d-none">Quảng Ngãi</option>
+                                <option data-prize='["1","7"]' value="/lo-xien-xstth.html" class="d-none">Thừa Thiên Huế</option>
+                                <option data-prize='["1"]' value="/lo-xien-xspy.html" class="d-none">Phú Yên</option>
+                                <option data-prize='["4"]' value="/lo-xien-xsbdi.html">Bình Định</option>
+                                <option data-prize='["7"]' value="/lo-xien-xskt.html" class="d-none">Kon Tum</option>
+                                <option data-prize='["2"]' value="/lo-xien-xsdlk.html" class="d-none">Đắk Lắk</option>
+                                <option data-prize='["2"]' value="/lo-xien-xsqna.html" class="d-none">Quảng Nam</option>
+                                <option data-prize='["6"]' value="/lo-xien-xsdno.html" class="d-none">Đắk Nông</option>
+                                <option data-prize='["5"]' value="/lo-xien-xsgl.html" class="d-none">Gia Lai</option>
+                                <option data-prize='["5"]' value="/lo-xien-xsnt.html" class="d-none">Ninh Thuận</option>
+                                <option data-prize='["4"]' value="/lo-xien-xsqb.html">Quảng Bình</option>
+                                <option data-prize='["4"]' value="/lo-xien-xsqt.html">Quảng Trị</option>
+                                <option data-prize='["1","6"]' value="/lo-xien-xshcm.html" class="d-none">Hồ Chí Minh</option>
+                                <option data-prize='["3"]' value="/lo-xien-xsdn.html" class="d-none">Đồng Nai</option>
+                                <option data-prize='["4"]' value="/lo-xien-xsag.html">An Giang</option>
+                                <option data-prize='["7"]' value="/lo-xien-xstg.html" class="d-none">Tiền Giang</option>
+                                <option data-prize='["7"]' value="/lo-xien-xskg.html" class="d-none">Kiên Giang</option>
+                                <option data-prize='["4"]' value="/lo-xien-xstn.html">Tây Ninh</option>
+                                <option data-prize='["5"]' value="/lo-xien-xsbd.html" class="d-none">Bình Dương</option>
+                                <option data-prize='["3"]' value="/lo-xien-xsst.html" class="d-none">Sóc Trăng</option>
+                                <option data-prize='["5"]' value="/lo-xien-xsvl.html" class="d-none">Vĩnh Long</option>
+                                <option data-prize='["5"]' value="/lo-xien-xstv.html" class="d-none">Trà Vinh</option>
+                                <option data-prize='["3"]' value="/lo-xien-xsct.html" class="d-none">Cần Thơ</option>
+                                <option data-prize='["2"]' value="/lo-xien-xsbtr.html" class="d-none">Bến Tre</option>
+                                <option data-prize='["2"]' value="/lo-xien-xsvt.html" class="d-none">Vũng Tàu</option>
+                                <option data-prize='["2"]' value="/lo-xien-xsbl.html" class="d-none">Bạc Liêu</option>
+                                <option data-prize='["4"]' value="/lo-xien-xsbth.html">Bình Thuận</option>
+                                <option data-prize='["1"]' value="/lo-xien-xsdt.html" class="d-none">Đồng Tháp</option>
+                                <option data-prize='["6"]' value="/lo-xien-xsla.html" class="d-none">Long An</option>
+                                <option data-prize='["1"]' value="/lo-xien-xscm.html" class="d-none">Cà Mau</option>
+                                <option data-prize='["6"]' value="/lo-xien-xsbp.html" class="d-none">Bình Phước</option>
+                                <option data-prize='["6"]' value="/lo-xien-xshg.html" class="d-none">Hậu Giang</option>
+                                <option data-prize='["7"]' value="/lo-xien-xsdl.html" class="d-none">Đà Lạt</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-2">
+                        <label class="label text-6b">Biên độ</label>
+                        <div class="select-arow">
+                            <select class="form-control form-control-sm bg-grey2 font-weight-bold" name="rangeday" id="range-day">
+                                <option value="5" <?= (isset($limit) && $limit == 5) ? 'selected' : '' ?>>5</option>
+                                <option value="10" <?= (isset($limit) && $limit == 10) ? 'selected' : '' ?>>10</option>
+                                <option value="15" <?= (isset($limit) && $limit == 15) ? 'selected' : '' ?>>15</option>
+                                <option value="20" <?= (isset($limit) && $limit == 20) ? 'selected' : '' ?>>20</option>
+                                <option value="25" <?= (isset($limit) && $limit == 25) ? 'selected' : '' ?>>25</option>
+                                <option value="30" <?= (isset($limit) && $limit == 30) ? 'selected' : '' ?>>30</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <label class="label text-6b">&nbsp;</label>
+                        <button class="btn btn-danger btn-sm flex-grow-1" type="submit">Thống kê </button>
+                    </div>
+                </form>
+
+                <div class="my-3">
+                    <!-- XIEN 2 TABLE -->
+                    <div id="xien_2">
+                        <h4 class="mb-0 title-blue"> <img loading="lazy" src="/images/star-blue.svg" alt="Lo xien" class="mr-2"> Lô xiên 2 biên độ <?= $limit ?> ngày </h4>
+                        <div class="overflow-auto">
+                            <table class="table table-bordered text-center table-striped table-statistic-width-td-first">
+                                <thead class="bg-orange font-13 text-nowrap" style="color:black !important">
+                                    <tr>
+                                        <th>Lô xiên 2</th>
+                                        <th>Số lần xuất hiện</th>
+                                        <th class="text-left">Các ngày xuất hiện</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-14">
+                                    <?php if (!empty($xien2)): foreach ($xien2 as $row): ?>
+                                            <tr>
+                                                <td><span class="font-weight-bold text-nowrap text-red3 font-16"><?= $row['pair'] ?></span></td>
+                                                <td class="font-weight-bold"> <?= $row['count'] ?> <span class="font-weight-normal">ngày</span> </td>
+                                                <td class="text-left">
+                                                    <?php
+                                                    // Show first 5 links
+                                                    $links = [];
+                                                    foreach ($row['dates'] as $d) {
+                                                        $links[] = '<a rel="nofollow" href="/xsmb-' . $d['full'] . '.html" title="XSMB ngày ' . $d['full'] . '" class="text-gray2">' . $d['full'] . '</a>';
+                                                    }
+                                                    echo implode(', ', array_slice($links, 0, 5));
+                                                    if (count($links) > 5) echo ', ...';
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;
+                                    else: ?>
+                                        <tr>
+                                            <td colspan="3">Chưa có dữ liệu lô xiên 2 trong khoảng này.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- XIEN 3 TABLE -->
+                    <div id="xien_3" style="display:none;">
+                        <h4 class="title-blue mb-0"> <img loading="lazy" src="/images/star-blue.svg" alt="Lo xien" class="mr-2"> Lô xiên 3 biên độ <?= $limit ?> ngày </h4>
+                        <div class="overflow-auto">
+                            <table class="table table-bordered text-center table-striped table-statistic-width-td-first">
+                                <thead class="bg-orange font-13 text-nowrap">
+                                    <tr>
+                                        <th>Lô xiên 3</th>
+                                        <th>Số lần xuất hiện</th>
+                                        <th class="text-left">Các ngày xuất hiện</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="font-14">
+                                    <?php if (!empty($xien3)): foreach ($xien3 as $row): ?>
+                                            <tr>
+                                                <td><span class="font-weight-bold text-nowrap text-red3 font-16"><?= $row['triplet'] ?></span></td>
+                                                <td class="font-weight-bold"> <?= $row['count'] ?> <span class="font-weight-normal">ngày</span> </td>
+                                                <td class="text-left">
+                                                    <?php
+                                                    $links = [];
+                                                    foreach ($row['dates'] as $d) {
+                                                        $links[] = '<a rel="nofollow" href="/xsmb-' . $d['full'] . '.html" title="XSMB ngày ' . $d['full'] . '" class="text-gray2">' . $d['full'] . '</a>';
+                                                    }
+                                                    echo implode(', ', array_slice($links, 0, 5));
+                                                    if (count($links) > 5) echo ', ...';
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;
+                                    else: ?>
+                                        <tr>
+                                            <td colspan="3">Chưa có dữ liệu lô xiên 3 trong khoảng này.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FREQUENCY MATRIX (Similar to tansuatsolo) -->
+                <div id="view_data">
+                    <div class="bg-white p-3 mt-3 text-justify new-content">
+                        <h3 style="text-align: justify;"><span>Dự đoán lô xiên Miền Bắc <?= date('d/m/Y') ?></span></h3>
+                        <p style="text-align: justify;"><span>Từ những con số thống kê lô tô ở phía trên chúng tôi đưa ra các con số lô xiên 2, lô tô xiên 3 có xác suất về cao nhất. Mời anh em tham khảo:</span></p>
+
+                        <table class="table-default w-100 text-center mb-3">
+                            <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">Lô xiên 2 đẹp</td>
+                                    <?php
+                                    // Pick top 3 from xien 2
+                                    $top3X2 = array_slice($xien2 ?? [], 0, 3);
+                                    foreach ($top3X2 as $item):
+                                    ?>
+                                        <td><span class="text-red"><?= $item['pair'] ?></span></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <tr>
+                                    <td class="font-weight-bold">Lô xiên 3 đẹp</td>
+                                    <?php
+                                    // Pick top 3 from xien 3
+                                    $top3X3 = array_slice($xien3 ?? [], 0, 3);
+                                    foreach ($top3X3 as $item):
+                                    ?>
+                                        <td><span class="text-red"><?= $item['triplet'] ?></span></td>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p style="text-align: justify;">Thống kê lô xiên là bảng tổng hợp các cặp loto 2 số (xiên 2) hoặc 3 số (xiên 3) cùng về trong một kỳ quay thưởng, giúp anh em dễ dàng nhận biết được những bộ số hay đi cùng nhau.</p>
+                    </div>
+
+                </div>
+                <?php $this->partial('partials/prediction_articles_list'); ?>
+            </div>
+
+            <!-- COL LEFT (Sidebar trái) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+
+            <!-- SIDEBAR RIGHT -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+<style>
+    .bg-blue {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .title-bg-blue {
+        background: #007bff;
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .text-red,
+    .text-danger,
+    .text-red3 {
+        color: #dc3545 !important;
+    }
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #dee2e6;
+        vertical-align: middle;
+        padding: 0.5rem;
+        text-align: center;
+    }
+
+    .table-b {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .table-b td {
+        padding: 5px;
+        border: 1px solid #e0e0e0;
+    }
+
+    .empty {
+        background-color: #f9f9f9;
+    }
+
+    .btn-ts {
+        border: 1px solid #ccc;
+        background: #fff;
+        padding: 2px 5px;
+        font-size: 12px;
+        cursor: pointer;
+        margin: 2px;
+    }
+
+    .btn-ts.active {
+        background: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+    .h-500 {
+        max-height: 500px;
+    }
+
+    .bg-orange {
+        background-color: #fd7e14;
+        color: #fff;
+    }
+
+    .table-statistic-width-td-first td:first-child {
+        width: 20%;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Filter Matrix Logic (reuse from tansuatsolo)
+        const rows = document.querySelectorAll('tr.loto-row');
+
+        function applyFilter() {
+            const checked = [];
+            document.querySelectorAll('.loto-checkbox:checked').forEach(cb => checked.push(cb.value));
+            rows.forEach(row => {
+                const num = row.getAttribute('number');
+                row.style.display = checked.includes(num) ? 'table-row' : 'none';
+            });
+        }
+        document.querySelectorAll('.loto-checkbox').forEach(cb => cb.addEventListener('change', applyFilter));
+        document.querySelectorAll('.btn-ts').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = this.getAttribute('data-id');
+                const num = this.getAttribute('data-number');
+                if (id === 'all_number') document.querySelectorAll('.loto-checkbox').forEach(cb => cb.checked = true);
+                else if (id === 'all_none') document.querySelectorAll('.loto-checkbox').forEach(cb => cb.checked = false);
+                else if (id === 'only_even') document.querySelectorAll('.loto-checkbox').forEach(cb => cb.checked = (parseInt(cb.value) % 2 === 0));
+                else if (id === 'only_odd') document.querySelectorAll('.loto-checkbox').forEach(cb => cb.checked = (parseInt(cb.value) % 2 !== 0));
+                else if (id === 'head') document.querySelectorAll('.loto-checkbox').forEach(cb => {
+                    if (cb.value.startsWith(num)) cb.checked = !cb.checked;
+                });
+                else if (id === 'tail') document.querySelectorAll('.loto-checkbox').forEach(cb => {
+                    if (cb.value.endsWith(num)) cb.checked = !cb.checked;
+                });
+                applyFilter();
+            });
+        });
+    });
+</script>

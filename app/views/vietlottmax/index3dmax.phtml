@@ -1,0 +1,401 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh'); ?>
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3" id="breadcrumb-container">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item" id="game-breadcrumb" style="<?= isset($selectedDate) && $selectedDate ? 'display: block;' : 'display: none;' ?>"><a title="Xổ số Max 3D - Vietlott" href="/ket-qua-xoso-max-3d-vietlott.html"><span>Xổ số Max 3D - Vietlott</span></a></li>
+                        <li class="nav-breadcrumb-item" id="date-breadcrumb">
+                            <?php if (isset($selectedDate) && $selectedDate): ?>
+                            <?php
+                                $date = new DateTime($selectedDate);
+                                $dayNames = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+                                $dayName = $dayNames[$date->format('w')];
+                                $formattedDate = $date->format('d/m/Y');
+                                $formattedDateShort = $date->format('d-m');
+                                ?>
+                            <span>Kết Quả Xổ Số Max 3D Ngày <?= $formattedDate ?> (<?= $dayName ?> <?= $formattedDateShort ?>)</span>
+                            <?php else: ?>
+                            <span>Xổ số Max 3D</span>
+                            <?php endif; ?>
+                        </li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm" id="page-header">
+                    <h1 class="page-title-h1" id="page-title">
+                        <?php if (isset($selectedDate) && $selectedDate): ?>
+                        <?php
+                            $date = new DateTime($selectedDate);
+                            $dayNames = ['Chủ nhật', 'Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7'];
+                            $dayName = $dayNames[$date->format('w')];
+                            $formattedDate = $date->format('d/m/Y');
+                            $formattedDateShort = $date->format('d-m');
+                            ?>
+                        Kết Quả Xổ Số Max 3D Ngày <?= $formattedDate ?> (<?= $dayName ?> <?= $formattedDateShort ?>)
+                        <?php else: ?>
+                        Xổ Số Max 3D - Tra Cứu Kết Quả Nhanh Nhất Vietlott Hôm Nay
+                        <?php endif; ?>
+                    </h1>
+                </div>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm util-mt-3 util-mb-3 util-p-3">
+                <p>
+                    <strong><a title="Xo so Max 3D" href="<?= $this->url->get('/ket-qua-xoso-max-3d-vietlott-' . date('d-m-Y') . '.html') ?>">Xo so Max 3D</a></strong>,
+                    Cập nhật trực tiếp kết quả <strong>Max 3D Vietlott</strong> trong ngày,
+                    <strong>XS Max3D</strong> được công bố vào các buổi tối thứ 2, thứ 4, thứ 6 mỗi tuần,
+                    <strong>XS3D</strong> được cập nhật nhanh chóng và đảm bảo chính xác.
+                </p>
+            </div>
+            <ul class="nav nav-tabs util-rounded-top util-bg-max3d" id="myTab" role="tablist">
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-power-6-55-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Power 655</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Mega 645</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-max-3d-pro-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Max 3D Pro</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase util-bg-orange" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-max-3d-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-black">Max 3D</a>
+                </li>
+                <li class="nav-item util-text-center util-text-uppercase" role="presentation">
+                    <a href="<?= $this->url->get('/ket-qua-xoso-keno-vietlott-' . date('d-m-Y') . '.html') ?>" class="nav-link util-text-decoration-none util-text-white">Keno</a>
+                </li>
+            </ul>
+            <div class="lottery-result util-p-0">
+                <div class="lottery-result-header">
+                    <h2 class="lottery-result-tree util-text-center util-text-uppercase">
+                        <a title="Kết quả xổ số Max 3D" class="util-text-decoration-none util-fs-5" href="<?= $this->url->get('/ket-qua-xoso-max-3d-vietlott-' . date('d-m-Y')) ?>">Kết Quả Xổ Số Max 3D Vietlott</a>
+                    </h2>
+                </div>
+                <?php if (!empty($results)): ?>
+                <?php foreach ($results as $index => $result): ?>
+                <?php $numId = 19100 + ($index + 1) * 20; ?>
+                <div class="util-p-3 util-bg-dark-vietlott" data-id="<?php echo htmlspecialchars(substr($result['draw_number'], 1)); ?>">
+                    <h3 class="util-text-center util-font-bold util-fs-6 util-mb-3">
+                        Kỳ quay thưởng <span class="util-text-warning"><?php echo htmlspecialchars($result['draw_date']); ?></span>
+                    </h3>
+                    <table class="comp-table util-small util-text-center util-align-items-center vietlott__winners__table" width="100%">
+                        <thead>
+                            <tr>
+                                <th class="util-text-uppercase util-font-bold util-bg-max3d util-text-nowrap util-text-white">Max 3D</th>
+                                <th class="util-text-uppercase util-font-bold util-bg-max3d util-text-nowrap util-text-white">Kết quả</th>
+                                <th class="util-text-uppercase util-font-bold util-bg-max3d util-text-nowrap util-text-white">Max 3D+</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="util-font-bold util-text-nowrap">Đặc biệt</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        1 triệu: <span class="util-font-bold"><?php echo isset($result['jackpot_winners'][0]) ? htmlspecialchars($result['jackpot_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layout-row util-gx-0">
+                                        <?php foreach ($result['jackpot_numbers'] as $i => $number): ?>
+                                        <span class="layout-col-6 util-fs-1 util-font-bold util-text-pink js-lottery-number-max3d" data-num-id="<?php echo $numId + $i + 1; ?>"><?php echo htmlspecialchars($number); ?></span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="util-text-nowrap util-font-bold">Đặc biệt</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        1 tỷ: <span class="util-font-bold"><?php echo isset($result['jackpot_winners'][1]) ? htmlspecialchars($result['jackpot_winners'][1]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="util-text-nowrap util-font-bold">Giải Nhất</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        350K: <span class="util-font-bold"><?php echo isset($result['first_winners'][0]) ? htmlspecialchars($result['first_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layout-row util-gx-0">
+                                        <?php foreach ($result['first_numbers'] as $i => $number): ?>
+                                        <span class="layout-col-6 util-fs-2 util-font-bold util-text-orange js-lottery-number-max3d" data-num-id="<?php echo $numId + 2 + $i + 1; ?>"><?php echo htmlspecialchars($number); ?></span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="util-text-nowrap util-font-bold">Giải Nhất</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        40 triệu: <span class="util-font-bold"><?php echo isset($result['first_winners'][1]) ? htmlspecialchars($result['first_winners'][1]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="util-font-bold">Giải Nhì</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        210K: <span class="util-font-bold"><?php echo isset($result['second_winners'][0]) ? htmlspecialchars($result['second_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layout-row util-gx-0">
+                                        <?php foreach ($result['second_numbers'] as $i => $number): ?>
+                                        <span class="layout-col-4 util-font-bold util-fs-4 util-text-green js-lottery-number-max3d" data-num-id="<?php echo $numId + 6 + $i + 1; ?>"><?php echo htmlspecialchars($number); ?></span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="util-font-bold">Giải Nhì</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        10 triệu: <span class="util-font-bold"><?php echo isset($result['second_winners'][1]) ? htmlspecialchars($result['second_winners'][1]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="util-font-bold">Giải Ba</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        100K: <span class="util-font-bold"><?php echo isset($result['third_winners'][0]) ? htmlspecialchars($result['third_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layout-row util-gx-0">
+                                        <?php foreach ($result['third_numbers'] as $i => $number): ?>
+                                        <span class="layout-col-3 util-font-bold util-fs-5-5 util-text-blue js-lottery-number-max3d" data-num-id="<?php echo $numId + 12 + $i + 1; ?>"><?php echo htmlspecialchars($number); ?></span>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="util-font-bold">Giải Ba</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        5 triệu: <span class="util-font-bold"><?php echo isset($result['third_winners'][1]) ? htmlspecialchars($result['third_winners'][1]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    Trùng bất kỳ 2 bộ ba số quay thưởng của giải Đặc biệt, Nhất, Nhì hoặc Ba
+                                </td>
+                                <td>
+                                    <span class="util-font-bold">Giải Tư</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        1 triệu: <span class="util-font-bold"><?php echo isset($result['fourth_winners'][0]) ? htmlspecialchars($result['fourth_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    Trùng 1 bộ số bất kỳ của giải Đặc biệt
+                                </td>
+                                <td>
+                                    <span class="util-font-bold">Giải Năm</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        150K: <span class="util-font-bold"><?php echo isset($result['fifth_winners'][0]) ? htmlspecialchars($result['fifth_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    Trùng 1 bộ số bất kỳ của giải Nhất, Nhì hoặc Ba bất kỳ
+                                </td>
+                                <td>
+                                    <span class="util-font-bold">Giải Sáu</span>
+                                    <div class="util-text-nowrap util-fs-12">
+                                        40K: <span class="util-font-bold"><?php echo isset($result['sixth_winners'][0]) ? htmlspecialchars($result['sixth_winners'][0]) : 0; ?></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="util-fs-10">
+                        Con số dự thưởng phải trùng với số kết quả theo đúng thứ tự
+                    </p>
+                    <p class="util-fs-10">
+                        Thời hạn lĩnh thưởng của vé trúng thưởng: là 60 (sáu mươi) ngày, kể từ ngày xác định Kết quả quay số mở thưởng. Quá thời hạn trên, các vé trúng thưởng không còn giá trị lĩnh thưởng.
+                    </p>
+                    <div class="atr-ad-slot">
+                        <ins class="adsbygoogle" style="display: block" data-ad-client="ca-pub-1713423796088709" data-ad-slot="9433207007" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+                <?php else: ?>
+                <div class="util-p-3 util-bg-dark-vietlott">
+                    <p class="util-text-center util-text-warning">Không có kết quả nào cho ngày này.</p>
+                </div>
+                <?php endif; ?>
+            </div>
+            <div class="comp-box">
+                <h2 class="comp-box-title">Kết quả Max 3D các ngày khác</h2>
+                <ul class="comp-list-links layout-row util-gx-0 util-mb-0 util-me-4">
+                    <?php foreach ($otherDates as $date): ?>
+                    <li class="layout-col-4">
+                        <a href="<?php echo htmlspecialchars($date['url']) . '.html'; ?>" title="Kết quả xổ số Max 3D ngày <?php echo htmlspecialchars(substr($date['date'], 8)); ?>">MAX 3D <?php echo htmlspecialchars($date['date']); ?></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                <p class="util-p-1 util-text-center util-pb-3 align-item-center">
+                    <a class="js-date-picker-vietlott util-text-body util-text-decoration-none util-fs-6" data-type="max3d" day-of-week="[1,3,5,6]" day-of-week-used="[1,3,5]" rel="nofollow" href="javascript:void(0)">
+                        <i class="icon-calendar util-me-1 util-align-items-center util-mb-1"></i> Xem ngày khác
+                    </a>
+                </p>
+            </div>
+            <div class="comp-box">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+                    60 bộ số Max 3D về nhiều nhất
+                </h2>
+                <div class="comp-table-responsive">
+                    <table class="comp-table util-fs-11 util-align-items-center util-mb-0 util-text-center">
+                        <thead>
+                            <tr>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $frequentRows = array_chunk(array_slice($frequentNumbers, 0, 60), 5);
+                            foreach ($frequentRows as $row): ?>
+                            <tr>
+                                <?php foreach ($row as $item): ?>
+                                <td><span class="util-font-bold util-fs-6 util-text-pink"><?php echo htmlspecialchars($item['number']); ?></span></td>
+                                <td><?php echo htmlspecialchars($item['times']); ?> lần</td>
+                                <?php endforeach; ?>
+                                <?php for ($i = count($row); $i < 5; $i++): ?>
+                                <td></td>
+                                <td></td>
+                                <?php endfor; ?>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="comp-box">
+                <h2 class="util-bg-orange util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-rounded-top">
+                    60 bộ số Max 3D lâu chưa về
+                </h2>
+                <div class="comp-table-responsive">
+                    <table class="comp-table util-fs-11 util-align-items-center util-mb-0 util-text-center">
+                        <thead>
+                            <tr>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                                <th>Bộ số</th>
+                                <th>Số lần</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $rareRows = array_chunk(array_slice($rareNumbers, 0, 60), 5);
+                            foreach ($rareRows as $row): ?>
+                            <tr>
+                                <?php foreach ($row as $item): ?>
+                                <td><span class="util-font-bold util-fs-6 util-text-pink"><?php echo htmlspecialchars($item['number']); ?></span></td>
+                                <td><?php echo htmlspecialchars($item['frequency']); ?> lần</td>
+                                <?php endforeach; ?>
+                                <?php for ($i = count($row); $i < 5; $i++): ?>
+                                <td></td>
+                                <td></td>
+                                <?php endfor; ?>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="comp-article-content util-bg-white util-border util-rounded util-shadow-sm util-p-3 util-mt-5 js-bottom-content">
+                <p>
+                    <strong>Max 3D</strong> là dòng sản phẩm xổ số tự chọn số được Vietlott triển khai, người tham gia được quyền lựa chọn bộ 3 con số trong phạm vi từ 0 tới 9. <strong>Xổ số Max 3D</strong> mang đến 2 hình thức chơi với cấu trúc thưởng đa dạng: <strong>Max 3D</strong> và <strong>Max 3D+</strong> với mức giải thưởng hấp dẫn có thể lên tới 1 tỷ đồng.
+                </p>
+                <p>
+                    <strong>Xổ số Max 3D</strong> được giới thiệu chính thức vào ngày 22/4/2019. <strong>KQXS Max 3D</strong> được phát sóng trực tiếp trong khung giờ từ 18h tới 18h30 vào các buổi tối thứ Hai, thứ Tư và thứ Sáu mỗi tuần qua đài VTC3. Tổng số người may mắn trúng giải ở từng hạng mục sẽ được thông báo ngay khi kết thúc phiên quay.
+                </p>
+                <p>
+                    Giá trị phiếu cho một lần chơi là 10.000 đồng, mức giải thưởng được nhận sẽ được tính dựa trên tần suất tham gia của người chơi.
+                </p>
+                <h2><strong>Đối chiếu hình thức chơi Max 3D và Max 3D+:</strong></h2>
+                <table style="border-collapse: collapse; width: 100%; height: 168px">
+                    <tbody>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: center"><span style="font-size: 10pt"><strong>Tiêu chí so sánh</strong></span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-size: 10pt"><strong>Max 3D</strong></span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-size: 10pt"><strong>Max 3D+</strong></span></td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: left"><span style="font-weight: 400; font-size: 10pt">Số lượng bộ ba số dự thưởng</span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-size: 10pt">1</span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-size: 10pt">2</span></td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: left"><span style="font-size: 10pt">Số lượng hạng mục giải thưởng</span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-size: 10pt">4</span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-size: 10pt"><strong>7</strong></span></td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: left"><span style="font-size: 10pt">Giá trị giải thưởng thấp nhất</span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-size: 10pt"><strong>100.000 đồng</strong></span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-size: 10pt">40.000 đồng</span></td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: left"><span style="font-size: 10pt">Giá trị giải thưởng cao nhất</span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-size: 10pt">1 triệu đồng</span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-size: 10pt"><strong>1 tỷ đồng</strong></span></td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: left"><span style="font-size: 10pt">Cách trúng thưởng</span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-weight: 400; font-size: 10pt">Khớp 1 bộ ba con số với kết quả công bố</span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-weight: 400; font-size: 10pt">Khớp 2 bộ ba con số với kết quả công bố (giải 4, 5 và 6 chỉ cần khớp 1 bộ ba con số)</span></td>
+                        </tr>
+                        <tr style="height: 24px">
+                            <td style="width: 32.2619%; height: 24px; text-align: left"><span style="font-weight: 400; font-size: 10pt">Các cách dự thưởng khác</span></td>
+                            <td style="width: 30.5654%; height: 24px; text-align: center"><span style="font-weight: 400; font-size: 10pt">Chơi bao bộ số, chơi cuộn</span></td>
+                            <td style="width: 37.1726%; height: 24px; text-align: center"><span style="font-weight: 400; font-size: 10pt">Chơi bao bộ 3 số, chơi bao nhiều bộ ba số</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul>
+                    <li>Trong trường hợp người chơi may mắn trúng đa dạng giải trong cùng phiên, tổng giá trị thưởng sẽ được tính bằng tổng cộng giá trị của toàn bộ các giải đã trúng</li>
+                    <li>Đối với giải thưởng Max 3D+, khi người chơi đặt 2 bộ số phối hợp giống hệt nhau, mức giải thưởng sẽ được tăng gấp đôi.</li>
+                </ul>
+                <p>
+                    Người tham gia cũng có thể đăng ký theo phương thức Max 3D Tổ hợp (chơi bộ ba số Tổ hợp). Truy cập trang Vietlott.vn để tra cứu đầy đủ quy định chi tiết và chính xác nhất về sản phẩm xổ số Max 3D.
+                </p>
+                <h2><strong>Tổng hợp cấu trúc giải thưởng của các phương thức chơi MAX 3D:</strong></h2>
+                <p>
+                    <img class="size-large wp-image-126544 aligncenter" src="/img/3dmax/cocaugiaithuong3dmax.png" alt="Cơ cấu giải thưởng Max 3D" width="660" height="230" />
+                </p>
+                <p style="text-align: center"><em>Cơ cấu giải thưởng Max 3D</em></p>
+                <p>
+                    <img class="size-large wp-image-126543 aligncenter" src="/img/3dmax/cocaugiaithuong3dmax+.png" alt="Cơ cấu giải thưởng Max 3D+" width="660" height="315" />
+                </p>
+                <p style="text-align: center"><em>Cơ cấu giải thưởng Max 3D+</em></p>
+                <p>
+                    <img class="size-large wp-image-126545 aligncenter" src="/img/3dmax/cocaugiaithuong3dmaxtohop.png" alt="Cơ cấu giải thưởng Max 3D Tổ hợp" width="660" height="340" />
+                </p>
+                <p style="text-align: center"><em>Cơ cấu giải thưởng Max 3D Tổ hợp</em></p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" media="print" onload="this.media='all'">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+<script src="/js/max3dindex/max3dindex.js" defer></script>

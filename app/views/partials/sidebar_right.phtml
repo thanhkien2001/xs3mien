@@ -1,0 +1,355 @@
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh');
+// Sidebar Right - Top nhà cái, lịch mở thưởng, etc
+?>
+<!-- <aside class="border-radius-4 mb-3">
+    <h3 class="mb-0 pl-3 text-uppercase text-red2 font-weight-bold h-42px">TOP NHÀ CÁI</h3>
+    <div class="asb-content">
+        <div class="mb-3 border-bottom-dashed pb-3 container container-nhacai">
+            <div class="row">
+                <div class="col-2 medal position-relative"></div>
+                <div class="col-4 px-0">
+                    <a href="#" target="_blank" rel="nofollow">
+                        <img loading="lazy" src="/media/banner/me88/428x428.png" alt="Me88 THƯỞNG 200%">
+                    </a>
+                </div>
+                <div class="col-6 pl-2 pr-0">
+                    <a href="#" class="text-black font-weight-bold" target="_blank" rel="nofollow">Me88 THƯỞNG 200% LÊN ĐẾN 15 TRIỆU</a>
+                    <span class="d-block font-19" style="color:#ff7a00">★★★★★</span>
+                </div>
+                <div class="col-12 text-justify">
+                    <p class="my-2">MIỄN PHÍ 100K TÂN THỦ</p>
+                </div>
+                <div class="col-12 mt-2 d-flex text-center text-nowrap">
+                    <a href="#" rel="nofollow" target="_blank" class="mr-1 w-50 d-block bg-red2 px-4 py-2 rounded-0 text-white">CƯỢC NGAY</a>
+                    <a href="#" class="ml-1 d-block w-50 px-4 py-2 rounded-0 text-gray2 border">XEM REVIEW</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside> -->
+
+<!-- Calendar placeholder -->
+<div id="datepicker" class="mb-3 border-radius-4"></div>
+<script src="/js/datepicker-calendar.js"></script>
+
+<?php
+
+use App\Library\PredictionHelper;
+use App\Models\LotteryResults;
+
+// Lấy 5 kết quả gần nhất của XSMB để tính toán
+$cache = $this->getDI()->get('modelsCache');
+$cacheKey = 'sidebar_predictions_v7_' . date('Ymd'); // v7: phân biệt lô đẹp vs đặc biệt
+$predictions = $cache->get($cacheKey);
+
+if ($predictions === null) {
+    $recentResults = LotteryResults::find([
+        'conditions' => 'draw_type = :type:',
+        'bind' => ['type' => 'XSMB'],
+        'order' => 'draw_date DESC',
+        'limit' => 5
+    ]);
+
+    $resultsArray = [];
+    if ($recentResults && count($recentResults) > 0) {
+        foreach ($recentResults as $result) {
+            $prizes = [];
+            // Sử dụng field names ĐÚNG theo columnMap
+            if (isset($result->special_prize) && $result->special_prize) {
+                $prizes[1] = is_array($result->special_prize) ? $result->special_prize : \App\Library\KqxsHelper::toArray($result->special_prize);
+            }
+            if (isset($result->first_prize) && $result->first_prize) {
+                $prizes[2] = is_array($result->first_prize) ? $result->first_prize : \App\Library\KqxsHelper::toArray($result->first_prize);
+            }
+            if (isset($result->second_prize) && $result->second_prize) {
+                $prizes[3] = is_array($result->second_prize) ? $result->second_prize : \App\Library\KqxsHelper::toArray($result->second_prize);
+            }
+            if (isset($result->third_prize) && $result->third_prize) {
+                $prizes[4] = is_array($result->third_prize) ? $result->third_prize : \App\Library\KqxsHelper::toArray($result->third_prize);
+            }
+            if (isset($result->fourth_prize) && $result->fourth_prize) {
+                $prizes[5] = is_array($result->fourth_prize) ? $result->fourth_prize : \App\Library\KqxsHelper::toArray($result->fourth_prize);
+            }
+            if (isset($result->fifth_prize) && $result->fifth_prize) {
+                $prizes[6] = is_array($result->fifth_prize) ? $result->fifth_prize : \App\Library\KqxsHelper::toArray($result->fifth_prize);
+            }
+            if (isset($result->sixth_prize) && $result->sixth_prize) {
+                $prizes[7] = is_array($result->sixth_prize) ? $result->sixth_prize : \App\Library\KqxsHelper::toArray($result->sixth_prize);
+            }
+            if (isset($result->seventh_prize) && $result->seventh_prize) {
+                $prizes[8] = is_array($result->seventh_prize) ? $result->seventh_prize : \App\Library\KqxsHelper::toArray($result->seventh_prize);
+            }
+            if (isset($result->eighth_prize) && $result->eighth_prize) {
+                $prizes[9] = is_array($result->eighth_prize) ? $result->eighth_prize : \App\Library\KqxsHelper::toArray($result->eighth_prize);
+            }
+
+            if (!empty($prizes)) {
+                $resultsArray[] = ['prizes' => $prizes];
+            }
+        }
+    }
+
+    // Debug: Kiểm tra có data không
+    $hasData = count($resultsArray) > 0;
+    $totalPrizes = 0;
+    foreach ($resultsArray as $result) {
+        if (isset($result['prizes'])) {
+            foreach ($result['prizes'] as $prizes) {
+                $totalPrizes += count($prizes);
+            }
+        }
+    }
+
+    $predictions = [
+        'loDep' => PredictionHelper::generateLoDep($resultsArray, 10),
+        'dacBiet' => PredictionHelper::generateDacBietDep($resultsArray, 10),
+        'date' => PredictionHelper::getTomorrowDate(),
+        'hasData' => $hasData,
+        'totalPrizes' => $totalPrizes, // Debug: tổng số giải
+        'resultsCount' => count($resultsArray) // Debug: số kết quả
+    ];
+
+    // Cache ngắn hơn nếu không có data
+    $cacheTime = $hasData ? 3600 : 300;
+    $cache->set($cacheKey, $predictions, $cacheTime);
+}
+?>
+
+<!-- Cầu lô đẹp nhất -->
+<div class="mb-3">
+    <div class="bg-black5 border-radius-top text-uppercase mb-0 text-white h-42px font-weight-bold pl-2 font-14">
+        Cầu lô đẹp nhất ngày <?= $predictions['date'] ?>
+        <!-- <?php if (empty($predictions['hasData'])): ?>
+            (Mặc định)
+        <?php else: ?>
+            (<?= $predictions['resultsCount'] ?> kết quả, <?= $predictions['totalPrizes'] ?> giải)
+        <?php endif; ?> -->
+    </div>
+    <div class="d-flex px-1 py-2 bg-white flex-wrap text-center font-weight-bold border">
+        <?php foreach ($predictions['loDep'] as $pair): ?>
+            <div class="col-3 px-1 my-2">
+                <span class="p-2 bg-blue2 box-item-rbk border hover-text-blue1"><?= htmlspecialchars($pair) ?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<!-- Cầu đặc biệt đẹp -->
+<div class="mb-3">
+    <div class="bg-red1 border-radius-top text-uppercase mb-0 text-white h-42px font-weight-bold pl-2 font-14">
+        Cầu đặc biệt đẹp ngày <?= $predictions['date'] ?>
+    </div>
+    <div class="d-flex px-1 py-2 bg-white flex-wrap text-center font-weight-bold border">
+        <?php foreach ($predictions['dacBiet'] as $pair): ?>
+            <div class="col-3 px-1 my-2">
+                <span class="p-2 bg-blue2 box-item-rbk border hover-text-blue1"><?= htmlspecialchars($pair) ?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<aside class="border-radius-4 mt-3">
+    <h3 class="mb-0 border-bottom pl-3 text-uppercase text-red2 font-weight-bold h-42px">Soi cầu VIP</h3>
+    <nav class="aside-news">
+        <ul class="child-hot-a">
+            <li> <a href="soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn">Soi cầu lô de chuẩn</a> </li>
+            <li> <a href="soi-cau-666-xsmb.html" title="Soi cầu 666">Soi cầu 666</a> </li>
+            <li> <a href="soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777">Soi cầu 7777</a> </li>
+            <li> <a href="xs-minh-ngoc-hom-nay.html" title="Soi cầu Minh Ngọc">Soi cầu Minh Ngọc</a> </li>
+            <li> <a href="soi-cau-tot-soi-cau-xo-so-3-mien.html" title="Soi cầu tốt">Soi cầu tốt</a> </li>
+            <li> <a href="soi-cau-viet-soi-cau-lo-viet.html" title="Soi cầu Việt">Soi cầu Việt</a> </li>
+            <!-- <li> <a href="soi-cau-xo-so.html" title="Soi cầu xổ số">Soi cầu xổ số</a> </li> -->
+            <li> <a href="soi-cau-366-mb.html" title="Soi cầu 366">Soi cầu 366</a> </li>
+        </ul>
+    </nav>
+</aside>
+
+<aside class="border-radius-4 mt-3">
+    <h3 class="mb-0 border-bottom pl-3 text-uppercase text-red2 font-weight-bold h-42px">Cầu đặc biệt VIP</h3>
+    <nav class="aside-news">
+        <ul class="child-hot-a">
+            <li> <a href="/soi-cau-3-cang-mien-bac.html" title="Soi Cầu 3 càng">Soi Cầu 3 càng</a> </li>
+            <li> <a href="nuoi-lo-khung-xsmb.html" title="Nuôi lô khung">Nuôi lô khung</a> </li>
+            <li> <a href="bach-thu-de-xsmb-hom-nay.html" title="Cầu Độc Thủ Đề">Cầu Độc Thủ Đề</a> </li>
+            <li> <a href="soi-cau-song-thu-de.html" title="Cầu Song Thủ Đề">Cầu Song Thủ Đề</a> </li>
+            <li> <a href="dan-de-10-so-nuoi-khung-5-ngay.html" title="Dàn đề 10 số">Dàn đề 10 số</a> </li>
+            <li> <a href="nuoi-dan-de-20-so-khung-3-ngay.html" title="Dàn đề 20 số">Dàn đề 20 số</a> </li>
+            <li> <a href="dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số khung 3 ngày">Dàn đề 36 số khung 3
+                    ngày</a> </li>
+        </ul>
+    </nav>
+</aside>
+
+<aside class="border-radius-4 mt-3">
+    <h3 class="mb-0 border-bottom pl-3 text-uppercase text-red2 font-weight-bold h-42px">Thống kê vip</h3>
+    <nav class="aside-news">
+        <ul>
+            <li> <a rel="nofollow" href="lo-gan-xsmb.html" title="Thống kê lô gan">Thống kê lô gan</a> </li>
+            <li> <a rel="nofollow" href="dac-biet-xsmb.html" title="Thống kê đặc biệt">Thống kê đặc biệt</a> </li>
+            <li> <a rel="nofollow" href="dac-biet-tuan-xsmb.html" title="Thống kê đặc biệt tuần">Thống kê đặc biệt
+                    tuần</a> </li>
+            <li> <a rel="nofollow" href="dac-biet-thang-xsmb.html" title="Thống kê đặc biệt tháng">Thống kê đặc biệt
+                    tháng</a> </li>
+            <li> <a rel="nofollow" href="dau-duoi-xsmb.html" title="Thống kê đầu đuôi lô tô">Thống kê đầu đuôi lô tô</a>
+            </li>
+            <li> <a rel="nofollow" href="tan-suat-lo-to-xsmb.html" title="Thống kê tần suất lô tô">Thống kê tần suất lô
+                    tô</a> </li>
+            <li> <a rel="nofollow" href="lo-xien-xsmb.html" title="Thống kê lô xiên">Thống kê lô xiên</a> </li>
+            <li> <a rel="nofollow" href="lo-kep-xsmb.html" title="Thống kê lô kép">Thống kê lô kép</a> </li>
+            <li> <a rel="nofollow" href="thong-ke-theo-tong-xsmb.html" title="Thống kê theo tổng">Thống kê theo tổng</a>
+            </li>
+        </ul>
+    </nav>
+</aside>
+
+<aside class="border-radius-4 mt-2">
+    <h3 class="aside-title-blue font-14 px-3">Lịch mở thưởng xổ số</h3>
+    <nav class="aside-prize-open">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="pl-3">Miền Bắc</th>
+                    <th>Miền Trung</th>
+                    <th>Miền Nam</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a rel="nofollow" href="/xsmb-thu-2-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày thứ 2">XSMB Thứ 2</a></td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-thua-thien-hue-xstth.html"
+                                title="Xổ số Thừa Thiên Huế - Trực tiếp KQ XSTTH lúc 17h15 hôm nay">TT Huế</a></p>
+                        <p><a rel="nofollow" href="/xo-so-phu-yen-xspy.html"
+                                title="Xổ số Phú Yên - Trực tiếp KQ XSPY lúc 17h15' hôm nay">Phú Yên</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-ho-chi-minh-xshcm.html"
+                                title="Xổ số Hồ Chí Minh - Trực tiếp KQ XSHCM lúc 16h15 hôm nay">HCM</a></p>
+                        <p><a rel="nofollow" href="/xo-so-dong-thap-xsdt.html"
+                                title="Xổ số Đồng Tháp - Trực tiếp KQ XSDN lúc 16h15' hôm nay">Đồng Tháp</a></p>
+                        <p><a rel="nofollow" href="/xo-so-ca-mau-xscm.html"
+                                title="Xổ số Cà Mau - Trực tiếp KQ XSCM lúc 16h15' hôm nay">Cà Mau</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <a rel="nofollow" href="/xsmb-thu-3-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày thứ 3">XSMB Thứ 3</a> </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-dak-lak-xsdlk.html"
+                                title="Xổ số Đắk Lắk - Trực tiếp KQ XSDLK lúc 17h15 hôm nay">Đắk Lắk</a></p>
+                        <p><a rel="nofollow" href="/xo-so-quang-nam-xsqna.html"
+                                title="Xổ số Quảng Nam - Trực tiếp KQ XSQNA lúc 17h15 hôm nay">Quảng Nam</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-ben-tre-xsbtr.html"
+                                title="Xổ số Bến Tre - Trực tiếp KQ XSBTR lúc 16h15' hôm nay">Bến Tre</a></p>
+                        <p><a rel="nofollow" href="/xo-so-vung-tau-xsvt.html"
+                                title="Xổ số Vũng Tàu - Trực tiếp KQ XSVT lúc 16h15' hôm nay">Vũng Tàu</a></p>
+                        <p><a rel="nofollow" href="/xo-so-bac-lieu-xsbl.html"
+                                title="Xổ số Bạc Liêu - Trực tiếp KQ XSBL lúc 16h15' hôm nay">Bạc Liêu</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <a rel="nofollow" href="/xsmb-thu-4-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày thứ 4">XSMB Thứ 4</a> </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-khanh-hoa-xskh.html"
+                                title="Xổ số Khánh Hòa - Trực tiếp KQ XSKH lúc 17h15 hôm nay">Khánh Hòa</a></p>
+                        <p><a rel="nofollow" href="/xo-so-da-nang-xsdna.html"
+                                title="Xổ số Đà Nẵng - Trực tiếp KQ XSDNA lúc 17h15' hôm nay">Đà Nẵng</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-dong-nai-xsdn.html"
+                                title="Xổ số Đồng Nai - Trực tiếp KQ XSDN lúc 16h15' hôm nay">Đồng Nai</a></p>
+                        <p><a rel="nofollow" href="/xo-so-soc-trang-xsst.html"
+                                title="Xổ số Sóc Trăng - Trực tiếp KQ XSST lúc 16h15' hôm nay">Sóc Trăng</a></p>
+                        <p><a rel="nofollow" href="/xo-so-can-tho-xsct.html"
+                                title="Xổ số Cần Thơ - Trực tiếp KQ XSCT lúc 16h15' hôm nay">Cần Thơ</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <a rel="nofollow" href="/xsmb-thu-5-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày thứ 5">XSMB Thứ 5</a> </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-binh-dinh-xsbdi.html"
+                                title="Xổ số Bình Định - Trực tiếp KQ XSBDI lúc 17h15 hôm nay">Bình Định</a></p>
+                        <p><a rel="nofollow" href="/xo-so-quang-binh-xsqb.html"
+                                title="Xổ số Quảng Bình - Trực tiếp KQ XSQB lúc 17h15 hôm nay">Quảng Bình</a></p>
+                        <p><a rel="nofollow" href="/xo-so-quang-tri-xsqt.html"
+                                title="Xổ số Quảng Trị - Trực tiếp KQ XSQT lúc 17h15 hôm nay">Quảng Trị</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-an-giang-xsag.html"
+                                title="Xổ số An Giang - Trực tiếp KQ XSAG lúc 16h15' hôm nay">An Giang</a></p>
+                        <p><a rel="nofollow" href="/xo-so-tay-ninh-xstn.html"
+                                title="Xổ số Tây Ninh - Trực tiếp KQ XSTN lúc 16h15' hôm nay">Tây Ninh</a></p>
+                        <p><a rel="nofollow" href="/xo-so-binh-thuan-xsbth.html"
+                                title="Xổ số Bình Thuận - Trực tiếp KQ XSBTH lúc 16h15 hôm nay">Bình Thuận</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <a rel="nofollow" href="/xsmb-thu-6-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày thứ 6">XSMB Thứ 6</a> </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-gia-lai-xsgl.html"
+                                title="Xổ số Gia Lai - Trực tiếp KQ XSGL lúc 17h15' hôm nay">Gia Lai</a></p>
+                        <p><a rel="nofollow" href="/xo-so-ninh-thuan-xsnt.html"
+                                title="Xổ số Ninh Thuận - Trực tiếp KQ XSNT lúc 17h15 hôm nay">Ninh Thuận</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-binh-duong-xsbd.html"
+                                title="Xổ số Bình Dương - Trực tiếp KQ XSBD lúc 16h15' hôm nay">Bình Dương</a></p>
+                        <p><a rel="nofollow" href="/xo-so-vinh-long-xsvl.html"
+                                title="Xổ số Vĩnh Long - Trực tiếp KQ XSVL lúc 16h15' hôm nay">Vĩnh Long</a></p>
+                        <p><a rel="nofollow" href="/xo-so-tra-vinh-xstv.html"
+                                title="Xổ số Trà Vinh - Trực tiếp KQ XSTV lúc 16h15' hôm nay">Trà Vinh</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <a rel="nofollow" href="/xsmb-thu-7-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày thứ 7">XSMB Thứ 7</a> </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-da-nang-xsdna.html"
+                                title="Xổ số Đà Nẵng - Trực tiếp KQ XSDNA lúc 17h15' hôm nay">Đà Nẵng</a></p>
+                        <p><a rel="nofollow" href="/xo-so-quang-ngai-xsqng.html"
+                                title="Xổ số Quảng Ngãi - Trực tiếp KQ XSQNG lúc 17h15 hôm nay">Quảng Ngãi</a></p>
+                        <p><a rel="nofollow" href="/xo-so-dak-nong-xsdno.html"
+                                title="Xổ số Đắk Nông - Trực tiếp KQ XSDNO lúc 17h15 hôm nay">Đắk Nông</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-ho-chi-minh-xshcm.html"
+                                title="Xổ số Hồ Chí Minh - Trực tiếp KQ XSHCM lúc 16h15 hôm nay">HCM</a></p>
+                        <p><a rel="nofollow" href="/xo-so-long-an-xsla.html"
+                                title="Xổ số Long An - Trực tiếp KQ XSLA lúc 16h15' hôm nay">Long An</a></p>
+                        <p><a rel="nofollow" href="/xo-so-binh-phuoc-xsbp.html"
+                                title="Xổ số Bình Phước - Trực tiếp KQ XSBP lúc 16h15' hôm nay">Bình Phước</a></p>
+                        <p><a rel="nofollow" href="/xo-so-hau-giang-xshg.html"
+                                title="Xổ số Hậu Giang - Trực tiếp KQ XSHG lúc 16h15' hôm nay">Hậu Giang</a></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <a rel="nofollow" href="/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html"
+                            title="Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày chủ nhật">XSMB CN</a> </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-khanh-hoa-xskh.html"
+                                title="Xổ số Khánh Hòa - Trực tiếp KQ XSKH lúc 17h15 hôm nay">Khánh Hòa</a></p>
+                        <p><a rel="nofollow" href="/xo-so-thua-thien-hue-xstth.html"
+                                title="Xổ số Thừa Thiên Huế - Trực tiếp KQ XSTTH lúc 17h15 hôm nay">Thừa Thiên Huế</a>
+                        </p>
+                        <p><a rel="nofollow" href="/xo-so-kon-tum-xskt.html"
+                                title="Xổ số Kon Tum - Trực tiếp KQ XSKT lúc 17h15 hôm nay">Kon Tum</a></p>
+                    </td>
+                    <td>
+                        <p><a rel="nofollow" href="/xo-so-tien-giang-xstg.html"
+                                title="Xổ số Tiền Giang - Trực tiếp KQ XSTG lúc 16h15' hôm nay">Tiền Giang</a></p>
+                        <p><a rel="nofollow" href="/xo-so-kien-giang-xskg.html"
+                                title="Xổ số Kiên Giang - Trực tiếp KQ XSKG lúc 16h15' hôm nay">Kiên Giang</a></p>
+                        <p><a rel="nofollow" href="/xo-so-da-lat-xsdl.html"
+                                title="Xổ số Đà Lạt - Trực tiếp KQ XSDL lúc 16h15' hôm nay">Đà Lạt</a></p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </nav>
+</aside>

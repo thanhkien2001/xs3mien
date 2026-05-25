@@ -1,0 +1,108 @@
+<?php
+/**
+ * View: Kết quả xổ số theo ngày (Dynamic)
+ * Variables: $date, $dayOfWeek, $xsmnResults, $xsmbResults, $xsmtResults
+ */
+$esc = $this->escaper;
+?>
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="<i class='icon-home'></i>">
+                                <i class="icon-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="/kqxs-ngay-<?= str_replace('/', '-', $date) ?>.html" 
+                               title="Kết quả xổ số ngày <?= $esc->escapeHtmlAttr($date) ?>">
+                                Kết quả xổ số ngày <?= $esc->escapeHtml($date) ?>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="col-xl-610">
+                <?php if ($hasXsmn): ?>
+                <!-- XSMN Results (Dynamic View v2) -->
+                <article class="my-2">
+                    <?php $this->partial('kqxsdate/partials/xsmn_results', [
+                        'results' => $xsmnResults,
+                        'date' => $date,
+                        'dayOfWeek' => $dayOfWeek
+                    ]); ?>
+                </article>
+                
+                <!-- XSMN Predictions -->
+                <?php $this->partial('kqxsdate/partials/prediction_box', [
+                    'predictions' => $xsmnPredictions,
+                    'region' => 'XSMN',
+                    'regionName' => 'miền Nam'
+                ]); ?>
+                <?php else: ?>
+                <!-- Debug: XSMN không có data cho ngày <?= $esc->escapeHtml($date) ?> -->
+                <?php endif; ?>
+                
+                <?php if ($hasXsmb): ?>
+                <!-- XSMB Results -->
+                <article class="my-2">
+                    <?php $this->partial('kqxsdate/partials/xsmb_results', [
+                        'results' => $xsmbResults,
+                        'date' => $date,
+                        'dayOfWeek' => $dayOfWeek
+                    ]); ?>
+                </article>
+                
+                <!-- XSMB Predictions -->
+                <?php $this->partial('kqxsdate/partials/prediction_box', [
+                    'predictions' => $xsmbPredictions,
+                    'region' => 'XSMB',
+                    'regionName' => 'miền Bắc'
+                ]); ?>
+                <?php endif; ?>
+                
+                <?php if ($hasXsmt): ?>
+                <!-- XSMT Results (Dynamic View v2) -->
+                <article class="my-2">
+                    <?php $this->partial('kqxsdate/partials/xsmt_results', [
+                        'results' => $xsmtResults,
+                        'date' => $date,
+                        'dayOfWeek' => $dayOfWeek
+                    ]); ?>
+                </article>
+                
+                <!-- XSMT Predictions -->
+                <?php $this->partial('kqxsdate/partials/prediction_box', [
+                    'predictions' => $xsmtPredictions,
+                    'region' => 'XSMT',
+                    'regionName' => 'miền Trung'
+                ]); ?>
+                <?php else: ?>
+                <!-- Debug: XSMT không có data cho ngày <?= $esc->escapeHtml($date) ?> -->
+                <?php endif; ?>
+                
+                <?php if (!$hasXsmn && !$hasXsmb && !$hasXsmt): ?>
+                <div class="alert alert-info mt-3">
+                    <h4>Chưa có kết quả</h4>
+                    <p>Kết quả xổ số ngày <?= $esc->escapeHtml($date) ?> chưa được cập nhật.</p>
+                </div>
+                <?php endif; ?>
+            </div>
+            
+            <!-- Sidebar Left -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+            
+            <!-- Sidebar Right -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+

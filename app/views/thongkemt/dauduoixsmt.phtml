@@ -1,0 +1,322 @@
+<?php
+
+/** @var array $provinceOptions */
+/** @var string $selectedProvinceRaw */
+/** @var string $selectedProvinceName */
+/** @var int $totalDay */
+/** @var string|null $asOfDate */
+/** @var array $headGridByDate */
+/** @var array $tailGridByDate */
+/** @var array $sumGridByDate */
+/** @var array $specialHeadCounts */
+/** @var array $specialTailCounts */
+$digits = range(0, 9);
+?>
+<link rel="stylesheet" href="/css/thongke/thongke1.css">
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class=" " title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a></li>
+                    <li><a class=" " title="Thống kê xổ số Miền Nam" href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+                    <li><a class="util-text-red" title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+                    <li><a title="Thống kê Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power 6/55</a></li>
+                    <li><a title="Thống kê Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega 6/45</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <?php if (!empty($selectedProvinceCode) && $selectedProvinceRaw !== 'REGION:XSMT'): ?>
+                        <li class="nav-breadcrumb-item"><a href="/thong-ke-dau-duoi-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html"><span>Đầu đuôi Miền Trung</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Đầu đuôi <?= htmlspecialchars($selectedProvinceCode) ?></span></li>
+                        <?php else: ?>
+                        <li class="nav-breadcrumb-item"><span>Đầu đuôi Miền Trung</span></li>
+                        <?php endif; ?>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1">
+                        <?= htmlspecialchars($seo_title ?? "Thống Kê Đầu Đuôi {$selectedProvinceName} – TK Đầu Đuôi Lô Tô " . (int)$totalDay . " Kỳ") ?>
+                        <?php if ($asOfDate): ?>
+                        <small class="util-text-muted">(đến <?= date('d/m/Y', strtotime($asOfDate)) ?>)</small>
+                        <?php endif; ?>
+                    </h1>
+
+                    <form class="util-mb-3 util-small util-rounded js-thong-ke-redirect-form" action="" method="POST">
+                        <div class="layout-row util-g-3">
+                            <div class="layout-col-md-6">
+                                <label class="util-mb-1">Tỉnh/Thành</label>
+                                <select class="form-select util-border util-border-dark-subtle util-fs-8 js-chon-mien-tinh" name="province_id" onchange="this.form.submit()">
+                                    <option value="REGION:XSMT" <?= $selectedProvinceRaw === 'REGION:XSMT' ? 'selected' : ''; ?>>Miền Trung (tổng hợp)</option>
+                                    <optgroup label="Miền Trung">
+                                        <?php foreach ($provinceOptions as $p): ?>
+                                        <option value="<?= (int)$p['id'] ?>" <?= $selectedProvinceRaw == (string)$p['id'] ? 'selected' : ''; ?>>
+                                            <?= htmlspecialchars($p['name']) ?>
+                                        </option>
+                                        <?php endforeach; ?>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            <div class="layout-col-md-4" style="margin-top: 0px;">
+                                <label class="util-mb-1">Số lần quay</label>
+                                <select class="form-select util-border util-border-dark-subtle util-fs-8" name="total_day" onchange="this.form.submit()">
+                                    <?php foreach ([5, 10, 30, 60, 100] as $opt): ?>
+                                    <option value="<?= $opt ?>" <?= $totalDay == $opt ? 'selected' : ''; ?>><?= $opt ?> lần quay</option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="hidden" name="loai_tk" value="tk_dauduoi" />
+                    </form>
+
+                    <?php if ($isRegionMode): ?>
+                    <ul class="list__subpage">
+                        <li><a title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê Miền Trung</a></li>
+                        <li><a title="Lô gan xổ số Miền Trung" href="/thong-ke-lo-gan-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Lô gan Miền Trung</a></li>
+                        <li><a title="Thống kê đặc biệt xổ số Miền Trung" href="/thong-ke-dac-biet-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Giải đặc biệt Miền Trung</a></li>
+                        <li><a title="Thống kê tần suất xổ số Miền Trung" href="/thong-ke-tan-suat-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html">Tần suất Miền Trung</a></li>
+                    </ul>
+                    <?php endif; ?>
+                    <?php if (!empty($statisticsMenu)): ?>
+                    <?= $statisticsMenu ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <strong>Thống kê đầu đuôi <?= htmlspecialchars($selectedProvinceName) ?></strong>, thống kê đầu/đuôi lô tô từ 00–99 dựa trên <b>2 số cuối của tất cả giải</b> trong mỗi ngày/quầy.
+            </div>
+            <div class="legend util-small util-text-muted util-mb-4 util-flex util-align-items-center" style="gap: 8px;">
+                <span class="util-me-2">Chú thích:</span>
+                <?php for ($b = 0; $b <= 9; $b++): ?>
+                <span class="box hb-<?= $b ?>"></span>
+                <?php endfor; ?>
+                <span class="util-ms-2">Nhạt → đậm: tần suất thấp → cao (trong từng ngày).</span>
+            </div>
+
+            <h2 class="util-fs-5-5 util-m-0 util-p-2 util-px-3 util-bg-orange">Bảng thống kê <span>đầu lô tô</span> <?= htmlspecialchars($selectedProvinceName) ?> <?= (int)$totalDay ?> kỳ quay</h2>
+            <div class="comp-table-responsive util-mb-4">
+                <table class="table__thongke comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <td>Ngày</td>
+                            <?php foreach ($digits as $d): ?>
+                            <td>Đầu <span class="util-block util-font-bold util-fs-6 util-text-red"><?= $d ?></span></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($headGridByDate)): ?>
+                        <?php foreach ($headGridByDate as $row): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['date_vn']) ?></td>
+                            <?php foreach ($digits as $d): $v = (int)$row['counts'][$d]; ?>
+                            <td class="hb-<?= $v ?>"><?= $v ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td class="util-text-center" colspan="11">Không có dữ liệu.</td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-5-5 util-m-0 util-p-2 util-px-3 util-bg-orange">Bảng thống kê <span>đuôi lô tô</span> <?= htmlspecialchars($selectedProvinceName) ?> <?= (int)$totalDay ?> kỳ quay</h2>
+            <div class="comp-table-responsive util-mb-4">
+                <table class="table__thongke comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Ngày</th>
+                            <?php foreach ($digits as $d): ?>
+                            <th>Đuôi <span class="util-block util-font-bold util-fs-6 util-text-red"><?= $d ?></span></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($tailGridByDate)): ?>
+                        <?php foreach ($tailGridByDate as $row): ?>
+                        <tr>
+                            <td class="sticky-col"><?= htmlspecialchars($row['date_vn']) ?></td>
+                            <?php foreach ($digits as $d): $v = (int)$row['counts'][$d]; ?>
+                            <td class="hb-<?= $v ?>"><?= $v ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td class="util-text-center" colspan="11">Không có dữ liệu.</td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-5-5 util-m-0 util-p-2 util-px-3 util-bg-orange">Thống kê theo tổng lô tô <?= htmlspecialchars($selectedProvinceName) ?></h2>
+            <div class="comp-table-responsive util-mb-4">
+                <table class="table__thongke comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Ngày</th>
+                            <?php foreach ($digits as $d): ?>
+                            <th>Tổng <span class="util-block util-font-bold util-fs-6 util-text-red"><?= $d ?></span></th>
+                            <?php endforeach; ?>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($sumGridByDate)): ?>
+                        <?php foreach ($sumGridByDate as $row): ?>
+                        <tr>
+                            <td class="sticky-col"><?= htmlspecialchars($row['date_vn']) ?></td>
+                            <?php foreach ($digits as $d): $v = (int)$row['counts'][$d]; ?>
+                            <td class="hb-<?= $v ?>"><?= $v ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php endforeach; ?>
+                        <?php else: ?>
+                        <tr>
+                            <td class="util-text-center" colspan="11">Không có dữ liệu.</td>
+                        </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-5-5 util-m-0 util-p-2 util-px-3 util-bg-orange">Số lần về <span>đầu số</span> giải đặc biệt <?= htmlspecialchars($selectedProvinceName) ?> <?= (int)$totalDay ?> kỳ quay</h2>
+            <div class="comp-table-responsive util-mb-4">
+                <table class="table__thongke comp-table util-table-bordered util-small util-text-center util-mt-0 util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Con số</th>
+                            <th>Số lần về</th>
+                            <th>Con số</th>
+                            <th>Số lần về</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $pairs = array_chunk($specialHeadCounts, 2);
+                        if (empty($pairs)): ?>
+                        <tr>
+                            <td colspan="4">Không có dữ liệu.</td>
+                        </tr>
+                        <?php else:
+                            foreach ($pairs as $pair): ?>
+                        <tr>
+                            <?php foreach ($pair as $it): ?>
+                            <td>Đầu <span class="util-text-red util-fs-6 util-font-bold"><?= (int)$it['digit'] ?></span></td>
+                            <td><?= (int)$it['times'] ?> lần về</td>
+                            <?php endforeach; ?>
+                            <?php if (count($pair) === 1): ?><td></td>
+                            <td></td><?php endif; ?>
+                        </tr>
+                        <?php endforeach;
+                        endif; ?>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 class="util-fs-5-5 util-m-0 util-p-2 util-px-3 util-bg-orange">Số lần về <span>đuôi số</span> giải đặc biệt <?= htmlspecialchars($selectedProvinceName) ?> <?= (int)$totalDay ?> kỳ quay</h2>
+            <div class="comp-table-responsive util-mb-4">
+                <table class="table__thongke comp-table util-table-bordered util-small util-text-center util-mb-0">
+                    <thead class="util-align-items-center">
+                        <tr>
+                            <th>Con số</th>
+                            <th>Số lần về</th>
+                            <th>Con số</th>
+                            <th>Số lần về</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $pairs = array_chunk($specialTailCounts, 2);
+                        if (empty($pairs)): ?>
+                        <tr>
+                            <td colspan="4">Không có dữ liệu.</td>
+                        </tr>
+                        <?php else:
+                            foreach ($pairs as $pair): ?>
+                        <tr>
+                            <?php foreach ($pair as $it): ?>
+                            <td>Đuôi <span class="util-text-red util-fs-6 util-font-bold"><?= (int)$it['digit'] ?></span></td>
+                            <td><?= (int)$it['times'] ?> lần về</td>
+                            <?php endforeach; ?>
+                            <?php if (count($pair) === 1): ?><td></td>
+                            <td></td><?php endif; ?>
+                        </tr>
+                        <?php endforeach;
+                        endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm1 util-mt-3 util-mb-4 util-p-3">
+                <p><a title="Thống kê đầu đuôi miền Trung" href="/thong-ke-dau-duoi-xsmt-thong-ke-xo-so-mien-trung-tk-xsmt.html"><strong>Thống kê đầu đuôi
+                            miền Trung</strong></a> là công cụ hỗ trợ đắc lực giúp người chơi xổ số miền Trung theo dõi
+                    các cặp số đầu và số đuôi xuất hiện thường xuyên cũng như xu hướng ra số trong bảng <a title="KQ XSMT" href="/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html"><strong>KQ
+                            XSMT</strong></a> ở các kỳ gần đây. Các chỉ số liên quan đến đầu - đuôi MT
+                    được sắp xếp từ 0 đến 9 và tổng số lần về của chúng, từ đó hỗ trợ người chơi
+                    phân tích và nhận diện dễ dàng những tín hiệu quan trọng để giành
+                    giải thưởng miền Trung.</p>
+                <p>Ngoài ra, người chơi còn có thể xem phân tích về tổng đầu - đuôi lô tô miền Trung như
+                    số đầu và đuôi giải đặc biệt có tần suất cao nhất sẽ mang lại nhiều gợi ý
+                    <strong><a title="soi cầu MT" href="/du-doan-xsmt-c60.html">Soi cầu MT</a></strong> hữu ích và
+                    nâng cao cơ hội trúng giải hấp dẫn. Tận dụng dữ liệu từ bảng <strong>thống kê đầu đuôi
+                        lô tô XSMT</strong> tại soicau247.com được cập nhật vào 17h35 hàng ngày ngay sau
+                    kỳ quay để đảm bảo tính chính xác của thông tin cung cấp cho người chơi.
+                </p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<script src="/js/thongke/thongke-navigation.js"></script>
+
+
+<script>
+    document.addEventListener('change', function(e) {
+        if (e.target.closest('.js-thong-ke-redirect-form select')) {
+            e.target.closest('form').submit();
+        }
+    }, false);
+</script>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+        body .layout-row.util-g-0.util-g-md-3 {
+        margin-top: 0 !important;
+    }
+    }
+</style>
+
+<script>
+    (function() {
+        var form = document.querySelector('.js-thong-ke-redirect-form');
+        if (!form) return;
+
+        // Đảm bảo form submit đến đúng URL hiện tại
+        if (!form.action || form.action === '') {
+            form.action = window.location.pathname;
+        }
+
+        form.addEventListener('change', function(e) {
+            if (e.target && (e.target.name === 'province_id' || e.target.name === 'total_day')) {
+                form.submit();
+            }
+        });
+    })();
+</script>

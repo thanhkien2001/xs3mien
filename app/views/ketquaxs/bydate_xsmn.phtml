@@ -1,0 +1,432 @@
+<?php
+/**
+ * Trang kết quả XSMN theo ngày - Giao diện mới
+ * @var \DateTime $pageDate
+ * @var array $provincesForView
+ * @var array $resultsForView
+ * @var string $thuText
+ * @var string $thuLink
+ * @var array $otherLinks
+ * @var array $latestResults
+ */
+
+use App\Library\LotteryHelper;
+
+$esc = $this->escaper;
+$day = (int)$pageDate->format('j');
+$month = (int)$pageDate->format('n');
+$year = (int)$pageDate->format('Y');
+$dateFormatted = sprintf('%02d/%02d/%d', $day, $month, $year);
+$dateSlug = sprintf('%d-%d-%d', $day, $month, $year);
+
+// Map active day
+$weekday = (int)$pageDate->format('N'); // 1=Monday, 7=Sunday
+$dayMap = [
+    1 => 'thu-2',
+    2 => 'thu-3',
+    3 => 'thu-4',
+    4 => 'thu-5',
+    5 => 'thu-6',
+    6 => 'thu-7',
+    7 => 'chu-nhat'
+];
+$active = $dayMap[$weekday] ?? '';
+
+// Province URL mapping
+function getProvinceUrl($provinceName) {
+    $urlMap = [
+        'Hồ Chí Minh' => '/xo-so-ho-chi-minh-xshcm.html',
+        'Đồng Nai' => '/xo-so-dong-nai-xsdn.html',
+        'An Giang' => '/xo-so-an-giang-xsag.html',
+        'Tiền Giang' => '/xo-so-tien-giang-xstg.html',
+        'Kiên Giang' => '/xo-so-kien-giang-xskg.html',
+        'Tây Ninh' => '/xo-so-tay-ninh-xstn.html',
+        'Bình Dương' => '/xo-so-binh-duong-xsbduong.html',
+        'Sóc Trăng' => '/xo-so-soc-trang-xsst.html',
+        'Vĩnh Long' => '/xo-so-vinh-long-xsvl.html',
+        'Trà Vinh' => '/xo-so-tra-vinh-xstv.html',
+        'Cần Thơ' => '/xo-so-can-tho-xsct.html',
+        'Bến Tre' => '/xo-so-ben-tre-xsbtr.html',
+        'Vũng Tàu' => '/xo-so-vung-tau-xsvt.html',
+        'Bạc Liêu' => '/xo-so-bac-lieu-xsblieu.html',
+        'Bình Thuận' => '/xo-so-binh-thuan-xsbthuan.html',
+        'Đồng Tháp' => '/xo-so-dong-thap-xsdthap.html',
+        'Long An' => '/xo-so-long-an-xsla.html',
+        'Cà Mau' => '/xo-so-ca-mau-xscm.html',
+        'Bình Phước' => '/xo-so-binh-phuoc-xsbp.html',
+        'Hậu Giang' => '/xo-so-hau-giang-xshg.html',
+        'Đà Lạt' => '/xo-so-da-lat-xsdl.html',
+    ];
+    return $urlMap[$provinceName] ?? '#';
+}
+?>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <div class="submenu2">
+                    <ul class="row flex-nowrap text-nowrap overflow-auto mx-0 rounded lh-25 submenu2-bg pl-0 pl-md-3">
+                        <li class="px-2 px-lg-3 active">
+                            <a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html" title="Miền Nam">XSMN</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-2' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-2-ket-qua-xo-so-mien-nam.html" title="thứ 2">thứ 2</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-3' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-3-ket-qua-xo-so-mien-nam.html" title="thứ 3">thứ 3</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-4' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-4-ket-qua-xo-so-mien-nam.html" title="thứ 4">thứ 4</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-5' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-5-ket-qua-xo-so-mien-nam.html" title="thứ 5">thứ 5</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-6' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-6-ket-qua-xo-so-mien-nam.html" title="thứ 6">thứ 6</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-7' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-7-ket-qua-xo-so-mien-nam.html" title="thứ 7">thứ 7</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'chu-nhat' ? 'active' : '' ?>">
+                            <a href="/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html" title="chủ nhật">chủ nhật</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html" title="XSMN">XSMN</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="<?= $esc->escapeHtmlAttr($thuLink ?? '#') ?>" title="XSMN <?= $esc->escapeHtml($thuText ?? '') ?>">XSMN <?= $esc->escapeHtml($thuText ?? '') ?></a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <a href="/xsmn-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMN ngày <?= $esc->escapeHtml($dateFormatted) ?>">XSMN ngày <?= $esc->escapeHtml($dateFormatted) ?></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <article class="my-2">
+                    <div class="result result-multi rounded">
+                        <h2 class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+                            Xổ số Miền Nam ngày <?= $esc->escapeHtml($dateFormatted) ?>
+                        </h2>
+                        <div class="breadcrumb-table">
+                            <h4 class="breadcrumb-table-title">
+                                <a href="<?= $esc->escapeHtmlAttr($thuLink ?? '#') ?>" title="XSMN <?= $esc->escapeHtml($thuText ?? '') ?>">XSMN <?= $esc->escapeHtml($thuText ?? '') ?></a>
+                                /
+                                <a href="/xsmn-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMN <?= $esc->escapeHtml($dateFormatted) ?>">XSMN <?= $esc->escapeHtml($dateFormatted) ?></a>
+                            </h4>
+                        </div>
+                        <div class="table-flex-border">
+                            <table class="table-flex table-result" data-code="XSMN">
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <?php foreach ($provincesForView as $province): ?>
+                                        <td>
+                                            <a href="<?= getProvinceUrl($province['name']) ?>" title="<?= $esc->escapeHtmlAttr($province['name']) ?>">
+                                                <?= $esc->escapeHtml($province['name'] === 'TP. Hồ Chí Minh' ? 'Hồ Chí Minh' : $province['name']) ?>
+                                            </a>
+                                        </td>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                    <?php
+                                    $get = function ($pvId, $idx) use ($resultsForView) {
+                                        $pr = $resultsForView[$pvId]['prizes'] ?? null;
+                                        return $pr ? ($pr[$idx] ?? []) : [];
+                                    };
+                                    
+                                    $prizeLabels = ['G8', 'G7', 'G6', 'G5', 'G4', 'G3', 'G2', 'G1', 'ĐB'];
+                                    $prizeIndexes = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+                                    $ncValues = [2, 3, 4, 4, 5, 5, 5, 5, 6];
+                                    
+                                    foreach ($prizeLabels as $idx => $label):
+                                        $prizeIdx = $prizeIndexes[$idx];
+                                        $nc = $ncValues[$idx];
+                                    ?>
+                                    <tr>
+                                        <td><?= $label ?></td>
+                                        <?php foreach ($provincesForView as $province): ?>
+                                        <td>
+                                            <?php
+                                            $prizes = $get($province['id'], $prizeIdx);
+                                            if (is_array($prizes) && !empty($prizes)) {
+                                                foreach ($prizes as $prize) {
+                                                    $prize = trim($prize);
+                                                    if ($prize) {
+                                                        echo '<span class="text-number" nc="' . $nc . '">' . $esc->escapeHtml($prize) . '</span> ';
+                                                    }
+                                                }
+                                            }
+                                            ?>
+                                        </td>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="loto loto-multi rounded">
+                        <table class="table table-bordered table-striped table-xslt-multi-col" data-code="XSMN">
+                            <thead>
+                                <tr>
+                                    <th>Đầu</th>
+                                    <?php foreach ($provincesForView as $province): ?>
+                                    <th><?= $esc->escapeHtml($province['name'] === 'TP. Hồ Chí Minh' ? 'Hồ Chí Minh' : $province['name']) ?></th>
+                                    <?php endforeach; ?>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php for ($head = 0; $head <= 9; $head++): ?>
+                                <tr>
+                                    <td><?= $head ?></td>
+                                    <?php foreach ($provincesForView as $province): ?>
+                                    <td>
+                                        <?php
+                                        $dau = $resultsForView[$province['id']]['dau'] ?? array_fill(0, 10, []);
+                                        $vals = $dau[$head] ?? [];
+                                        if (!empty($vals)) {
+                                            sort($vals);
+                                            foreach ($vals as $v) {
+                                                echo '<span>' . $esc->escapeHtml($v) . '</span>';
+                                            }
+                                        }
+                                        ?>
+                                    </td>
+                                    <?php endforeach; ?>
+                                </tr>
+                                <?php endfor; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+                
+                <div class="mt-3">
+                    <?php foreach ($provincesForView as $province): ?>
+                    <p class="mb-1">
+                        <span class="text-red">»</span>
+                        <a href="<?= getProvinceUrl($province['name']) ?>" class="text-blue">
+                            Kết quả <?= $esc->escapeHtml($province['name']) ?> <?= $esc->escapeHtml($dateFormatted) ?>
+                        </a>
+                    </p>
+                    <?php endforeach; ?>
+                </div>
+                
+                <h3 class="font-weight-bold mt-3 font-16">Thống kê giải đặc biệt XSMN <?= $esc->escapeHtml($dateFormatted) ?></h3>
+                <table class="table-default w-100 text-center">
+                    <tbody>
+                        <tr class="bg-orange font-weight-bold">
+                            <td>Ngày</td>
+                            <td>Tỉnh</td>
+                            <td>Giải ĐB</td>
+                            <td>Ngày</td>
+                            <td>Tỉnh</td>
+                            <td>Giải ĐB</td>
+                        </tr>
+                        <?php
+                        $stats = $statistics['specialPrize'] ?? [];
+                        $rowCount = 0;
+                        foreach ($stats as $item):
+                            if ($rowCount % 2 == 0):
+                                $itemDate = new \DateTime($item['date']);
+                                $itemDateFormatted = $itemDate->format('d/m');
+                                $itemDateSlug = $itemDate->format('d-n-Y');
+                        ?>
+                        <tr>
+                            <td><a class="text-blue" rel="nofollow" href="/xsmn-<?= $esc->escapeHtmlAttr($itemDateSlug) ?>.html"><?= $esc->escapeHtml($itemDateFormatted) ?></a></td>
+                            <td><?= $esc->escapeHtml($item['province_code'] ?? '') ?></td>
+                            <td class="font-weight-bold">
+                                <?php
+                                $db = $item['special_prize'];
+                                if (strlen($db) >= 2) {
+                                    echo $esc->escapeHtml(substr($db, 0, -2)) . '<span class="text-red">' . $esc->escapeHtml(substr($db, -2)) . '</span>';
+                                } else {
+                                    echo $esc->escapeHtml($db);
+                                }
+                                ?>
+                            </td>
+                            <?php
+                            $nextItem = $stats[$rowCount + 1] ?? null;
+                            if ($nextItem):
+                                $nextDate = new \DateTime($nextItem['date']);
+                                $nextDateFormatted = $nextDate->format('d/m');
+                                $nextDateSlug = $nextDate->format('d-n-Y');
+                            ?>
+                            <td><a class="text-blue" rel="nofollow" href="/xsmn-<?= $esc->escapeHtmlAttr($nextDateSlug) ?>.html"><?= $esc->escapeHtml($nextDateFormatted) ?></a></td>
+                            <td><?= $esc->escapeHtml($nextItem['province_code'] ?? '') ?></td>
+                            <td class="font-weight-bold">
+                                <?php
+                                $nextDb = $nextItem['special_prize'];
+                                if (strlen($nextDb) >= 2) {
+                                    echo $esc->escapeHtml(substr($nextDb, 0, -2)) . '<span class="text-red">' . $esc->escapeHtml(substr($nextDb, -2)) . '</span>';
+                                } else {
+                                    echo $esc->escapeHtml($nextDb);
+                                }
+                                ?>
+                            </td>
+                            <?php else: ?>
+                            <td></td>
+                            <td></td>
+                            <td class="font-weight-bold"></td>
+                            <?php endif; ?>
+                        </tr>
+                        <?php
+                            endif;
+                            $rowCount++;
+                        endforeach;
+                        ?>
+                    </tbody>
+                </table>
+                
+                <?php if (!empty($statistics['lotoStats'])): ?>
+                <h3 class="font-weight-bold mt-3 font-16">Thống kê loto về nhiều XSMN <?= $esc->escapeHtml($dateFormatted) ?></h3>
+                <table class="table-default w-100 text-center">
+                    <tbody>
+                        <tr class="bg-blue text-white font-weight-bold">
+                            <?php foreach (array_slice($statistics['lotoStats'], 0, 3) as $provinceStats): ?>
+                            <td colspan="2"><?= $esc->escapeHtml($provinceStats['name']) ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr class="bg-orange">
+                            <?php foreach (array_slice($statistics['lotoStats'], 0, 3) as $provinceStats): ?>
+                            <td>Cặp số</td>
+                            <td>Lần về</td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php for ($i = 0; $i < 5; $i++): ?>
+                        <tr>
+                            <?php foreach (array_slice($statistics['lotoStats'], 0, 3) as $provinceStats): ?>
+                            <td>
+                                <?php if (isset($provinceStats['frequent'][$i])): ?>
+                                <span class="text-red font-weight-bold"><?= $esc->escapeHtml($provinceStats['frequent'][$i]['loto']) ?></span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if (isset($provinceStats['frequent'][$i])): ?>
+                                <span class="font-weight-bold"><?= (int)$provinceStats['frequent'][$i]['frequency'] ?></span> lần
+                                <?php endif; ?>
+                            </td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php endfor; ?>
+                    </tbody>
+                </table>
+                
+                <h3 class="font-weight-bold mt-3 font-16">Thống kê loto về ít XSMN <?= $esc->escapeHtml($dateFormatted) ?></h3>
+                <table class="table-default w-100 text-center">
+                    <tbody>
+                        <tr class="bg-blue text-white font-weight-bold">
+                            <?php foreach (array_slice($statistics['lotoStats'], 0, 3) as $provinceStats): ?>
+                            <td colspan="2"><?= $esc->escapeHtml($provinceStats['name']) ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <tr class="bg-orange">
+                            <?php foreach (array_slice($statistics['lotoStats'], 0, 3) as $provinceStats): ?>
+                            <td>Cặp số</td>
+                            <td>Lần về</td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php for ($i = 0; $i < 5; $i++): ?>
+                        <tr>
+                            <?php foreach (array_slice($statistics['lotoStats'], 0, 3) as $provinceStats): ?>
+                            <td>
+                                <?php if (isset($provinceStats['rare'][$i])): ?>
+                                <span class="text-red font-weight-bold"><?= $esc->escapeHtml($provinceStats['rare'][$i]['loto']) ?></span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if (isset($provinceStats['rare'][$i])): ?>
+                                <span class="font-weight-bold"><?= (int)$provinceStats['rare'][$i]['frequency'] ?></span> lần
+                                <?php endif; ?>
+                            </td>
+                            <?php endforeach; ?>
+                        </tr>
+                        <?php endfor; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+                
+                <p class="text-red1">» <a href="/rong-bach-kim-666-hom-nay.html" title="Rồng Bạch Kim 666" class="text-blue">Rồng Bạch Kim 666</a></p>
+                <p class="text-red1">» <a href="/soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888" class="text-blue">Soi cầu XSMB Win2888</a></p>
+                <p class="text-red1">» <a href="/soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi Cầu 24h" class="text-blue">Soi Cầu 24h</a></p>
+                
+                <?php if (!empty($predictions)): ?>
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top mb-0">Dự đoán xổ số Miền Nam</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <?php foreach (array_slice($predictions, 0, 2) as $pred): ?>
+                        <div class="row">
+                            <div class="col-12 mt-3 mb-2">
+                                <a class="text-blue1 font-16 font-weight-bold" href="<?= $esc->escapeHtmlAttr($pred['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                    <?= $esc->escapeHtml($pred['title'] ?? '') ?>
+                                </a>
+                            </div>
+                            <?php if (!empty($pred['image_url'])): ?>
+                            <div class="col-4 pr-2">
+                                <a href="<?= $esc->escapeHtmlAttr($pred['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                    <img loading="lazy" width="410" height="215" src="<?= $esc->escapeHtmlAttr($pred['image_url']) ?>" alt="<?= $esc->escapeHtmlAttr($pred['title'] ?? '') ?>">
+                                </a>
+                            </div>
+                            <div class="col-8 pl-2">
+                                <p class="text-black1 font-14 lh-18px line-3 text-justify"><?= $esc->escapeHtml(mb_substr($pred['title'] ?? '', 0, 150)) ?>...</p>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+                
+                <div class="my-3 bg-white">
+                    <?php if (!empty($otherLinks)): ?>
+                        <?php foreach (array_slice($otherLinks, 0, 2) as $link): ?>
+                        <p class="mb-1"><span class="text-red">»</span> <a href="<?= $esc->escapeHtmlAttr($link['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($link['title'] ?? '') ?>"><?= $esc->escapeHtml($link['title'] ?? '') ?></a></p>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="my-3">
+                    <p class="font-weight-bold">Xem KQ XSMN theo ngày:</p>
+                    <?php if (!empty($otherLinks)): ?>
+                        <?php foreach (array_slice($otherLinks, 0, 4) as $link): ?>
+                        <p class="mb-1"><span class="text-red">»</span> <a href="<?= $esc->escapeHtmlAttr($link['url'] ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($link['title'] ?? '') ?>"><?= $esc->escapeHtml($link['title'] ?? '') ?></a></p>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                
+                <div class="my-3">
+                    <p class="font-weight-bold">Xem thêm:</p>
+                    <p class="mb-1"><span class="text-red">»</span> <a href="/soi-cau-xsmn.html" title="Soi cầu XSMN">Soi cầu XSMN</a> mới nhất</p>
+                    <p class="mb-1"><span class="text-red">»</span> <a href="/du-doan-xsmn-c61.html" title="Dự đoán XSMN">Dự đoán XSMN</a> siêu chuẩn</p>
+                    <p class="mb-1"><span class="text-red">»</span> Kết quả <a href="/thong-ke-xsmn-30-ngay-xo-so-mien-nam-30-ngay.html" title="XSMN 30 ngày">XSMN 30 ngày</a></p>
+                    <p class="mb-1"><span class="text-red">»</span> Kết quả XSMB hôm nay: <a href="/xsmb-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMB <?= $esc->escapeHtml($dateFormatted) ?>">XSMB <?= $esc->escapeHtml($dateFormatted) ?></a></p>
+                    <p class="mb-1"><span class="text-red">»</span> Kết quả XSMT hôm nay: <a href="/xsmt-<?= $esc->escapeHtmlAttr($dateSlug) ?>.html" title="XSMT <?= $esc->escapeHtml($dateFormatted) ?>">XSMT <?= $esc->escapeHtml($dateFormatted) ?></a></p>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+

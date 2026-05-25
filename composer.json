@@ -1,0 +1,27 @@
+{
+  "name": "xskt_phalcon/app",
+  "autoload": {
+    "psr-4": {
+      "XsktPhalcon\\App\\": "src/",
+      "App\\": "app/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Pham Huynh Ngoc Hieu",
+      "email": "phamhuynhngochieu468@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "phalcon/ide-stubs": "^5.9",
+    "phalcon/migrations": "^3.0"
+  },
+  "require": {
+    "guzzlehttp/guzzle": "^7.9",
+    "sunra/php-simple-html-dom-parser": "^1.5",
+    "cboden/ratchet": "^0.4.4",
+    "react/event-loop": "^1.2",
+    "phalcon/cphalcon": "^5.0",
+    "vlucas/phpdotenv": "^3.4"
+  }
+}

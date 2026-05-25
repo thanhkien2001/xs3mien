@@ -1,0 +1,60 @@
+<?php
+/**
+ * Partial: Lô Kép Khung 3 Ngày
+ * Hiển thị lịch sử và kết quả lô kép
+ */
+?>
+
+<div class="my-3 box-lo-kep-home">
+    <h3 class="aside-title-red">
+        <a class="text-red2" href="/nuoi-lo-khung-xsmb.html" title="LÔ KÉP KHUNG 3 NGÀY 247">LÔ KÉP KHUNG 3 NGÀY 247</a> 
+        <sup class="vip"></sup>
+    </h3>
+    <p class="text-justify">
+        Lô kép khung 3 ngày 247 giúp anh em lựa chọn cặp kép đẹp có xác suất về cao và nuôi trong vòng 3 ngày. 
+        Bên cạnh đó, để tiện theo dõi, chúng tôi đưa ra bảng thống kê kết quả dự đoán lô kép trong trong những ngày vừa qua. 
+        Anh em tham khảo cặp lô kép khung 3 ngày 247 của chúng tôi ngay sau nhé!
+    </p>
+    
+    <table class="table-default w-100 text-center">
+        <thead>
+            <tr>
+                <th>Lô kép</th>
+                <th>Ngày</th>
+                <th>Kết quả</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $loKepData = [
+                ['lo_kep' => '66-99', 'ngay' => '27/12 - 29/12/2025', 'ket_qua' => 'Chờ kết quả', 'so_trung' => null],
+                ['lo_kep' => '44-22', 'ngay' => '25/12 - 26/12/2025', 'ket_qua' => 'Ăn lô', 'so_trung' => '22 ngày 2'],
+                ['lo_kep' => '66-88', 'ngay' => '23/12 - 24/12/2025', 'ket_qua' => 'Ăn lô', 'so_trung' => '66 ngày 2'],
+                ['lo_kep' => '33-55', 'ngay' => '21/12 - 22/12/2025', 'ket_qua' => 'Ăn lô', 'so_trung' => '55 ngày 2'],
+                ['lo_kep' => '11-77', 'ngay' => '20/12 - 20/12/2025', 'ket_qua' => 'Ăn lô', 'so_trung' => '11 ngày 1'],
+                ['lo_kep' => '00-88', 'ngay' => '17/12 - 19/12/2025', 'ket_qua' => 'Trượt', 'so_trung' => null],
+                ['lo_kep' => '66-99', 'ngay' => '14/12 - 16/12/2025', 'ket_qua' => 'Trượt', 'so_trung' => null],
+                ['lo_kep' => '55-11', 'ngay' => '11/12 - 13/12/2025', 'ket_qua' => 'Trượt', 'so_trung' => null],
+                ['lo_kep' => '99-44', 'ngay' => '08/12 - 10/12/2025', 'ket_qua' => 'Trượt', 'so_trung' => null],
+                ['lo_kep' => '88-00', 'ngay' => '05/12 - 07/12/2025', 'ket_qua' => 'Trượt', 'so_trung' => null],
+            ];
+            
+            foreach ($loKepData as $item): ?>
+            <tr>
+                <td class="text-red font-weight-bold"><?= $item['lo_kep'] ?></td>
+                <td><?= $item['ngay'] ?></td>
+                <td>
+                    <?php if ($item['ket_qua'] === 'Chờ kết quả'): ?>
+                        <?= $item['ket_qua'] ?>
+                    <?php elseif ($item['ket_qua'] === 'Ăn lô'): ?>
+                        Ăn lô <span class="text-red font-weight-bold"><?= $item['so_trung'] ?></span>
+                    <?php else: ?>
+                        <?= $item['ket_qua'] ?>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+

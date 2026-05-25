@@ -1,0 +1,1575 @@
+{
+    "archive": {
+        "province": {
+            "title_template": {
+                "type": "text",
+                "default": "Xổ Số {provinceName} - {provinceCode} - Kết Quả Xổ Số Tỉnh {provinceName} Hôm Nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem lịch sử kết quả xổ số {provinceName} {regionName} qua các kỳ quay. Dữ liệu chính xác, cập nhật liên tục. Tra cứu thống kê các giải nhanh chóng.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "lịch sử kết quả xổ số, {provinceName}, {regionName}, xsmb, xsmn, xsmt, kết quả xổ số cũ",
+                "required": true
+            }
+        },
+        "weekday": {
+            "title_template": {
+                "type": "text",
+                "default": "Xổ Số {regionName} {weekdayText} - {regionCode} {weekdayText} - Hàng Tuần",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Xổ số {regionName} {weekdayText} - Trực tiếp {regionCode} {weekdayText} hàng tuần",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem lịch sử kết quả xổ số {regionName} các ngày {weekdayText}. Dữ liệu chính xác, cập nhật liên tục.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "lịch sử kết quả xổ số, {regionName}, xsmb, xsmn, xsmt, kết quả xổ số cũ",
+                "required": true
+            }
+        }
+    },
+    "lottery_results": {
+        "list": {
+            "title_template": {
+                "type": "text",
+                "default": "{regionCode} - Kết Quả Xổ Số {regionName} Hôm Nay - {regionCode} - KQ{regionCode}",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "{regionCode} - Kết quả xổ số {regionName} hôm nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số {regionName} hôm nay - {regionCode} - S{regionCode} - KQ{regionCode}. Cập nhật kết quả xổ số kiến thiết {regionName} mới nhất, chính xác và nhanh nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả xổ số, {regionCode}, {regionName}, s{regionCode}, kq{regionCode}",
+                "required": true
+            }
+        },
+        "live": {
+            "title_template": {
+                "type": "text",
+                "default": "Trực Tiếp {regionCode} - Xổ Số {regionName} Live Hôm Nay",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Trực tiếp {regionCode} - Live KQXS {regionName} hôm nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem trực tiếp kết quả xổ số {regionName} hôm nay. Live {regionCode} realtime, cập nhật kết quả nhanh chóng và chính xác nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "trực tiếp {regionCode}, live {regionCode}, xổ số {regionName} live, kết quả {regionCode} hôm nay",
+                "required": true
+            }
+        },
+        "detail": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả xổ số {provinceName} ngày {date} - {regionName}",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Xổ số {provinceName} - KQXS{provinceCode} - Kết quả xổ số {provinceName} ngày {date}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số {provinceName} ngày {date}. Xem ngay các giải thưởng đặc biệt, giải nhất và các giải khác.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả xổ số, {provinceName}, {regionName}, {date}, giải thưởng xổ số",
+                "required": true
+            }
+        },
+        "base_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Xổ số miền Bắc - Trực tiếp KQ XSMB lúc 18h15 hàng ngày",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": " Xổ số miền Bắc - Kết quả xổ số miền Bắc hôm nay - Cập nhật KQ XSMB lúc 18h15' hàng ngày, tường thuật trực tiếp từ trường quay nhanh nhất, chính xác nhất hàng ngày.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "xo so mien bac, ket qua xo so mien bac",
+                "required": true
+            }
+        },
+        "base_xsmn": {
+            "title_template": {
+                "type": "text",
+                "default": "Xổ số miền Nam - Trực tiếp KQ XSMN lúc 16h15 hàng ngày",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Xổ số miền Nam - Trực tiếp KQ XSMN lúc 16h15 hàng ngày",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xổ số miền Nam - Kết quả xổ số miền Nam hôm nay - Cập nhật KQ XSMN lúc 16h15' hàng ngày, tường thuật trực tiếp từ trường quay nhanh nhất, chính xác nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "xo so mien nam, ket qua xo so mien nam",
+                "required": true
+            }
+        },
+        "base_xsmt": {
+            "title_template": {
+                "type": "text",
+                "default": "Xổ số miền Trung - Trực tiếp KQ XSMT lúc 17h15 hàng ngày",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Xổ số miền Trung - Trực tiếp KQ XSMT lúc 17h15 hàng ngày",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xổ số miền Trung - Kết quả xổ số miền Trung hôm nay - Cập nhật KQ XSMT lúc 17h15' hàng ngày, tường thuật trực tiếp từ trường quay nhanh, chính xác nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "xo so mien trung, ket qua xo so mien trung, xsmt",
+                "required": true
+            }
+        }
+    },
+    "predictions": {
+        "listing": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán {regionCode} hôm nay - Soi cầu 24\/7 {regionCode} - Dự đoán {regionName}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán xổ số {regionName} hôm nay. Soi cầu {regionCode} chính xác nhất với phân tích thống kê, lô gan, đầu đuôi. Cập nhật dự đoán mới nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "dự đoán xổ số, soi cầu {regionCode}, dự đoán {regionName}, thống kê xổ số, phân tích {regionCode}",
+                "required": true
+            }
+        },
+        "detail": {
+            "title_template": {
+                "type": "text",
+                "default": "{title}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán xổ số {regionName} ngày {date}. Phân tích chuyên sâu, soi cầu chính xác giúp bạn chọn số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "dự đoán xổ số, soi cầu, {regionName}, {date}",
+                "required": true
+            }
+        },
+        "base": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi Cầu Xổ Số 3 Miền Hôm Nay - Dự Đoán VIP 24\/7 Miễn Phí",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán xổ số soi cầu chính xác nhất. Phân tích thống kê, soi cầu chuyên sâu giúp bạn tìm ra con số may mắn cho các miền.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "dự đoán xổ số, soi cầu, phân tích xổ số, số may mắn, dự đoán miền bắc, dự đoán miền nam, dự đoán miền trung",
+                "required": true
+            }
+        },
+        "vietlott_mega645": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán số Mega 6\/45 Vietlott ngày {date} - Soi cầu Mega 6\/45 chính xác",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán số Mega 6\/45 Vietlott ngày {date}. Phân tích thống kê, soi cầu Mega 6\/45 chính xác nhất. Cập nhật dự đoán Mega 6\/45 mới nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "dự đoán mega 6\/45, soi cầu mega 6\/45, dự đoán mega 6\/45 ngày {date}, thống kê mega 6\/45, phân tích mega 6\/45",
+                "required": true
+            }
+        },
+        "vietlott_power655": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán số Power 6\/55 Vietlott ngày {date} - Soi cầu Power 6\/55 chính xác",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán số Power 6\/55 Vietlott ngày {date}. Phân tích thống kê, soi cầu Power 6\/55 chính xác nhất. Cập nhật dự đoán Power 6\/55 mới nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "dự đoán power 6\/55, soi cầu power 6\/55, dự đoán power 6\/55 ngày {date}, thống kê power 6\/55, phân tích power 6\/55",
+                "required": true
+            }
+        },
+        "province": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán Xổ Số {provinceName} - Soi Cầu {provinceName} - Dự đoán hôm nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán xổ số {provinceName} ngày {date}. Soi cầu {regionCode} chính xác nhất với phân tích thống kê, lô gan, đầu đuôi. Cập nhật dự đoán {provinceName} mới nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "dự đoán xổ số, soi cầu {regionCode}, dự đoán {provinceName}, thống kê xổ số, phân tích {regionCode}, {provinceName}",
+                "required": true
+            }
+        }
+    },
+    "statistics": {
+        "thongke": {
+            "title_template": {
+                "type": "text",
+                "default": "Thống Kê Xổ Số {regionName} - TK {regionCode} Chi Tiết, Lô Gan, Chu Kỳ, Tần Suất",
+                "required": true
+            },
+            "title_province_template": {
+                "type": "text",
+                "default": "Thống Kê Xổ Số {provinceName} - TK {provinceCode} Chi Tiết, Lô Gan, Chu Kỳ, Tần Suất",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê chi tiết xổ số {regionName}. Phân tích tần suất, lô gan, đầu đuôi để hỗ trợ dự đoán chính xác.",
+                "required": true
+            },
+            "description_province_template": {
+                "type": "textarea",
+                "default": "Thống kê xổ số {provinceName} chi tiết nhất. Phân tích dữ liệu {provinceCode}, lô gan, tần suất xuất hiện để dự đoán chính xác.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thống kê xổ số, {regionName}, {regionCode}",
+                "required": true
+            },
+            "keywords_province_template": {
+                "type": "text",
+                "default": "thống kê {provinceCode}, thống kê xổ số {provinceName}, {provinceCode} hôm nay",
+                "required": true
+            }
+        },
+        "logan": {
+            "title_template": {
+                "type": "text",
+                "default": "Lô gan xổ số {regionName} - Số nào gan nhất {regionCode}",
+                "required": true
+            },
+            "title_province_template": {
+                "type": "text",
+                "default": "Lô Gan {provinceCode} - Thống Kê Lô Gan {provinceName} Lâu Chưa Về",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Lô gan xổ số {regionName} - Thống kê lô gan {regionCode} lâu chưa về",
+                "required": true
+            },
+            "h1_province_template": {
+                "type": "text",
+                "default": "Lô gan {provinceName} - Lô gan {provinceCode} - Thống kê lô gan {provinceName} lâu chưa về",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Bảng lô gan xổ số {regionName} chi tiết. Xem số nào gan nhất, lâu chưa về để đưa ra quyết định chính xác.",
+                "required": true
+            },
+            "description_province_template": {
+                "type": "textarea",
+                "default": "Bảng lô gan {provinceCode} chi tiết nhất. Thống kê số lô gan {provinceName} lâu chưa về, giúp dự đoán chính xác.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "lô gan xổ số, {regionName}, {regionCode}",
+                "required": true
+            },
+            "keywords_province_template": {
+                "type": "text",
+                "default": "lô gan {provinceCode}, lô gan {provinceName}, số lô gan lâu chưa về",
+                "required": true
+            }
+        },
+        "dacbiet": {
+            "title_template": {
+                "type": "text",
+                "default": "Giải đặc biệt {regionName} - Thống kê GĐB {regionCode}",
+                "required": true
+            },
+            "title_province_template": {
+                "type": "text",
+                "default": "Thống Kê Đặc Biệt {provinceCode} - TK Giải Đặc Biệt {provinceName}",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Thống kê đặc biệt {regionName} - Thống kê giải đặc biệt {regionCode}",
+                "required": true
+            },
+            "h1_province_template": {
+                "type": "text",
+                "default": "Thống kê đặc biệt {provinceName} - Thống kê giải đặc biệt xổ số {provinceName}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê giải đặc biệt xổ số {regionName}. Phân tích kết quả GĐB, tần suất xuất hiện các con số.",
+                "required": true
+            },
+            "description_province_template": {
+                "type": "textarea",
+                "default": "Thống kê giải đặc biệt {provinceCode} chi tiết. Phân tích kết quả GĐB {provinceName}, tần suất xuất hiện các con số.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "giải đặc biệt, {regionName}, {regionCode}",
+                "required": true
+            },
+            "keywords_province_template": {
+                "type": "text",
+                "default": "giải đặc biệt {provinceCode}, thống kê đặc biệt {provinceName}, GĐB {provinceCode}",
+                "required": true
+            }
+        },
+        "dauduoi": {
+            "title_template": {
+                "type": "text",
+                "default": "Đầu đuôi xổ số {regionName} - Thống kê đầu đuôi {regionCode}",
+                "required": true
+            },
+            "title_province_template": {
+                "type": "text",
+                "default": "Thống Kê Đầu Đuôi {provinceCode} - TK Đầu Đuôi Lô Tô XSKT {provinceName}",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Thống kê đầu đuôi {regionName} - Thống kê đầu đuôi {regionCode}",
+                "required": true
+            },
+            "h1_province_template": {
+                "type": "text",
+                "default": "Thống kê đầu đuôi {provinceName} - Thống kê đầu đuôi xổ số {provinceName}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê đầu đuôi xổ số {regionName}. Phân tích tần suất xuất hiện đầu số và đuôi số.",
+                "required": true
+            },
+            "description_province_template": {
+                "type": "textarea",
+                "default": "Thống kê đầu đuôi {provinceCode} chi tiết. Phân tích tần suất xuất hiện đầu số và đuôi số {provinceName}.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "đầu đuôi xổ số, {regionName}, {regionCode}",
+                "required": true
+            },
+            "keywords_province_template": {
+                "type": "text",
+                "default": "đầu đuôi {provinceCode}, thống kê đầu đuôi {provinceName}, lô tô {provinceCode}",
+                "required": true
+            }
+        },
+        "tansuat": {
+            "title_template": {
+                "type": "text",
+                "default": "Tần suất xổ số {regionName} - Bảng tần suất {regionCode}",
+                "required": true
+            },
+            "title_province_template": {
+                "type": "text",
+                "default": "Tần Suất {provinceCode} - Thống Kê Tần Suất Xổ Số {provinceName}",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Bảng tần suất xổ số {regionName} - Thống kê tần suất {regionCode}",
+                "required": true
+            },
+            "h1_province_template": {
+                "type": "text",
+                "default": "Tần suất {provinceCode} - Thống kê tần suất xổ số {provinceName}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Bảng tần suất xổ số {regionName}. Thống kê chi tiết tần suất xuất hiện các con số trong 100 kỳ gần nhất.",
+                "required": true
+            },
+            "description_province_template": {
+                "type": "textarea",
+                "default": "Bảng tần suất {provinceCode} chi tiết. Thống kê tần suất xuất hiện các con số {provinceName} trong 100 kỳ gần nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "tần suất xổ số, {regionName}, {regionCode}",
+                "required": true
+            },
+            "keywords_province_template": {
+                "type": "text",
+                "default": "tần suất {provinceCode}, thống kê tần suất {provinceName}, bảng tần suất {provinceCode}",
+                "required": true
+            }
+        },
+        "vietlott_mega645": {
+            "title_template": {
+                "type": "text",
+                "default": "Thống Kê Mega 6\/45 Vietlott - Phân Tích Số May Mắn, Tần Suất Xuất Hiện",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê Mega 6\/45 Vietlott chi tiết. Phân tích tần suất số may mắn, số ít xuất hiện, cặp số liên tiếp. Dữ liệu được cập nhật liên tục.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thống kê mega 6\/45, mega 6\/45 vietlott, tần suất mega 6\/45, số may mắn mega 6\/45, phân tích mega 6\/45",
+                "required": true
+            }
+        },
+        "vietlott_power655": {
+            "title_template": {
+                "type": "text",
+                "default": "Thống Kê Power 6\/55 Vietlott - Phân Tích Số May Mắn, Tần Suất Xuất Hiện",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê Power 6\/55 Vietlott chi tiết. Phân tích tần suất số may mắn, số ít xuất hiện, cặp số liên tiếp. Dữ liệu được cập nhật liên tục.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thống kê power 6\/55, power 6\/55 vietlott, tần suất power 6\/55, số may mắn power 6\/55, phân tích power 6\/55",
+                "required": true
+            }
+        }
+    },
+    "vietlott": {
+        "mega645": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả Vietlott Mega 6\/45 {date} - Xổ Số Kiến Thiết",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Vietlott Mega 6\/45 {date}. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "vietlott, Mega 6\/45, kết quả xổ số, thống kê vietlott, số may mắn",
+                "required": true
+            }
+        },
+        "power655": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết Quả Xổ Số Điện Toán Power 6\/55  {date} - Vietlott Hôm Nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Vietlott Power 6\/55 {date}. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "vietlott, Power 6\/55, kết quả xổ số, thống kê vietlott, số may mắn",
+                "required": true
+            }
+        },
+        "max3d": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả Vietlott Max 3D {date} - Xổ Số Kiến Thiết",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Vietlott Max 3D {date}. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "vietlott, Max 3D, kết quả xổ số, thống kê vietlott, số may mắn",
+                "required": true
+            }
+        },
+        "max3dpro": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả Vietlott Max 3D Pro {date} - Xổ Số Kiến Thiết",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Vietlott Max 3D Pro {date}. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "vietlott, Max 3D Pro, kết quả xổ số, thống kê vietlott, số may mắn",
+                "required": true
+            }
+        },
+        "base_mega645": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả xổ số Mega 6\/45 Vietlott - Xổ Số Kiến Thiết",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Mega 6\/45 Vietlott mới nhất. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả mega 6\/45, vietlott mega 6\/45, xổ số mega 6\/45, thống kê mega 6\/45",
+                "required": true
+            }
+        },
+        "base_power655": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết Quả Xổ Số Điện Toán Power 6\/55 Vietlott Hôm Nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Power 6\/55 Vietlott mới nhất. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả power 6\/55, vietlott power 6\/55, xổ số power 6\/55, thống kê power 6\/55",
+                "required": true
+            }
+        },
+        "base_max3d": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả xổ số Max 3D Vietlott - Xổ Số Kiến Thiết",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Max 3D Vietlott mới nhất. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả max 3d, vietlott max 3d, xổ số max 3d, thống kê max 3d",
+                "required": true
+            }
+        },
+        "base_max3dpro": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả xổ số Max 3D Pro Vietlott - Xổ Số Kiến Thiết",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả xổ số Max 3D Pro Vietlott mới nhất. Cập nhật nhanh chóng, chính xác. Thống kê, phân tích số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả max 3d pro, vietlott max 3d pro, xổ số max 3d pro, thống kê max 3d pro",
+                "required": true
+            }
+        }
+    },
+    "quaythu": {
+        "xs": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay thử xổ số - Quay lấy tài lộc may mắn - Quay Thử 3 Miền",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử xổ số online miễn phí. Công cụ quay thử XS giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử xs, quay thử xổ số online, thử vận may xs, công cụ quay thử",
+                "required": true
+            }
+        },
+        "xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay Thử XSMB hôm nay - Quay Thử XSMB - Số Thử MB",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử xổ số Miền Bắc online miễn phí. Công cụ quay thử XSMB giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử xsmb, quay thử xổ số miền bắc, thử vận may xsmb, công cụ quay thử",
+                "required": true
+            }
+        },
+        "xsmn": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay Thử XSMN hôm nay - Quay Thử XSMN - Số Thử MN",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử xổ số Miền Nam online miễn phí. Công cụ quay thử XSMN giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử xsmn, quay thử xổ số miền nam, thử vận may xsmn, công cụ quay thử",
+                "required": true
+            }
+        },
+        "xsmt": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay Thử XSMT hôm nay - Quay Thử XSMT - Số Thử MT",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử xổ số Miền Trung online miễn phí. Công cụ quay thử XSMT giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử xsmt, quay thử xổ số miền trung, thử vận may xsmt, công cụ quay thử",
+                "required": true
+            }
+        },
+        "power655": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay Thử Power 655 - Quay Thử Vietlott Power 655 Online",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử Vietlott Power 655 online miễn phí. Công cụ quay thử Power 655 giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử power 655, quay thử vietlott power 655, thử vận may power 655, công cụ quay thử",
+                "required": true
+            }
+        },
+        "mega645": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay Thử Mega 645 - Quay Thử Vietlott Mega 645 Online",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử Vietlott Mega 645 online miễn phí. Công cụ quay thử Mega 645 giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử mega 645, quay thử vietlott mega 645, thử vận may mega 645, công cụ quay thử",
+                "required": true
+            }
+        },
+        "province": {
+            "title_template": {
+                "type": "text",
+                "default": "Quay Thử Xổ Số {provinceCode} - Quay Thử Online",
+                "required": true
+            },
+            "title_province_template": {
+                "type": "text",
+                "default": "Quay Thử {provinceCode} - Quay Thử Xổ Số {provinceName} Hôm Nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Quay thử xổ số {provinceCode} online miễn phí. Công cụ quay thử xổ số {region} giúp bạn thử vận may với các con số may mắn.",
+                "required": true
+            },
+            "description_province_template": {
+                "type": "textarea",
+                "default": "Quay thử xổ số {provinceName} online miễn phí. Công cụ quay thử {provinceCode} giúp bạn thử vận may với các con số may mắn, mô phỏng quay thưởng thực tế.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "quay thử {provinceCode}, quay thử xổ số {region}, thử vận may {provinceCode}, công cụ quay thử",
+                "required": true
+            },
+            "keywords_province_template": {
+                "type": "text",
+                "default": "quay thử {provinceCode}, quay thử xổ số {provinceName}, thử vận may {provinceCode}, công cụ quay thử {provinceName}",
+                "required": true
+            }
+        }
+    },
+    "homepage": {
+        "default": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi Cầu 247: Chuyên Trang Soi Cầu Xổ Số 3 Miền Đáng Tin Cậy",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi Cầu 247: Chuyên Trang Soi Cầu Xổ Số 3 Miền Đáng Tin Cậy",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 247 TOP – Soi cầu xổ số 3 miền Bắc, Trung, Nam chuẩn xác. Soi cầu 247 – SOI CẦU XỔ SỐ TOP #1 tại Việt Nam, chốt số chính xác hằng ngày.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu 247, soi cau 247 top, soi cầu 247 org",
+                "required": true
+            }
+        }
+    },
+    "keno": {
+        "default": {
+            "title_template": {
+                "type": "text",
+                "default": "Kết quả Keno - Xổ số Keno Việt Nam {date}",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Kết quả Keno mới nhất. Xem kết quả Keno trực tiếp, thống kê tần suất số. Cập nhật mỗi 8 phút.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "kết quả keno, xổ số keno, keno việt nam, kết quả keno mới nhất, thống kê keno",
+                "required": true
+            }
+        }
+    },
+    "vietlott_live": {
+        "mega645": {
+            "title_template": {
+                "type": "text",
+                "default": "Trực tiếp kết quả xổ số Mega 6\/45 Vietlott hôm nay - Live Mega 6\/45",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem trực tiếp kết quả xổ số Mega 6\/45 Vietlott hôm nay. Cập nhật live kết quả Mega 6\/45 mới nhất, chính xác và nhanh nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "trực tiếp mega 6\/45, live mega 6\/45, kết quả mega 6\/45 hôm nay, vietlott mega 6\/45",
+                "required": true
+            }
+        },
+        "power655": {
+            "title_template": {
+                "type": "text",
+                "default": "Trực tiếp kết quả xổ số Power 6\/55 Vietlott hôm nay - Live Power 6\/55",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem trực tiếp kết quả xổ số Power 6\/55 Vietlott hôm nay. Cập nhật live kết quả Power 6\/55 mới nhất, chính xác và nhanh nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "trực tiếp power 6\/55, live power 6\/55, kết quả power 6\/55 hôm nay, vietlott power 6\/55",
+                "required": true
+            }
+        },
+        "max3d": {
+            "title_template": {
+                "type": "text",
+                "default": "Trực tiếp kết quả xổ số Max 3D Vietlott hôm nay - Live Max 3D",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem trực tiếp kết quả xổ số Max 3D Vietlott hôm nay. Cập nhật live kết quả Max 3D mới nhất, chính xác và nhanh nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "trực tiếp max 3d, live max 3d, kết quả max 3d hôm nay, vietlott max 3d",
+                "required": true
+            }
+        },
+        "max3dpro": {
+            "title_template": {
+                "type": "text",
+                "default": "Trực tiếp kết quả xổ số Max 3D Pro Vietlott hôm nay - Live Max 3D Pro",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Xem trực tiếp kết quả xổ số Max 3D Pro Vietlott hôm nay. Cập nhật live kết quả Max 3D Pro mới nhất, chính xác và nhanh nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "trực tiếp max 3d pro, live max 3d pro, kết quả max 3d pro hôm nay, vietlott max 3d pro",
+                "required": true
+            }
+        }
+    },
+    "custom_pages": {
+        "soicauvip": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu VIP - Cầu lô Vip {regionName} hôm nay siêu chuẩn - Soi cầu 247",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu VIP - Cầu lô Vip {regionName} hôm nay siêu chuẩn",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu VIP {regionCode} hôm nay - Dự đoán cầu lô VIP {regionName} chính xác với xác suất cao. Tham khảo các dự đoán VIP từ chuyên gia hàng đầu tại Soi cầu 247.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu vip, cầu lô vip, soi cầu {regionCode}, dự đoán {regionName}, soi cầu 247",
+                "required": true
+            }
+        },
+        "sokequa": {
+            "title_template": {
+                "type": "text",
+                "default": "{regionCode} {limit} ngày - Thống kê kết quả xổ số {regionName} {limit} qua",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "{regionCode} {limit} ngày - Thống kê kết quả xổ số {regionName} {limit} qua",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê {regionCode} {limit} ngày gần nhất tổng hợp kết quả đặc biệt, đầu đuôi đặc biệt, cầu lô tô, đầu đuôi lô tô {extra_desc} giúp anh em dễ dàng lựa chọn cặp số cho mình",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thong ke ket qua xo so {regionNameLower} {limit} ngay, thong ke {limit} ngay, thong ke xo so {regionNameLower} {limit} ngay, ket qua {regionCodeLower} {limit} ngay, ket qua xo so {limit} ngay, ket qua xo so {regionNameLower} {limit} ngay",
+                "required": true
+            }
+        },
+        "du_doan_xsmb_c59": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán XSMB - DD XSMB - Dự đoán xổ số Miền Bắc",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Dự đoán XSMB - DD XSMB - Dự đoán xổ số Miền Bắc",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán XSMB - DD XSMB - Dự đoán xổ số Miền Bắc chính xác nhất hôm nay - Tham khảo dự đoán MB miễn phí, xác suất về cực cao trong ngày | Soi Cầu 247™",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "du doan xsmb, du doan mb, dd xsmb, du doan xo so mien bac",
+                "required": true
+            }
+        },
+        "du_doan_xsmt_c60": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán XSMT - DD XSMT - Dự đoán xổ số Miền Trung",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Dự đoán XSMT - DD XSMT - Dự đoán xổ số Miền Trung",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán XSMT - DD XSMT - Dự đoán xổ số Miền Trung chính xác nhất hôm nay - Tham khảo dự đoán MT miễn phí, xác suất về cực cao trong ngày | Soi Cầu 247™",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "du doan xsmt, dd xsmt, du doan mt, du doan xo so mien trung",
+                "required": true
+            }
+        },
+        "du_doan_xsmn_c61": {
+            "title_template": {
+                "type": "text",
+                "default": "Dự đoán XSMN - DD XSMN - Dự đoán xổ số Miền Nam",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Dự đoán XSMN - DD XSMN - Dự đoán xổ số Miền Nam",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Dự đoán XSMN - DD XSMN - Dự đoán xổ số Miền Nam chính xác nhất hôm nay - Tham khảo dự đoán MN miễn phí, xác suất về cực cao trong ngày | Soi Cầu 247™",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "du doan xsmn, dự đoán xổ số miền nam, dự đoán mn, dự đoán miền nam, dự đoán xổ số miền nam hôm nay",
+                "required": true
+            }
+        },
+        "rong_bach_kim": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu Rồng Bạch Kim 247 hoàn toàn miễn phí",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu Rồng Bạch Kim 247 hoàn toàn miễn phí",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu Rồng Bạch Kim - RBK 247 cung cấp cho anh em những cầu lô bạch thủ, cầu 2 nháy, cầu đặc biệt siêu đẹp và hoàn toàn miễn phí",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "rồng bạch kim, rongbachkim, soi cầu rồng bạch kim, rồng bạch kim 888, soi cầu 247 rồng bạch kim, top rồng bạch kim, soi cầu bạch kim, rồng bạch kim 247",
+                "required": true
+            }
+        },
+        "soi_cau_24h": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu 24h - Dự đoán xổ số 24 hôm nay siêu chuẩn xác",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu 24h - Dự đoán xổ số 24 hôm nay siêu chuẩn xác",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 24 - Dự đoán xổ số 24 chốt cầu bạch thủ lô XSMB đưa ra những cặp lô bạch thủ có xác suất về cao giúp anh em nắm chắc cơ hội trúng lớn trong ngày hôm nay.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu 24h, dự đoán xổ số 24",
+                "required": true
+            }
+        },
+        "soi_cau_888": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu 888 - Soi cầu miễn phí 888 XSMB 2 nháy Vip",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu 888 - Soi cầu miễn phí 888 XSMB 2 nháy Vip",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 888 - Soi cầu miễn phí 888 2 nháy MB sử dụng phương pháp thống kê và soi cầu thông minh. soi cầu vip 888 miễn phí chốt số miền Bắc siêu chuẩn xác.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu 888, soi cầu miễn phí 888, soi cầu 888 2nháy miễn phí",
+                "required": true
+            }
+        },
+        "soi_cau_366": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu 366 - Soi cầu MB 366 siêu chuẩn xác hôm nay",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu 366 - Soi cầu MB 366 siêu chuẩn xác hôm nay",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 366 - Soi cầu MB 366 hôm nay cung cấp những cặp số đẹp nhất, tỷ lệ ăn cao được đưa ra từ công cụ phân tích và soi cầu thông minh nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cau 366, soi cau mb 366, soi cau 366 hom nay",
+                "required": true
+            }
+        },
+        "soi_cau_3_cang": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu 3 càng VIP hôm nay hoàn toàn miễn phí",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu 3 càng VIP hôm nay hoàn toàn miễn phí",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 3 càng vip hôm nay là công cụ soi cầu được nhiều người tin tưởng, có tỷ lệ về cao, giúp người chơi tư tin lựa chọn các con số đẹp nhất trong ngày",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "Soi cầu 3 càng",
+                "required": true
+            }
+        },
+        "win2888_asia": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu XSMB Win2888 asia - Chốt số chính xác 100%",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu XSMB Win2888 asia - Chốt số chính xác 100%",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu XSMB Win2888 Asia - Dự đoán XSMB 2888 chốt cầu miễn phí XSMB hôm nay hoàn toàn miễn phí tại Soi cầu 247. Kết quả được chúng tôi cập nhật nhanh chóng nhất..",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cau xsmb win2888",
+                "required": true
+            }
+        },
+        "giac_mo": {
+            "title_template": {
+                "type": "text",
+                "default": "Giải mã giấc mơ lô đề - Ý nghĩa những giấc mơ và chốt số",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Giải mã giấc mơ lô đề - Ý nghĩa những giấc mơ và các phương pháp chốt số giấc mơ cho anh em tham khảo. Sổ mơ lô đề cung cấp cho AE hàng vạn giấc mơ để chốt số",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "giai ma giac mo, y nghia giac mo, giac mo lo de",
+                "required": true
+            }
+        },
+        "soi_cau_666": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu 666 – Dự đoán XSMB 666 chốt số hàng ngày miễn phí",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 666 tổng hợp thống kê và đưa ra các cặp số đẹp cầu bạch thủ, cầu nhiều nháy, cầu lô kép, cầu đặc biệt, cầu về cả cặp, cầu lật liên tục, cầu song thủ lô, cầu đặc biệt... chính xác nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu 666, soi cầu 666 xsmb, rồng bạch kim 666, soi cầu miền bắc 666, xổ số 666, soi cầu 666 hôm nay",
+                "required": true
+            }
+        },
+        "soi_cau_7777": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu 7777 - Rồng Bạch Kim 7777 dự đoán lô vàng MB miễn phí",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu 7777 được biết đến là một công cụ soi cầu thống kê dựa có tỉ lệ chính xác rất cao. Rồng Bạch Kim 7777 luôn cung cấp cho anh em những cầu số đẹp nhất.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu 7777, rồng bạch kim 7777, soi cầu 7777 mb, soi cầu 7777 miễn phí, soi cầu mb 7777",
+                "required": true
+            }
+        },
+        "soi_cau_lo_de_chuan": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu lô de chuẩn - Soi cầu XSMB chính xác nhất",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu lô de chuẩn là kênh soi cầu XSMB hoàn toàn miễn phí và đã tạo được uy tín đói với nhiều anh em chơi lô đề. Vậy còn chừo gì nữa mà không tham khảo ngay kết quả soi cầu lô đề của chúng tôi ngày hôm nay.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu lô đề chuẩn, soi cau lo de chuan, soi cầu chuẩn",
+                "required": true
+            }
+        },
+        "xs_minh_ngoc": {
+            "title_template": {
+                "type": "text",
+                "default": "Xổ số Minh ngọc 247 - Soi cầu Minh Ngọc 3 miền Bắc Trung Nam",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu Minh Ngọc - Dự đoán XSMB minh ngọc - Dự đoán xổ số Minh Ngọc 3 miền hôm nay cung cấp cho anh em những thông tin kịp thời, cần thiết và nhanh chóng nhất để đưa ra quyết định lựa chọn con số quay thưởng đẹp nhất. Mời anh em theo dõi.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "xo so minh ngoc, xs minh ngoc, soi cau minh ngoc",
+                "required": true
+            }
+        },
+        "soi_cau_tot": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu tốt - Soi cầu xổ số tốt nhất hằng ngày",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu tốt - Soi cầu 3 miền chính xác nhất hằng ngày và được cập nhật hoàn toàn miễn phí.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cầu tốt, soi cau tot",
+                "required": true
+            }
+        },
+        "bi_kip": {
+            "title_template": {
+                "type": "text",
+                "default": "Bí kíp về phương pháp soi cầu lô đề chuẩn, xác suất về cao",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Phương pháp chơi lô đề có tỷ lệ về cao nhất trong ngày HOÀN TOÀN MIỄN PHÍ cho anh em thao khảo để chọn cho mình cặp số ưng ý nhất trong ngày hôm nay",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "phuong phap choi lo de, bi kip lo de",
+                "required": true
+            }
+        },
+        "bach_thu": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu bạch thủ - Cầu bạch thủ lô MB siêu chuẩn",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu bạch thủ - Cầu bạch thủ lô MB siêu chuẩn",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu bạch thủ - Cầu bạch thủ MB - Soi cầu bạch thủ lô miền Bắc hôm nay chính xác 100% lựa chọn được những cặp số đẹp có xác suất về cao nhất trong ngày",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cau bach thu, cau bach thu mb, soi cau bach thu lo",
+                "required": true
+            }
+        },
+        "nhieu_nhay": {
+            "title_template": {
+                "type": "text",
+                "default": "Cầu về nhiều nháy - Soi cầu miền Bắc về nhiều nháy",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Cầu về nhiều nháy - Soi cầu miền Bắc về nhiều nháy",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Cầu về nhiều nháy - Soi cầu miền Bắc về nhiều nháy hôm nay. Hệ thống cung cấp công cụ soi cầu về 2 nháy, 3 nháy....cực kỳ chuẩn, chính xác và miễn phí",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "cau ve nhieu nhay, soi cau vè nhieu nhay, cau mien bac ve nhieu nhay",
+                "required": true
+            }
+        },
+        "lat_lien_tuc": {
+            "title_template": {
+                "type": "text",
+                "default": "Cầu lật liên tục - Soi cầu lật liên tục miền Bắc",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Cầu lật liên tục - Soi cầu lật liên tục miền Bắc",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Cầu lật liên tục - Soi cầu lật liên tục miền Bắc cung cấp cho anh em chi tiết cầu chạy theo từng ngày, miễn phí và chính xác tuyệt đối cho ngày hôm nay",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "cau lat lien tuc, soi cau lat lien tuc",
+                "required": true
+            }
+        },
+        "mien_trung": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu XSMT - Soi cầu Miền Trung - Soi cầu xổ số Miền Trung",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu XSMT - Soi cầu Miền Trung - Soi cầu xổ số Miền Trung",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu XSMT - Soi cầu Miền Trung VIP khả năng về cao trong ngày - Soi cầu xổ số Miền Trung theo biên độ ngày chính xác chọn ra các bộ số đẹp, miễn phí 100%",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cau XSMT, soi cau Miền Trung, soi cau xo so Miền Trung",
+                "required": true
+            }
+        },
+        "mien_nam": {
+            "title_template": {
+                "type": "text",
+                "default": "Soi cầu XSMN - Soi cầu Miền Nam - Soi cầu xổ số Miền Nam",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Soi cầu XSMN - Soi cầu Miền Nam - Soi cầu xổ số Miền Nam",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Soi cầu XSMN - Soi cầu Miền Nam VIP khả năng về cao trong ngày - Soi cầu xổ số Miền Nam theo biên độ ngày chính xác chọn ra các bộ số đẹp, miễn phí 100%",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "soi cau XSMN, soi cau Miền Nam, soi cau xo so Miền Nam",
+                "required": true
+            }
+        },
+        "lo_gan_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Lô gan XSMB - Lô gan Miền Bắc - Thống kê lô gan XSMB",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Lô gan XSMB - Lô gan Miền Bắc - Thống kê lô gan XSMB",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Lô gan XSMB - Lô gan Miền Bắc - Thống kê lô gan XSMB lâu chưa về nhất - Thống kê lô khan, lô lì Miền Bắc cực đại hôm nay chính xác nhất theo các biên độ ngày.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "lo gan XSMB, lô gan Miền Bắc, thong ke lo gan XSMB",
+                "required": true
+            }
+        },
+        "dac_biet_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Thống kê đặc biệt XSMB - Thống kê 2 số cuối giải đặc biệt XSMB",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Thống kê đặc biệt XSMB - Thống kê 2 số cuối giải đặc biệt XSMB",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê đặc biệt XSMB theo tuần, tháng, năm - Thống kê 2 số cuối giải đặc biệt xổ số Miền Bắc - Bảng thống kê giải đặc biệt theo tổng XSMB chính xác nhất",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thong ke dac biet, thong ke dac biet XSMB, thống kê đặc biệt Miền Bắc",
+                "required": true
+            }
+        },
+        "dac_biet_tuan_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Bảng đặc biệt tuần XSMB - Thống kê giải đặc biệt XSMB theo tuần",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Bảng đặc biệt tuần XSMB - Thống kê giải đặc biệt XSMB theo tuần",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Bảng đặc biệt tuần XSMB - Thống kê giải đặc biệt theo tuần xổ số Miền Bắc chi tiết, chính xác nhất giúp anh em nhìn ra quy luật xuất hiện giải đặc biệt",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "bang dac biet tuan XSMB, thong ke giai dac biet theo tuan XSMB",
+                "required": true
+            }
+        },
+        "dac_biet_thang_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Bảng đặc biệt tháng XSMB - Thống kê giải đặc biệt XSMB tháng",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Bảng đặc biệt tháng XSMB - Thống kê giải đặc biệt XSMB tháng",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Bảng đặc biệt tháng XSMB - Thống kê giải đặc biệt theo tháng xổ số Miền Bắc chi tiết, chính xác nhất giúp anh em nhìn ra quy luật xuất hiện giải đặc biệt",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "bang dac biet thang XSMB, thong ke giai dac biet theo thang XSMB",
+                "required": true
+            }
+        },
+        "dau_duoi_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Thống kê đầu đuôi XSMB - Thống kê đầu đuôi loto Miền Bắc",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Thống kê đầu đuôi XSMB - Thống kê đầu đuôi loto Miền Bắc",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê đầu đuôi XSMB - Thống kê đầu đuôi loto Miền Bắc chính xác nhất - Tổng hợp đầu đuôi lô tô xuất hiện trong tất cả các giải những lần quay gần đây",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thong ke dau duoi XSMB, thong ke dau duoi loto XSMB, thống kê đầu đuôi Miền Bắc",
+                "required": true
+            }
+        },
+        "tan_suat_lo_to_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Tần suất lô to cặp - Thống kê tần suất lô tô XSMB siêu chuẩn",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Tần suất lô to cặp - Thống kê tần suất lô tô XSMB siêu chuẩn",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Tần suất lô to cặp XSMB - Thống kê tần suất lô tô xổ số Miền Bắc nhanh nhất, chính xác và chi tiết nhất. Thống kê cặp số từ 00 đến 99. Thống kê kqxs từ 00 đến 99 giải đặc biệt và các giải khác.",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "tần suất lô to cặp, tần suất loto , thong ke tuan suat cap loto, thong ke ket qua cap loto",
+                "required": true
+            }
+        },
+        "lo_xien_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Lô xiên XSMB - Soi cầu lô xiên 2, Lô xiên 3 Miền Bắc",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Lô xiên XSMB - Soi cầu lô xiên 2, Lô xiên 3 Miền Bắc",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Lô xiên XSMB - Soi cầu lô xiên 2, Lô xiên 3 Miền Bắc xác suất về cao trong ngày - Thống kê lô xiên hôm nay chính xác, chi tiết, hoàn toàn miễn phí",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "lo xien XSMB, lô xiên Miền Bắc, thong ke lo xien XSMB",
+                "required": true
+            }
+        },
+        "lo_kep_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Lô kép XSMB - Thống kê lô kép Miền Bắc chính xác nhất",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Lô kép XSMB - Thống kê lô kép Miền Bắc chính xác nhất",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Lô kép XSMB - Thống kê lô kép Miền Bắc chính xác nhất - Thống kê các cặp lô kép XSMB lâu ngày chưa về nhanh và chuẩn xác nhất, cập nhật hàng ngày miễn phí",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "lo kep XSMB, lo kep XSMB, lô kép Miền Bắc, thong ke lo kep XSMB",
+                "required": true
+            }
+        },
+        "thong_ke_theo_tong_xsmb": {
+            "title_template": {
+                "type": "text",
+                "default": "Thống kê XSMB theo tổng - Thống kê loto Miền Bắc theo tổng",
+                "required": true
+            },
+            "h1_template": {
+                "type": "text",
+                "default": "Thống kê XSMB theo tổng - Thống kê loto Miền Bắc theo tổng",
+                "required": true
+            },
+            "description_template": {
+                "type": "textarea",
+                "default": "Thống kê XSMB theo tổng - Thống kê loto Miền Bắc theo tổng - Thống kê tổng chưa về, lần xuất hiện cuối, ngày về gần nhất theo tổng đã chọn chính xác nhất",
+                "required": true
+            },
+            "keywords_template": {
+                "type": "text",
+                "default": "thong ke XSMB theo tong, thống kê loto Miền Bắc theo tổng",
+                "required": true
+            }
+        }
+    }
+}

@@ -1,0 +1,470 @@
+<?php
+
+/**
+ * Trang kết quả XSMN - Giao diện mới
+ * @var \DateTime $pageDate
+ * @var array $provincesForView
+ * @var array $resultsForView
+ * @var string $thuText
+ * @var string $thuLink
+ * @var array $otherLinks
+ * @var array $latestResults
+ */
+
+use App\Library\LotteryHelper;
+
+$esc = $this->escaper;
+$day = (int) $pageDate->format('j');
+$month = (int) $pageDate->format('n');
+$year = (int) $pageDate->format('Y');
+$dateFormatted = sprintf('%02d/%02d/%d', $day, $month, $year);
+$dateSlug = sprintf('%02d-%02d-%d', $day, $month, $year);
+
+// Map active day
+$weekday = (int) $pageDate->format('N'); // 1=Monday, 7=Sunday
+$dayMap = [
+    1 => 'thu-2',
+    2 => 'thu-3',
+    3 => 'thu-4',
+    4 => 'thu-5',
+    5 => 'thu-6',
+    6 => 'thu-7',
+    7 => 'chu-nhat'
+];
+$active = $dayMap[$weekday] ?? '';
+
+// Province URL mapping
+function getProvinceUrl($provinceName)
+{
+    $urlMap = [
+        'Hồ Chí Minh' => '/xo-so-ho-chi-minh-xshcm.html',
+        'Đồng Nai' => '/xo-so-dong-nai-xsdn.html',
+        'An Giang' => '/xo-so-an-giang-xsag.html',
+        'Tiền Giang' => '/xo-so-tien-giang-xstg.html',
+        'Kiên Giang' => '/xo-so-kien-giang-xskg.html',
+        'Tây Ninh' => '/xo-so-tay-ninh-xstn.html',
+        'Bình Dương' => '/xo-so-binh-duong-xsbduong.html',
+        'Sóc Trăng' => '/xo-so-soc-trang-xsst.html',
+        'Vĩnh Long' => '/xo-so-vinh-long-xsvl.html',
+        'Trà Vinh' => '/xo-so-tra-vinh-xstv.html',
+        'Cần Thơ' => '/xo-so-can-tho-xsct.html',
+        'Bến Tre' => '/xo-so-ben-tre-xsbtr.html',
+        'Vũng Tàu' => '/xo-so-vung-tau-xsvt.html',
+        'Bạc Liêu' => '/xo-so-bac-lieu-xsblieu.html',
+        'Bình Thuận' => '/xo-so-binh-thuan-xsbthuan.html',
+        'Đồng Tháp' => '/xo-so-dong-thap-xsdthap.html',
+        'Long An' => '/xo-so-long-an-xsla.html',
+        'Cà Mau' => '/xo-so-ca-mau-xscm.html',
+        'Bình Phước' => '/xo-so-binh-phuoc-xsbp.html',
+        'Hậu Giang' => '/xo-so-hau-giang-xshg.html',
+        'Đà Lạt' => '/xo-so-da-lat-xsdl.html',
+    ];
+    return $urlMap[$provinceName] ?? '#';
+}
+?>
+
+<link rel="stylesheet" href="/css/live-animations.css">
+
+<main>
+    <div class="container">
+        <!-- Submenu ngày trong tuần -->
+        <div class="row">
+            <div class="w-100">
+                <div class="submenu2">
+                    <ul class="row flex-nowrap text-nowrap overflow-auto mx-0 rounded lh-25 submenu2-bg pl-0 pl-md-3">
+                        <li class="px-2 px-lg-3 <?= $active === 'xsmn' ? 'active' : '' ?>">
+                            <a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html" title="Miền Nam">XSMN</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-2' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-2-ket-qua-xo-so-mien-nam.html" title="thứ 2">thứ 2</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-3' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-3-ket-qua-xo-so-mien-nam.html" title="thứ 3">thứ 3</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-4' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-4-ket-qua-xo-so-mien-nam.html" title="thứ 4">thứ 4</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-5' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-5-ket-qua-xo-so-mien-nam.html" title="thứ 5">thứ 5</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-6' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-6-ket-qua-xo-so-mien-nam.html" title="thứ 6">thứ 6</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'thu-7' ? 'active' : '' ?>">
+                            <a href="/xsmn-thu-7-ket-qua-xo-so-mien-nam.html" title="thứ 7">thứ 7</a>
+                        </li>
+                        <li class="px-2 px-lg-3 <?= $active === 'chu-nhat' ? 'active' : '' ?>">
+                            <a href="/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html" title="chủ nhật">chủ nhật</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/" title="Trang chủ"><i class="icon-home"></i></a>
+                        </li>
+                        <?php if (isset($isBasePage) && $isBasePage): ?>
+                            <li class="breadcrumb-item"><a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html"
+                                    title="Xổ số Miền Nam">Xổ số Miền Nam</a></li>
+                        <?php else: ?>
+                            <li class="breadcrumb-item"><a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html"
+                                    title="Xổ số Miền Nam">Xổ số Miền Nam</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            <!-- COL CENTER (Content chính) -->
+            <div class="col-xl-610">
+                <div id="ajax_content" class="d-flex flex-column category-result">
+                    <!-- Main Result -->
+                    <article class="my-2">
+                        <div class="result result-multi rounded">
+                            <h2 class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+                                <a class="text-white" href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html" title="XSMN">
+                                    KQXSMN - Xổ Số Miền Nam
+                                </a>
+                            </h2>
+
+                            <div class="breadcrumb-table">
+                                <h4 class="breadcrumb-table-title">
+                                    <a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html"
+                                        title="XSMN">XSMN</a>
+                                    »
+                                    <a href="<?= $esc->escapeHtmlAttr($thuLink ?? '#') ?>"
+                                        title="XSMN <?= $esc->escapeHtml($thuText ?? '') ?>">XSMN
+                                        <?= $esc->escapeHtml($thuText ?? '') ?></a>
+                                    »
+                                    <a href="/xsmn-<?= $dateSlug ?>.html" title="XSMN <?= $dateFormatted ?>">XSMN
+                                        <?= $dateFormatted ?></a>
+                                </h4>
+                            </div>
+
+                            <div class="table-flex-border">
+                                <table class="table-flex table-result" data-code="XSMN">
+                                    <tbody>
+                                        <!-- Header row with province names -->
+                                        <tr>
+                                            <td></td>
+                                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                                <td data-province-id="<?= $esc->escapeHtmlAttr($province['id']) ?>"
+                                                    data-province-code="<?= $esc->escapeHtmlAttr($province['code']) ?>">
+                                                    <a href="<?= getProvinceUrl($province['name']) ?>"
+                                                        title="<?= $esc->escapeHtmlAttr($province['name']) ?>">
+                                                        <?= $esc->escapeHtml($province['name'] === 'TP. Hồ Chí Minh' ? 'Hồ Chí Minh' : $province['name']) ?>
+                                                    </a>
+                                                </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+
+                                        <?php
+                                        $get = function ($pvId, $idx) {
+                                            $pr = $this->view->resultsForView[$pvId]['prizes'] ?? null;
+                                            return $pr ? ($pr[$idx] ?? []) : [];
+                                        };
+
+                                        $prizeLabels = ['G8', 'G7', 'G6', 'G5', 'G4', 'G3', 'G2', 'G1', 'ĐB'];
+                                        $prizeIndexes = [9, 8, 7, 6, 5, 4, 3, 2, 1];
+                                        $ncValues = [2, 3, 4, 4, 5, 5, 5, 5, 6];
+                                        // Số lượng giải thưởng cho mỗi giải (XSMN có 3 tỉnh/ngày)
+                                        $prizeCountsPerProvince = [
+                                            'G8' => 1,  // 1 giải
+                                            'G7' => 1,  // 1 giải
+                                            'G6' => 3,  // 3 giải
+                                            'G5' => 1,  // 1 giải
+                                            'G4' => 7,  // 7 giải
+                                            'G3' => 2,  // 2 giải
+                                            'G2' => 1,  // 1 giải
+                                            'G1' => 1,  // 1 giải
+                                            'ĐB' => 1,  // 1 giải
+                                        ];
+
+                                        foreach ($prizeLabels as $idx => $label):
+                                            $prizeIdx = $prizeIndexes[$idx];
+                                            $nc = $ncValues[$idx];
+                                            $loadingCount = $prizeCountsPerProvince[$label] ?? 1;
+                                        ?>
+                                            <tr>
+                                                <td><?= $label ?></td>
+                                                <?php foreach ($this->view->provincesForView as $province): ?>
+                                                    <td data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>"
+                                                        data-id-giai="<?= $esc->escapeHtmlAttr($prizeIdx) ?>">
+                                                        <?php
+                                                        $prizes = $get($province['id'], $prizeIdx);
+                                                        if (is_array($prizes) && !empty($prizes)) {
+                                                            foreach ($prizes as $prize) {
+                                                                $prize = trim($prize);
+                                                                if ($prize) {
+                                                                    echo '<span class="text-number" nc="' . $nc . '">' . $esc->escapeHtml($prize) . '</span> ';
+                                                                }
+                                                            }
+                                                        } else {
+                                                            // Show loading icons based on prize count
+                                                            for ($i = 0; $i < $loadingCount; $i++) {
+                                                                echo '<i class="icon icon-loading123"></i> ';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </td>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Lô tô table -->
+                        <div class="loto loto-multi rounded">
+                            <table class="table table-bordered table-striped table-xslt-multi-col" data-code="XSMN">
+                                <thead>
+                                    <tr>
+                                        <th>Đầu</th>
+                                        <?php foreach ($this->view->provincesForView as $province): ?>
+                                            <th><?= $esc->escapeHtml($province['code'] ?? substr($province['name'], 0, 3)) ?>
+                                            </th>
+                                        <?php endforeach; ?>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php for ($head = 0; $head <= 9; $head++): ?>
+                                        <tr>
+                                            <td><?= $head ?></td>
+                                            <?php foreach ($this->view->provincesForView as $province): ?>
+                                                <td class="js-number-dau-duoi"
+                                                    data-page-id="<?= $esc->escapeHtmlAttr($province['keyid']) ?>"
+                                                    data-num="<?= $esc->escapeHtmlAttr($head) ?>">
+                                                    <?php
+                                                    $dau = $this->view->resultsForView[$province['id']]['dau'] ?? array_fill(0, 10, []);
+                                                    $vals = $dau[$head] ?? [];
+                                                    if (!empty($vals)) {
+                                                        foreach ($vals as $v) {
+                                                            echo '<span>' . $esc->escapeHtml($v) . '</span>';
+                                                        }
+                                                    } else {
+                                                        echo '<span class="text-muted">-</span>';
+                                                    }
+                                                    ?>
+                                                </td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                    <?php endfor; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <!-- Latest Results (similar structure) -->
+                    <?php if (isset($latestResults) && !empty($latestResults)): ?>
+                        <?php foreach ($latestResults as $index => $latestResult): ?>
+                            <?php
+                            $latestDate = new \DateTime($latestResult['draw_date'], new \DateTimeZone('Asia/Ho_Chi_Minh'));
+                            $latestDay = (int) $latestDate->format('j');
+                            $latestMonth = (int) $latestDate->format('n');
+                            $latestYear = (int) $latestDate->format('Y');
+                            $latestDateFormatted = sprintf('%02d/%02d/%d', $latestDay, $latestMonth, $latestYear);
+                            $latestDateSlug = sprintf('%02d-%02d-%d', $latestDay, $latestMonth, $latestYear);
+                            $latestYmd = str_replace('-', '', $latestResult['draw_date']);
+
+                            $latestWeekday = (int) $latestDate->format('N');
+                            $latestThuText = ['', 'thứ 2', 'thứ 3', 'thứ 4', 'thứ 5', 'thứ 6', 'thứ 7', 'chủ nhật'][$latestWeekday] ?? '';
+                            $latestThuSlug = $dayMap[$latestWeekday] ?? '';
+                            ?>
+
+                            <!-- Similar article structure for latest results -->
+                            <article class="my-2" id="position-latest-<?= $latestYmd ?>">
+                                <div class="result result-multi rounded">
+                                    <h3 class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16 mb-0">
+                                        KQXSMN - Xổ Số Miền Nam
+                                    </h3>
+
+                                    <div class="breadcrumb-table">
+                                        <h4 class="breadcrumb-table-title">
+                                            <a href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html"
+                                                title="XSMN">XSMN</a>
+                                            »
+                                            <a href="/xsmn-<?= $latestThuSlug ?>-ket-qua-xo-so-mien-nam.html"
+                                                title="XSMN <?= $latestThuText ?>">XSMN <?= $latestThuText ?></a>
+                                            »
+                                            <a href="/xsmn-<?= $latestDateSlug ?>.html"
+                                                title="XSMN <?= $latestDateFormatted ?>">XSMN <?= $latestDateFormatted ?></a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="table-flex-border">
+                                        <table class="table-flex table-result" data-code="XSMN">
+                                            <tbody>
+                                                <tr>
+                                                    <td></td>
+                                                    <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                                                        <td>
+                                                            <a href="<?= getProvinceUrl($province['name']) ?>"
+                                                                title="<?= $esc->escapeHtmlAttr($province['name']) ?>">
+                                                                <?= $esc->escapeHtml($province['name'] === 'TP. Hồ Chí Minh' ? 'Hồ Chí Minh' : $province['name']) ?>
+                                                            </a>
+                                                        </td>
+                                                    <?php endforeach; ?>
+                                                </tr>
+
+                                                <?php
+                                                $getLatest = function ($pvId, $idx) use ($latestResult) {
+                                                    $pr = $latestResult['resultsForView'][$pvId]['prizes'] ?? null;
+                                                    return $pr ? ($pr[$idx] ?? []) : [];
+                                                };
+
+                                                foreach ($prizeLabels as $idx => $label):
+                                                    $prizeIdx = $prizeIndexes[$idx];
+                                                    $nc = $ncValues[$idx];
+                                                    $loadingCount = $prizeCountsPerProvince[$label] ?? 1;
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $label ?></td>
+                                                        <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                                                            <td>
+                                                                <?php
+                                                                $prizes = $getLatest($province['id'], $prizeIdx);
+                                                                if (is_array($prizes) && !empty($prizes)) {
+                                                                    foreach ($prizes as $prize) {
+                                                                        $prize = trim($prize);
+                                                                        if ($prize) {
+                                                                            echo '<span class="text-number" nc="' . $nc . '">' . $esc->escapeHtml($prize) . '</span> ';
+                                                                        }
+                                                                    }
+                                                                } else {
+                                                                    // Show loading icons based on prize count
+                                                                    for ($i = 0; $i < $loadingCount; $i++) {
+                                                                        echo '<i class="icon icon-loading123"></i> ';
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </td>
+                                                        <?php endforeach; ?>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- Lô tô for latest result -->
+                                <div class="loto loto-multi rounded">
+                                    <table class="table table-bordered table-striped table-xslt-multi-col" data-code="XSMN">
+                                        <thead>
+                                            <tr>
+                                                <th>Đầu</th>
+                                                <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                                                    <th><?= $esc->escapeHtml($province['code'] ?? substr($province['name'], 0, 3)) ?>
+                                                    </th>
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php for ($head = 0; $head <= 9; $head++): ?>
+                                                <tr>
+                                                    <td><?= $head ?></td>
+                                                    <?php foreach ($latestResult['provincesForView'] as $province): ?>
+                                                        <td>
+                                                            <?php
+                                                            $result = $latestResult['resultsForView'][$province['id']] ?? null;
+                                                            $vals = $result ? ($result['dau'][$head] ?? []) : [];
+                                                            if (!empty($vals)) {
+                                                                foreach ($vals as $v) {
+                                                                    echo '<span>' . $esc->escapeHtml($v) . '</span>';
+                                                                }
+                                                            } else {
+                                                                echo '<span class="text-muted">-</span>';
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                    <?php endforeach; ?>
+                                                </tr>
+                                            <?php endfor; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
+                    <!-- Links -->
+                    <p class="text-red1">» <a href="/rong-bach-kim.html" title="Rồng Bạch Kim 666"
+                            class="text-blue">Rồng Bạch Kim 666</a></p>
+                    <p class="text-red1">» <a href="/soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888"
+                            class="text-blue">Soi cầu XSMB Win2888</a></p>
+                    <p class="text-red1">» <a href="/soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi Cầu 24h"
+                            class="text-blue">Soi Cầu 24h</a></p>
+
+                    <div class="my-3">
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/soi-cau-xsmn.html"
+                                title="Soi cầu XSMN">Soi cầu XSMN</a> mới nhất</p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/du-doan-xsmn-c61.html"
+                                title="Dự đoán XSMN">Dự đoán XSMN</a> siêu chuẩn</p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a
+                                href="/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html" title="Kết quả XSMN">Kết
+                                quả XSMN</a> chuẩn xác nhất</p>
+                    </div>
+
+                </div>
+                <!-- SEO Content -->
+                <div class="new-content text-justify mt-4">
+                    <h3 style="text-align: justify;">Xổ số miền Nam - Trực tiếp KQ XSMN hôm nay</h3>
+                    <p style="text-align: justify;"><a href="/xo-so-mien-nam-xsmn.html" title="Xổ số miền Nam">Xổ số miền Nam</a> - Kết quả xổ số miền Nam hôm nay quay thưởng vào 16h10 sẽ được trực tiếp tại chuyên trang Soi cầu 247. Đảm bảo cung cấp cho anh em kết quả XSMN nhanh và chính xác nhất, xổ số miền Nam được tường thuật trực tiếp mỗi ngày tại trường quay của các tỉnh.</p>
+                    <p style="text-align: justify;">Kết quả xổ số miền Nam cũng cung cấp cho anh em đam mê bộ môn số học kết quả XSMN trong 30 ngày gần nhất, dễ dàng xem lại kết quả xổ số những ngày trước đó. Cùng với đó là phần phân tích, dự đoán các cặp số XSMN may mắn cho ngày hôm sau cũng được các chuyên gia phân tích giúp anh em có cơ sở chốt số đẹp cho mình.</p>
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Lịch quay thưởng xổ số miền Nam hàng tuần</span></h3>
+                    <p style="text-align: justify;">Xổ số miền Nam có số lượng đài quay thưởng nhiều nhất trong 3 miền và có lượng người chơi khá lớn. Mỗi ngày kết quả XSMN sẽ mở thưởng 1 đài chính và nhà đài phụ, quay thưởng vào lúc 16h15 mỗi ngày với tất cả 21 nhà đài. Mỗi nhà đài sẽ quay thưởng 1 tuần 1 lần, riêng thành phố Hồ Chính Minh sẽ được quay thưởng 2 lần/tuần. Cụ thể lịch mở thưởng XSMN như sau:</p>
+                    <p style="text-align: justify;">- Thứ 2: Quay thưởng đài Hồ Chí Minh, Cà Mau, Đồng Tháp.</p>
+                    <p style="text-align: justify;">- Thứ 3: Mở thưởng đài Bến Tre, Bạc Liêu, Vũng Tàu.<br> <br>- Thứ 4: Đài Cần Thơ, Sóc Trăng, Đồng Nai quay thưởng.</p>
+                    <p style="text-align: justify;">- Thứ 5: Đài Bình Thuận, đài Tây Ninh, đài An Giang.</p>
+                    <p style="text-align: justify;">- Thứ 6 : Vĩnh Long, Trà Vinh, Bình Dương mở thưởng.</p>
+                    <p style="text-align: justify;">- Thứ 7: có 4 đài quay thưởng là Hồ Chính Minh, Long An, Bình Phước, hậu Giang.</p>
+                    <p style="text-align: justify;">- Chủ nhật: Kiên Giang, Tiền Giang, Đà Lạt quay thưởng.</p>
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Cơ cấu giải thưởng XSMN</span></h3>
+                    <p style="text-align: justify;">Xổ số truyền thống miền Nam phát hành vé có mệnh giá là 10.000 vnđ. Mỗi tỉnh phát hành 1.000.000 vé và có 9 giải từ giải 8 đến giải Đặc biệt gồm 18 dãy số tương ứng với 18 lần quay thưởng. Giá trị giải thưởng mỗi giải xổ số miền Nam như sau:</p>
+                    <p style="text-align: justify;">- Có 1 giải Đặc biệt với trị giá giải thưởng lên đến 2.000.000.000 vnđ.</p>
+                    <p style="text-align: justify;">- 10 giải Nhất khi trùng với 5 số trị giá mỗi giải thưởng là 30.000.000 vnđ.</p>
+                    <p style="text-align: justify;">- 10 giải Nhì khi trùng 5 số với mỗi giải trị giá 15.000.000 vnđ.</p>
+                    <p style="text-align: justify;">- 20 giải Ba giá trị mỗi giải là 10.000.000 vnđ.</p>
+                    <p style="text-align: justify;">- 70 giải Tư với giá trị mỗi giải lên đến 3.000.000 vnđ.</p>
+                    <p style="text-align: justify;">- Có 100 giải Năm mỗi giải có giá trị là 1.000.000 vnđ.</p>
+                    <p style="text-align: justify;">- 300 giải Sáu khi trùng 4 chữ số với giá trị mỗi giải là 400.000 vnđ.</p>
+                    <p style="text-align: justify;">- Có 1000 giải bảy khi trùng 3 chữ số trị giá 200.000 vnđ.</p>
+                    <p style="text-align: justify;">- 10.000 giải Tám giá trị mỗi giải là 100.000 vnđ.</p>
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Quy trình nhận thưởng khi trúng xổ số miền Nam</span></h3>
+                    <p style="text-align: justify;">Sau khi tra cứu kết quả xổ số miền nam và thấy chắc chắn đã trúng giải, anh em cần liên hệ với công ty xổ số kiến thiết hoặc đại lý vé số gần nhất để thực hiện các thủ tục lĩnh thưởng.</p>
+                    <p style="text-align: justify;">Vé số mang đi nhận thưởng phải giữ nguyên vẹn, không được rách nát hay có dấu hiệu tẩy xóa, chắp vá, sửa chữa. Thời gian lĩnh thưởng tối đa là 30 ngày kể từ khi công bố giải thưởng.</p>
+                    <p style="text-align: justify;">Đối với những giải thưởng trị giá từ 10 triệu đồng trở lên thì người trúng giải sẽ phải nộp thuế thu nhập cá nhân theo quy định. Công ty xổ số kiến thiết trao thưởng sẽ có trách nhiệm trừ trực tiếp số tiền theo quy định với các giải thưởng này.</p>
+                    <p style="text-align: justify;">Trong suốt thời gian trả thưởng, tất cả thông tin của người trúng giải sẽ được công ty xổ số bảo mật hoàn toàn. Nếu người nhận thưởng mà gặp phải những nguyên nhân khách quan không thể nhận thưởng thì có thể ủy quyền cho người khác theo quy định.</p>
+                    <p style="text-align: justify;">Anh em có thể dò kết quả xổ số miền Nam trên tivi hoặc tại chuyên mục xổ số miền Nam của chúng tôi. <a href="/" title="chuyên trang Soi cầu 247">Soi cầu 247 miễn phí</a> luôn cung cấp cho anh em kết quả xổ số nhanh chóng kèm theo những dự đoán kết quả xổ số từ chuyên gia xổ số hàng đầu. Chúc anh em may mắn!</p>
+                </div>
+            </div>
+            <!-- COL LEFT (Sidebar trái) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+            <!-- COL RIGHT (Sidebar phải) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    window.appProvinces = <?= json_encode($this->view->provinces ?? []) ?>;
+    window.provinceIdToKeyId = <?= json_encode($this->view->provinceIdToKeyId ?? []) ?>;
+</script>
+<link rel="preload" href="/js/kqxs/kqxsmn-live.js" as="script">
+<script src="/js/kqxs/kqxsmn-live.js" async></script>
+
+<link rel="preload" href="/js/kqxs/kqxsmn.js" as="script">
+<script src="/js/kqxs/kqxsmn.js" async></script>

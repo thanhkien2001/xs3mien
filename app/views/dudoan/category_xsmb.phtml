@@ -1,0 +1,403 @@
+<?php
+$esc = $this->escaper;
+$firstPrediction = $predictions->count() > 0 ? $predictions[0] : null;
+$remainingPredictions = [];
+foreach ($predictions as $index => $pred) {
+    if ($index > 0 && $index <= 3) {
+        $remainingPredictions[] = $pred;
+    }
+}
+$ajaxPredictions = [];
+foreach ($predictions as $index => $pred) {
+    if ($index > 3) {
+        $ajaxPredictions[] = $pred;
+    }
+}
+?>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="<i class='icon-home'></i>"><i
+                                    class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item active"><a href="/du-doan-xsmb-c59.html" title="Dự đoán XSMB">Dự đoán
+                                XSMB</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-xl-610 border-radius-4">
+                <div class="row">
+                    <div class="col-12 pt-3">
+                        <h2 class="title-news-cate text-center">DỰ ĐOÁN XSMB - DỰ ĐOÁN MB CHÍNH XÁC NHẤT HÔM NAY</h2>
+                        <p>Dự đoán KQXSMB - Dự đoán xổ số miền Bắc được các chuyên gia tổng hợp và phân tích để đưa ra
+                            những cặp số MB đẹp nhất có tỉ lệ về cao nhất trong ngày hôm nay. Các con số của chúng tôi
+                            được cập nhật nhanh chóng và mới nhất vào mỗi ngày. Cùng tham khảo ngay sau đây:</p>
+                        <div class="d-flex bg-blue1 child-border-right">
+                            <a href="/du-doan-xsmb-c59.html" class="col text-center p-2 text-white bg-red1">Dự đoán
+                                XSMB</a>
+                            <a href="/du-doan-xsmt-c60.html" class="col text-center p-2 text-white">Dự đoán XSMT</a>
+                            <a href="/du-doan-xsmn-c61.html" class="col text-center p-2 text-white">Dự đoán XSMN</a>
+                        </div>
+                        <h2 class="font-weight-bold mt-3">Dự đoán xổ số miền Bắc hôm nay</h2>
+                    </div>
+                    <?php if ($firstPrediction): ?>
+                        <div class="col-12 col-lg-6 pr-2">
+                            <a href="/<?= $esc->escapeHtml($firstPrediction->slug) ?>.html"
+                                title="<?= $esc->escapeHtml($firstPrediction->title) ?>">
+                                <img width="410" height="215" loading="lazy"
+                                    src="<?= $esc->escapeHtml($firstPrediction->image_url ?? '/img/soicaududoan/xsmb/dudoanxsmb.png') ?>"
+                                    alt="<?= $esc->escapeHtml($firstPrediction->title) ?>">
+                            </a>
+                        </div>
+                        <div class="col-12 col-lg-6 pl-2">
+                            <h3 class="mt-2 mt-lg-0">
+                                <a class="font-18 font-weight-bold lh-24px text-blue1"
+                                    href="/<?= $esc->escapeHtml($firstPrediction->slug) ?>.html"
+                                    title="<?= $esc->escapeHtml($firstPrediction->title) ?>">
+                                    <?= $esc->escapeHtml($firstPrediction->title) ?>
+                                </a>
+                            </h3>
+                            <p class="text-black2 font-14 d-none line-lg-4 mb-0 lh-18px text-justify">
+                                <?= $esc->escapeHtml(mb_substr(strip_tags($firstPrediction->content), 0, 200)) ?>...
+                            </p>
+                        </div>
+                        <div class="col-12 d-lg-none">
+                            <p class="text-black2 font-14 mb-0">
+                                <?= $esc->escapeHtml(mb_substr(strip_tags($firstPrediction->content), 0, 200)) ?>...
+                            </p>
+                        </div>
+                    <?php endif; ?>
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                    <?php foreach ($remainingPredictions as $pred): ?>
+                        <div
+                            class="col-4 <?= $pred === $remainingPredictions[0] ? 'pr-2' : ($pred === $remainingPredictions[count($remainingPredictions) - 1] ? 'pl-2' : 'px-2') ?>">
+                            <a href="/<?= $esc->escapeHtml($pred->slug) ?>.html"
+                                title="<?= $esc->escapeHtml($pred->title) ?>">
+                                <img width="410" height="215" loading="lazy"
+                                    src="<?= $esc->escapeHtml($pred->image_url ?? '/img/soicaududoan/xsmb/dudoanxsmb.png') ?>"
+                                    alt="<?= $esc->escapeHtml($pred->title) ?>">
+                            </a>
+                            <h3>
+                                <a class="text-black1 lh-18px font-14 font-weight-bold mt-3 d-block text-justify"
+                                    href="/<?= $esc->escapeHtml($pred->slug) ?>.html"
+                                    title="<?= $esc->escapeHtml($pred->title) ?>">
+                                    <?= $esc->escapeHtml($pred->title) ?>
+                                </a>
+                            </h3>
+                        </div>
+                    <?php endforeach; ?>
+                    <div class="col-12">
+                        <hr class="mb-0">
+                    </div>
+                    <div class="col-12">
+                        <h2 class="font-weight-bold my-3">Thống kê XSMB</h2>
+                        <a href="/lo-gan-xsmb.html">
+                            <h3 class="font-weight-bold">Thống kê lô gan XSMB</h3>
+                        </a>
+                        <table class="text-center table-default w-100">
+                            <thead>
+                                <tr class="bg-orange">
+                                    <th>Lô gan</th>
+                                    <th>Lần chưa về</th>
+                                    <th>Về gần nhất</th>
+                                    <th>Gan cực đại</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($loGanStats as $stat): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold"><?= $esc->escapeHtml($stat['number']) ?></td>
+                                        <td><?= $esc->escapeHtml($stat['miss']) ?> <span
+                                                class="font-weight-normal">lần</span></td>
+                                        <td>
+                                            <?php if ($stat['last_appeared']): ?>
+                                                <a rel="nofollow"
+                                                    href="/xsmb-<?= date('d-m-Y', strtotime($stat['last_appeared'])) ?>.html"
+                                                    class="text-black" target="_blank">
+                                                    <?= date('d/m/Y', strtotime($stat['last_appeared'])) ?>
+                                                </a>
+                                            <?php else: ?>
+                                                Chưa về
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><?= $esc->escapeHtml($stat['max_gap']) ?> <span
+                                                class="font-weight-normal">lần</span></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                        <a class="my-2 d-block" href="/dac-biet-xsmb.html">
+                            <h3 class="font-weight-bold">Thống kê đặc biệt XSMB</h3>
+                        </a>
+                        <div class="logan-result">
+                            <div class="table-dacbiet overflow-auto">
+                                <table class="text-center table-total table-fixed w-100">
+                                    <tbody>
+                                        <tr class="bg-orange font-weight-bold">
+                                            <td colspan="4">10 cặp số về nhiều nhất (thống kê từ 00 đến 99)</td>
+                                        </tr>
+                                        <tr class="font-weight-bold">
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                        </tr>
+                                        <?php
+                                        $topFrequent = $dacBietStats['top_frequent'] ?? [];
+                                        for ($i = 0; $i < count($topFrequent); $i += 2):
+                                            $item1 = $topFrequent[$i] ?? null;
+                                            $item2 = $topFrequent[$i + 1] ?? null;
+                                            ?>
+                                            <tr class="bg-white">
+                                                <?php if ($item1): ?>
+                                                    <td><span
+                                                            class="text-red font-weight-bold"><?= $esc->escapeHtml($item1->number) ?></span>
+                                                    </td>
+                                                    <td><span
+                                                            class="font-weight-bold"><?= $esc->escapeHtml($item1->count) ?></span>
+                                                        lần</td>
+                                                <?php else: ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endif; ?>
+                                                <?php if ($item2): ?>
+                                                    <td><span
+                                                            class="text-red font-weight-bold"><?= $esc->escapeHtml($item2->number) ?></span>
+                                                    </td>
+                                                    <td><span
+                                                            class="font-weight-bold"><?= $esc->escapeHtml($item2->count) ?></span>
+                                                        lần</td>
+                                                <?php else: ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endif; ?>
+                                            </tr>
+                                        <?php endfor; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="logan-result">
+                            <div class="table-dacbiet overflow-auto">
+                                <table class="text-center table-total table-fixed w-100">
+                                    <tbody>
+                                        <tr class="bg-orange font-weight-bold">
+                                            <td colspan="4">10 cặp số về ít nhất (thống kê từ 00 đến 99)</td>
+                                        </tr>
+                                        <tr class="font-weight-bold">
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                            <td class="bg-blue2">Cặp số</td>
+                                            <td class="bg-blue2">Xuất hiện</td>
+                                        </tr>
+                                        <?php
+                                        $topLeast = $dacBietStats['top_least'] ?? [];
+                                        for ($i = 0; $i < count($topLeast); $i += 2):
+                                            $item1 = $topLeast[$i] ?? null;
+                                            $item2 = $topLeast[$i + 1] ?? null;
+                                            ?>
+                                            <tr class="bg-white">
+                                                <?php if ($item1): ?>
+                                                    <td><span
+                                                            class="text-red font-weight-bold"><?= $esc->escapeHtml($item1->number) ?></span>
+                                                    </td>
+                                                    <td><span
+                                                            class="font-weight-bold"><?= $esc->escapeHtml($item1->count) ?></span>
+                                                        lần</td>
+                                                <?php else: ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endif; ?>
+                                                <?php if ($item2): ?>
+                                                    <td><span
+                                                            class="text-red font-weight-bold"><?= $esc->escapeHtml($item2->number) ?></span>
+                                                    </td>
+                                                    <td><span
+                                                            class="font-weight-bold"><?= $esc->escapeHtml($item2->count) ?></span>
+                                                        lần</td>
+                                                <?php else: ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endif; ?>
+                                            </tr>
+                                        <?php endfor; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <h3 class="my-2 font-weight-bold">Hai số cuối giải đặc biệt có xác suất về cao nhất trong ngày
+                        </h3>
+                        <div class="logan-result">
+                            <div class="table-dacbiet logan-result">
+                                <div class="overflow-auto">
+                                    <table class="text-center table-total w-100">
+                                        <thead>
+                                            <tr class="bg-orange">
+                                                <th>Số thứ nhất</th>
+                                                <th>Số thứ hai</th>
+                                                <th>Số thứ ba</th>
+                                                <th>Số thứ tư</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $specialLast2 = $dacBietStats['special_prize_last2'] ?? [];
+                                            $row1 = array_slice($specialLast2, 0, 4);
+                                            $row2 = array_slice($specialLast2, 4, 4);
+                                            ?>
+                                            <?php if (!empty($row1)): ?>
+                                                <tr class="table-dacbiet-tr1 bg-white">
+                                                    <?php foreach ($row1 as $num): ?>
+                                                        <td><?= $esc->escapeHtml($num) ?></td>
+                                                    <?php endforeach; ?>
+                                                </tr>
+                                            <?php endif; ?>
+                                            <?php if (!empty($row2)): ?>
+                                                <tr class="table-dacbiet-tr1 bg-white">
+                                                    <?php foreach ($row2 as $num): ?>
+                                                        <td><?= $esc->escapeHtml($num) ?></td>
+                                                    <?php endforeach; ?>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ajax_content">
+                    <?php foreach ($ajaxPredictions as $pred): ?>
+                        <div class="row">
+                            <div class="col-12 mt-3 mb-2">
+                                <a class="text-blue1 font-16 font-weight-bold"
+                                    href="/<?= $esc->escapeHtml($pred->slug) ?>.html"
+                                    title="<?= $esc->escapeHtml($pred->title) ?>">
+                                    <?= $esc->escapeHtml($pred->title) ?>
+                                </a>
+                            </div>
+                            <div class="col-4 pr-2">
+                                <a href="/<?= $esc->escapeHtml($pred->slug) ?>.html"
+                                    title="<?= $esc->escapeHtml($pred->title) ?>">
+                                    <img loading="lazy" width="410" height="215"
+                                        src="<?= $esc->escapeHtml($pred->image_url ?? '/img/soicaududoan/xsmb/dudoanxsmb.png') ?>"
+                                        alt="<?= $esc->escapeHtml($pred->title) ?>">
+                                </a>
+                            </div>
+                            <div class="col-8 pl-2">
+                                <p class="text-black1 font-14 lh-18px line-3 text-justify">
+                                    <?= $esc->escapeHtml(mb_substr(strip_tags($pred->content), 0, 200)) ?>...
+                                </p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <button class="btnLoadMore" data-url="/du-doan-xsmb-c59/page/" data-page="2"
+                    data-total="<?= $predictions->count() ?>" data-limit="19">Xem thêm bài viết</button>
+                <div class="new-content text-justify mt-4">
+                    <p style="text-align: justify;"><a href="/du-doan-xsmb-c59.html" title="Dự đoán XSMB">Dự đoán
+                            XSMB</a> - Dự đoán kết quả XSMB hôm nay với tỷ lệ chính xác cực cao, gợi ý cho anh em những
+                        con số tài lộc có khả năng về trong ngày. Chuyên mục dự đoán của chúng tôi được đưa ra dựa trên
+                        kinh nghiệm của các chuyên gia soi cầu lô đề hàng đầu, kết hợp với các thống kê từ máy tính hiện
+                        đại đảm bảo sẽ mang đến cho anh em những con số chuẩn nhất, hoàn toàn miễn phí.</p>
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Dự đoán XSMB - Dự đoán xổ số miền
+                            Bắc chính xác 100%</span></h3>
+                    <p style="text-align: justify;">Dự đoán XSMB là hình thức soi cầu dự đoán KQXSMB về ngày hôm sau dựa
+                        theo dữ liệu <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html"
+                            title="kết quả xổ số miền Bắc">kết quả xổ số miền Bắc</a> những ngày trước và kết hợp nhiều
+                        phương pháp soi cầu hiện đại. Các chuyên gia soi cầu có kinh nghiệm lâu năm của chúng tôi sẽ
+                        phân tích và đưa ra những con số đẹp nhất trong ngày cho anh em tham khảo. Dự đoán MB sẽ được
+                        cập nhật nhanh chóng, có tỷ lệ chính xác cao, hoàn toàn miễn phí và nhanh nhất mỗi ngày. Anh em
+                        có thể theo dõi và tham khảo những con số chúng tôi cung cấp để chọn ra con số tài lộc đưa anh
+                        em về bờ.</p>
+                    <p style="text-align: justify;">Tại chuyên mục dự đoán xổ số miền Bắc của Soi cầu 247 anh em có thể
+                        tham khảo nhiều thông tin hữu ích như:</p>
+                    <p style="text-align: justify;">- Số lô đẹp nhất về trong ngày: Dự đoán MB 247 đưa ra các con số
+                        bạch thủ lô, song thủ lô, lô kép, lô xiên (xiên 2, xiên 3)</p>
+                    <p style="text-align: justify;">- Dự đoán giải đặc biệt sẽ về hôm sau: dự đoán đầu đuôi đặc biệt
+                        miền Bắc, đề chạm, dàn đề 4 số may mắn.</p>
+                    <p style="text-align: justify;">- Bảng thống kê XSMB thuận tiện, dễ theo dõi: thống kê kết quả XSMB
+                        kỳ quay trước, thống kê lô gan lâu chưa về, thống kê tần suất lô 2 số cuối giải đặc biệt, thống
+                        kê lô xiên,....</p>
+                    <p style="text-align: justify;">- Soi cầu Rồng Bạch Kim, soi cầu win2888, dự đoán số đề,...</p>
+                    <p style="text-align: justify;">Mỗi phần DD XSMB sẽ đưa ra dự đoán cho anh em những cặp số đẹp khác
+                        nhau, đáp ứng được nhu cầu soi cầu chốt số đa dạng của anh em.</p>
+                    <p style="text-align: justify;">Những con số chúng tôi đưa ra đều dựa trên phần mềm thống kế hiện
+                        đại cực chuẩn xác, cung cấp các bảng thống kê lô nhanh chóng, trở thành công cụ soi cầu hiệu quả
+                        giúp anh em tìm ra con số may mắn nhất.</p>
+                </div>
+            </div>
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnLoadMore = document.querySelector('.btnLoadMore');
+        if (btnLoadMore) {
+            btnLoadMore.addEventListener('click', function () {
+                const currentPage = parseInt(this.getAttribute('data-page') || '2');
+                const baseUrl = this.getAttribute('data-url');
+                const total = parseInt(this.getAttribute('data-total') || '0');
+                const limit = parseInt(this.getAttribute('data-limit') || '19');
+
+                if (!baseUrl) {
+                    console.error('Missing data-url attribute');
+                    return;
+                }
+
+                this.disabled = true;
+                const originalText = this.textContent;
+                this.textContent = 'Đang tải...';
+
+                fetch(baseUrl + currentPage, {
+                    method: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        if (html && html.trim().length > 0) {
+                            const ajaxContent = document.getElementById('ajax_content');
+                            if (ajaxContent) {
+                                ajaxContent.insertAdjacentHTML('beforeend', html);
+                            }
+                            const newPage = currentPage + 1;
+                            this.setAttribute('data-page', newPage);
+                            if (newPage * limit >= total) {
+                                this.style.display = 'none';
+                            } else {
+                                this.disabled = false;
+                                this.textContent = originalText;
+                            }
+                        } else {
+                            this.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        this.disabled = false;
+                        this.textContent = originalText;
+                    });
+            });
+        }
+    });
+</script>

@@ -1,0 +1,74 @@
+<?php
+/**
+ * Partial: Cầu Bạch Thủ Chạy 4 Ngày
+ * Hiển thị thống kê bạch thủ theo đầu số
+ */
+?>
+
+<div class="my-3">
+    <h3 class="aside-title-red">
+        <a class="text-red2" href="/soi-cau-bach-thu.html" title="SOI CẦU 24H BẠCH THỦ">SOI CẦU 24H BẠCH THỦ</a> 
+        <sup class="vip"></sup>
+    </h3>
+    <p class="text-black4 font-14 mt-3 text-justify">
+        Soi cầu bạch thủ lô là công cụ uy tín được nhiều anh em biết đến. Tuy nhiên, để tìm được cặp số ưng ý có xác suất về cao không phải dễ. 
+        Soi cầu bạch thủ 247 của chúng tôi sử dụng công cụ thống kê soi cầu thông minh để đem đến cho anh em những cặp số đẹp nhất.
+    </p>
+
+    <!-- Cầu bạch thủ chạy 4 ngày -->
+    <div class="logan-result mt-3">
+        <h4 class="title-blue">
+            <img loading="lazy" src="public/images/star-blue.svg" alt="Cầu bạch thủ" class="mr-2"> 
+            Cầu bạch thủ chạy 4 ngày
+        </h4>
+    </div>
+    
+    <div class="soi-cau">
+        <div class="col-12 cau-bach-thu-loto p-0">
+            <div class="table-soi-cau">
+                <div class="overflow-auto">
+                    <table class="table-soicau-all">
+                        <tbody>
+                            <?php 
+                            // Dữ liệu bạch thủ chạy 4 ngày
+                            $bachThuData = [
+                                '0' => ['00' => 1, '02' => 1, '04' => 2, '05' => 1, '09' => 2],
+                                '1' => ['11' => 1],
+                                '2' => ['22' => 1, '28' => 1],
+                                '3' => ['38' => 1],
+                                '4' => ['40' => 1, '48' => 2],
+                                '5' => ['58' => 1],
+                                '6' => ['61' => 1, '64' => 1, '66' => 1, '68' => 1],
+                                '7' => ['76' => 2, '78' => 3],
+                                '8' => ['82' => 1],
+                                '9' => ['97' => 2]
+                            ];
+                            
+                            foreach ($bachThuData as $dau => $numbers):
+                            ?>
+                            <tr>
+                                <td><span>Đầu <?= $dau ?></span></td>
+                                <?php for ($i = 0; $i <= 9; $i++): 
+                                    $num = $dau . $i;
+                                    if (isset($numbers[$num])):
+                                ?>
+                                <td>
+                                    <div class="block-number">
+                                        <span><?= $num ?></span>
+                                        <span><?= $numbers[$num] ?> lần</span>
+                                    </div>
+                                </td>
+                                <?php else: ?>
+                                <td> </td>
+                                <?php endif; 
+                                endfor; ?>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

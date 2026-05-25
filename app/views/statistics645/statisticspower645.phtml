@@ -1,0 +1,290 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper" style="padding-left: 0;">
+        <ul class="nav-sub" style="padding-left: 0; margin-left: 0;">
+            <li style="padding-left: 0;">
+                <a title="Thống kê xổ số Miền Bắc" href="/thong-ke-xo-so-mien-bac-tk-xsmb.html">Thống kê XSMB</a>
+            </li>
+            <li><a title="Thống kê xổ số Miền Nam" href="/thong-ke-xo-so-mien-nam-tk-xsmn.html">Thống kê XSMN</a></li>
+            <li><a title="Thống kê xổ số Miền Trung" href="/thong-ke-xo-so-mien-trung-tk-xsmt.html">Thống kê XSMT</a></li>
+            <li><a title="Thống kê Power 6/55" href="/thong-ke-xo-so-power-6-55.html">Thống kê Power 6/55</a></li>
+            <li><a class="util-text-red" title="Thống kê Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega 6/45</a></li>
+        </ul>
+    </div>
+</div>
+
+<main class="layout-wrapper-fluid util-mt-3 util-px-0 util-px-md-3 layout-clearfix">
+    <div class="layout-row util-g-0 util-g-md-3">
+        <div class="layout-col-12 layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Thống kê Mega 6/45</span></li>
+                    </ol>
+                </nav>
+
+                <div class="page-header util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm">
+                    <h1 class="page-title-h1">Bảng thống kê chi tiết Vietlott Mega 6/45 cập nhật liên tục</h1>
+                    <ul class="list__subpage">
+                        <li><a title="Kết quả Mega 6/45" href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y')) ?>">Kết Quả Mega</a></li>
+                        <li><a title="Dự đoán Mega 6/45" href="<?= $this->url->get('/du-doan-soi-cau-xo-so-mega-6-45-vietlott-ngay-' . $nextDate) . '-co-nen-xuong-tay' ?>">Dự đoán Mega</a></li>
+                        <li><a title="Quay thử Mega 6/45" href="/quay-thu-xo-so-mega-6-45-hom-nay.html">Quay thử Mega</a></li>
+                        <li><a class="util-text-red" title="Thống kê xổ số Mega 6/45" href="/thong-ke-xo-so-mega-6-45.html">Thống kê Mega</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="util-ms-2">
+
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">Bảng Thống kê Mega 6/45 trong 100 kỳ quay</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php if (!empty($numberFrequency)): ?>
+                                <?php $row = [];
+                                $index = 0;
+                                $total = count($numberFrequency); ?>
+                                <?php foreach ($numberFrequency as $number => $frequency): ?>
+                                    <?php $row[] = ['number' => $number, 'frequency' => $frequency]; ?>
+                                    <?php if (count($row) == 4 || $index == $total - 1): ?>
+                                        <tr>
+                                            <?php foreach ($row as $item): ?>
+                                                <td><span class="ball small mega"><?php echo htmlspecialchars($item['number']); ?></span></td>
+                                                <td><?php echo htmlspecialchars($item['frequency']); ?> lần</td>
+                                            <?php endforeach; ?>
+                                            <?php if ($index == $total - 1 && count($row) < 4): ?>
+                                                <?php for ($i = count($row); $i < 4; $i++): ?>
+                                                    <td></td>
+                                                    <td></td>
+                                                <?php endfor; ?>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <?php $row = []; ?>
+                                    <?php endif; ?>
+                                    <?php $index++; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="8" class="util-text-center">Không có dữ liệu thống kê</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">Bảng Thống kê 20 số Mega xuất hiện nhiều</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php $row = [];
+                            $index = 0;
+                            $total = count($top20Numbers); ?>
+                            <?php foreach ($top20Numbers as $number => $frequency): ?>
+                                <?php $row[] = ['number' => $number, 'frequency' => $frequency]; ?>
+                                <?php if (count($row) == 4 || $index == $total - 1): ?>
+                                    <tr>
+                                        <?php foreach ($row as $item): ?>
+                                            <td><span class="ball small mega"><?php echo htmlspecialchars($item['number']); ?></span></td>
+                                            <td><?php echo htmlspecialchars($item['frequency']); ?> lần</td>
+                                        <?php endforeach; ?>
+                                        <?php if ($index == $total - 1 && count($row) < 4): ?>
+                                            <?php for ($i = count($row); $i < 4; $i++): ?>
+                                                <td></td>
+                                                <td></td>
+                                            <?php endfor; ?>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php $row = []; ?>
+                                <?php endif; ?>
+                                <?php $index++; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">Bảng Thống kê 20 số Mega ít xuất hiện</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php if (!empty($rareNumbers)): ?>
+                                <?php for ($i = 0; $i < 5; $i++): ?>
+                                    <tr>
+                                        <?php for ($j = $i * 4; $j < $i * 4 + 4 && isset($rareNumbers[$j]); $j++): ?>
+                                            <td><span class="ball small mega"><?= htmlspecialchars($rareNumbers[$j]['number'] ?? '') ?></span></td>
+                                            <td><?= htmlspecialchars($rareNumbers[$j]['frequency'] ?? '0') ?> lần</td>
+                                        <?php endfor; ?>
+                                    </tr>
+                                <?php endfor; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="8" class="util-text-center">Không có dữ liệu số hiếm</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0">Cặp số Mega 6/45 ra liên tiếp</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <?php if (empty($top20ConsecutivePairs)): ?>
+                        <p class="util-p-3 util-text-center text-danger">Không tìm thấy cặp số liên tiếp nào.</p>
+                    <?php else: ?>
+                        <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                            <tbody>
+                                <?php $row = [];
+                                $index = 0;
+                                $total = count($top20ConsecutivePairs); ?>
+                                <?php foreach ($top20ConsecutivePairs as $pair => $frequency): ?>
+                                    <?php $numbers = explode(',', $pair); ?>
+                                    <?php $row[] = ['numbers' => $numbers, 'frequency' => $frequency]; ?>
+                                    <?php if (count($row) == 2 || $index == $total - 1): ?>
+                                        <tr>
+                                            <?php foreach ($row as $item): ?>
+                                                <td>
+                                                    <div class="balls">
+                                                        <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][0]); ?></span>
+                                                        <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][1]); ?></span>
+                                                    </div>
+                                                </td>
+                                                <td><?php echo htmlspecialchars($item['frequency']); ?> lần</td>
+                                            <?php endforeach; ?>
+                                            <?php if ($index == $total - 1 && count($row) < 2): ?>
+                                                <td></td>
+                                                <td></td>
+                                            <?php endif; ?>
+                                        </tr>
+                                        <?php $row = []; ?>
+                                    <?php endif; ?>
+                                    <?php $index++; ?>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">Danh sách 20 cặp số Mega 6/45 xuất hiện nhiều</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php $row = [];
+                            $index = 0;
+                            $total = count($top20Pairs); ?>
+                            <?php foreach ($top20Pairs as $pair => $frequency): ?>
+                                <?php $numbers = explode(',', $pair); ?>
+                                <?php $row[] = ['numbers' => $numbers, 'frequency' => $frequency]; ?>
+                                <?php if (count($row) == 2 || $index == $total - 1): ?>
+                                    <tr>
+                                        <?php foreach ($row as $item): ?>
+                                            <td>
+                                                <div class="balls">
+                                                    <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][0]); ?></span>
+                                                    <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][1]); ?></span>
+                                                </div>
+                                            </td>
+                                            <td><?php echo htmlspecialchars($item['frequency']); ?> lần</td>
+                                        <?php endforeach; ?>
+                                        <?php if ($index == $total - 1 && count($row) < 2): ?>
+                                            <td></td>
+                                            <td></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php $row = []; ?>
+                                <?php endif; ?>
+                                <?php $index++; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">Trọn bộ 3 số Mega 6/45 xuất hiện nhiều</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <tbody>
+                            <?php $row = [];
+                            $index = 0;
+                            $total = count($topTriplets); ?>
+                            <?php foreach ($topTriplets as $triplet => $frequency): ?>
+                                <?php $numbers = explode(',', $triplet); ?>
+                                <?php $row[] = ['numbers' => $numbers, 'frequency' => $frequency]; ?>
+                                <?php if (count($row) == 2 || $index == $total - 1): ?>
+                                    <tr>
+                                        <?php foreach ($row as $item): ?>
+                                            <td>
+                                                <div class="balls">
+                                                    <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][0]); ?></span>
+                                                    <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][1]); ?></span>
+                                                    <span class="ball small mega util-mx-1"><?php echo htmlspecialchars($item['numbers'][2]); ?></span>
+                                                </div>
+                                            </td>
+                                            <td><?php echo htmlspecialchars($item['frequency']); ?> lần</td>
+                                        <?php endforeach; ?>
+                                        <?php if ($index == $total - 1 && count($row) < 2): ?>
+                                            <td></td>
+                                            <td></td>
+                                        <?php endif; ?>
+                                    </tr>
+                                    <?php $row = []; ?>
+                                <?php endif; ?>
+                                <?php $index++; ?>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="util-mb-4 util-bg-white util-border util-shadow-sm">
+                <h2 class="util-bg-orange util-bg-primary-subtle util-fs-5-5 util-font-medium util-p-2 util-px-3 util-mb-0 util-text-black-2">Các giá trị Jackpot Mega 6/45 cao nhất</h2>
+                <div class="comp-table-responsive" style="overflow: hidden;">
+                    <table class="comp-table util-text-center util-mb-0 util-small util-align-items-center">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Giải Jackpot</th>
+                                <th>Ngày quay thưởng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (!empty($topJackpots)): ?>
+                                <?php foreach ($topJackpots as $index => $jackpot): ?>
+                                    <tr>
+                                        <td><?php echo $index + 1; ?></td>
+                                        <td class="fs-6"><?php echo number_format($jackpot['jackpot_amount'] ?? 0, 0, ',', '.'); ?> ₫</td>
+                                        <td><?php echo date('d/m/Y', strtotime($jackpot['draw_date'] ?? '1970-01-01')); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="3" class="util-text-center">Không có dữ liệu jackpot</td>
+                                </tr>
+                            <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="comp-article-content util-bg-white util-shadow-sm util-p-3 util-mt-5">
+                <p>Trang <a href="/thong-ke-xo-so-mega-6-45.html"><strong>Phân tích Mega 6/45</strong></a> của soicau247.com cung cấp báo cáo chi tiết về tần suất ra số trong <a href="<?= $this->url->get('/ket-qua-xoso-mega-6-45-vietlott-' . date('d-m-Y')) ?>">Vietlott Mega 6/45</a>. Dữ liệu chính xác, cập nhật liên tục giúp bạn có cơ sở tham khảo khi chọn dãy số ưng ý.</p>            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+    </div>
+</main>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+
+        .util-bg-white.util-shadow-sm {
+            margin-top: 54px !important;
+        }
+    }
+</style>

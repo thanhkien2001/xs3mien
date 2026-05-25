@@ -1,0 +1,167 @@
+<div class="util-bg-white util-shadow-sm util-mb-3">
+    <div class="layout-wrapper">
+        <div class="layout-row">
+            <div class="layout-col-12">
+                <ul class="nav-sub">
+                    <li><a class="" title="Dự đoán xổ số Miền Bắc" href="/du-doan-xsmb-c59.html">Dự đoán XSMB</a></li>
+                    <li><a class=" " title="Dự đoán xổ số Miền Nam" href="/du-doan-xsmn-c61.html">Dự đoán XSMN</a></li>
+                    <li><a class=" " title="Dự đoán xổ số Miền Trung" href="/du-doan-xsmt-c60.html">Dự đoán XSMT</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main class="layout-wrapper util-mt-3 layout-clearfix">
+    <div class="layout-row util-gx-3" template="page-du-doan-tong.desktop">
+        <div class="layout-col-lg-8">
+            <div class="util-mx-1">
+                <nav aria-label="breadcrumb">
+                    <ol class="nav-breadcrumb layout-clearfix util-mb-3">
+                        <li class="nav-breadcrumb-item"><a title="Trang chủ" href="/"><span>Trang chủ</span></a></li>
+                        <li class="nav-breadcrumb-item"><span>Dự đoán xổ số</span></li>
+                    </ol>
+                </nav>
+                <div class="page-header">
+                    <h1 class="page-title-h1 util-mb-3 util-p-2 util-px-3 util-border util-border-danger util-rounded util-shadow-sm util-font-bold">Soi Cầu Xổ Số 3 Miền Hôm Nay - Dự Đoán VIP 24/7 Miễn Phí</h1>
+                </div>
+
+                <h2 class="util-fs-6 util-font-medium util-lh-base util-mt-4 util-mb-3">Soi cầu 3 miền VIP hôm nay, ngày mai chuẩn xác nhất. Dự đoán xổ số giải đặc biệt ưu việt, kết quả XSMB - XSMT - XSMN, soi cầu miễn phí.</h2>
+            </div>
+            <div class="util-mb-5">
+                <p class="comp-box-title util-lh-base">Dự đoán xổ số hôm nay</p>
+                <ul class="comp-list-articles js-article-listing">
+                    <?php if (isset($predictions) && $predictions->count() > 0): ?>
+                    <?php foreach ($predictions as $index => $prediction): ?>
+                    <li class="<?= $index === 0 ? 'first' : '' ?>">
+                        <a class="util-flex util-shadow-sm util-text-decoration-none util-p-4" href="/<?= $prediction->slug ?>" title="<?= htmlspecialchars($prediction->title) ?>">
+                            <img class="comp-thumb-medium util-float-start util-me-3 util-lazy-load" src="images/default-image.svg" data-src="<?= $prediction->image_url ?: '/img/soicaududoan/xsmb/dudoanxsmb.png' ?>" alt="<?= htmlspecialchars($prediction->title) ?>">
+                            <aside>
+                                <h3 class="util-fs-5-5 util-font-medium util-lh-base"><?= htmlspecialchars($prediction->title) ?></h3>
+                                <p class="util-text-body util-line-clamp-2"><?= htmlspecialchars(mb_substr(strip_tags($prediction->content), 0, 150)) ?>...</p>
+                            </aside>
+                        </a>
+                    </li>
+                    <?php endforeach; ?>
+                    <?php else: ?>
+                    <li class="first">
+                        <div class="util-flex util-shadow-sm util-text-decoration-none util-p-4">
+                            <p class="util-text-muted">Không có dữ liệu dự đoán nào.</p>
+                        </div>
+                    </li>
+                    <?php endif; ?>
+                </ul>
+                <div class="util-d-grid util-mt-4">
+                    <div class="btn-base btn-green btn-lg util-rounded util-shadow-sm js-load-readmore-post-item" data-last-id="<?= $lastId ?>" data-type="dd"><span>Xem thêm</span></div>
+                </div>
+            </div>
+            <div class="comp-article-content util-shadow-sm util-rounded util-bg-white util-p-3">
+                <p>soicau247.com là trang web <strong>soi cầu xổ số uy tín hàng đầu</strong> tại Việt Nam, được hàng nghìn anh em tin tưởng lựa chọn. Điểm mạnh giúp chúng tôi chinh phục người chơi là <strong>hệ thống dữ liệu phong phú qua nhiều năm</strong>, <strong>phương pháp dự đoán chính xác cao</strong> dựa trên phân tích thống kê chuyên sâu.</p>
+
+                <p>Phương pháp <strong>soi cầu 3 miền</strong> của soicau247.com dựa trên việc phân tích kết quả các kỳ quay gần nhất, kết hợp dữ liệu thống kê lịch sử để tìm ra quy luật xuất hiện của các con số trong kỳ tiếp theo.</p>
+
+                <p><strong>Tại sao nên chọn soicau247.com thay vì các website khác như xoso.mobi, xsmn.mobi, xsmn247.mobi hay xskt.com.vn?</strong></p>
+
+                <ul>
+                    <li>Kinh nghiệm lâu năm trong lĩnh vực soi cầu xổ số.</li>
+                    <li>Phương pháp phân tích logic, khoa học và minh bạch.</li>
+                    <li>Thuật toán độc quyền không bị tác động bởi yếu tố chủ quan.</li>
+                    <li>Cập nhật kết quả nhanh chóng, chính xác mỗi ngày.</li>
+                </ul>
+
+                <p><strong>Xem ngay dự đoán xổ số 3 miền hôm nay:</strong></p>
+
+                <ul>
+                    <li><a title="Soi cầu XSMB VIP" href="/du-doan-xsmb">Soi cầu XSMB</a> - Cập nhật 19h hàng ngày</li>
+                    <li><a title="Soi cầu XSMN VIP" href="/du-doan-xsmn">Soi cầu XSMN</a> - Cập nhật 19h hàng ngày</li>
+                    <li><a title="Soi cầu XSMT VIP" href="/du-doan-xsmt">Soi cầu XSMT</a> - Cập nhật 19h hàng ngày</li>
+                </ul>
+
+                <p><span style="color: #ff0000;"><em><strong>Lưu ý quan trọng:</strong> Xổ số tuân theo quy luật ngẫu nhiên và không thể dự đoán chính xác 100%. Thông tin soi cầu chỉ mang tính chất tham khảo, giải trí. Người chơi nên có trách nhiệm với bản thân, chỉ nên tham gia xổ số kiến thiết do Nhà nước phát hành. Chúc anh em nhiều may mắn!</em></span></p>
+            </div>
+        </div>
+        <?php $this->partial('layouts/rightbar'); ?>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadMoreBtn = document.querySelector('.js-load-readmore-post-item');
+        const articleList = document.querySelector('.js-article-listing');
+        let isLoading = false;
+        let lastId = < ? = $lastId ? > ;
+        console.log('Initial lastId:', lastId);
+
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', function() {
+                if (isLoading) return;
+
+                isLoading = true;
+                loadMoreBtn.innerHTML = '<span>Đang tải...</span>';
+                loadMoreBtn.disabled = true;
+
+                const requestData = {
+                    last_id: lastId
+                };
+                console.log('Sending lastId:', lastId);
+
+                fetch('/dudoan/loadMoreSoiCau', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(requestData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success' && data.data.length > 0) {
+                            data.data.forEach(function(item, index) {
+                                const li = document.createElement('li');
+                                li.innerHTML = `
+                            <a class="util-flex util-shadow-sm util-text-decoration-none util-p-4"
+                                href="/du-doan-xo-so-soi-cau-${item.region.toLowerCase()}/${item.slug}"
+                                title="${item.title}">
+                                <img class="comp-thumb-medium util-float-start util-me-3 util-lazy-load"
+                                    src="${item.image_url}"
+                                    data-src="${item.image_url || '/img/soicaududoan/xsmb/dudoanxsmb.png'}"
+                                    alt="${item.title}">
+                                <aside>
+                                    <h3 class="util-fs-5-5 util-font-medium util-lh-base">${item.title}</h3>
+                                    <p class="util-text-body util-line-clamp-2">${item.content}...</p>
+                                </aside>
+                            </a>
+                        `;
+                                articleList.appendChild(li);
+                            });
+                            lastId = data.lastId;
+                            if (!data.hasMore) {
+                                loadMoreBtn.style.display = 'none';
+                            }
+                        } else {
+                            loadMoreBtn.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading more articles:', error);
+                        loadMoreBtn.innerHTML = '<span>Lỗi tải dữ liệu</span>';
+                    })
+                    .finally(() => {
+                        isLoading = false;
+                        loadMoreBtn.innerHTML = '<span>Xem thêm</span>';
+                        loadMoreBtn.disabled = false;
+                    });
+            });
+        }
+    });
+</script>
+<style>
+    @media (max-width: 767px) {
+        body .layout-row.util-g-0.util-g-md-3 {
+            margin-top: 0px !important;
+        }
+
+        body .layout-row.util-gx-3 {
+            margin-top: 0px !important;
+        }
+    }
+</style>

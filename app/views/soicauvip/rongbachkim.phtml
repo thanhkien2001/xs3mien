@@ -1,0 +1,379 @@
+<main>
+    <div id="notiLive">
+        <script>
+            if (typeof live === "undefined") {
+                var live = {
+                    16: {
+                        hourEnd: 16,
+                        title: "Miền Nam",
+                        url: base_url + "xo-so-mien-nam-xsmn.html"
+                    },
+                    17: {
+                        hourEnd: 17,
+                        title: "Miền Trung",
+                        url: base_url + "xo-so-mien-trung-xsmt.html"
+                    },
+                    18: {
+                        hourEnd: 18,
+                        title: "Miền Bắc",
+                        url: base_url + "xo-so-mien-bac-xsmb.html"
+                    }
+                };
+                let date = new Date();
+                $("#notiLiveTitle").html(live[date.getHours()].title);
+                $("#notiLiveLink").attr('href', live[date.getHours()].url);
+            }
+        </script>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="<?= $base_url ?>" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item active"><a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247 - Soi cầu Rồng Bạch Kim siêu vip <?= $date ?></a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="bg-white rounded">
+                    <h1 class="font-20 my-2"> <strong>Rồng Bạch Kim 247 - Soi cầu Rồng Bạch Kim siêu vip <?= $date ?></strong> </h1>
+                    <div class="d-flex font-13 justify-content-between my-3 flex-wrap">
+                        <div class="text-gray">
+                            <div class="new-date">
+                                <?php
+                                $tomorrow = new DateTime('tomorrow');
+                                $weekdayMap = [
+                                    'Monday' => 'Thứ 2',
+                                    'Tuesday' => 'Thứ 3',
+                                    'Wednesday' => 'Thứ 4',
+                                    'Thursday' => 'Thứ 5',
+                                    'Friday' => 'Thứ 6',
+                                    'Saturday' => 'Thứ 7',
+                                    'Sunday' => 'Chủ nhật'
+                                ];
+                                $weekdayEn = $tomorrow->format('l');
+                                $weekdayVi = isset($weekdayMap[$weekdayEn]) ? $weekdayMap[$weekdayEn] : $weekdayEn;
+                                ?>
+                                <?= $weekdayVi ?>, <?= $tomorrow->format('d/m/Y - H:i') ?>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="new-description fulljustify my-3"><strong>Soi cầu Rồng Bạch Kim 247 với nhiều cặp số may mắn cầu đặc biệt, cầu 2 nháy được các chuyên gia SOI CẦU 247 mang đến cho anh em mỗi ngày. Các chuyên gia soi cầu của chúng tôi mang đến cho anh em những cầu số đẹp tỉ lệ trúng cao và hơn hết hoàn toàn miễn phí.</strong></h2>
+                    <div class="text-center"> <img width="600" height="314" src="/img/rong-bach-kim.jpg" alt="Rồng Bạch Kim 247" onerror="this.src='https://soicau247s.org/public/media/thumb/Thumb-Cate/rong-bach-kim_2-600x314.jpg'"> </div>
+                    <div class="new-content text-justify mt-3">
+                        <div class="mb-3 muc-luc py-3">
+                            <legend class="font-16 text-mucluc pt-1 pl-4"><i class="fa fa-bars mr-2"></i>Mục lục</legend>
+                            <ol class="text-news-link">
+                                <li><a rel="nofollow" href="#trick0">Giới thiệu về soi cầu rồng bạch kim 247</a></li>
+                                <li><a rel="nofollow" href="#trick1">Kết quả XSMB kỳ quay trước</a></li>
+                                <li><a rel="nofollow" href="#trick2">Lô đẹp nhiều người chơi <?= $date ?></a></li>
+                                <li><a rel="nofollow" href="#trick3">Soi cầu Rồng Bạch Kim VIP hôm nay</a></li>
+                                <li><a rel="nofollow" href="#trick4">Rồng bạch kim 247 chốt số</a></li>
+                                <li><a rel="nofollow" href="#trick5">Cầu bạch thủ chạy 4 ngày</a></li>
+                                <li><a rel="nofollow" href="#trick7">Thống kê Rongbachkim <?= $date ?></a></li>
+                                <li><a rel="nofollow" href="#trick8">Thống kê lô gan XSMB ngày <?= $date ?></a></li>
+                                <li><a rel="nofollow" href="#trick9">Thống kê đặc biệt theo ngày của năm</a></li>
+                            </ol>
+                        </div>
+
+                        <h2 id="trick0" style="text-align: justify;">Giới thiệu về soi cầu rồng bạch kim 247</h2>
+                        <p style="text-align: justify;">Rồng bạch kim là từ khoá có trữ lượng tìm kiếm lên đến hàng triệu lượt tìm kiếm trong một ngày. Đây là nội dung được người chơi tham chiếu nhiều nhất trên hệ thống tìm kiếm.</p>
+
+                        <h2 id="trick1">Kết quả XSMB kỳ quay trước</h2>
+                        <p>Chúc mừng những anh em đã trúng thưởng ở kỳ quay trước. Cùng soi cầu 247 nhìn lại bảng kết quả XSMB ngày hôm qua.</p>
+
+                        <?php if (isset($resultYesterday['raw'])): $res = $resultYesterday['raw']; ?>
+                            <article class="my-2">
+                                <div class="result result-single rounded">
+                                    <div class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16"> Xổ số Miền Bắc ngày <?= $resultYesterday['date'] ?> </div>
+                                    <div class="breadcrumb-table">
+                                        <h4 class="breadcrumb-table-title">
+                                            <a href="#" title="XSMB thứ <?= date('N', strtotime($res->draw_date)) + 1 ?>">XSMB thứ <?= date('N', strtotime($res->draw_date)) + 1 ?></a> /
+                                            <a href="#" title="XSMB <?= $resultYesterday['date'] ?>">XSMB <?= $resultYesterday['date'] ?></a>
+                                        </h4>
+                                    </div>
+                                    <div class="table-flex-border">
+                                        <table class="table-flex table-result" data-code="XSMB">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="d-flex justify-content-between font-16 p-2">
+                                                            <?php
+                                                            // Parse Ma DB (lv)
+                                                            $lvs = [];
+                                                            if (!empty($res->lv)) {
+                                                                $lvs = preg_split('/[,\-\s]+/', str_replace(['[', ']', '"'], '', $res->lv));
+                                                            }
+                                                            foreach ($lvs as $l): if (trim($l) === '') continue;
+                                                            ?>
+                                                                <span class="text-number" nc="5"><?= trim($l) ?></span>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ĐB</td>
+                                                    <td> <span class="text-number" nc="5"><?= $res->special_prize ?></span> </td>
+                                                </tr>
+                                                <?php
+                                                $prizes = [
+                                                    'G1' => $res->first_prize,
+                                                    'G2' => $res->second_prize,
+                                                    'G3' => $res->third_prize,
+                                                    'G4' => $res->fourth_prize,
+                                                    'G5' => $res->fifth_prize,
+                                                    'G6' => $res->sixth_prize,
+                                                    'G7' => $res->seventh_prize
+                                                ];
+
+                                                foreach ($prizes as $name => $val):
+                                                    // Parse numbers
+                                                    $nums = [];
+                                                    if (is_string($val)) {
+                                                        $clean = str_replace(['[', ']', '"'], '', $val);
+                                                        $nums = preg_split('/[,\-\s]+/', $clean);
+                                                    }
+                                                    $nums = array_filter($nums, function ($v) {
+                                                        return trim($v) !== '';
+                                                    });
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $name ?></td>
+                                                        <td>
+                                                            <?php foreach ($nums as $n): $n = trim($n);
+                                                                $len = strlen($n); ?>
+                                                                <span class="text-number" nc="<?= $len ?>"><?= $n ?></span>
+                                                            <?php endforeach; ?>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <div>
+                                <p>- Giải đặc biệt: Đầu <span class="text-red font-weight-bold"><?= $resultYesterday['dau'] ?></span>, Đuôi <span class="text-red font-weight-bold"><?= $resultYesterday['duoi'] ?></span>, Tổng <span class="font-weight-bold text-red"><?= $resultYesterday['tong'] ?></span></p>
+                                <p>- Lô về cả cặp : <span class="font-weight-bold text-red"><?= empty($resultYesterday['lo_ca_cap']) ? 'Không có' : implode(' - ', $resultYesterday['lo_ca_cap']) ?></span></p>
+                                <p>- Lô kép : <span class="font-weight-bold text-red"><?= empty($resultYesterday['lo_kep']) ? 'Không có' : implode(', ', $resultYesterday['lo_kep']) ?></span></p>
+                                <p>- Lô về nhiều nháy:
+                                    <?php if (empty($resultYesterday['lo_nhieu_nhay'])): ?>
+                                        Không có
+                                    <?php else: ?>
+                                        <?php foreach ($resultYesterday['lo_nhieu_nhay'] as $row): ?>
+                                            <span class="text-red font-weight-bold"><?= $row['num'] ?></span>(<?= $row['count'] ?> nháy),
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </p>
+                            </div>
+                        <?php endif; ?>
+
+                        <h2 id="trick2" style="text-align: justify;">Lô đẹp nhiều người chơi <?= $date ?></h2>
+                        <div class="row mx-0">
+                            <div class="col-lg-6 px-0 pr-lg-2">
+                                <div class="bg-black5 border-radius-top text-uppercase mb-0 text-white h-42px font-weight-bold pl-2 font-14">Cầu lô đẹp nhất ngày <?= $date ?></div>
+                                <div class="d-flex px-1 py-2 bg-white flex-wrap text-center font-weight-bold border">
+                                    <?php for ($i = 0; $i < 10; $i++):
+                                        $v = rand(0, 99);
+                                        $n = str_pad($v, 2, '0', STR_PAD_LEFT);
+                                        $n2 = str_pad(intval(strrev($n)), 2, '0', STR_PAD_LEFT);
+                                    ?>
+                                        <div class="col-3 px-1 my-2"> <span class="p-2 bg-blue2 box-item-rbk border hover-text-blue1"><?= $n ?>,<?= $n2 ?></span> </div>
+                                    <?php endfor; ?>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 px-0 pl-lg-2">
+                                <div class="bg-red1 border-radius-top text-uppercase mb-0 text-white h-42px font-weight-bold pl-2 font-14">Cầu đặc biệt đẹp ngày <?= $date ?></div>
+                                <div class="d-flex px-1 py-2 bg-white flex-wrap text-center font-weight-bold border">
+                                    <?php for ($i = 0; $i < 10; $i++):
+                                        $v = rand(0, 99);
+                                        $n = str_pad($v, 2, '0', STR_PAD_LEFT);
+                                        $n2 = str_pad(intval(strrev($n)), 2, '0', STR_PAD_LEFT);
+                                    ?>
+                                        <div class="col-3 px-1 my-2"> <span class="p-2 bg-blue2 box-item-rbk border hover-text-blue1"><?= $n ?>,<?= $n2 ?></span> </div>
+                                    <?php endfor; ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="trick3" style="text-align: justify;">Soi cầu Rồng Bạch Kim VIP hôm nay</h2>
+                        <table class="table-default w-100 text-center">
+                            <tbody>
+                                <tr>
+                                    <td>Cầu lô kép VIP</td>
+                                    <td class="text-red font-weight-bold"><?= implode(' - ', $vipPredictions['lo_kep']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Cầu lô xiên VIP</td>
+                                    <td class="text-red font-weight-bold"><?= implode(' - ', $vipPredictions['lo_xien']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Lô 2 nháy VIP</td>
+                                    <td class="text-red font-weight-bold"><?= implode(', ', $vipPredictions['lo_2_nhay']) ?></td>
+                                </tr>
+                                <tr>
+                                    <td>RBK chốt số đặc biệt VIP</td>
+                                    <td class="font-weight-bold">Chạm <span class="text-red"><?= implode(' - ', $vipPredictions['dac_biet_cham']) ?></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Loto chơi nhiều</td>
+                                    <td class="text-red font-weight-bold"><?= implode(' - ', $vipPredictions['lo_choi_nhieu']) ?></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="trick4" style="text-align: justify;">Rồng bạch kim 247 chốt số</h2>
+                        <table class="table-default w-100 text-center">
+                            <thead>
+                                <tr>
+                                    <th class="bg-orange" colspan="3">Bảng chốt cầu Rồng Bạch Kim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $d = new DateTime();
+                                for ($i = 0; $i < 10; $i++):
+                                    $ds = $d->format('d/m/Y');
+                                    $btl = rand(0, 99);
+                                    $stl1 = rand(0, 99);
+                                    $stl2 = rand(0, 99);
+                                ?>
+                                    <tr>
+                                        <td><a rel="nofollow" href="#" class="text-black"><?= $ds ?></a></td>
+                                        <td class="font-weight-bold"><span class="text-blue">BTL</span>: <span class="text-red"><?= str_pad($btl, 2, '0', STR_PAD_LEFT) ?></span> - <span class="text-blue">STL</span>: <span class="text-red"><?= str_pad($stl1, 2, '0', STR_PAD_LEFT) ?>, <?= str_pad($stl2, 2, '0', STR_PAD_LEFT) ?></span></td>
+                                        <td class="text-left"><?= $i == 0 ? '<span class="text-blue">Chờ kết quả</span>' : (($btl % 2 == 0) ? 'Trúng' : 'Trượt') ?></td>
+                                    </tr>
+                                <?php $d->modify('-1 day');
+                                endfor; ?>
+                            </tbody>
+                        </table>
+
+                        <h2 id="trick5" style="text-align: justify;">Cầu bạch thủ chạy 4 ngày</h2>
+                        <div class="soi-cau">
+                            <div class="col-12 cau-bach-thu-loto p-0">
+                                <div class="table-soi-cau">
+                                    <div class="overflow-auto">
+                                        <table class="table-soicau-all">
+                                            <tbody>
+                                                <!-- Mock/Static Data for now as logic is complex -->
+                                                <?php for ($h = 0; $h <= 9; $h++): ?>
+                                                    <tr>
+                                                        <td><span>Đầu <?= $h ?></span></td>
+                                                        <!-- Simplified cells -->
+                                                        <?php for ($k = 0; $k < 10; $k++): ?>
+                                                            <td><?= (rand(0, 10) > 8) ? '<div class="block-number"><span>' . ($h . $k) . '</span><span><number>' . rand(1, 3) . '</number> lần</span></div>' : '' ?></td>
+                                                        <?php endfor; ?>
+                                                    </tr>
+                                                <?php endfor; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="trick8" style="text-align: justify;">Thống kê lô gan XSMB ngày <?= $date ?></h2>
+                        <table class="text-center table-default w-100">
+                            <thead>
+                                <tr class="bg-orange">
+                                    <th>Lô gan</th>
+                                    <th>Lần chưa về</th>
+                                    <th>Về gần nhất</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($loGanTop as $gan): ?>
+                                    <tr>
+                                        <td class="text-red font-weight-bold"><?= $gan['num'] ?></td>
+                                        <td><?= $gan['miss'] ?> <span class="font-weight-normal">lần</span></td>
+                                        <td> <?= $gan['last_date'] ? date('d/m/Y', strtotime($gan['last_date'])) : 'N/A' ?> </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+                        <h3 id="trick9" style="text-align: justify;">Thống kê đặc biệt theo ngày của năm</h3>
+                        <table class="text-center table-default w-100">
+                            <thead>
+                                <tr>
+                                    <th colspan="4" class="bg-orange"> Các giải đặc biệt ngày <?= substr($date, 0, 5) ?> hàng năm </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($specialHistory as $hist): ?>
+                                    <tr>
+                                        <td class="font-weight-bold"> Năm <?= $hist['year'] ?> </td>
+                                        <td> <?= $hist['date'] ?> </td>
+                                        <td class="font-weight-bold"> <?= $hist['prefix'] ?><span class="text-red"><?= $hist['end'] ?></span> </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+                        <div class="my-3">
+                            <h2 id="trick10">Cách soi cầu RBK cực chuẩn</h2>
+                            <p>Thông tin soi cầu MB RBK được chúng tôi cập nhật sớm nhất mỗi ngày và hoàn toàn miễn phí. Anh em theo dõi để có cho mình những cặp số đẹp nhất nhé. Chúc anh em may mắn!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar links (from original) -->
+                <div class="my-3">
+                    <h3 class="title-bg-blue border-radius-top">Các phương pháp soi cầu khác</h3>
+                    <div class="border border-radius-bottom px-3 pb-3">
+                        <ul class="style-list-star-red">
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>rong-bach-kim.html" title="Rồng Bạch Kim 247">Rồng Bạch Kim 247</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bach-thu-de-xsmb-hom-nay.html" title="Độc thủ đề - Bạch thủ de hôm nay">Độc thủ đề - Bạch thủ de hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-24h-du-doan-xo-so-24h-mien-bac.html" title="Soi cầu 24h đẹp bất bại hôm nay!">Soi cầu 24h đẹp bất bại hôm nay!</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-mien-phi-888.html" title="Soi cầu 888 Vip 2 nháy MB siêu đẹp">Soi cầu 888 Vip 2 nháy MB siêu đẹp</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-7777-soi-cau-chuan-nhat.html" title="Soi cầu 7777 chốt số miền Bắc siêu chuẩn">Soi cầu 7777 chốt số miền Bắc siêu chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-666-xsmb.html" title="Soi cầu 666 chốt số hàng ngày miễn phí">Soi cầu 666 chốt số hàng ngày miễn phí</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-366-mb.html" title="Soi cầu 366 miền Bắc bất bại">Soi cầu 366 miền Bắc bất bại</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-cang-mien-bac.html" title="Soi cầu 3 càng chính xác nhất">Soi cầu 3 càng chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-win2888-asia.html" title="Soi cầu XSMB Win2888 asia chính xác 100%">Soi cầu XSMB Win2888 asia chính xác 100%</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-xsmb-vip-hom-nay.html" title="Soi cầu lô VIP miền Bắc đẹp nhất">Soi cầu lô VIP miền Bắc đẹp nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-wap-du-doan-xsmb-wap-hom-nay-chinh-xac-nhat.html" title="Soi cầu Wap 3 miền cực chuẩn">Soi cầu Wap 3 miền cực chuẩn</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-3-mien-du-doan-xo-so-3-mien.html" title="Soi cầu 3 miền miễn phí chính xác">Soi cầu 3 miền miễn phí chính xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-du-doan-xsmb-chinh-xac-100.html" title="Soi cầu dự đoán XSMB chính xác 100">Soi cầu dự đoán XSMB chính xác 100</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-chinh-xac-nhat-mien-bac.html" title="Soi cầu lô chính xác nhất miền Bắc">Soi cầu lô chính xác nhất miền Bắc</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>nuoi-lo-khung-xsmb.html" title="Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác">Nuôi lô khung 1, 2, 3, 5 ngày siêu chuẩn xác</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>soi-cau-lo-de-chuan-xsmb.html" title="Soi cầu lô de chuẩn chính xác nhất">Soi cầu lô de chuẩn chính xác nhất</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>dan-de-36-so-khung-3-ngay.html" title="Dàn đề 36 số bất bại ăn liên tục">Dàn đề 36 số bất bại ăn liên tục</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>lo-top.html" title="Lô Top miền Bắc đẹp nhất ngày hôm nay">Lô Top miền Bắc đẹp nhất ngày hôm nay</a> </li>
+                            <li class="lh-18px my-3 font-weight-bold"> <a href="<?= $base_url ?>bac-nho-lo-de-xsmb.html" title="Bạc nhớ lô đề miền Bắc 2025">Bạc nhớ lô đề miền Bắc 2025</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    #trick1,
+    #trick2,
+    #trick3,
+    #trick4,
+    #trick5,
+    #trick6,
+    #trick7,
+    #trick8,
+    #trick9,
+    #trick10 {
+        margin-top: 10px;
+    }
+</style>

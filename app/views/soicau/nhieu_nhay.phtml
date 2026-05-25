@@ -1,0 +1,799 @@
+<?php
+$esc = $this->escaper;
+$dateEnd = $dateEnd ?? date('d/m/Y');
+$soCau = $soCau ?? 3;
+$cauData = $cauData ?? [];
+?>
+
+<main class="main-home">
+    <div class="container">
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="XSMB">XSMB</a></li>
+                        <li class="breadcrumb-item active"><a href="/soi-cau-nhieu-nhay.html" title="Soi cầu nhiều nháy">Soi cầu nhiều nháy</a></li>
+                        <script type="application/ld+json">
+                            {
+                                "@context": "http://schema.org",
+                                "@type": "BreadcrumbList",
+                                "itemListElement": [{
+                                        "@type": "ListItem",
+                                        "position": 1,
+                                        "item": {
+                                            "@id": "<?= $this->url->get('/') ?>",
+                                            "name": "Trang chủ"
+                                        }
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 2,
+                                        "item": {
+                                            "@id": "<?= $this->url->get('/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html') ?>",
+                                            "name": "XSMB"
+                                        }
+                                    },
+                                    {
+                                        "@type": "ListItem",
+                                        "position": 3,
+                                        "item": {
+                                            "@id": "<?= $this->url->get('/soi-cau-nhieu-nhay.html') ?>",
+                                            "name": "Soi cầu nhiều nháy"
+                                        }
+                                    }
+                                ]
+                            }
+                        </script>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div class="viewStatistic">
+                    <article>
+                        <div class="static-search">
+                            <h2 class="aside-title-red justify-content-center">Soi cầu nhiều nháy XSMB</h2>
+                            <div class="container form-search">
+                                <form method="GET" action="/soi-cau-nhieu-nhay.html">
+                                    <div class="row align-items-end">
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-6">
+                                            <div class="label">Biên độ ngày</div>
+                                            <div class="input-datetick flex-grow-1">
+                                                <input id="dateEnd" class="form-control form-control-sm mr-2" name="date_end" type="text" value="<?= $esc->escapeHtmlAttr($dateEnd) ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-6">
+                                            <label class="label">Số ngày cầu chạy:</label>
+                                            <div class="input-group static-kn">
+                                                <div class="input-group-append">
+                                                    <span id="btn-minus" class="btn btn-sm btn-minus d-flex align-items-center">
+                                                        <i class="icon-minus"></i>
+                                                    </span>
+                                                </div>
+                                                <input id="range-day" name="so_cau" class="count form-control form-control-sm" type="number" max="5" min="3" value="<?= $esc->escapeHtmlAttr($soCau) ?>">
+                                                <div class="input-group-prepend">
+                                                    <span id="btn-plus" class="btn btn-sm btn-plus d-flex align-items-center">
+                                                        <i class="icon-plus"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-4 col-12 mt-md-0 mt-2">
+                                            <button class="btn btn-danger btn-sm btnLogan btnFilterBachThu" type="submit">Thống kê</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="mt-2 bg-white soi-cau">
+                        <div class="logan-result">
+                            <div class="title-blue">Soi&nbsp;cầu&nbsp;nhiều&nbsp;nháy&nbsp;XSMB hôm nay</div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mt-4">
+                                            *Hướng dẫn: Số nhiều nháy là số xuất hiện nhiều lần trong cùng 1 ngày (ví dụ: số 45 xuất hiện 3 lần trong ngày = 3 nháy). Di chuột đến ô cầu để xem chi tiết. Nhấn vào một ô cầu để xem cách tính cầu đó.
+                                            <span class="text-primary">Bấm xem số cầu cho từng bộ số</span> để xem thêm.
+                                        </div>
+                                        <div class="border-top"></div>
+
+                                        <!-- Links to other soi cau pages -->
+                                        <div class="col-12 w-100 mt-4">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 mb-1">
+                                                    <span class="text-red">•</span>
+                                                    <a class="text-blue1" href="/soi-cau-bach-thu.html" title="Cầu Miền Bắc Bạch Thủ">Cầu Miền Bắc Bạch Thủ</a>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 mb-1">
+                                                    <span class="text-red">•</span>
+                                                    <a class="text-blue1" href="/soi-cau-mien-trung.html" title="Cầu Miền Trung">Cầu Miền Trung</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 w-100">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 mb-1">
+                                                    <span class="text-red">•</span>
+                                                    <a class="text-blue1" href="/soi-cau-lat-lien-tuc.html" title="Cầu Miền Bắc Lật Liên Tục">Cầu Miền Bắc Lật Liên Tục</a>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 mb-1">
+                                                    <span class="text-red">•</span>
+                                                    <a class="text-blue1" href="/soi-cau-mien-nam.html" title="Cầu Miền Nam">Cầu Miền Nam</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 w-100 mb-3">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <span class="text-red">•</span>
+                                                    <a class="text-blue1" href="/soi-cau-nhieu-nhay.html" title="Cầu Miền Bắc Về Nhiều Nháy">Cầu Miền Bắc Về Nhiều Nháy</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bảng cầu bạch thủ -->
+                                    <div class="col-12 cau-bach-thu-loto">
+                                        <div class="table-soi-cau">
+                                            <div class="overflow-auto">
+                                                <table class="table-soicau-all">
+                                                    <tbody>
+                                                        <?php for ($dau = 0; $dau <= 9; $dau++): ?>
+                                                            <tr>
+                                                                <td><span>Đầu <?= $dau ?></span></td>
+                                                                <?php for ($duoi = 0; $duoi <= 9; $duoi++):
+                                                                    $num = str_pad($dau * 10 + $duoi, 2, '0', STR_PAD_LEFT);
+                                                                    $count = $cauData[$num]['count'] ?? 0;
+                                                                    $maxNhay = $cauData[$num]['max_nhay'] ?? 0;
+                                                                    $ngayCoNhay = $cauData[$num]['ngay_co_nhay'] ?? 0;
+                                                                    $positions = $cauData[$num]['positions'] ?? [];
+                                                                    $positionsStr = implode(',', $positions);
+                                                                    $isHidden = ($maxNhay < 2) ? 'd-none' : '';
+                                                                    $tooltipText = $maxNhay >= 2 
+                                                                        ? "Nhiều nháy: {$maxNhay} nháy (trong {$ngayCoNhay} ngày) - Vị trí: {$positionsStr}" 
+                                                                        : "Vị trí tạo cầu: {$positionsStr}";
+                                                                ?>
+                                                                    <td>
+                                                                        <?php
+                                                                        // Escape positions cho JavaScript (thay dấu nháy đơn để tránh conflict)
+                                                                        $jsPositionsStr = str_replace("'", "\\'", $positionsStr);
+                                                                        ?>
+                                                                        <div class="block-number <?= $isHidden ?>"
+                                                                            data-positions="<?= $esc->escapeHtmlAttr($positionsStr) ?>"
+                                                                            data-toggle="tooltip"
+                                                                            title="<?= $esc->escapeHtmlAttr($tooltipText) ?>"
+                                                                            style="cursor: pointer;"
+                                                                               onclick="handleSoiCauClick(this, '<?= $esc->escapeHtmlAttr($jsPositionsStr) ?>'); return false;">
+                                                                            <span><?= $num ?></span>
+                                                                            <span>
+                                                                                <?php if ($maxNhay >= 2): ?>
+                                                                                    <number id="count_<?= $num ?>"><?= $maxNhay ?></number> nháy
+                                                                                    <!-- <?php if ($ngayCoNhay > 0): ?>
+                                                                                        <small>(<?= $ngayCoNhay ?> ngày)</small>
+                                                                                    <?php endif; ?> -->
+                                                                                <?php else: ?>
+                                                                                    <number id="count_<?= $num ?>"><?= $count ?></number> lần
+                                                                                <?php endif; ?>
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
+                                                                <?php endfor; ?>
+                                                            </tr>
+                                                        <?php endfor; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Phần Biên độ X ngày -->
+                    <div class="col-12 soi-cau pt-4">
+                        <div id="kqcaumb">
+                            <div class="list-tkcau">
+                                <?php
+                                // Logic tính biên độ:
+                                // - Biên độ càng lớn thì càng lọc kỹ, chỉ lấy số xuất hiện nhiều lần nhất
+                                // - Biên độ 10: nháy >= 4 hoặc có >= 3 ngày
+                                // - Biên độ 6: nháy >= 3 hoặc có >= 2 ngày
+                                // - Biên độ 5: nháy >= 2 hoặc có >= 1 ngày
+                                // - Biên độ 4: nháy >= 2 hoặc có >= 1 ngày
+                                // - Biên độ 3: nháy >= 2
+                                
+                                $filteredNumbersByBienDo = $filteredNumbersByBienDo ?? [];
+                                
+                                // Hiển thị từ biên độ 10 đến 3 (từ lớn đến nhỏ) - chỉ hiển thị nếu có dữ liệu
+                                $bienDoList = [10, 6, 5, 4, 3];
+                                foreach ($bienDoList as $bienDo):
+                                    $displayNumbers = $filteredNumbersByBienDo[$bienDo] ?? [];
+                                    
+                                    // Nếu không có dữ liệu, skip
+                                    if (empty($displayNumbers)) {
+                                        continue;
+                                    }
+                                ?>
+                                    <div class="list-tkcau check_bien_do" data-bien_do="<?= $bienDo ?>">
+                                        <div class="rows">+ Biên độ <?= $bienDo ?> ngày:</div>
+                                        <div class="rows">
+                                            <?php foreach ($displayNumbers as $num => $info):
+                                                $positions = $info['positions'] ?? [];
+                                                $positionsStr = implode(',', $positions);
+                                                $count = $info['count'] ?? 0;
+                                                $maxNhay = $info['max_nhay'] ?? 0;
+                                                $ngayCoNhay = $info['ngay_co_nhay'] ?? 0;
+                                                $titleText = $maxNhay >= 2 
+                                                    ? "Nhiều nháy: {$maxNhay} nháy (trong {$ngayCoNhay} ngày) - Tổng: {$count} lần - Vị trí: {$positionsStr}" 
+                                                    : "Xuất hiện {$count} lần - Vị trí: {$positionsStr}";
+                                            ?>
+                                                <?php
+                                                // Escape positions cho JavaScript
+                                                $jsPositionsStrBienDo = str_replace("'", "\\'", $positionsStr);
+                                                ?>
+                                                <a class="item-tk-cau-icon" 
+                                                   data-positions="<?= $esc->escapeHtmlAttr($positionsStr) ?>"
+                                                   title="<?= $esc->escapeHtmlAttr($titleText) ?>"
+                                                   href="javascript:void(0);"
+                                                   onclick="handleSoiCauClick(this, '<?= $esc->escapeHtmlAttr($jsPositionsStrBienDo) ?>'); return false;">
+                                                    <span class="soicau_mb"><?= $esc->escapeHtml($num) ?></span>
+                                                    <?php if ($maxNhay >= 2): ?>
+                                                        <small>(<?= $maxNhay ?> nháy)</small>
+                                                    <?php endif; ?>
+                                                </a>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bảng kết quả XSMB đã sử dụng -->
+                    <div id="xsmb-results-section" class="col-12 mt-4">
+                        <div class="title-blue mb-3">Bảng kết quả XSMB đã sử dụng</div>
+
+                        <?php
+                        $allResults = $allResults ?? [];
+                        foreach ($allResults as $resultIndex => $result):
+                            $resultDate = $result['date'] ?? '';
+                        ?>
+                            <article class="my-2">
+                                <div class="result result-single rounded">
+                                    <h2 class="bg-red2 text-white text-uppercase px-3 py-2 mb-0 font-weight-bold font-16">
+                                        Xổ số Miền Bắc ngày <?= $esc->escapeHtml($resultDate) ?>
+                                    </h2>
+
+                                    <div class="breadcrumb-table">
+                                        <h4 class="breadcrumb-table-title">
+                                            <a href="/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html" title="XSMB">XSMB</a> /
+                                            <a href="/xsmb-<?= $esc->escapeHtmlAttr(str_replace('/', '-', $resultDate)) ?>.html" title="XSMB <?= $esc->escapeHtml($resultDate) ?>">XSMB <?= $esc->escapeHtml($resultDate) ?></a>
+                                        </h4>
+                                    </div>
+
+                                    <div class="table-flex-border">
+                                        <table class="table-flex table-result" data-code="XSMB">
+                                            <tbody>
+                                                <!-- Hàng mã đài (LV) -->
+                                                <?php if (!empty($result['lv'])):
+                                                    $lvCodes = is_array($result['lv']) ? $result['lv'] : [];
+                                                ?>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <div class="d-flex justify-content-between font-16 p-2">
+                                                                <?php foreach ($lvCodes as $lv):
+                                                                    $lv = trim($lv);
+                                                                    if ($lv):
+                                                                        $codes = explode('-', $lv);
+                                                                        foreach ($codes as $code):
+                                                                            $code = trim($code);
+                                                                            if ($code):
+                                                                ?>
+                                                                                <span class="text-number" nc="5"><?= $esc->escapeHtml($code) ?></span>
+                                                                <?php
+                                                                            endif;
+                                                                        endforeach;
+                                                                    endif;
+                                                                endforeach; ?>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                <?php endif; ?>
+
+                                                <?php 
+                                                // Lấy dữ liệu position cho từng giải
+                                                $prizesWithPos = $result['prizes_with_position'] ?? [];
+                                                $prizeKeys = [
+                                                    'special_prize' => ['key' => 'special_prize', 'nc' => '5'],
+                                                    'first_prize' => ['key' => 'first_prize', 'nc' => '5'],
+                                                    'second_prize' => ['key' => 'second_prize', 'nc' => '5'],
+                                                    'third_prize' => ['key' => 'third_prize', 'nc' => '5'],
+                                                    'fourth_prize' => ['key' => 'fourth_prize', 'nc' => '4'],
+                                                    'fifth_prize' => ['key' => 'fifth_prize', 'nc' => '4'],
+                                                    'sixth_prize' => ['key' => 'sixth_prize', 'nc' => '3'],
+                                                    'seventh_prize' => ['key' => 'seventh_prize', 'nc' => '2'],
+                                                    'eighth_prize' => ['key' => 'eighth_prize', 'nc' => '2']
+                                                ];
+                                                $giaiLabels = [
+                                                    'special_prize' => 'ĐB',
+                                                    'first_prize' => 'G1',
+                                                    'second_prize' => 'G2',
+                                                    'third_prize' => 'G3',
+                                                    'fourth_prize' => 'G4',
+                                                    'fifth_prize' => 'G5',
+                                                    'sixth_prize' => 'G6',
+                                                    'seventh_prize' => 'G7',
+                                                    'eighth_prize' => 'G8'
+                                                ];
+                                                foreach ($prizeKeys as $prizeKey => $config):
+                                                    $giaiLabel = $giaiLabels[$prizeKey];
+                                                    $numbers = $prizesWithPos[$prizeKey] ?? [];
+                                                ?>
+                                                <!-- Giải <?= $giaiLabel ?> -->
+                                                <tr>
+                                                    <td><?= $esc->escapeHtml($giaiLabel) ?></td>
+                                                    <td>
+                                                        <?php foreach ($numbers as $item): 
+                                                            $num = $item['number'] ?? '';
+                                                            $pos = $item['position'] ?? '';
+                                                        ?>
+                                                            <span class="text-number result-number" 
+                                                                  nc="<?= $esc->escapeHtmlAttr($config['nc']) ?>" 
+                                                                  data-position="<?= $esc->escapeHtmlAttr($pos) ?>">
+                                                                <?= $esc->escapeHtml(trim($num)) ?>
+                                                            </span>
+                                                        <?php endforeach; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- SEO Content -->
+                    <div class="new-content text-justify mt-4">
+                        <h3>Soi cầu nhiều nháy XSMB - Dự đoán xổ số miền Bắc chính xác</h3>
+                        <p>Soi cầu nhiều nháy XSMB là phương pháp dự đoán xổ số miền Bắc dựa trên thống kê các số xuất hiện nhiều lần trong cùng 1 ngày quay thưởng. Hệ thống tự động phân tích và tìm các cặp số có nhiều nháy (xuất hiện từ 2 lần trở lên trong cùng ngày) trong <?= $esc->escapeHtml($soCau) ?> ngày gần nhất.</p>
+
+                        <h4>Cách sử dụng công cụ soi cầu nhiều nháy</h4>
+                        <p>
+                            - <strong>Biên độ ngày:</strong> Chọn ngày kết thúc để thống kê (mặc định là hôm nay)<br>
+                            - <strong>Số ngày cầu chạy:</strong> Chọn từ 3-5 ngày để phân tích (càng nhiều ngày càng chính xác)<br>
+                            - <strong>Xem kết quả:</strong> Di chuột vào ô cầu để xem số nháy, số ngày có nháy và vị trí xuất hiện
+                        </p>
+
+                        <h4>Ý nghĩa các thông số</h4>
+                        <p>
+                            - <strong>Số nháy:</strong> Số lần cặp số xuất hiện trong cùng 1 ngày (ví dụ: 3 nháy = xuất hiện 3 lần trong 1 ngày)<br>
+                            - <strong>Số ngày có nháy:</strong> Tổng số ngày mà cặp số có nhiều nháy (>= 2 nháy)<br>
+                            - <strong>Vị trí tạo cầu:</strong> Các vị trí trong bảng kết quả mà cặp số đã xuất hiện<br>
+                            - <strong>Cầu ẩn:</strong> Các cặp số không có nhiều nháy (hiển thị mờ) có thể là cơ hội cho kỳ tiếp theo
+                        </p>
+
+                        <p class="text-danger font-weight-bold">
+                            Lưu ý: Kết quả soi cầu chỉ mang tính chất tham khảo. Người chơi cần cân nhắc kỹ trước khi đưa ra quyết định.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIDEBAR LEFT (col-xl-200) -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- SIDEBAR RIGHT (col-xl-300) -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Helper function để đợi jQuery (định nghĩa trước)
+    function waitForJQuery(callback, maxWait) {
+        maxWait = maxWait || 1000; // Max 1 second (giảm từ 5s xuống 1s)
+        var startTime = Date.now();
+        var attempts = 0;
+        var maxAttempts = 20; // Tối đa 20 lần check (20 * 50ms = 1s)
+        
+        function check() {
+            attempts++;
+            var elapsed = Date.now() - startTime;
+            
+            if (typeof jQuery !== 'undefined') {
+                callback(jQuery);
+                return;
+            } else if (typeof window.$ !== 'undefined' && window.$.fn && window.$.fn.jquery) {
+                callback(window.$);
+                return;
+            }
+            
+            // Nếu chưa hết thời gian và chưa vượt quá số lần thử
+            if (elapsed < maxWait && attempts < maxAttempts) {
+                setTimeout(check, 50);
+            } else {
+                // Fallback: pass null để callback dùng vanilla JS
+                if (typeof callback === 'function') {
+                    callback(null);
+                }
+            }
+        }
+        
+        check();
+    }
+
+    // Handler function được gọi từ onclick (inline)
+    function handleSoiCauClick(element, positionsStr) {
+        
+        if (!positionsStr || positionsStr === '' || positionsStr === '0') {
+            alert('Số này chưa có dữ liệu vị trí để highlight');
+            return false;
+        }
+        
+        // Kiểm tra jQuery có sẵn ngay không
+        var $ = (typeof jQuery !== 'undefined') ? jQuery : (typeof window.$ !== 'undefined' && window.$.fn && window.$.fn.jquery) ? window.$ : null;
+        
+        if ($) {
+            // jQuery có sẵn, dùng ngay
+            var $el = $(element);
+            
+            // Remove previous highlights
+            $('.block-number, .soicau_mb, .item-tk-cau-icon').removeClass('highlight');
+            
+            // Highlight element được click
+            $el.addClass('highlight');
+            if ($el.hasClass('item-tk-cau-icon')) {
+                $el.find('.soicau_mb').addClass('highlight');
+            }
+            
+            // Gọi highlightAndScroll với jQuery
+            if (typeof highlightAndScroll === 'function') {
+                highlightAndScroll(positionsStr, true);
+            } else {
+            }
+        } else {
+            // jQuery chưa có, dùng vanilla JS ngay hoặc đợi một chút
+            waitForJQuery(function($) {
+                if ($) {
+                    var $el = $(element);
+                    $('.block-number, .soicau_mb, .item-tk-cau-icon').removeClass('highlight');
+                    $el.addClass('highlight');
+                    if ($el.hasClass('item-tk-cau-icon')) {
+                        $el.find('.soicau_mb').addClass('highlight');
+                    }
+                    if (typeof highlightAndScroll === 'function') {
+                        highlightAndScroll(positionsStr, true);
+                    }
+                } else {
+                    highlightAndScrollVanilla(element, positionsStr);
+                }
+            }, 500);
+        }
+        
+        return false;
+    }
+    
+    // Fallback function với vanilla JS
+    function highlightAndScrollVanilla(element, positionsStr) {
+        
+        // Remove previous highlights
+        document.querySelectorAll('.block-number, .soicau_mb, .item-tk-cau-icon').forEach(function(el) {
+            el.classList.remove('highlight');
+        });
+        
+        // Highlight element
+        element.classList.add('highlight');
+        if (element.classList.contains('item-tk-cau-icon')) {
+            var soicauMb = element.querySelector('.soicau_mb');
+            if (soicauMb) soicauMb.classList.add('highlight');
+        }
+        
+        // Parse positions
+        var positions = positionsStr.toString().split(',').map(function(p) {
+            return parseInt(p.trim());
+        }).filter(function(p) {
+            return !isNaN(p) && p > 0;
+        });
+        
+        // Remove previous result highlights
+        document.querySelectorAll('.result-number').forEach(function(el) {
+            el.classList.remove('highlight-result');
+        });
+        
+        // Scroll đến section
+        var resultsSection = document.getElementById('xsmb-results-section');
+        if (!resultsSection) {
+            resultsSection = document.querySelector('.col-12.mt-4');
+        }
+        if (resultsSection) {
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Highlight numbers after scroll (giảm thời gian đợi)
+            setTimeout(function() {
+                highlightResultNumbersVanilla(positions);
+            }, 400); // Giảm từ 600ms xuống 400ms
+        } else {
+            // Nếu không tìm thấy section, highlight ngay
+            highlightResultNumbersVanilla(positions);
+        }
+    }
+
+    // Định nghĩa functions trước khi dùng (global scope)
+    /**
+     * Function để highlight và scroll đến bảng kết quả
+     * @param {string} positionsStr - Chuỗi positions (ví dụ: "71,72")
+     * @param {boolean} keepElementHighlight - Giữ highlight của element được click (default: true)
+     */
+    function highlightAndScroll(positionsStr, keepElementHighlight) {
+        
+        if (keepElementHighlight === undefined) {
+            keepElementHighlight = true;
+        }
+        
+        if (!positionsStr || positionsStr === '' || positionsStr === '0') {
+            return;
+        }
+        
+        // Parse positions từ string "71,72" thành array [71, 72]
+        var positions = positionsStr.toString().split(',').map(function(p) {
+            return parseInt(p.trim());
+        }).filter(function(p) {
+            return !isNaN(p) && p > 0;
+        });
+        
+        if (positions.length === 0) {
+            return;
+        }
+        
+        
+        // Kiểm tra jQuery có sẵn ngay không
+        var $ = (typeof jQuery !== 'undefined') ? jQuery : (typeof window.$ !== 'undefined' && window.$.fn && window.$.fn.jquery) ? window.$ : null;
+        
+        if ($) {
+            // jQuery có sẵn, dùng ngay
+            executeHighlightAndScroll($, positions, keepElementHighlight);
+        } else {
+            // Đợi jQuery load xong (tối đa 500ms)
+            waitForJQuery(function($) {
+                if ($) {
+                    executeHighlightAndScroll($, positions, keepElementHighlight);
+                } else {
+                    // Fallback với vanilla JS
+                    var resultsSection = document.getElementById('xsmb-results-section') || document.querySelector('.col-12.mt-4');
+                    if (resultsSection) {
+                        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        setTimeout(function() {
+                            highlightResultNumbersVanilla(positions);
+                        }, 600);
+                    }
+                }
+            }, 500);
+        }
+        
+        function executeHighlightAndScroll($, positions, keepElementHighlight) {
+            // Remove previous highlights (nhưng giữ highlight của element được click)
+            if (!keepElementHighlight) {
+                $('.block-number, .soicau_mb, .item-tk-cau-icon').removeClass('highlight');
+            }
+            $('.result-number').removeClass('highlight-result');
+            
+            // Scroll đến phần bảng kết quả (smooth scroll)
+            var resultsSection = $('#xsmb-results-section');
+            if (!resultsSection.length) {
+                resultsSection = $('.col-12.mt-4').first();
+            }
+            
+            
+            if (resultsSection.length) {
+                var scrollOffset = resultsSection.offset().top - 100;
+                $('html, body').animate({
+                    scrollTop: scrollOffset
+                }, 400, function() { // Giảm từ 500ms xuống 400ms
+                    // Sau khi scroll xong, highlight các số
+                    highlightResultNumbers(positions);
+                });
+            } else {
+                // Nếu không tìm thấy section, highlight ngay
+                highlightResultNumbers(positions);
+            }
+        }
+    }
+    
+    /**
+     * Highlight các số trong bảng kết quả dựa trên positions (dùng jQuery)
+     */
+    function highlightResultNumbers(positions) {
+        
+        // Kiểm tra jQuery có sẵn ngay không
+        var $ = (typeof jQuery !== 'undefined') ? jQuery : (typeof window.$ !== 'undefined' && window.$.fn && window.$.fn.jquery) ? window.$ : null;
+        
+        if ($) {
+            executeHighlightResultNumbers($, positions);
+        } else {
+            waitForJQuery(function($) {
+                if ($) {
+                    executeHighlightResultNumbers($, positions);
+                } else {
+                    highlightResultNumbersVanilla(positions);
+                }
+            }, 300); // Chỉ đợi 300ms
+        }
+        
+        function executeHighlightResultNumbers($, positions) {
+            var highlightedCount = 0;
+            var totalNumbers = $('.result-number').length;
+            
+            $('.result-number').each(function() {
+                var position = parseInt($(this).data('position'));
+                if (!isNaN(position) && positions.indexOf(position) !== -1) {
+                    $(this).addClass('highlight-result');
+                    highlightedCount++;
+                    
+                    // Scroll đến số được highlight nếu cần
+                    var $resultArticle = $(this).closest('article');
+                    if ($resultArticle.length) {
+                        var articleTop = $resultArticle.offset().top;
+                        var currentScroll = $(window).scrollTop();
+                        var windowHeight = $(window).height();
+                        
+                        // Nếu số nằm ngoài viewport, scroll đến nó
+                        if (articleTop < currentScroll || articleTop > currentScroll + windowHeight) {
+                            $('html, body').animate({
+                                scrollTop: articleTop - 150
+                            }, 200); // Giảm từ 300ms xuống 200ms
+                        }
+                    }
+                }
+            });
+        }
+    }
+    
+    /**
+     * Highlight các số trong bảng kết quả dựa trên positions (dùng vanilla JS)
+     */
+    function highlightResultNumbersVanilla(positions) {
+        var resultNumbers = document.querySelectorAll('.result-number');
+        var highlightedCount = 0;
+        
+        resultNumbers.forEach(function(el) {
+            var position = parseInt(el.getAttribute('data-position'));
+            if (!isNaN(position) && positions.indexOf(position) !== -1) {
+                el.classList.add('highlight-result');
+                highlightedCount++;
+            }
+        });
+        
+    }
+
+    $(document).ready(function() {
+        // Initialize datepicker
+        $('#dateEnd').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'vi',
+            autoclose: true,
+            todayHighlight: true,
+            endDate: new Date()
+        });
+
+        // Plus/Minus buttons
+        $('#btn-plus').on('click', function() {
+            var val = parseInt($('#range-day').val()) || 3;
+            if (val < 5) {
+                $('#range-day').val(val + 1);
+            }
+        });
+
+        $('#btn-minus').on('click', function() {
+            var val = parseInt($('#range-day').val()) || 3;
+            if (val > 3) {
+                $('#range-day').val(val - 1);
+            }
+        });
+
+        // Initialize tooltips
+        $('[data-toggle="tooltip"]').tooltip();
+        
+        // Event delegation cho các số trong biên độ và bảng cầu
+        // Lắng nghe tất cả clicks trên .block-number và .item-tk-cau-icon
+        $(document).on('click', '.block-number, .item-tk-cau-icon', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $el = $(this);
+            var positionsStr = $el.attr('data-positions') || '';
+            
+            // Nếu không có trên element, tìm trong children
+            if (!positionsStr) {
+                positionsStr = $el.find('[data-positions]').first().attr('data-positions') || '';
+            }
+            
+            // Nếu không có, tìm trong parent
+            if (!positionsStr) {
+                positionsStr = $el.closest('[data-positions]').attr('data-positions') || '';
+            }
+            
+            // Chỉ xử lý nếu có positions và không rỗng
+            if (positionsStr && positionsStr.trim() !== '' && positionsStr !== '0') {
+                // Remove previous highlights
+                $('.block-number, .soicau_mb, .item-tk-cau-icon').removeClass('highlight');
+                
+                // Highlight element được click
+                $el.addClass('highlight');
+                if ($el.hasClass('item-tk-cau-icon')) {
+                    $el.find('.soicau_mb').addClass('highlight');
+                }
+                
+                // Scroll và highlight trong bảng kết quả
+                highlightAndScroll(positionsStr.trim(), true);
+            } else {
+                alert('Số này chưa có dữ liệu vị trí để highlight');
+            }
+        });
+        
+    });
+
+    // Function to highlight positions in loto table (backward compatibility)
+    function setcolortoloto(element, ...positions) {
+        // Lấy positions từ data-positions attribute
+        var $el = $(element);
+        var positionsStr = $el.attr('data-positions') || 
+                         $el.closest('[data-positions]').attr('data-positions') || '';
+        
+        // Hoặc từ arguments nếu có
+        if (!positionsStr && positions && positions.length > 0) {
+            positionsStr = positions.join(',');
+        }
+        
+        if (positionsStr) {
+            highlightAndScroll(positionsStr);
+        }
+    }
+</script>
+
+<style>
+/* Highlight cho số trong bảng cầu và biên độ */
+.list-tkcau a{
+    width: 14% !important;
+}
+.block-number.highlight,
+.soicau_mb.highlight,
+.item-tk-cau-icon.highlight {
+    background-color: #ffc107 !important;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+}
+
+/* Highlight cho số trong bảng kết quả */
+.result-number.highlight-result {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+    font-weight: bold;
+    padding: 2px 4px;
+    border-radius: 3px;
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.8);
+    animation: pulse-highlight 0.6s ease-in-out;
+}
+
+@keyframes pulse-highlight {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+</style>

@@ -1,0 +1,343 @@
+<?php
+$esc = $this->escaper;
+$regionClass = strtolower($region);
+
+// Helper function to get weekday slug from date
+function getWeekdaySlug($dateObj)
+{
+    $dow = (int)$dateObj->format('N'); // 1=Monday, 7=Sunday
+    $slugs = [
+        1 => 'thu-2',
+        2 => 'thu-3',
+        3 => 'thu-4',
+        4 => 'thu-5',
+        5 => 'thu-6',
+        6 => 'thu-7',
+        7 => 'chu-nhat'
+    ];
+    return $slugs[$dow] ?? 'thu-2';
+}
+
+// Helper function to get weekday text
+function getWeekdayText($dateObj)
+{
+    $dow = (int)$dateObj->format('N');
+    $texts = [
+        1 => 'thứ 2',
+        2 => 'thứ 3',
+        3 => 'thứ 4',
+        4 => 'thứ 5',
+        5 => 'thứ 6',
+        6 => 'thứ 7',
+        7 => 'chủ nhật'
+    ];
+    return $texts[$dow] ?? 'thứ 2';
+}
+
+// Get region name
+$regionName = match ($region) {
+    'XSMN' => 'Miền Nam',
+    'XSMT' => 'Miền Trung',
+    'XSMB' => 'Miền Bắc',
+    default => 'Miền Nam'
+};
+
+// Get region URL
+$regionUrl = match ($region) {
+    'XSMN' => '/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html',
+    'XSMT' => '/ket-qua-xsmt-xo-so-kien-thiet-mien-trung-sxmt-kqxsmt.html',
+    'XSMB' => '/ket-qua-xsmb-xo-so-kien-thiet-mien-bac-sxmb-kqxsmb.html',
+    default => '/ket-qua-xsmn-xo-so-kien-thiet-mien-nam-sxmn-kqxsmn.html'
+};
+
+// Get weekday URLs for submenu
+$weekdayUrls = [];
+if ($region === 'XSMN') {
+    $weekdayUrls = [
+        'thu-2' => '/xsmn-thu-2-ket-qua-xo-so-mien-nam.html',
+        'thu-3' => '/xsmn-thu-3-ket-qua-xo-so-mien-nam.html',
+        'thu-4' => '/xsmn-thu-4-ket-qua-xo-so-mien-nam.html',
+        'thu-5' => '/xsmn-thu-5-ket-qua-xo-so-mien-nam.html',
+        'thu-6' => '/xsmn-thu-6-ket-qua-xo-so-mien-nam.html',
+        'thu-7' => '/xsmn-thu-7-ket-qua-xo-so-mien-nam.html',
+        'chu-nhat' => '/xsmn-chu-nhat-ket-qua-xo-so-mien-nam.html'
+    ];
+} elseif ($region === 'XSMT') {
+    $weekdayUrls = [
+        'thu-2' => '/xsmt-thu-2-ket-qua-xo-so-mien-trung.html',
+        'thu-3' => '/xsmt-thu-3-ket-qua-xo-so-mien-trung.html',
+        'thu-4' => '/xsmt-thu-4-ket-qua-xo-so-mien-trung.html',
+        'thu-5' => '/xsmt-thu-5-ket-qua-xo-so-mien-trung.html',
+        'thu-6' => '/xsmt-thu-6-ket-qua-xo-so-mien-trung.html',
+        'thu-7' => '/xsmt-thu-7-ket-qua-xo-so-mien-trung.html',
+        'chu-nhat' => '/xsmt-chu-nhat-ket-qua-xo-so-mien-trung.html'
+    ];
+} else {
+    $weekdayUrls = [
+        'thu-2' => '/xsmb-thu-2-ket-qua-xo-so-mien-bac.html',
+        'thu-3' => '/xsmb-thu-3-ket-qua-xo-so-mien-bac.html',
+        'thu-4' => '/xsmb-thu-4-ket-qua-xo-so-mien-bac.html',
+        'thu-5' => '/xsmb-thu-5-ket-qua-xo-so-mien-bac.html',
+        'thu-6' => '/xsmb-thu-6-ket-qua-xo-so-mien-bac.html',
+        'thu-7' => '/xsmb-thu-7-ket-qua-xo-so-mien-bac.html',
+        'chu-nhat' => '/xsmb-chu-nhat-ket-qua-xo-so-mien-bac.html'
+    ];
+}
+
+// Get province canonical URL
+$provinceCanonicalUrl = \App\Library\ArchiveHelper::getCanonicalProvinceUrl($province);
+?>
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="w-100">
+                <div class="submenu2">
+                    <ul class="row flex-nowrap text-nowrap overflow-auto mx-0 rounded lh-25 submenu2-bg pl-0 pl-md-3">
+                        <li class="px-2 px-lg-3"> <a href="<?= $esc->escapeHtmlAttr($regionUrl) ?>" title="<?= $esc->escapeHtmlAttr($regionName) ?>"> <?= strtoupper($region) ?> </a> </li>
+                        <?php foreach ($weekdayUrls as $slug => $url): ?>
+                            <li class="px-2 px-lg-3"> <a href="<?= $esc->escapeHtmlAttr($url) ?>" title="<?= $esc->escapeHtmlAttr(str_replace('-', ' ', $slug)) ?>"> <?= $esc->escapeHtml(str_replace('-', ' ', $slug)) ?> </a> </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="w-100 mt-2">
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/" title="Trang chủ"><i class="icon-home"></i></a> </li>
+                        <li class="breadcrumb-item"><a href="<?= $esc->escapeHtmlAttr($regionUrl) ?>" title="<?= strtoupper($region) ?>"><?= strtoupper($region) ?></a> </li>
+                        <?php if (!empty($items) && isset($items[0]['date'])):
+                            $firstDate = $items[0]['date'];
+                            $weekdaySlug = getWeekdaySlug($firstDate);
+                            $weekdayText = getWeekdayText($firstDate);
+                            $weekdayUrl = $weekdayUrls[$weekdaySlug] ?? '#';
+                        ?>
+                            <li class="breadcrumb-item"><a href="<?= $esc->escapeHtmlAttr($weekdayUrl) ?>" title="<?= strtoupper($region) ?> <?= $esc->escapeHtmlAttr($weekdayText) ?>"><?= strtoupper($region) ?> <?= $esc->escapeHtml($weekdayText) ?></a> </li>
+                        <?php endif; ?>
+                        <li class="breadcrumb-item active"><a href="<?= $esc->escapeHtmlAttr($provinceCanonicalUrl ?? '#') ?>" title="Xổ số <?= $esc->escapeHtmlAttr($province->name) ?>">Xổ số <?= $esc->escapeHtml($province->name) ?></a> </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-610">
+                <div id="ajax_content" class="d-flex flex-column category-result">
+                    <?php foreach ($items as $item):
+                        $dateObj = $item['date'];
+                        $dmy = $dateObj->format('d/m/Y');
+                        $prizes = $item['prizes'];
+                        $dau = $item['dau'];
+                        $duoi = $item['duoi'];
+                        $provinceCode = strtoupper($province->code);
+                    ?>
+                        <article class="my-2">
+                            <div class="result result-province rounded">
+                                <div class="bg-red2 text-white text-uppercase px-3 py-2 font-weight-bold font-16">Xổ số <?= $esc->escapeHtml($province->name) ?> ngày <?= $esc->escapeHtml($dmy) ?></div>
+                                <div class="breadcrumb-table">
+                                    <h2 class="breadcrumb-table-title">
+                                        <a href="<?= $esc->escapeHtmlAttr($regionUrl) ?>" title="<?= strtoupper($region) ?>">
+                                            <?= strtoupper($region) ?>
+                                        </a>
+                                        /
+                                        <a href="<?= $esc->escapeHtmlAttr($provinceCanonicalUrl ?? '#') ?>" title="<?= $esc->escapeHtmlAttr($provinceCode) ?>"><?= $esc->escapeHtml($provinceCode) ?></a>
+                                        /
+                                        <a href="#" title="<?= $esc->escapeHtmlAttr($provinceCode . ' ' . $dmy) ?>"><?= $esc->escapeHtml($provinceCode . ' ' . $dmy) ?></a>
+                                    </h2>
+                                </div>
+                                <div class="table-flex-border">
+                                    <table class="table-flex table-result" data-code="<?= $esc->escapeHtmlAttr($provinceCode) ?>">
+                                        <tbody>
+                                            <tr>
+                                                <td>G8</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[9])): ?>
+                                                        <?php foreach ($prizes[9] as $num): ?>
+                                                            <span class="text-number" nc="2"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G7</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[8])): ?>
+                                                        <?php foreach ($prizes[8] as $num): ?>
+                                                            <span class="text-number" nc="3"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G6</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[7])): ?>
+                                                        <?php foreach ($prizes[7] as $num): ?>
+                                                            <span class="text-number" nc="4"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G5</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[6])): ?>
+                                                        <?php foreach ($prizes[6] as $num): ?>
+                                                            <span class="text-number" nc="4"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G4</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[5])): ?>
+                                                        <?php foreach ($prizes[5] as $num): ?>
+                                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G3</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[4])): ?>
+                                                        <?php foreach ($prizes[4] as $num): ?>
+                                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G2</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[3])): ?>
+                                                        <?php foreach ($prizes[3] as $num): ?>
+                                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>G1</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[2])): ?>
+                                                        <?php foreach ($prizes[2] as $num): ?>
+                                                            <span class="text-number" nc="5"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ĐB</td>
+                                                <td>
+                                                    <?php if (!empty($prizes[1])): ?>
+                                                        <?php foreach ($prizes[1] as $num): ?>
+                                                            <span class="text-number" nc="6"><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="loto loto-single">
+                                <table class="table table-bordered table-striped table-xslt-single-col">
+                                    <thead>
+                                        <tr>
+                                            <th>Đầu</th>
+                                            <th>Lô tô</th>
+                                            <th>Đuôi</th>
+                                            <th>Lô tô</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php for ($head = 0; $head <= 9; $head++): ?>
+                                            <tr>
+                                                <td><?= $head ?></td>
+                                                <td>
+                                                    <?php if (!empty($dau[$head])): ?>
+                                                        <?php foreach ($dau[$head] as $num): ?>
+                                                            <span><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td><?= $head ?></td>
+                                                <td>
+                                                    <?php if (!empty($duoi[$head])): ?>
+                                                        <?php foreach ($duoi[$head] as $num): ?>
+                                                            <span><?= $esc->escapeHtml($num) ?></span>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+                                        <?php endfor; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+
+                    <div class="my-3">
+                        <p class="font-weight-bold">Xem thêm về <a href="<?= $esc->escapeHtmlAttr($provinceCanonicalUrl ?? '#') ?>" title="Xổ số <?= $esc->escapeHtmlAttr($province->name) ?>">Xổ số <?= $esc->escapeHtml($province->name) ?></a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/lo-gan-<?= strtolower($province->code) ?>.html" title="Thống kê lô gan <?= $esc->escapeHtmlAttr($province->name) ?>">Thống kê lô gan <?= $esc->escapeHtml($province->name) ?></a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/dac-biet-<?= strtolower($province->code) ?>.html" title="Thống kê đặc biệt <?= $esc->escapeHtmlAttr($provinceCode) ?>">Thống kê đặc biệt <?= $esc->escapeHtml($provinceCode) ?></a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/dau-duoi-<?= strtolower($province->code) ?>.html" title="Thống kê đầu đuôi <?= $esc->escapeHtmlAttr($provinceCode) ?>">Thống kê đầu đuôi <?= $esc->escapeHtml($provinceCode) ?></a></p>
+                    </div>
+                    <div class="my-3 order-1">
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/soi-cau-<?= strtolower($province->code) ?>.html" title="Soi cầu xổ số <?= $esc->escapeHtmlAttr($province->name) ?>">Soi cầu xổ số <?= $esc->escapeHtml($province->name) ?></a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/du-doan-<?= strtolower($province->code) ?>.html" title="Dự đoán xổ số <?= $esc->escapeHtmlAttr($province->name) ?>">Dự đoán xổ số <?= $esc->escapeHtml($province->name) ?></a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="<?= $esc->escapeHtmlAttr($regionUrl) ?>" title="Kết quả <?= strtoupper($region) ?>">Kết quả <?= strtoupper($region) ?></a></p>
+                        <p class="mb-2"><span class="text-red1">»</span> <a href="/kqxs-ngay-<?= date('d-m-Y') ?>.html" title="Kết quả 3 miền">Kết quả 3 miền</a> hôm nay</p>
+                    </div>
+                </div>
+
+                <?php if ($nextUrl && $nextUrl !== '#'): ?>
+                    <button class="btnLoadMore mt-2" data-url="<?= $esc->escapeHtmlAttr($provinceCanonicalUrl ?? '#') ?>/page/" data-page="<?= $page + 1 ?>">Xem thêm kết quả</button>
+                <?php endif; ?>
+
+                <div class="new-content text-justify mt-4">
+                    <h3 style="text-align: justify;">Xổ số <?= $esc->escapeHtml($province->name) ?> - Trực tiếp kết quả xổ số <?= $esc->escapeHtml($province->name) ?></h3>
+                    <p style="text-align: justify;">Xổ số <?= $esc->escapeHtml($province->name) ?> - <?= $esc->escapeHtml($provinceCode) ?> - Kết quả xổ số <?= $esc->escapeHtml($province->name) ?> hôm nay được trực tiếp từ 16h10 đến 16h30 tại <a href="/">Soi cầu 247</a>. Mang đến cho anh em thông tin quay thưởng kết quả xổ số <?= $esc->escapeHtml($province->name) ?> nhanh chóng và chính xác nhất.</p>
+
+                    <p style="text-align: justify;">Xổ số <?= $esc->escapeHtml($province->name) ?> được quay thưởng vào lúc 16h10 hàng tuần. Anh em có thể theo dõi tường thuật trực tiếp <?= $esc->escapeHtml($provinceCode) ?> tại website của chúng tôi, trên tivi hoặc kênh FM 97.5 Mhz đài VOV</p>
+
+                    <p style="text-align: justify;">Đặc biệt, khi xem kết quả xổ số <?= $esc->escapeHtml($province->name) ?> tại chuyên trang của chúng tôi anh em sẽ dễ dàng xem được kết quả <?= $esc->escapeHtml($provinceCode) ?> những ngày trước, tuần trước để nắm được quy luật về số chuẩn nhất. <br>Cùng với đó là các bảng thống kê xổ số, lô gan, đặc biệt về ít nhiều cũng được tổng hợp đầy đủ cho anh em tham khảo, tiết kiệm thời gian.</p>
+
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Cơ cấu giải thưởng <?= $esc->escapeHtml($provinceCode) ?></span></h3>
+                    <p style="text-align: justify;">
+                        - Giải ĐB: Gồm 1 số có 6 chữ số nhận ngay giải thưởng trị giá 2 tỷ đồng. <br>
+                        - Giải Nhất: nhận ngay 30 triệu đồng nếu trúng giải. <br>
+                        - Giải Nhì: người chơi trúng 5 số cuối sẽ nhận được phần thưởng 15 triệu đồng.<br>
+                        - Giải Ba: người chơi trúng 5 số cuối sẽ nhận được phần thưởng 10 triệu đồng. <br>
+                        - Giải 4: trúng 5 số cuối và nhận thưởng 3 triệu đồng. <br>
+                        - Giải 5: có 100 giải 5 và nhận thưởng 1 triệu đồng.<br>
+                        - Giải 6: có 300 giải 6 và nhận thưởng 400 nghìn đồng. <br>
+                        - Giải 7: có 1000 giải 7 và nhận thưởng 200 nghìn đồng. <br>
+                        - Giải 8: có 10000 giải 8 và nhận thưởng 100 nghìn đồng. <br>
+                        - 9 giải phụ đặc biệt mỗi giải nhận thưởng 50 triệu đồng. <br>
+                        - 45 giải khuyến khích mỗi giải nhận thưởng ngay 6 triệu đồng.
+                    </p>
+
+                    <h3 style="text-align: justify;"><span style="font-size: 12pt;">Cách xác định trúng thưởng khi tham gia <?= $esc->escapeHtml($provinceCode) ?></span></h3>
+                    <p style="text-align: justify;">Kết quả <a href="<?= $esc->escapeHtmlAttr($provinceCanonicalUrl ?? '#') ?>" title="xổ số <?= $esc->escapeHtmlAttr($province->name) ?>">xổ số <?= $esc->escapeHtml($province->name) ?></a> được đưa ra ngay sau khi thực hiện xong quay thưởng và có sự xác nhận của Hội đồng giám sát xổ số. Sau khi xác nhận biên bản quay thưởng thì sẽ được ký duyệt và gửi đến các đại lý xổ số để đối chiếu và trao thưởng cho người chơi.</p>
+
+                    <p style="text-align: justify;">Vé số trúng thưởng phải là vé số được Công ty Xổ số Kiến thiết <?= $esc->escapeHtml($province->name) ?> phát hành. Các thông tin trên tờ vé số phải trùng với ngày quay thưởng và đúng theo vị trí với giải thưởng đã được công bố.</p>
+
+                    <p style="text-align: justify;">Vé số trúng thưởng sẽ được công ty xổ số <?= $esc->escapeHtml($province->name) ?> tiếp nhận và kiểm tra để thực hiện trao thưởng cho người chơi theo đúng quy trình. Người chơi trúng giải phải giữ nguyên vẹn tấm vé trúng thưởng. Trong quá trình kiểm tra nếu thấy có dấu hiệu làm giả hoặc tẩy xóa thì sẽ không đủ điều kiện để nhận thưởng theo quy định.</p>
+                </div>
+            </div>
+            <!-- Sidebar Left -->
+            <div class="col-xl-200 mx-lg-3 mx-lg-0 pr-md-3 pr-lg-0 order-2 order-lg-1 font-14">
+                <?php $this->partial('partials/sidebar_left'); ?>
+            </div>
+
+            <!-- Sidebar Right -->
+            <div class="col-xl-300 mt-3 mt-md-0 order-1 order-lg-2">
+                <?php $this->partial('partials/sidebar_right'); ?>
+            </div>
+        </div>
+    </div>
+</main>

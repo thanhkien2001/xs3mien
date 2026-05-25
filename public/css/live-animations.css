@@ -1,0 +1,28 @@
+/* ===================================
+   LIVE LOTTERY NUMBER ANIMATIONS
+   =================================== */
+
+/* Số random - màu xanh #004593 */
+.number-random,
+.lottery-number-random {
+    color: #004593 !important;
+    font-weight: 700;
+}
+
+/* Hiệu ứng flip khi số thay đổi */
+@keyframes lotteryNumberFlip {
+    0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: rotateX(90deg);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+}
